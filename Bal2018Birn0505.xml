@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="balisage-1-3.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-stylesheet type="text/xsl" href="balisage-proceedings-html.xsl"?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Flattening and unflattening XML markup</title>
+    <info>
+        <abstract>
+            <para>From time to time, it may be necessary or expedient to flatten our XML documents
+                by replacing the start- and end-tags of conventional XML content elements with empty
+                place-marker elements (variously known as <emphasis role="ital">milestone
+                    elements</emphasis> or as <emphasis>Trojan horse markup</emphasis>). When we do,
+                we will often wish, later, to restore the content elements we flattened. The purpose
+                of this late-breaking presentation is to present a survey of ways to perform the
+                task of unflattening or of raising: restoring a conventional XML element structure
+                of content elements from a flattened XML document instance (or part of one), and
+                comparing different solutions to see what we can learn from them.</para>
+        </abstract>
+        <author>
+            <personname>
+                <firstname>David</firstname>
+                <othername>J.</othername>
+                <surname>Birnbaum</surname>
+            </personname>
+            <personblurb>
+                <para>David J. Birnbaum is Professor and Co-Chair of the Department of Slavic
+                    Languages and Literatures at the University of Pittsburgh. He has been involved
+                    in the study of electronic text technology since the mid-1980s, has delivered
+                    presentations at a variety of electronic text technology conferences, and has
+                    served on the board of the Association for Computers and the Humanities, the
+                    editorial board of <emphasis role="ital">Markup languages: theory and
+                        practice</emphasis>, and the Text Encoding Initiative Council. Much of his
+                    electronic text work intersects with his research in medieval Slavic manuscript
+                    studies, but he also often writes about issues in the philosophy of
+                    markup.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Professor of Slavic Languages and Literatures</jobtitle>
+                <orgname>University of Pittsburgh, Pittsburgh, PA</orgname>
+            </affiliation>
+            <email>ebb8@pitt.edu</email>
+        </author>
+        <author>
+            <personname>
+                <firstname>Elisa</firstname>
+                <othername>Eileen</othername>
+                <surname>Beshero-Bondar</surname>
+            </personname>
+            <personblurb>
+                <para>A scholar of British Romanticism and hybrid literary genres, Dr.
+                    Beshero-Bondar earned a PhD in English Literature from Penn State University in
+                    2003, and afterwards took a post teaching literature at the University of
+                    Pittsburgh at Greensburg. Her publications include a book about women Romantic
+                    epoists, titled <emphasis role="ital">Women, epic, and transition in British
+                        Romanticism</emphasis>, published by the University of Delaware Press in
+                    2011, and articles in <emphasis role="ital">Literature compass</emphasis>,
+                        <emphasis role="ital">ELH</emphasis> (English literary history), <emphasis
+                        role="ital">Genre</emphasis>, and <emphasis role="ital">Philological
+                        quarterly</emphasis> on the poetry of Robert Southey, Mary Russell Mitford,
+                    and Lord Byron in context with 18th- and 19th-century views of revolution, world
+                    empires, natural sciences, and theater productions.</para>
+                <para>Since earning tenure in 2011, she has applied herself adventurously to the
+                    building of digital editions and digital research projects, such as studying
+                    studying associations among physical and mythical locations in epic poetry, and
+                    teaching undergraduates the XML family of languages in the context of designing
+                    research projects. She is the director of the <link
+                        xlink:href="http://digitalmitford.org">Digital Mitford project</link>, whose
+                    two-fold mission is:<orderedlist>
+                        <listitem>
+                            <para>to produce the first comprehensive scholarly edition of the works
+                                and letters of Mary Russell Mitford, and</para>
+                        </listitem>
+                        <listitem>
+                            <para>to share knowledge of TEI XML and other related humanities
+                                computing practices with all serious scholars interested in
+                                contributing to the project.</para>
+                        </listitem>
+                    </orderedlist> In keeping with the second goal, she hosts an annual coding
+                    school at Pitt-Greensburg each May or June to teach TEI, regular expression
+                    up-conversion of documents, XPath, schema design, and XSLT or XQuery, based on
+                    the interests and background of registrants. Other digital projects in which she
+                    is enmeshed include <link
+                        xlink:href="https://github.com/ebeshero/Pittsburgh_Frankenstein/tree/Text_Processing"
+                        >a Bicentennial Frankenstein project</link> to up-convert the 1990s
+                    electronic Frankenstein edition by 2018, and <link
+                        xlink:href="http://amadis.newtfire.org/">Amadis In Translation</link>, which
+                    applies XML to quantify, categorize, and study alterations made by Robert
+                    Southey in translating an early modern Spanish text of Amadis de Gaule. She was
+                    elected to serve on <link xlink:href="http://www.tei-c.org/Activities/Council/"
+                        >the TEI Technical Council</link> from 2016-2017.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Associate Professor of English</jobtitle>
+                <jobtitle>Director, <link
+                        xlink:href="http://www.greensburg.pitt.edu/digital-humanities/center-digital-text"
+                        >Center for the Digital Text</link></jobtitle>
+                <orgname>University of Pittsburgh at Greensburg</orgname>
+            </affiliation>
+            <email>ebb8@pitt.edu</email>
+        </author>
+        <author>
+            <personname>
+                <firstname>C.</firstname>
+                <othername>M.</othername>
+                <surname>Sperberg-McQueen</surname>
+            </personname>
+            <personblurb>
+                <para>C. M. Sperberg-McQueen is the founder and principal of <link
+                        xlink:href="http://www.blackmesatech.com/">Black Mesa Technologies</link>, a
+                    consultancy specializing in helping memory institutions improve the long term
+                    preservation of and access to the information for which they are responsible. He
+                    served as editor in chief of the TEI Guidelines from 1988 to 2000, and has also
+                    served as co-editor of the World Wide Web Consortium's XML 1.0 and XML Schema
+                    1.1 specifications.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Founder and Principal</jobtitle>
+                <orgname>Black Mesa Technologies</orgname>
+            </affiliation>
+        </author>
+    </info>
+    <section>
+        <title>Overview</title>
+        <para>From time to time, it may be necessary or expedient to flatten our XML documents by
+            replacing the start- and end-tags of conventional XML content elements with empty
+            place-marker elements (variously known as <emphasis role="ital">milestone
+                elements</emphasis>, after the milestone technique described in the TEI Guidelines
+            for page beginnings, column beginnings, line beginnings, etc. [<xref linkend="tei_p5"
+            />], or as <emphasis>Trojan horse markup</emphasis>, after the technique described by
+            Steve DeRose [<xref linkend="derose_2004"/>]). When we do, we will often wish, later, to
+            restore the content elements we flattened. The three co-authors discovered recently that
+            we had each had occasion to perform this task, and that we had undertaken it using
+            different techniques. </para>
+        <para>The purpose of this late-breaking presentation is to present a survey of ways to
+            perform the task of unflattening or of raising: restoring a conventional XML element
+            structure of content elements from a flattened XML document instance (or part of one),
+            and comparing different solutions to see what we can learn from them. Nothing here is
+            profoundly difficult or new, but each of us found it challenging and interesting enough
+            that we think it may be worth while to share what we have learned with others.</para>
+        <para>In the following sections, we describe first a concrete instance of the task, with
+            enough supporting detail to make clear that this is not an academic exercise, but one
+            that arose in a concrete project. We then present several approaches to solving the
+            problem, including some false starts, which illustrate possible wrong turnings along the
+            way. We then discuss and compare the different solutions with respect to coding
+            difficulty and costs in space and time.</para>
+    </section>
+    <section>
+        <title>The concrete sample task (TODO: Elisa)</title>
+        <para>As a concrete example, we can consider the form taken by this task in the Variorum
+            Frankenstein [<xref linkend="frankenstein"/>] project edited by the second author. In
+            order to collate different XML-encoded versions of the novel using the collation tool
+            CollateX [<xref linkend="collatex"/>], it is necessary to work with individual word
+            tokens, and to retain markup information in the eventual collation output without
+            letting it interfere with the alignment process.</para>
+
+        <para>We may, for example, wish to collate the following two fragments of <emphasis
+                role="ital">Frankenstein</emphasis>:</para>
+
+        <programlisting>[sample needed, first witness, in native TEI or other XML]</programlisting>
+
+        <programlisting>[sample needed, second witness]</programlisting>
+        <para>If we feed these documents to CollateX directly, the results are somewhat
+            disappointing:</para>
+        <programlisting>[sample output showing disastrous result]</programlisting>
+        <para>To produce more useful results, we need the input to CollateX to take the following
+            form for the first fragment:</para>
+        <programlisting>[Flattened version of first fragment]</programlisting>
+        <para>Similar changes are needed in the second fragment as well.</para>
+        <para>Now the output from CollateX is more satisfactory:</para>
+        <programlisting>[Sample output looking better]</programlisting>
+        <para>In order to work normally with the output, however, we need to restore the original
+            element structure.</para>
+        <para>TODO: We can’t always restore the element structure because CollateX wraps each word
+            token in tags. We might choose to merge some of these down the road, and we can raise
+            those flattened elements that are located entirely within one merged sequence. But we
+            may nonetheless wind up with an original start-tag inside one container element and its
+            corresponding original end-tag inside another, and we cannot reconstruct that element
+            without creating overlap. So: do we want, for example, to raise instances of
+                <code>&lt;seg&gt;></code> that are inside a word token while not raising those that
+            straddle word tokens? What is the cost of treating the same element type differently?
+            For what it’s worth, in the <link xlink:href="http://pvl.obdurodon.org">PVL</link>, I
+            flatten the markup for collation and then convert the milestones to symbols for
+            rendering. That is, I don’t try to reconstruct the original hierarchy.</para>
+    </section>
+    <section>
+        <title>Right-sibling traversal of the input tree (TODO: Michael)</title>
+        <para>[Description of the algorithm in the shallow-to-deep.xsl stylesheet on <link
+                xlink:href="http://uyghur.ittc.ku.edu">shallow-to-deep.xsl</link>. Possibly two
+            versions, for 1.0 and 3.0.]</para>
+    </section>
+    <section>
+        <title>A recursive function (TODO: David)</title>
+        <para>[Description of the algorithm in DJB’s raise.xsl. 3.0 version, and a rewrite using a
+            recursive named-template call for 1.0 with result element extension.]</para>
+    </section>
+    <section>
+        <title>An XSLT 3.0 solution using accumulators (TODO: Michael)</title>
+        <para>[To be written. I am assuming that we can find a way to use accumulators to handle
+            this.]</para>
+    </section>
+    <section>
+        <title>Global search and replace using regular expressions (TODO: David)</title>
+        <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
+            mode, and/or Perl or Python.]</para>
+    </section>
+    <section>
+        <title>Some things that can go wrong</title>
+        <para>TODO: Michael: MSM’s bugs include a failure to specify the correct mode on an
+            apply-templates call, which meant that processing slipped out of the special mode and
+            into default mode, and many nodes appeared repeatedly in the input: tenfold increase in
+            size of document, and more.</para>
+        <para>TODO: Elisa: EBB’s initial sketch, with discussion of what is going wrong.</para>
+        <para>TODO: Elisa: EBB’s implementation of right-sibling recursion, with analysis and
+            discussion.</para>
+        <para>TODO: David: DJB’s bugs, if any ...]</para>
+    </section>
+    <section>
+        <title>Comparison</title>
+        <para>TODO: David: [Discussion of the tail recursion in the two recursive approaches (secs.
+            2, 3), prediction that right-sibling recursion will need more memory.]</para>
+        <para>TODO: Unassigned: [Measurement of time and space complexity running all solutions on
+            the same data (as large as we can manage—e.g., all of <emphasis role="ital"
+                >Frankenstein</emphasis>, or an artificial document containing 10 or 100 copies of
+                <emphasis role="ital">Frankenstein</emphasis>).]</para>
+        <para>TODO: Unassigned: [Time complexity is easy enough to measure; space complexity may be
+            harder, but we may be able to find ways. I believe that the Unix tool <emphasis
+                role="bold">top</emphasis> gives the current memory usage of a task, so the
+            information is certainly available.]</para>
+        <para>TODO Unassigned: [One reason I would like to have multiple XSLT 1.0 solutions is so
+            that we can test performance in more than one implementation: <emphasis role="bold"
+                >xsltproc</emphasis>, <emphasis role="bold">Xalan</emphasis>, and browser XSLT
+            engines, if we can figure out how to persuade a browser to do the work.</para>
+        <para>TODO Unassigned: [My prediction a priori is that using <emphasis role="bold"
+                >sed</emphasis>, <emphasis role="bold">emacs</emphasis>, <emphasis role="bold"
+                >perl</emphasis>, or <emphasis role="bold">Python</emphasis> to make the changes
+            with regular expressions will be much faster than using XSLT. Without XSLT, it will be
+            much easier to produce output that’s not well-formed; it would be good to document how
+            many attempts are needed before our sed script is producing well-formed output, and how
+            many more are needed before it’s both well formed and correct.]</para>
+    </section>
+    <section>
+        <title>Conclusion (TODO: Unassigned)</title>
+        <para>[what do we say here?]</para>
+    </section>
+    <bibliography>
+        <title>Works cited</title>
+        <bibliomixed xml:id="collatex" xreflabel="CollateX"><emphasis role="ital">CollateX: software
+                for collating textual sources.</emphasis>
+            <link>https://collatex.net/-</link></bibliomixed>
+        <bibliomixed xml:id="derose_2004" xreflabel="DeRose 2004">DeRose, Steve. 2004. “Markup
+            Overlap: a review and a horse.” Presented at Extreme Markup Languages 2004. Montréal,
+            Québec, August 2-6, 2004.
+            <link>http://xml.coverpages.org/DeRoseEML2004.pdf</link></bibliomixed>
+        <bibliomixed xml:id="tei_p5" xreflabel="TEI P5">P5: <emphasis role="ital">Guidelines for
+                electronic text encoding and interchange.</emphasis>
+            <link>http://www.tei-c.org/guidelines/P5/</link></bibliomixed>
+        <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein"><emphasis role="ital"
+                >Pittsburgh</emphasis> Frankenstein <emphasis role="ital">Project.</emphasis>
+            <link>https://github.com/PghFrankenstein/Pittsburgh_Frankenstein</link></bibliomixed>
+    </bibliography>
+</article>
