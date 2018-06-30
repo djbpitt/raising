@@ -1,9 +1,7 @@
-<root xmlns:th="http://www.obdurodon.org">
-    <p th:sID="d1e3"/>This is a <word th:sID="d1s5"/>paragraph<word th:eID="d1e5"/> that contains
-    some stuff.<p th:eID="d1e3"/>
-    <p th:sID="d1e9"/>This is another paragraph <phrase 
-        th:sID="d1e11"/><word th:sID="d1e12"/>that
-        <word th:eID="d1e12"/>
-    <word th:sID="d1e15"/>contains<word th:eID="d1e15"/>
-    <word th:sID="d1e18"/>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"
-    /></root>
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <p>This is a <word>paragraph</word> that contains some stuff.</p>
+    <p>This is another paragraph <phrase><word>that</word>
+            <word>contains</word>
+            <word>more</word></phrase> stuff.</p>
+</root>
