@@ -326,13 +326,13 @@
             </itemizedlist></para>
         <para>We replace all matches with the following replacement pattern:</para>
         <programlisting>\1\2\3</programlisting>
-        <para>The regex to match Trojan end-tags is almost the same, except that we look for
-                <code>th:eID</code> instead of <code>th:sID</code>, and we capture the opening
-                <code>&lt;</code> separately from whatever follows it, so that we can write a
-                <code>/</code> into the replacement after it. The regex is:</para>
-        <programlisting>(&lt;)([^&gt;]+?)th:eID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+        <para>The regex to match Trojan end-tags is similar to the one for start-tags, and because
+            real end-tags cannot contain attributes, we do not need to match or copy them. We
+            capture the opening <code>&lt;</code> separately from whatever follows it, so that we
+            can write a <code>/</code> into the replacement after it. The regex is:</para>
+        <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?/(&gt;)</programlisting>
         <para>and the replacement pattern is:</para>
-        <programlisting>\1/\2\3\4</programlisting>
+        <programlisting>\1/\2\3</programlisting>
         <para>This method will incorrectly apply the replacement to matching patterns within XML
             comments and CDATA marked sections. With apologies for disappointing Regex Edge-Case
             Bounty Hunters, coping with matches in these contexts, which would not naturally appear
