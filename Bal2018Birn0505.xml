@@ -129,7 +129,7 @@
             Steve DeRose [<xref linkend="derose_2004"/>]). When we do, we will often wish, later, to
             restore the content elements we flattened. The three co-authors discovered recently that
             we had each had occasion to perform this task, and that we had undertaken it using
-            different techniques. </para>
+            different techniques.</para>
         <para>The purpose of this late-breaking presentation is to present a survey of ways to
             perform the task of unflattening or of raising: restoring a conventional XML element
             structure of content elements from a flattened XML document instance (or part of one),
@@ -189,8 +189,79 @@
     </section>
     <section>
         <title>A recursive function (TODO: David)</title>
-        <para>[Description of the algorithm in DJB’s raise.xsl. 3.0 version, and a rewrite using a
-            recursive named-template call for 1.0 with result element extension.]</para>
+        <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
+            is generic) and fix line-number references</para>
+        <para>We turn off indentation (line 5) to avoid deforming the whitespace.
+                <code>@exclude-result-prefixes="#all"</code> is not enough to avoid writing the
+                <code>th:</code> namespace onto the root element of the output, even though the
+            namespace in question is not used the output. An unused namespace declaration is
+            informationally harmless, but also needlessly distracting, so we suppress it by spelling
+            out the identity template (for all modes) and specifying
+                <code>@copy-namespaces="no"</code> on <code>&lt;xsl:copy&gt;</code>inside it (lines
+            6–10).</para>
+        <para>Our recursive raising operation (the <code>th:raise()</code> function, lines 11–26)
+            operates on document nodes, and we need to process the original document node of the
+            input file differently from the new document nodes that we create on each pass through
+            the recursive function. For that reason, we match the original document node in no mode
+                (<code>&lt;xsl:template match="/"&gt;</code>, lines 27–29) and pass it into the
+            raising function (<code>&lt;xsl:sequence select="th:raise(.)"/&gt;</code>, line
+            28).</para>
+        <para>The raising function checks for the presence of @th:sID attributes in the input
+                (<code>&lt;xsl:when test="exists($input//@th:sID)"&gt;</code>, line 14). If there
+            aren’t any (<code>&lt;xsl:otherwise&gt;</code>, lines 22–24), the recursion is finished,
+            and the function returns the result (<code>&lt;xsl:sequence select="$input"/&gt;</code>,
+            line 23). If there are still <code>@th:sID</code> attributes in the text, we create a
+            variable <code>$result</code> (lines 15–19) of type document and apply templates inside
+            the newly created document node (line 17). After the application of templates is
+            finished, we recur and pass the result into another invocation of
+                <code>th:raise()</code> (<code>&lt;xsl:sequence select="th:raise($result)"/></code>,
+            line 20).</para>
+        <para>The application of templates within the recursive function begins by applying
+            templates to the (newly created) document node in loop mode
+                (<code>&lt;xsl:apply-templates select="$input" mode="loop"/&gt;</code>, line 17).
+            The matching template (lines 30–32) simply applies templates to its children, unlike the
+            template that matches the original document node (in no mode, lines 27–29), which passes
+            the document into the th:raise() function (line 28), a difference in mode that is needed
+            to avoid an endless loop. All other processing is the same for both the original
+            document and the interim documents created inside <code>th:raise()</code>, so
+                <code>&lt;xsl:template match="/" mode="loop"&gt;</code> (lines 30–32) is the only
+            modal template, and it applies templates to its children in no mode.</para>
+        <para>There are three templates that do the actual processing of the innermost elements to
+            be raised on each recursion: one that processes the start-tag, one that processes the
+            content of the newly raised element, and one that processes the corresponding end-tag:<itemizedlist>
+                <listitem>
+                    <para><emphasis role="bold">start-tag:</emphasis> We match elements with an
+                        @th:sID attribute that has a value equal to the value of a @th:eID attribute
+                        on their first following sibling element that has a @th:eID attribute (line
+                        34). This, then, matches only start-tags that contain nothing but
+                            <code>text()</code> nodes and elements that have already been raised
+                        (from which attributes in the <code>th:</code> namespacethat were present in
+                        the input have been discarded). In other words, it matches only the
+                        innermost flattened elements, those that do not contain any other empty
+                        flattened elements. We process these hits by creating a container element
+                        with the same generic identifier as the start-tag and copying all
+                        following-sibling nodes that precede the end-tag that matches the start-tag
+                        we’re processing at the moment (lines 36–41). In other words, we copy the
+                        content of the newly raised element into it.</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold">nodes inside the new wrapper:</emphasis> We have
+                        already copied the content of the newly raised element inside it, which
+                        means that we don’t want to process those nodes again, since that would
+                        create duplicates. For that reason, we match all nodes between the start-
+                        and end-tags that we’re processing at the moment and suppress them by
+                        matching them inside an empty <code>&lt;xsl:template&gt;</code> element
+                        (lines 44–45).</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold">end-tag:</emphasis> Since we create real start- and
+                        end-tags when we match the flattened start-tag, we have no more use for the
+                        flattened end-tag, so we suppress it by matching it, too, inside an empty
+                            <code>&lt;xsl:template&gt;</code> element (lines 47–48).</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>TODO: rewrite using a recursive named-template call for 1.0 with result element
+            extension</para>
     </section>
     <section>
         <title>An XSLT 3.0 solution using accumulators (TODO: Michael)</title>
@@ -199,6 +270,72 @@
     </section>
     <section>
         <title>Global search and replace using regular expressions (TODO: David)</title>
+        <para>It is not possible to parse arbitrary XML with regular expressions (regex), but it is
+            not difficult to identify and process Trojan milestones.<footnote>
+                <para>In terms of the Chomsky hierarchy, XML is a Type 2 (context-free) grammar and
+                    regular expressions are a Type 3 (regular) grammar. Parsing a context-free
+                    grammar, which permits recursion, requires a stack, which is not available in
+                    regular grammars. While some modern regular expression implementations support
+                    back-referencing and recursion and thus go beyond the limitations of a Chomsky
+                    regular grammar, whether methods that rely on these extensions should be
+                    considered regular-expression parsing is unclear (this is a theoretical issue
+                    only), as is the role of legibility in evaluating the suitability of the method
+                    to the task (this is a practical matter).</para>
+            </footnote></para>
+        <para>The following regex matches Trojan start-tags:</para>
+        <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+        <para>The regex works as follows (in multiline mode, that is, where dot also matches
+                <code>\n</code>):<itemizedlist>
+                <listitem>
+                    <para>The first capture group matches everything from the beginning of a tag
+                        that contains a <code>@th:sID</code> attribute until that attribute name.
+                        This necessarilly includes the space that precedes the attribute name, as
+                        well as any attributes that might also precede it.</para>
+                </listitem>
+                <listitem>
+                    <para>We do not capture any part of the <code>th:sID</code> attribute: the
+                        attribute name, the equal sign (with optional whitespace before or after),
+                        the quotation mark value delimiter (single or double), the attribute value
+                        (all characters up to the closing value delimiter), and the closing value
+                        delimiter. As long as the <code>th:sID</code> and <code>th:eID</code> values
+                        are created with the XPath <code>generate-id()</code> function, they cannot
+                        contain single or double quotation marks (<code>generate-id()</code> creates
+                        only values that are XML names), so we do not need to verify that the
+                        opening and closing delimiters match each other lexically.<footnote>
+                            <para>“The returned identifier must consist of ASCII alphanumeric
+                                characters and must start with an alphabetic character. Thus, the
+                                string is syntactically an XML name.” [<xref linkend="xpath"/>,
+                                    <link
+                                    xlink:href="https://www.w3.org/TR/xpath-functions-31/#func-generate-id"
+                                    >§14.5.4</link>]</para>
+                        </footnote></para>
+                </listitem>
+                <listitem>
+                    <para>The second capture group captures everything following the
+                            <code>@th:sID</code> attribute up to the <code>/&gt;</code> that marks
+                        the end of the tag.</para>
+                </listitem>
+                <listitem>
+                    <para>We do not capture the <code>/</code> before the closing
+                        <code>&gt;</code>.</para>
+                </listitem>
+                <listitem>
+                    <para>The third capture group captures the closing <code>&gt;</code>.</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>We replace all matches with the following replacement pattern:</para>
+        <programlisting>\1\2\3</programlisting>
+        <para>The regex to match Trojan end-tags is almost the same, except that we look for
+                <code>th:eID</code> instead of <code>th:sID</code>, and we capture the opening
+                <code>&lt;</code> separately from whatever follows it, so that we can write a
+                <code>/</code> into the replacement after it. The regex is:</para>
+        <programlisting>(&lt;)([^&gt;]+?)th:eID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+        <para>and the replacement pattern is:</para>
+        <programlisting>\1/\2\3\4</programlisting>
+        <para>This method will incorrectly apply the replacement to matching patterns within XML
+            comments and CDATA marked sections. With apologies for disappointing Regex Edge-Case
+            Bounty Hunters, coping with matches in these contexts, which would not naturally appear
+            in our data, is not a goal in our work.</para>
         <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
             mode, and/or Perl or Python.]</para>
     </section>
@@ -256,5 +393,8 @@
         <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein"><emphasis role="ital"
                 >Pittsburgh</emphasis> Frankenstein <emphasis role="ital">Project.</emphasis>
             <link>https://github.com/PghFrankenstein/Pittsburgh_Frankenstein</link></bibliomixed>
+        <bibliomixed xml:id="xpath" xreflabel="XPath functions"><emphasis role="ital">XPath and
+                XQuery functions and operators 3.1 W3C recommendation 21 March 2017.</emphasis>
+            <link>https://www.w3.org/TR/xpath-functions-31/</link></bibliomixed>
     </bibliography>
 </article>
