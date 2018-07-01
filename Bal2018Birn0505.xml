@@ -152,12 +152,9 @@
             CollateX [<xref linkend="collatex"/>], it is necessary to work with individual word
             tokens, and to retain markup information in the eventual collation output without
             letting it interfere with the alignment process.</para>
-
         <para>We may, for example, wish to collate the following two fragments of <emphasis
                 role="ital">Frankenstein</emphasis>:</para>
-
         <programlisting>[sample needed, first witness, in native TEI or other XML]</programlisting>
-
         <programlisting>[sample needed, second witness]</programlisting>
         <para>If we feed these documents to CollateX directly, the results are somewhat
             disappointing:</para>
@@ -183,13 +180,129 @@
             rendering. That is, I don’t try to reconstruct the original hierarchy.</para>
     </section>
     <section>
+        <title>Sample data</title>
+        <para>We report below on the application of different raising methods to authentic data from
+                <xref linkend="frankenstein"/>, described above, but for illustrative purposes when
+            discussing program logic we use a small contrived hierarchical XML sample.<footnote>
+                <para>All files discussed in this report, as well as the report itself, are
+                    available in <link>https://github.com/djbpitt/raising</link>.</para>
+            </footnote> The original input is:</para>
+        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+    &lt;p&gt;This is a &lt;word&gt;paragraph&lt;/word&gt; that contains some stuff.&lt;/p&gt;
+    &lt;p&gt;This is another paragraph &lt;phrase&gt;&lt;word&gt;that&lt;/word&gt;
+            &lt;word&gt;contains&lt;/word&gt;
+            &lt;word&gt;more&lt;/word&gt;&lt;/phrase&gt; stuff.&lt;/p&gt;
+&lt;/root&gt;</programlisting>
+        <para>We modify the Trojan milestone markup method described in <xref
+                linkend="derose_2004"/> by putting the <code>@sID</code> and <code>@eID</code>
+            attributes in a namespace, for which we bind the prefix <code>th:</code> to the URI
+                <code>http://www.blackmesatech.com/2017/nss/trojan-horse</code>. The flattened
+            version looks like:</para>
+        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"&gt;
+    &lt;p th:sID="d1e3"/&gt;This is a &lt;word th:sID="d1e5"/&gt;paragraph&lt;word th:eID="d1e5"/&gt; that contains
+    some stuff.&lt;p th:eID="d1e3"/&gt;
+    &lt;p th:sID="d1e9"/&gt;This is another paragraph &lt;phrase th:sID="d1e11"/&gt;&lt;word th:sID="d1e12"
+        /&gt;that&lt;word th:eID="d1e12"/&gt;
+    &lt;word th:sID="d1e15"/&gt;contains&lt;word th:eID="d1e15"/&gt;
+    &lt;word th:sID="d1e18"/&gt;more&lt;word th:eID="d1e18"/&gt;&lt;phrase th:eID="d1e11"/&gt; stuff.&lt;p th:eID="d1e9"
+    /&gt;
+&lt;/root&gt;</programlisting>
+        <para>The output of raising must be deep-equal to the original XML.</para>
+    </section>
+    <section>
         <title>Right-sibling traversal (TODO: Michael)</title>
         <para>[Description of the algorithm in the shallow-to-deep.xsl stylesheet on <link
                 xlink:href="http://uyghur.ittc.ku.edu">shallow-to-deep.xsl</link>. Possibly two
             versions, for 1.0 and 3.0.]</para>
     </section>
-    <section>
+    <section xml:id="inside-out-function" xreflabel="Inside-out processing: a recursive function">
         <title>Inside-out processing: a recursive function (TODO: David)</title>
+        <!-- 
+        <para>We flatten this with the following XSLT, which converts all tags except the root
+            (which must be preserved as a container element to ensure that the XML is well formed)
+            to Trojan milestones. The original generic identifier is retained, the start-tag is
+            replaced by an empty element that adds a <code>@th:sID</code> attribute with a generated
+            value, and the end-tag is replaced by an empty element that adds a <code>th:eID</code>
+            attribute with the same generated value:</para>
+        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
+    xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="#all"
+    version="3.0"&gt;
+    &lt;xsl:output method="xml" indent="no"/&gt;
+    &lt;xsl:template match="/*"&gt;
+        &lt;xsl:copy&gt;
+            &lt;xsl:namespace name="th" select="'http://www.blackmesatech.com/2017/nss/trojan-horse'"/&gt;
+            &lt;xsl:apply-templates/&gt;
+        &lt;/xsl:copy&gt;
+    &lt;/xsl:template&gt;
+    &lt;xsl:template match="*"&gt;
+        &lt;xsl:element name="{name()}"&gt;
+            &lt;xsl:attribute name="th:sID" select="generate-id()"/&gt;
+        &lt;/xsl:element&gt;
+        &lt;xsl:apply-templates/&gt;
+        &lt;xsl:element name="{name()}"&gt;
+            &lt;xsl:attribute name="th:eID" select="generate-id()"/&gt;
+        &lt;/xsl:element&gt;
+    &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</programlisting>
+
+        <para>We reconstruct the hierarchy using the inside-out recursive function method described
+            at <xref linkend="inside-out-function"/>, below:</para>
+        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all"&gt;
+    &lt;xsl:output method="xml" indent="no"/&gt;
+    &lt;xsl:template match="@* | node()" mode="#all"&gt;
+        &lt;xsl:copy copy-namespaces="no"&gt;
+            &lt;xsl:apply-templates select="@* | node()"/&gt;
+        &lt;/xsl:copy&gt;
+    &lt;/xsl:template&gt;
+    &lt;xsl:function name="th:raise"&gt;
+        &lt;xsl:param name="input" as="document-node()"/&gt;
+        &lt;xsl:choose&gt;
+            &lt;xsl:when test="exists($input//@th:sID)"&gt;
+                &lt;xsl:variable name="result" as="document-node()"&gt;
+                    &lt;xsl:document&gt;
+                        &lt;xsl:apply-templates select="$input" mode="loop"/&gt;
+                    &lt;/xsl:document&gt;
+                &lt;/xsl:variable&gt;
+                &lt;xsl:sequence select="th:raise($result)"/&gt;
+            &lt;/xsl:when&gt;
+            &lt;xsl:otherwise&gt;
+                &lt;xsl:sequence select="$input"/&gt;
+            &lt;/xsl:otherwise&gt;
+        &lt;/xsl:choose&gt;
+    &lt;/xsl:function&gt;
+    &lt;xsl:template match="/"&gt;
+        &lt;xsl:sequence select="th:raise(.)"/&gt;
+    &lt;/xsl:template&gt;
+    &lt;xsl:template match="/" mode="loop"&gt;
+        &lt;xsl:apply-templates/&gt;
+    &lt;/xsl:template&gt;
+    &lt;xsl:template match="*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"&gt;
+        &lt;!-/- innermost start-tag -/-&gt;
+        &lt;xsl:element name="{name()}"&gt;
+            &lt;!-/- textual content of raised element-/-&gt;
+            &lt;xsl:copy-of
+                select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"
+            /&gt;
+        &lt;/xsl:element&gt;
+    &lt;/xsl:template&gt;
+    &lt;!-/- nodes inside new wrapper -/-&gt;
+    &lt;xsl:template
+        match="node()[preceding-sibling::*[@th:sID][1]/@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"/&gt;
+    &lt;!-/- end-tag for new wrapper -/-&gt;
+    &lt;xsl:template
+        match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"
+    /&gt;
+&lt;/xsl:stylesheet&gt;</programlisting>
+
+        -->
         <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
             is generic) and fix line-number references</para>
         <para>We turn off indentation (line 5) to avoid deforming the whitespace.
@@ -341,9 +454,9 @@
         <para>and the replacement pattern is:</para>
         <programlisting>\1/\2\3</programlisting>
         <para>This method will incorrectly apply the replacement to matching patterns within XML
-            comments and CDATA marked sections. With apologies for disappointing Regex Edge-Case
-            Bounty Hunters, coping with matches in these contexts, which would not naturally appear
-            in our data, is not a goal in our work.<footnote>
+            comments and CDATA marked sections. With insincere apologies for disappointing Regex
+            Edge-Case Bounty Hunters, coping with matches in these contexts, which would not
+            naturally appear in our data, is not a goal in our work.<footnote>
                 <para>Similarly, we rely on the use of <code>th:</code> as the namespace prefix and
                         <code>th:sID</code> and <code>th:eID</code> as the attribute names for our
                     Trojan attributes. Changing these assumptions is not a problem as long as the
@@ -372,8 +485,9 @@
             is equal to the <emphasis role="ital">depth</emphasis> of the deepest Trojan element in
             the input hierarchy. The right-sibling traversal approach (both the XSLT 3.0 and the
             XSLT 1.0 versions) is also tail-recursive (TODO: Michael, is this correct?), and with an
-            XSLT parser that performs tail-call optimization, it requires stack space equal to the
-            maximum <emphasis role="ital">width</emphasis> of the widest hierarchical level.</para>
+            XSLT parser that does not perform tail-call optimization, it requires stack space equal
+            to the maximum <emphasis role="ital">width</emphasis> of the widest hierarchical
+            level.</para>
         <para>Insofar as an open-source XSLT 3.0 processor that performs tail-call optimization is
             freely available in the open-source, platform-independent Saxon-HE product [<xref
                 linkend="saxon"/>], the difference in stack requirements between the two methods has
