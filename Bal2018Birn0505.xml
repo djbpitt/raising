@@ -279,9 +279,9 @@
                     regular grammars. While some modern regular expression implementations support
                     back-referencing and recursion and thus go beyond the limitations of a Chomsky
                     regular grammar, whether methods that rely on these extensions should be
-                    considered regular-expression parsing is unclear (this is a theoretical issue
-                    only), as is the role of legibility in evaluating the suitability of the method
-                    to the task (this is a practical matter).</para>
+                    considered regular-expression parsing is unclear (this is a theoretical issue),
+                    as is the role of legibility in evaluating the suitability of the method to the
+                    task (this is a practical concern).</para>
             </footnote></para>
         <para>The following regex matches Trojan start-tags:</para>
         <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
