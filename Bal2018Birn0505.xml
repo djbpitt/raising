@@ -183,13 +183,13 @@
             rendering. That is, I don’t try to reconstruct the original hierarchy.</para>
     </section>
     <section>
-        <title>Right-sibling traversal of the input tree (TODO: Michael)</title>
+        <title>Right-sibling traversal (TODO: Michael)</title>
         <para>[Description of the algorithm in the shallow-to-deep.xsl stylesheet on <link
                 xlink:href="http://uyghur.ittc.ku.edu">shallow-to-deep.xsl</link>. Possibly two
             versions, for 1.0 and 3.0.]</para>
     </section>
     <section>
-        <title>A recursive function (TODO: David)</title>
+        <title>Inside-out processing: a recursive function (TODO: David)</title>
         <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
             is generic) and fix line-number references</para>
         <para>We turn off indentation (line 5) to avoid deforming the whitespace.
@@ -357,9 +357,28 @@
         <para>TODO: David: DJB’s bugs, if any ...]</para>
     </section>
     <section>
-        <title>Comparison</title>
-        <para>TODO: David: [Discussion of the tail recursion in the two recursive approaches (secs.
-            2, 3), prediction that right-sibling recursion will need more memory.]</para>
+        <title>Comparison (David)</title>
+        <para>The inside-out recursive approach (both the function-based XSLT 3.0 version and
+            named-template-based XSLT 1.0 one) is tail-recursive, which means that an XSLT processor
+            that performs tail-call optimization will not be at risk for running out of stack space.
+            In cases where tail-call optimization is not available, the maximum depth of recursion
+            is equal to the <emphasis role="ital">depth</emphasis> of the deepest Trojan element in
+            the input hierarchy. The right-sibling traversal approach (both the XSLT 3.0 and the
+            XSLT 1.0 versions) is also tail-recursive (TODO: Michael, is this correct?), and with an
+            XSLT parser that performs tail-call optimization, it requires stack space equal to the
+            maximum <emphasis role="ital">width</emphasis> of the widest hierarchical level.</para>
+        <para>Insofar as an open-source XSLT 3.0 processor that performs tail-call optimization is
+            freely available in the open-source, platform-independent Saxon-HE product [<xref
+                linkend="saxon"/>], the difference in stack requirements between the two methods has
+            not been a consideration for our purposes. But insofar as XML documents of the sort that
+            are of interest to digital humanists are typically wider than they are deep, users who
+            are unable to employ an XSLT processor that performs tail-call optimization may favor
+            inside-out processing over right-sibling traversal because inside-out processing is
+            likely to require less stack space.</para>
+        <para>(TODO: Michael: I find the inside-out approach simpler, that is, easier to understand,
+            but I don’t know whether that’s because it is simpler, or because of the greater
+            familiarity that comes with having developed it. If it is objectively simpler, should we
+            mention that in our comparison?)</para>
         <para>TODO: Unassigned: [Measurement of time and space complexity running all solutions on
             the same data (as large as we can manage—e.g., all of <emphasis role="ital"
                 >Frankenstein</emphasis>, or an artificial document containing 10 or 100 copies of
@@ -378,11 +397,18 @@
             with regular expressions will be much faster than using XSLT. Without XSLT, it will be
             much easier to produce output that’s not well-formed; it would be good to document how
             many attempts are needed before our sed script is producing well-formed output, and how
-            many more are needed before it’s both well formed and correct.]</para>
+            many more are needed before it’s both well formed and correct. djb: I spent about an
+            hour crafting and debugging the regex expressions for the start and end tags. It
+            produces well-formed output with my baby sample, recreating the original document
+            (before flattening) faithfully. I look forward to the Frankentest!]</para>
     </section>
     <section>
         <title>Conclusion (TODO: Unassigned)</title>
-        <para>[what do we say here?]</para>
+        <para>[what do we say here? djb: The conclusion of my micro-pipelining paper last year may
+            be applicable here, too. It reads: “None of the methods described here is new, but their
+            explicit juxtaposition, comparison, and evaluation in a tutorial context based on real
+            use cases has clarified much about micropipelining for the author, and, it is hoped, for
+            the reader, as well.”]</para>
     </section>
     <bibliography>
         <title>Works cited</title>
@@ -399,6 +425,8 @@
         <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein"><emphasis role="ital"
                 >Pittsburgh</emphasis> Frankenstein <emphasis role="ital">Project.</emphasis>
             <link>https://github.com/PghFrankenstein/Pittsburgh_Frankenstein</link></bibliomixed>
+        <bibliomixed xml:id="saxon" xreflabel="Saxon-HE">Saxon-HE (home edition).
+                <link>http://saxon.sourceforge.net/</link></bibliomixed>
         <bibliomixed xml:id="xpath" xreflabel="XPath functions"><emphasis role="ital">XPath and
                 XQuery functions and operators 3.1 W3C recommendation 21 March 2017.</emphasis>
             <link>https://www.w3.org/TR/xpath-functions-31/</link></bibliomixed>
