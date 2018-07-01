@@ -477,6 +477,8 @@
                     Trojan attributes. Changing these assumptions is not a problem as long as the
                     regex is changed to match.</para>
             </footnote></para>
+        <para>[TODO: djb: Raising with regex works only if it is guaranteed not to create
+            overlap.]</para>
         <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
             mode, and/or Perl or Python.]</para>
     </section>
