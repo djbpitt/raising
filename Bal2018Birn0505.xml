@@ -273,7 +273,8 @@
         <title>Pull parsing (TODO: David)</title>
         <para>[This is a fairly simple and straightforward task with a Python pull parser, which
             combines XML-awareness with single-pass streaming. It does maintain a stack, the maximum
-            depth of which is the maximum depth of the XML nesting. Example to follow ...]</para>
+            depth of which is the maximum depth of the XML nesting, but it is also similar to
+            right-sibling recursion in its single-passedness. Example to follow ...]</para>
     </section>
     <section>
         <title>Global search and replace using regular expressions (TODO: David)</title>
@@ -296,7 +297,7 @@
                 <listitem>
                     <para>The first capture group matches everything from the beginning of a tag
                         that contains a <code>@th:sID</code> attribute until that attribute name.
-                        This necessarilly includes the space that precedes the attribute name, as
+                        This necessarily includes the space that precedes the attribute name, as
                         well as any attributes that might also precede it.</para>
                 </listitem>
                 <listitem>
