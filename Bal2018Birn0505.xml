@@ -179,7 +179,7 @@
             flatten the markup for collation and then convert the milestones to symbols for
             rendering. That is, I don’t try to reconstruct the original hierarchy.</para>
     </section>
-    <section>
+    <section xml:id="simplified" xreflabel="Simplified sample data">
         <title>Illustration (simplified data)</title>
         <para>We report below on the application of different raising methods to authentic data from
                 <xref linkend="frankenstein"/>, described above, but for illustrative purposes when
@@ -194,9 +194,9 @@
             &lt;word&gt;contains&lt;/word&gt;
             &lt;word&gt;more&lt;/word&gt;&lt;/phrase&gt; stuff.&lt;/p&gt;
 &lt;/root&gt;</programlisting>
-        <para>We modify the Trojan milestone markup method described in <xref
-                linkend="derose_2004"/> by putting the <code>@sID</code> and <code>@eID</code>
-            attributes in a namespace, for which we bind the prefix <code>th:</code> to the URI
+        <para>We modify the Trojan milestone markup method described in <xref linkend="derose_2004"
+            /> by putting the <code>@sID</code> and <code>@eID</code> attributes in a namespace, for
+            which we bind the prefix <code>th:</code> to the URI
                 <code>http://www.blackmesatech.com/2017/nss/trojan-horse</code>. The flattened
             version looks like:</para>
         <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -209,7 +209,7 @@
     &lt;word th:sID="d1e18"/&gt;more&lt;word th:eID="d1e18"/&gt;&lt;phrase th:eID="d1e11"/&gt; stuff.&lt;p th:eID="d1e9"
     /&gt;
 &lt;/root&gt;</programlisting>
-        <para>The output of raising must be deep-equal to the original XML.</para>
+        <para>The output of raising must match the original XML.</para>
     </section>
     <section>
         <title>Right-sibling traversal (TODO: Michael)</title>
@@ -217,15 +217,28 @@
                 xlink:href="http://uyghur.ittc.ku.edu">shallow-to-deep.xsl</link>. Possibly two
             versions, for 1.0 and 3.0.]</para>
     </section>
-    <section xml:id="inside-out-function" xreflabel="Inside-out processing: a recursive function">
-        <title>Inside-out processing: a recursive function (TODO: David)</title>
-        <!-- 
-        <para>We flatten this with the following XSLT, which converts all tags except the root
-            (which must be preserved as a container element to ensure that the XML is well formed)
-            to Trojan milestones. The original generic identifier is retained, the start-tag is
-            replaced by an empty element that adds a <code>@th:sID</code> attribute with a generated
-            value, and the end-tag is replaced by an empty element that adds a <code>th:eID</code>
-            attribute with the same generated value:</para>
+    <section xml:id="inside-out-function" xreflabel="Inside-out recursion">
+        <title>Inside-out recursion</title>
+        <para>Inside-out recursion works by finding all innermost pairs of Trojan milestones, that
+            is, those that do not contain other Trojan milestones.<footnote>
+                <para>We call this <emphasis role="ital">inside-out</emphasis>, rather than
+                        <emphasis role="ital">bottom-up</emphasis>, because in fully flattened XML
+                    all empty elements are on the same hierarchical level, and any original
+                    hierarchy has been refactored as containment between Trojan milestones.</para>
+            </footnote> They may contain anything else, including <code>text()</code> nodes, empty
+            elements that are not Trojan milestones, and container elements. The transformation
+            forms all innermost pairs that it finds into container elements and passes the resulting
+            new document back into the recursive function, where the innermost pairs of Trojan
+            milestones are now outside the newly created container elements. The function recurs
+            until there are no more Trojan milestones. The maximum possible depth of recursion is
+            equal to the depth in the original (pre-flattening) XML hierarchy.</para>
+        <para>To test the method on our <xref linkend="simplified"/>, we flatten the original XML
+            with the following XSLT, which converts all tags except the root (which must be
+            preserved as a container element to ensure that the XML is well formed) to Trojan
+            milestones. The original generic identifier is retained, the start-tag is replaced by an
+            empty element that adds a <code>@th:sID</code> attribute with a generated value, and the
+            end-tag is replaced by an empty element that adds a <code>th:eID</code> attribute with
+            the same generated value:</para>
         <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -249,9 +262,10 @@
         &lt;/xsl:element&gt;
     &lt;/xsl:template&gt;
 &lt;/xsl:stylesheet&gt;</programlisting>
-
-        <para>We reconstruct the hierarchy using the inside-out recursive function method described
-            at <xref linkend="inside-out-function"/>, below:</para>
+        <para>The output of the preceding transformation is included in the <xref
+                linkend="simplified"/> section, above. We then reconstruct the hierarchy using the
+            inside-out recursive function <code>th:raise()</code> in the following XSLT
+            stylesheet:</para>
         <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -301,10 +315,6 @@
         match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"
     /&gt;
 &lt;/xsl:stylesheet&gt;</programlisting>
-
-        -->
-        <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
-            is generic) and fix line-number references</para>
         <para>We turn off indentation (line 5) to avoid deforming the whitespace.
                 <code>@exclude-result-prefixes="#all"</code> is not enough to avoid writing the
                 <code>th:</code> namespace onto the root element of the output, even though the
@@ -374,7 +384,11 @@
                             <code>&lt;xsl:template&gt;</code> element (lines 47–48).</para>
                 </listitem>
             </itemizedlist></para>
+        <para>When the simplified original document is flattened and then raised, as described
+            above, the output of the raising operation matches the original input.</para>
         <para>TODO: use a key to find the matching end-tag</para>
+        <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
+            is generic) and fix line-number references</para>
         <para>TODO: rewrite using a recursive named-template call for 1.0 with result element
             extension</para>
     </section>
