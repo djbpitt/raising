@@ -49,7 +49,7 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template
-        match="*[matches(@ana, '^start', 'i')][@loc eq following-sibling::*[matches(@ana, '^end', 'i')][1]/@loc]">
+        match="*[@ana eq 'start'][@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]">
         <!-- innermost start-tag -->
         <xsl:element name="{name()}">
             <!-- textual content of raised element-->
@@ -60,9 +60,9 @@
     </xsl:template>
     <!-- nodes inside new wrapper -->
     <xsl:template
-        match="node()[preceding-sibling::*[matches(@ana, '^start', 'i')][1]/@loc eq following-sibling::*[matches(@ana, '^end', 'i')][1]/@loc]"/> 
+        match="node()[preceding-sibling::*[@ana eq 'start'][1]/@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"/> 
     <!-- end-tag for new wrapper -->
     <xsl:template
-        match="*[matches(@ana, '^end', 'i')][@loc eq preceding-sibling::*[matches(@ana, 'start', 'i')][1]/@loc]"
+        match="*[@ana eq 'end'][@loc eq preceding-sibling::*[@ana eq 'start'][1]/@loc]"
     />
 </xsl:stylesheet>

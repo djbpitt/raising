@@ -15,7 +15,7 @@
                 </xsl:attribute>
             </xsl:for-each>
             <xsl:attribute name="ana">
-                <xsl:value-of select="start"/>
+                <xsl:text>start</xsl:text>
             </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>
@@ -29,7 +29,7 @@
                 </xsl:attribute>
             </xsl:for-each>
             <xsl:attribute name="ana">
-                <xsl:value-of select="end"/>
+                <xsl:text>end</xsl:text>
             </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>
