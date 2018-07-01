@@ -180,7 +180,7 @@
             rendering. That is, I don’t try to reconstruct the original hierarchy.</para>
     </section>
     <section>
-        <title>Sample data</title>
+        <title>Illustration (simplified data)</title>
         <para>We report below on the application of different raising methods to authentic data from
                 <xref linkend="frankenstein"/>, described above, but for illustrative purposes when
             discussing program logic we use a small contrived hierarchical XML sample.<footnote>
@@ -374,6 +374,7 @@
                             <code>&lt;xsl:template&gt;</code> element (lines 47–48).</para>
                 </listitem>
             </itemizedlist></para>
+        <para>TODO: use a key to find the matching end-tag</para>
         <para>TODO: rewrite using a recursive named-template call for 1.0 with result element
             extension</para>
     </section>
