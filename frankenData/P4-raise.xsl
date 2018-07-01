@@ -60,7 +60,7 @@
     </xsl:template>
     <!-- nodes inside new wrapper -->
     <xsl:template
-        match="node()[preceding-sibling::*[matches(@ana, '^start', 'i')][1]/@loc eq following-sibling::*[matches(@loc, '^end', 'i')][1]/@loc]"/>
+        match="node()[preceding-sibling::*[matches(@ana, '^start', 'i')][1]/@loc eq following-sibling::*[matches(@ana, '^end', 'i')][1]/@loc]"/> 
     <!-- end-tag for new wrapper -->
     <xsl:template
         match="*[matches(@ana, '^end', 'i')][@loc eq preceding-sibling::*[matches(@ana, 'start', 'i')][1]/@loc]"
