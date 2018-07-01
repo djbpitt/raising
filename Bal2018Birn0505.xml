@@ -270,6 +270,12 @@
             this.]</para>
     </section>
     <section>
+        <title>Pull parsing (TODO: David)</title>
+        <para>[This is a fairly simple and straightforward task with a Python pull parser, which
+            combines XML-awareness with single-pass streaming. It does maintain a stack, the maximum
+            depth of which is the maximum depth of the XML nesting. Example to follow ...]</para>
+    </section>
+    <section>
         <title>Global search and replace using regular expressions (TODO: David)</title>
         <para>It is not possible to parse arbitrary XML with regular expressions (regex), but it is
             not difficult to identify and process Trojan milestones.<footnote>
