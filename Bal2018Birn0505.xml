@@ -60,8 +60,8 @@
                         >Center for the Digital Text</link></jobtitle>
                 <orgname>University of Pittsburgh at Greensburg</orgname>
             </affiliation>
-            <email>ebb8@pitt.edu</email> 
-        </author>      
+            <email>ebb8@pitt.edu</email>
+        </author>
         <author>
             <personname>
                 <firstname>C.</firstname>
@@ -112,9 +112,13 @@
     <section>
         <title>The concrete sample task (TODO: Elisa)</title>
         <para>As a concrete example, we can consider the form taken by this task in the Variorum
-            Frankenstein [<xref linkend="frankenstein"/>] project edited by the second author. In this project, different encodings of the novel deriving from multiple digital sources are collated using the software
-            CollateX [<xref linkend="collatex"/>], which necessitates flattening the source markup to generate a new XML hierarchy that would overlap the original structure. It is necessary to retain markup information in the eventual collation output without
-            letting it interfere with the alignment process.</para>
+            Frankenstein [<xref linkend="frankenstein"/>] project edited by the second author. In
+            this project, different encodings of the novel deriving from multiple digital sources
+            are collated using the software CollateX [<xref linkend="collatex"/>], which
+            necessitates flattening the source markup to generate a new XML hierarchy that would
+            overlap the original structure. It is necessary to retain markup information in the
+            eventual collation output without letting it interfere with the alignment
+            process.</para>
         <!--2018-07-02 ebb: I'll continue rewriting here and patch in examples from the frankenData directory. -->
         <para>We may, for example, wish to collate the following two fragments of <emphasis
                 role="ital">Frankenstein</emphasis>:</para>
@@ -131,11 +135,12 @@
         <programlisting>[Sample output looking better]</programlisting>
         <para>In order to work normally with the output, however, we need to restore the original
             element structure.</para>
-        <para>TODO: We can’t always restore the element structure because [SHOW WHY]: We might choose to merge some of these down the road, and we can raise
-            those flattened elements that are located entirely within one merged sequence. But we
-            may nonetheless wind up with an original start-tag inside one container element and its
-            corresponding original end-tag inside another, and we cannot reconstruct that element
-            without creating overlap. <!-- So: do we want, for example, to raise instances of
+        <para>TODO: We can’t always restore the element structure because [SHOW WHY]: We might
+            choose to merge some of these down the road, and we can raise those flattened elements
+            that are located entirely within one merged sequence. But we may nonetheless wind up
+            with an original start-tag inside one container element and its corresponding original
+            end-tag inside another, and we cannot reconstruct that element without creating overlap.
+            <!-- So: do we want, for example, to raise instances of
                 <code>&lt;seg&gt;></code> that are inside a word token while not raising those that
             straddle word tokens? What is the cost of treating the same element type differently?
             For what it’s worth, in the <link xlink:href="http://pvl.obdurodon.org">PVL</link>, I
@@ -187,7 +192,9 @@
                 <para>We call this <emphasis role="ital">inside-out</emphasis>, rather than
                         <emphasis role="ital">bottom-up</emphasis>, because in fully flattened XML
                     all empty elements are on the same hierarchical level, and any original
-                    hierarchy has been refactored as containment between Trojan milestones.</para>
+                    hierarchy has been refactored as containment between Trojan milestones. While
+                    the result of raising is constructed in a bottom-up fashion, the nodes to be
+                    raised are processed from the inside outward.</para>
             </footnote> They may contain anything else, including <code>text()</code> nodes, empty
             elements that are not Trojan milestones, and container elements. The transformation
             forms all innermost pairs that it finds into container elements and passes the resulting
@@ -448,14 +455,34 @@
     </section>
     <section>
         <title>Some things that can go wrong</title>
-        <para>TODO: Michael: MSM’s bugs include a failure to specify the correct mode on an
-            apply-templates call, which meant that processing slipped out of the special mode and
-            into default mode, and many nodes appeared repeatedly in the input: tenfold increase in
-            size of document, and more.</para>
-        <para>TODO: Elisa: EBB’s initial sketch, with discussion of what is going wrong.</para>
-        <para>TODO: Elisa: EBB’s implementation of right-sibling recursion, with analysis and
-            discussion.</para>
-        <para>TODO: David: DJB’s bugs, if any ...]</para>
+        <section>
+            <title>EBB’s implementation of right-sibling recursion (TODO: Elise)</title>
+            <para>EBB’s implementation of right-sibling recursion, with analysis and
+                discussion.</para>
+        </section>
+        <section>
+            <title>Right-sibling traversal (TODO: Michael)</title>
+            <para>MSM’s bugs include a failure to specify the correct mode on an
+                apply-templates call, which meant that processing slipped out of the special mode
+                and into default mode, and many nodes appeared repeatedly in the input: tenfold
+                increase in size of document, and more.</para>
+        </section>
+        <section>
+            <title>Inside-out recursion (TODO: David)</title>
+            <para>DJB’s complications: inside-out recursion</para>
+        </section>
+        <section>
+            <title>Accumulators (TODO: Michael)</title>
+            <para>MSM's single combat with accumulators</para>
+        </section>
+        <section>
+            <title>Regex (TODO: David)</title>
+            <para>DJB’s complications: regex</para>
+        </section>
+        <section>
+            <title>Python pull parsing (TODO: David)</title>
+            <para>DJB’s complications: Python pull parsing</para>
+        </section>
     </section>
     <section>
         <title>Comparison (David)</title>
