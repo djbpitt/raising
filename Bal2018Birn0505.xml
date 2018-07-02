@@ -155,19 +155,25 @@
                 <para>All files discussed in this report, as well as the report itself, are
                     available in <link>https://github.com/djbpitt/raising</link>.</para>
             </footnote> The original input is:</para>
-        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        <figure>
+            <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root&gt;
     &lt;p&gt;This is a &lt;word&gt;paragraph&lt;/word&gt; that contains some stuff.&lt;/p&gt;
     &lt;p&gt;This is another paragraph &lt;phrase&gt;&lt;word&gt;that&lt;/word&gt;
             &lt;word&gt;contains&lt;/word&gt;
             &lt;word&gt;more&lt;/word&gt;&lt;/phrase&gt; stuff.&lt;/p&gt;
 &lt;/root&gt;</programlisting>
+            <caption>
+                <para>Original hierarchical XML</para>
+            </caption>
+        </figure>
         <para>We modify the Trojan milestone markup method described in <xref linkend="derose_2004"
             /> by putting the <code>@sID</code> and <code>@eID</code> attributes in a namespace, for
             which we bind the prefix <code>th:</code> to the URI
                 <code>http://www.blackmesatech.com/2017/nss/trojan-horse</code>. The flattened
             version looks like:</para>
-        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        <figure>
+            <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"&gt;
     &lt;p th:sID="d1e3"/&gt;This is a &lt;word th:sID="d1e5"/&gt;paragraph&lt;word th:eID="d1e5"/&gt; that contains
     some stuff.&lt;p th:eID="d1e3"/&gt;
@@ -177,6 +183,10 @@
     &lt;word th:sID="d1e18"/&gt;more&lt;word th:eID="d1e18"/&gt;&lt;phrase th:eID="d1e11"/&gt; stuff.&lt;p th:eID="d1e9"
     /&gt;
 &lt;/root&gt;</programlisting>
+            <caption>
+                <para>Original XML after flattening with Trojan milestones</para>
+            </caption>
+        </figure>
         <para>The output of raising must match the original XML.</para>
     </section>
     <section>
@@ -202,14 +212,17 @@
             milestones are now outside the newly created container elements. The function recurs
             until there are no more Trojan milestones. The maximum possible depth of recursion is
             equal to the depth in the original (pre-flattening) XML hierarchy.</para>
-        <para>To test the method on our <xref linkend="simplified"/>, we flatten the original XML
-            with the following XSLT, which converts all tags except the root (which must be
-            preserved as a container element to ensure that the XML is well formed) to Trojan
-            milestones. The original generic identifier is retained, the start-tag is replaced by an
-            empty element that adds a <code>@th:sID</code> attribute with a generated value, and the
-            end-tag is replaced by an empty element that adds a <code>th:eID</code> attribute with
-            the same generated value:</para>
-        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        <section>
+            <title>Flattening</title>
+            <para>To test the method on our <xref linkend="simplified"/>, we first flatten the
+                original XML with the following XSLT, which converts all tags except the root (which
+                must be preserved as a container element to ensure that the XML is well formed) to
+                Trojan milestones. The original generic identifier is retained, the start-tag is
+                replaced by an empty element that adds a <code>@th:sID</code> attribute with a
+                generated value, and the end-tag is replaced by an empty element that adds a
+                    <code>th:eID</code> attribute with the same generated value:</para>
+            <figure>
+                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
@@ -232,11 +245,19 @@
         &lt;/xsl:element&gt;
     &lt;/xsl:template&gt;
 &lt;/xsl:stylesheet&gt;</programlisting>
-        <para>The output of the preceding transformation is included in the <xref
-                linkend="simplified"/> section, above. We then reconstruct the hierarchy using the
-            inside-out recursive function <code>th:raise()</code> in the following XSLT
-            stylesheet:</para>
-        <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                <caption>
+                    <para>XSLT to flatten hierarchical XML to Trojan milestones</para>
+                </caption>
+            </figure>
+        </section>
+        <section>
+            <title>Raising</title>
+            <para>The output of the preceding transformation is included in the <xref
+                    linkend="simplified"/> section, above. We then reconstruct the hierarchy using
+                the inside-out recursive function <code>th:raise()</code> in the following XSLT
+                stylesheet:</para>
+            <figure>
+                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all"&gt;
@@ -284,82 +305,150 @@
     &lt;xsl:template
         match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"/&gt;
 &lt;/xsl:stylesheet&gt;</programlisting>
-        <para>We turn off indentation (line 5) to avoid deforming the whitespace.
-                <code>@exclude-result-prefixes="#all"</code> is not enough to avoid writing the
-                <code>th:</code> namespace onto the root element of the output, even though the
-            namespace in question is not used the output. An unused namespace declaration is
-            informationally harmless, but also needlessly distracting, so we suppress it by spelling
-            out the identity template (for all modes) and specifying
-                <code>@copy-namespaces="no"</code> on <code>&lt;xsl:copy&gt;</code>inside it (lines
-            6–10).</para>
-        <para>Our recursive raising operation (the <code>th:raise()</code> function, lines 11–26)
-            operates on document nodes, and we need to process the original document node of the
-            input file differently from the new document nodes that we create on each pass through
-            the recursive function. For that reason, we match the original document node in no mode
-                (<code>&lt;xsl:template match="/"&gt;</code>, lines 27–29) and pass it into the
-            raising function (<code>&lt;xsl:sequence select="th:raise(.)"/&gt;</code>, line
-            28).</para>
-        <para>The raising function checks for the presence of @th:sID attributes in the input
-                (<code>&lt;xsl:when test="exists($input//@th:sID)"&gt;</code>, line 14). If there
-            aren’t any (<code>&lt;xsl:otherwise&gt;</code>, lines 22–24), the recursion is finished,
-            and the function returns the result (<code>&lt;xsl:sequence select="$input"/&gt;</code>,
-            line 23). If there are still <code>@th:sID</code> attributes in the text, we create a
-            variable <code>$result</code> (lines 15–19) of type document and apply templates inside
-            the newly created document node (line 17). After the application of templates is
-            finished, we recur and pass the result into another invocation of
-                <code>th:raise()</code> (<code>&lt;xsl:sequence select="th:raise($result)"/></code>,
-            line 20).</para>
-        <para>The application of templates within the recursive function begins by applying
-            templates to the (newly created) document node in loop mode
-                (<code>&lt;xsl:apply-templates select="$input" mode="loop"/&gt;</code>, line 17).
-            The matching template (lines 30–32) simply applies templates to its children, unlike the
-            template that matches the original document node (in no mode, lines 27–29), which passes
-            the document into the th:raise() function (line 28), a difference in mode that is needed
-            to avoid an endless loop. All other processing is the same for both the original
-            document and the interim documents created inside <code>th:raise()</code>, so
-                <code>&lt;xsl:template match="/" mode="loop"&gt;</code> (lines 30–32) is the only
-            modal template, and it applies templates to its children in no mode.</para>
-        <para>There are three templates that do the actual processing of the innermost elements to
-            be raised on each recursion: one that processes the start-tag, one that processes the
-            content of the newly raised element, and one that processes the corresponding end-tag:<itemizedlist>
-                <listitem>
-                    <para><emphasis role="bold">start-tag:</emphasis> We match elements with an
-                        @th:sID attribute that has a value equal to the value of a @th:eID attribute
-                        on their first following sibling element that has a @th:eID attribute (line
-                        33). This, then, matches only start-tags that contain nothing but
-                            <code>text()</code> nodes and elements that have already been raised
-                        (from which attributes in the <code>th:</code> namespacethat were present in
-                        the input have been discarded). In other words, it matches only the
-                        innermost flattened elements, those that do not contain any other empty
-                        flattened elements. We process these hits by creating a container element
-                        with the same generic identifier as the start-tag and copying all
-                        following-sibling nodes that precede the end-tag that matches the start-tag
-                        we’re processing at the moment (lines 35–40). In other words, we copy the
-                        content of the newly raised element into it.</para>
-                </listitem>
-                <listitem>
-                    <para><emphasis role="bold">nodes inside the new wrapper:</emphasis> We have
-                        already copied the content of the newly raised element inside it, which
-                        means that we don’t want to process those nodes again, since that would
-                        create duplicates. For that reason, we suppress all nodes between the start-
-                        and end-tags that we’re processing at the moment by matching them inside an
-                        empty <code>&lt;xsl:template&gt;</code> element (lines 43–44).</para>
-                </listitem>
-                <listitem>
-                    <para><emphasis role="bold">end-tag:</emphasis> Since we create real start- and
-                        end-tags when we match the flattened start-tag, we have no more use for the
-                        flattened end-tag, so we suppress it by matching it, too, inside an empty
-                            <code>&lt;xsl:template&gt;</code> element (line 47).</para>
-                </listitem>
-            </itemizedlist></para>
-        <para>When the simplified original document is flattened and then raised, as described
-            above, the output of the raising operation matches the original input.</para>
-        <para>TODO: process non-Trojan attributes</para>
-        <para>TODO: use a key to find the matching end-tag</para>
-        <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
-            is generic)</para>
-        <para>TODO: rewrite using a recursive named-template call for 1.0 with result element
-            extension</para>
+                <caption>
+                    <para>XSLT to transform Trojan milestones into container elements</para>
+                </caption>
+            </figure>
+            <para>We turn off indentation (line 5) to avoid deforming the whitespace.
+                    <code>@exclude-result-prefixes="#all"</code> is not enough to avoid writing the
+                    <code>th:</code> namespace onto the root element of the output, even though the
+                namespace in question is not used the output. An unused namespace declaration is
+                informationally harmless, but also needlessly distracting, so we suppress it by
+                spelling out the identity template (for all modes) and specifying
+                    <code>@copy-namespaces="no"</code> on <code>&lt;xsl:copy&gt;</code>inside it
+                (lines 6–10).</para>
+            <para>Our recursive raising operation (the <code>th:raise()</code> function, lines
+                11–26) operates on document nodes, and we need to process the original document node
+                of the input file differently from the new document nodes that we create on each
+                pass through the recursive function. For that reason, we match the original document
+                node in no mode (<code>&lt;xsl:template match="/"&gt;</code>, lines 27–29) and pass
+                it into the raising function (<code>&lt;xsl:sequence
+                    select="th:raise(.)"/&gt;</code>, line 28).</para>
+            <para>The raising function checks for the presence of @th:sID attributes in the input
+                    (<code>&lt;xsl:when test="exists($input//@th:sID)"&gt;</code>, line 14). If
+                there aren’t any (<code>&lt;xsl:otherwise&gt;</code>, lines 22–24), the recursion is
+                finished, and the function returns the result (<code>&lt;xsl:sequence
+                    select="$input"/&gt;</code>, line 23). If there are still <code>@th:sID</code>
+                attributes in the text, we create a variable <code>$result</code> (lines 15–19) of
+                type document and apply templates inside the newly created document node (line 17).
+                After the application of templates is finished, we recur and pass the result into
+                another invocation of <code>th:raise()</code> (<code>&lt;xsl:sequence
+                    select="th:raise($result)"/></code>, line 20).</para>
+            <para>The application of templates within the recursive function begins by applying
+                templates to the (newly created) document node in loop mode
+                    (<code>&lt;xsl:apply-templates select="$input" mode="loop"/&gt;</code>, line
+                17). The matching template (lines 30–32) simply applies templates to its children,
+                unlike the template that matches the original document node (in no mode, lines
+                27–29), which passes the document into the th:raise() function (line 28), a
+                difference in mode that is needed to avoid an endless loop. All other processing is
+                the same for both the original document and the interim documents created inside
+                    <code>th:raise()</code>, so <code>&lt;xsl:template match="/"
+                    mode="loop"&gt;</code> (lines 30–32) is the only modal template, and it applies
+                templates to its children in no mode.</para>
+            <para>There are three templates that do the actual processing of the innermost elements
+                to be raised on each recursion: one that processes the start-tag, one that processes
+                the content of the newly raised element, and one that processes the corresponding end-tag:<itemizedlist>
+                    <listitem>
+                        <para><emphasis role="bold">start-tag:</emphasis> We match elements with an
+                            @th:sID attribute that has a value equal to the value of a @th:eID
+                            attribute on their first following sibling element that has a @th:eID
+                            attribute (line 33). This, then, matches only start-tags that contain
+                            nothing but <code>text()</code> nodes and elements that have already
+                            been raised (from which attributes in the <code>th:</code> namespacethat
+                            were present in the input have been discarded). In other words, it
+                            matches only the innermost flattened elements, those that do not contain
+                            any other empty flattened elements. We process these hits by creating a
+                            container element with the same generic identifier as the start-tag and
+                            copying all following-sibling nodes that precede the end-tag that
+                            matches the start-tag we’re processing at the moment (lines 35–40). In
+                            other words, we copy the content of the newly raised element into
+                            it.</para>
+                    </listitem>
+                    <listitem>
+                        <para><emphasis role="bold">nodes inside the new wrapper:</emphasis> We have
+                            already copied the content of the newly raised element inside it, which
+                            means that we don’t want to process those nodes again, since that would
+                            create duplicates. For that reason, we suppress all nodes between the
+                            start- and end-tags that we’re processing at the moment by matching them
+                            inside an empty <code>&lt;xsl:template&gt;</code> element (lines
+                            43–44).</para>
+                    </listitem>
+                    <listitem>
+                        <para><emphasis role="bold">end-tag:</emphasis> Since we create real start-
+                            and end-tags when we match the flattened start-tag, we have no more use
+                            for the flattened end-tag, so we suppress it by matching it, too, inside
+                            an empty <code>&lt;xsl:template&gt;</code> element (line 47).</para>
+                    </listitem>
+                </itemizedlist></para>
+            <para>When the simplified original document is flattened and then raised, as described
+                above, the output of the raising operation matches the original input. The preceding
+                XSLT does not copy attributes from the Trojan milestones because there aren’t any
+                non-Trojan attributes in our simplified example, but where needed, non-Trojan
+                attributes can be copied from the Trojan start-tag to the new container by changing
+                the element constructor to:</para>
+            <figure>
+                <programlisting>&lt;xsl:element name="{name()}"&gt;
+    &lt;xsl:copy-of select="@* except @th:*"/&gt;
+    &lt;xsl:copy-of
+        select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"
+    /&gt;
+&lt;/xsl:element&gt;</programlisting>
+                <caption>
+                    <para>Element constructor modified to copy non-Trojan attributes to raised
+                        elements</para>
+                </caption>
+            </figure>
+        </section>
+        <section>
+            <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
+            <para>The Trojan markup in the <emphasis role="ital">Frankenstein</emphasis> data
+                differs from that of our simplified test sample. Specifically, Trojan start-tags in
+                    <emphasis role="ital">Frankenstein</emphasis> have an <code>@ana</code>
+                attribute with the value <code>start</code>, end-tags have an <code>@ana</code>
+                attribute with the value <code>end</code>, and start- and end-tags are paired by
+                sharing a unique value of a <code>@loc</code> attribute. The output requirements are
+                to remove the <code>@ana</code> attribute and refactor the <code>@loc</code>
+                attribute as an <code>@xml:id</code> attribute. We do that with:</para>
+            <figure>
+                <programlisting>&lt;xsl:element name="{name()}"&gt;
+    &lt;xsl:attribute name="xml:id" select="@loc"/&gt;
+    &lt;xsl:copy-of
+        select="following-sibling::node()[following-sibling::*[@loc eq current()/@loc]]"/&gt;
+&lt;/xsl:element&gt;</programlisting>
+                <caption>
+                    <para>Element constructor to refactor <code>@loc</code> as <code>@xml:id</code>
+                        <emphasis role="ital">Frankenstein</emphasis></para>
+                </caption>
+            </figure>
+            <para>We match Trojan start-tags, (raised) element content, and end-tags in <emphasis
+                    role="ital">Frankenstein</emphasis> with the following XPath patterns:</para>
+            <figure>
+                <programlisting>&lt;xsl:template match="*[@ana eq 'start'][@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"&gt;</programlisting>
+                <caption>
+                    <para>XPath expression to match Trojan start-tags in <emphasis role="ital"
+                            >Frankenstein</emphasis></para>
+                </caption>
+            </figure>
+            <figure>
+                <programlisting>&lt;xsl:template match="node()[preceding-sibling::*[@ana eq 'start'][1]/@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"/&gt;</programlisting>
+                <caption>
+                    <para>XPath expression to match the content of raised elements in <emphasis
+                            role="ital">Frankenstein</emphasis></para>
+                </caption>
+            </figure>
+            <figure>
+                <programlisting>&lt;xsl:template match="*[@ana eq 'end'][@loc eq preceding-sibling::*[@ana eq 'start'][1]/@loc]"/&gt;</programlisting>
+                <caption>
+                    <para>XPath expression to match Trojan end-tags in <emphasis role="ital"
+                            >Frankenstein</emphasis></para>
+                </caption>
+            </figure>
+        </section>
+        <section>
+            <title>XSLT 1.0</title>
+            <para>TODO: rewrite using a recursive named-template call for 1.0 with result element
+                extension</para>
+        </section>
     </section>
     <section>
         <title>An XSLT 3.0 solution using accumulators (TODO: Michael)</title>
@@ -446,8 +535,16 @@
                     Trojan attributes. Changing these assumptions is not a problem as long as the
                     regex is changed to match.</para>
             </footnote></para>
-        <para>[TODO: djb: Raising with regex works only if it is guaranteed not to create
-            overlap.]</para>
+        <para>A more serious limitation of this method is that because it is not XML-aware, it can
+            be used only in situations where raising is guaranteed not to create overlap. For
+            example, given input like: <figure>
+                <programlisting>
+            
+        </programlisting>
+                <caption>
+                    <para>XML that cannot be unflattened without creating overlap</para>
+                </caption>
+            </figure></para>
         <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
             mode, and/or Perl or Python.]</para>
     </section>
@@ -471,8 +568,44 @@
                 document, and more.</para>
         </section>
         <section>
-            <title>Inside-out recursion (TODO: David)</title>
-            <para>DJB’s complications: inside-out recursion</para>
+            <title>Inside-out recursion</title>
+            <para>The two principal pitfalls with inside-recursion are <emphasis role="ital">double
+                    processing</emphasis> and <emphasis role="ital">endless
+                recursion</emphasis>.</para>
+            <section>
+                <title>Double processing</title>
+                <para>When a start-tag is matched and raised, the nodes that belong inside it are
+                    copied into it inside the template that matches the start-tag. Because the nodes
+                    being copied are also candidates for the application of templates in the current
+                    pass through the function, we need to match them (along with the end-tag) in an
+                    empty <code>&lt;xsl:template&gt;</code> in order to avoid outputting them twice.
+                    Otherwise they would be copied when the start-tag is matched and then processed
+                    again when templates are applied to them in their own right.</para>
+            </section>
+            <section>
+                <title>Endless recursion</title>
+                <para>Recursion requires an exit condition to avoid falling into an endless loop. In
+                    an early version of the code, the recursive function tested for the presence of
+                    Trojan milestone attributes, and if there weren’t any, it concluded that all
+                    raising had been completed and stopped the recursion. This test fails in
+                    situations where there are Trojan elements that cannot be raised without
+                    creating overlap. Avoiding the endless loop in such situations requires a more
+                    complex test, not just for the presence of Trojan attributes, but for the
+                    presence of those that can be raised without creating overlap.</para>
+                <para>Endless recursion is not an issue in situations where complete raising would
+                    not create overlap. This is the case with our original simplified sample, where
+                    the XML with Trojan markup was created by flattening original hierarchical XML,
+                    and since the original could not have had overlap, it can be reconstructed
+                    safely. Endless recursion is also not a problem when we raise only a subset of
+                    the markup that is guaranteed not to overlap. For example, if we have
+                    tessellated page and paragraph hierarchies over a prose text, where both pages
+                    and paragraphs have been flattened, we cannot fully raise all instances both
+                    types of elements if doing so would create overlap. But if our markup convension
+                    is that pages cannot overlap with pages and paragraphs cannot overlap with
+                    paragraphs, we can modify the raising routine to raise only the pages or only
+                    the paragraphs. See also <xref linkend="tessellated"/>, where we discuss an
+                    alternative approach to raising with data of this type.</para>
+            </section>
         </section>
         <section>
             <title>Accumulators (TODO: Michael)</title>
@@ -542,7 +675,7 @@
             use cases has clarified much about micropipelining for the author, and, it is hoped, for
             the reader, as well.”]</para>
     </section>
-    <appendix>
+    <appendix xml:id="tessellated" xreflabel="Appendix A: Raising tessellated hierarchies">
         <title>Appendix A: Raising tessellated hierarchies (TODO: djb)</title>
         <para>Raising tessellated hierarchies is a common requirement for hierarchy <emphasis
                 role="ital">inversion</emphasis>.<footnote>
