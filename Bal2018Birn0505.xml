@@ -465,7 +465,7 @@
             right-sibling recursion in its single-passedness. Example to follow ...]</para>
     </section>
     <section>
-        <title>Global search and replace using regular expressions)</title>
+        <title>Global search and replace using regular expressions</title>
         <para>It is not possible to parse arbitrary XML with regular expressions (regex), but it is
             not difficult to identify and process Trojan milestones.<footnote>
                 <para>In terms of the Chomsky hierarchy, XML is a Type 2 (context-free) grammar and
@@ -480,8 +480,8 @@
             </footnote></para>
         <para>The following regex matches Trojan start-tags:</para>
         <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
-        <para>The regex works as follows (in multiline mode, that is, where dot also matches
-                <code>\n</code>):<itemizedlist>
+        <para>The regex works as follows (in <emphasis role="ital">dot-all</emphasis> mode, that is,
+            where dot also matches <code>\n</code>):<itemizedlist>
                 <listitem>
                     <para>The first capture group matches everything from the beginning of a tag
                         that contains a <code>@th:sID</code> attribute until that attribute name.
@@ -512,8 +512,11 @@
                         the end of the tag.</para>
                 </listitem>
                 <listitem>
-                    <para>We do not capture the <code>/</code> before the closing
-                        <code>&gt;</code>.</para>
+                    <para>We do not capture the <code>/</code> before the closing <code>&gt;</code>.<footnote>
+                            <para>Forward slash has to be escaped in some regex implementations, but
+                                not in others. Escaping where it is not required does no
+                                harm.</para>
+                        </footnote></para>
                 </listitem>
                 <listitem>
                     <para>The third capture group captures the closing <code>&gt;</code>.</para>
@@ -525,7 +528,7 @@
             real end-tags cannot contain attributes, we do not need to match or copy them. We
             capture the opening <code>&lt;</code> separately from whatever follows it, so that we
             can write a <code>/</code> into the replacement after it. The regex is:</para>
-        <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?/(&gt;)</programlisting>
+        <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?\/(&gt;)</programlisting>
         <para>and the replacement pattern is:</para>
         <programlisting>\1/\2\3</programlisting>
         <para>This method will incorrectly apply the replacement to matching patterns within XML
