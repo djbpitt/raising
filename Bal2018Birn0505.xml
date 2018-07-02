@@ -653,8 +653,22 @@
             <para>MSM's single combat with accumulators</para>
         </section>
         <section>
-            <title>Regex (TODO: David)</title>
-            <para>DJB’s complications: regex</para>
+            <title>Regex</title>
+            <para>The only challenge to writing the regex (aside from the risk of inadvertently
+                creating XML that is not well-formed because of overlap, which is discussed above)
+                is anticipating variation in the markup. For example, an XML start-tag with a single
+                attribute looks like <code>&lt;gi attname="value"&gt;</code>, but it allows optional
+                whitespace around the equal sign and before the closing <code>&gt;</code>
+                delimiter—but not between the opening <code>&lt;</code> delimiter and the generic
+                identifier, and not between the <code>/</code> and the <code>&gt;</code> at the end
+                of a self-closing empty tag. Where it allows whitespace, it allows any amount of any
+                combination of whitespace characters.</para>
+            <para>Within the context of a single project, the easiest way to deal with the allowable
+                variation is not to allow it, that is, to enforce rigorous consistency even where
+                XML syntax does not require it. But because rigorous consistency is difficult to
+                achieve without computational validation, we opted for a more robust regex—that is,
+                one more accepting of variation, even though allowing for variation made the regex
+                harder to read and develop.</para>
         </section>
         <section>
             <title>Python pull parsing (TODO: David)</title>
