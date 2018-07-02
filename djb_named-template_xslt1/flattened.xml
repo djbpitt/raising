@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><root xmlns:djb="http://www.obdurodon.org">
-    <p djb:n="d1e3" djb:type="start"/>This is a <word djb:n="d1e5" djb:type="start"/>paragraph<word djb:n="d1e5" djb:type="end"/> that contains some stuff.<p djb:n="d1e3" djb:type="end"/>
-    <p djb:n="d1e9" djb:type="start"/>This is another paragraph <phrase djb:n="d1e11" djb:type="start"/><word djb:n="d1e12" djb:type="start"/>that<word djb:n="d1e12" djb:type="end"/>
-            <word djb:n="d1e15" djb:type="start"/>contains<word djb:n="d1e15" djb:type="end"/>
-            <word djb:n="d1e18" djb:type="start"/>more<word djb:n="d1e18" djb:type="end"/><phrase djb:n="d1e11" djb:type="end"/> stuff.<p djb:n="d1e9" djb:type="end"/>
+<?xml version="1.0" encoding="UTF-8"?><root>
+    <p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e3"/>This is a <word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e5"/>paragraph<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e5"/> that contains some stuff.<p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e3"/>
+    <p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e9"/>This is another paragraph <phrase xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e11"/><word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e12"/>that<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e12"/>
+            <word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e15"/>contains<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e15"/>
+            <word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e18"/>more<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e18"/><phrase xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e11"/> stuff.<p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e9"/>
 </root>
