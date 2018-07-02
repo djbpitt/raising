@@ -46,47 +46,12 @@
                 <surname>Beshero-Bondar</surname>
             </personname>
             <personblurb>
-                <para>A scholar of British Romanticism and hybrid literary genres, Dr.
-                    Beshero-Bondar earned a PhD in English Literature from Penn State University in
-                    2003, and afterwards took a post teaching literature at the University of
-                    Pittsburgh at Greensburg. Her publications include a book about women Romantic
-                    epoists, titled <emphasis role="ital">Women, epic, and transition in British
-                        Romanticism</emphasis>, published by the University of Delaware Press in
-                    2011, and articles in <emphasis role="ital">Literature compass</emphasis>,
-                        <emphasis role="ital">ELH</emphasis> (English literary history), <emphasis
-                        role="ital">Genre</emphasis>, and <emphasis role="ital">Philological
-                        quarterly</emphasis> on the poetry of Robert Southey, Mary Russell Mitford,
-                    and Lord Byron in context with 18th- and 19th-century views of revolution, world
-                    empires, natural sciences, and theater productions.</para>
-                <para>Since earning tenure in 2011, she has applied herself adventurously to the
-                    building of digital editions and digital research projects, such as studying
-                    studying associations among physical and mythical locations in epic poetry, and
-                    teaching undergraduates the XML family of languages in the context of designing
-                    research projects. She is the director of the <link
-                        xlink:href="http://digitalmitford.org">Digital Mitford project</link>, whose
-                    two-fold mission is:<orderedlist>
-                        <listitem>
-                            <para>to produce the first comprehensive scholarly edition of the works
-                                and letters of Mary Russell Mitford, and</para>
-                        </listitem>
-                        <listitem>
-                            <para>to share knowledge of TEI XML and other related humanities
-                                computing practices with all serious scholars interested in
-                                contributing to the project.</para>
-                        </listitem>
-                    </orderedlist> In keeping with the second goal, she hosts an annual coding
-                    school at Pitt-Greensburg each May or June to teach TEI, regular expression
-                    up-conversion of documents, XPath, schema design, and XSLT or XQuery, based on
-                    the interests and background of registrants. Other digital projects in which she
-                    is enmeshed include <link
-                        xlink:href="https://github.com/ebeshero/Pittsburgh_Frankenstein/tree/Text_Processing"
-                        >a Bicentennial Frankenstein project</link> to up-convert the 1990s
-                    electronic Frankenstein edition by 2018, and <link
-                        xlink:href="http://amadis.newtfire.org/">Amadis In Translation</link>, which
-                    applies XML to quantify, categorize, and study alterations made by Robert
-                    Southey in translating an early modern Spanish text of Amadis de Gaule. She was
-                    elected to serve on <link xlink:href="http://www.tei-c.org/Activities/Council/"
-                        >the TEI Technical Council</link> from 2016-2017.</para>
+                <para>Elisa Beshero-Bondar is a member of the TEI Technical Council, as well as an
+                    Associate Professor of English and Director of the Center for the Digital Text
+                    at the University of Pittsburgh at Greensburg. Her projects investigate complex
+                    texts such as epics, plays, and multi-volume voyage logs, and she is the founder
+                    and organizer of the <link xlink:href="http://digitalmitford.org">Digital
+                        Mitford project</link> and its annual coding school.</para>
             </personblurb>
             <affiliation>
                 <jobtitle>Associate Professor of English</jobtitle>
@@ -95,8 +60,8 @@
                         >Center for the Digital Text</link></jobtitle>
                 <orgname>University of Pittsburgh at Greensburg</orgname>
             </affiliation>
-            <email>ebb8@pitt.edu</email>
-        </author>
+            <email>ebb8@pitt.edu</email> 
+        </author>      
         <author>
             <personname>
                 <firstname>C.</firstname>
@@ -147,11 +112,10 @@
     <section>
         <title>The concrete sample task (TODO: Elisa)</title>
         <para>As a concrete example, we can consider the form taken by this task in the Variorum
-            Frankenstein [<xref linkend="frankenstein"/>] project edited by the second author. In
-            order to collate different XML-encoded versions of the novel using the collation tool
-            CollateX [<xref linkend="collatex"/>], it is necessary to work with individual word
-            tokens, and to retain markup information in the eventual collation output without
+            Frankenstein [<xref linkend="frankenstein"/>] project edited by the second author. In this project, different encodings of the novel deriving from multiple digital sources are collated using the software
+            CollateX [<xref linkend="collatex"/>], which necessitates flattening the source markup to generate a new XML hierarchy that would overlap the original structure. It is necessary to retain markup information in the eventual collation output without
             letting it interfere with the alignment process.</para>
+        <!--2018-07-02 ebb: I'll continue rewriting here and patch in examples from the frankenData directory. -->
         <para>We may, for example, wish to collate the following two fragments of <emphasis
                 role="ital">Frankenstein</emphasis>:</para>
         <programlisting>[sample needed, first witness, in native TEI or other XML]</programlisting>
@@ -167,17 +131,16 @@
         <programlisting>[Sample output looking better]</programlisting>
         <para>In order to work normally with the output, however, we need to restore the original
             element structure.</para>
-        <para>TODO: We can’t always restore the element structure because CollateX wraps each word
-            token in tags. We might choose to merge some of these down the road, and we can raise
+        <para>TODO: We can’t always restore the element structure because [SHOW WHY]: We might choose to merge some of these down the road, and we can raise
             those flattened elements that are located entirely within one merged sequence. But we
             may nonetheless wind up with an original start-tag inside one container element and its
             corresponding original end-tag inside another, and we cannot reconstruct that element
-            without creating overlap. So: do we want, for example, to raise instances of
+            without creating overlap. <!-- So: do we want, for example, to raise instances of
                 <code>&lt;seg&gt;></code> that are inside a word token while not raising those that
             straddle word tokens? What is the cost of treating the same element type differently?
             For what it’s worth, in the <link xlink:href="http://pvl.obdurodon.org">PVL</link>, I
             flatten the markup for collation and then convert the milestones to symbols for
-            rendering. That is, I don’t try to reconstruct the original hierarchy.</para>
+            rendering. That is, I don’t try to reconstruct the original hierarchy.--></para>
     </section>
     <section xml:id="simplified" xreflabel="Simplified sample data">
         <title>Illustration (simplified data)</title>
