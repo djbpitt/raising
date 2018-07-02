@@ -458,13 +458,6 @@
             this.]</para>
     </section>
     <section>
-        <title>Pull parsing (TODO: David)</title>
-        <para>[This is a fairly simple and straightforward task with a Python pull parser, which
-            combines XML-awareness with single-pass streaming. It does maintain a stack, the maximum
-            depth of which is the maximum depth of the XML nesting, but it is also similar to
-            right-sibling recursion in its single-passedness. Example to follow ...]</para>
-    </section>
-    <section>
         <title>Global search and replace using regular expressions</title>
         <para>It is not possible to parse arbitrary XML with regular expressions (regex), but it is
             not difficult to identify and process Trojan milestones.<footnote>
@@ -579,6 +572,25 @@
             well-formed.</para>
         <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
             mode, and/or Perl or Python.]</para>
+    </section>
+    <section>
+        <title>Pull parsing in Python</title>
+        <para>The Python <code>xml.dom.pulldom</code> module that can be used to stream an XML
+            document past an event handler that can be used to raise a flattened hierarchy.<footnote>
+                <para>The authors are grateful to Ronald Haentjens Dekker for bringing this method
+                    to our attention. The example at his
+                        <link>https://github.com/rhdekker/python_xml_pull_parser_example</link>
+                    GitHub repository is the model for the examples here.</para>
+            </footnote> The pull parser can create output in two ways, as a string or as XML. With
+            string output, this method is comparable to the regex replacement strategy described
+            above: it passes all events through unchanged except for Trojan milestones, which it
+            replaces with regular XML start- and end-tags. Because the output construction is not
+            XML-aware, it has the same limitations as the regex approach: it is capable of creating
+            output that includes overlap, and that therefore is not well formed XML. With XML
+            output, it uses <code>xml.dom.minidom</code> to create XML elements. Insofar as this is
+            a streaming protocol, it can be considered a form of depth-first traversal, which is to
+            say that it begins at the document node and processes each element on a single
+            traversal, maintaining the current context in a stack.</para>
     </section>
     <section>
         <title>Some things that can go wrong</title>
