@@ -269,21 +269,20 @@
         &lt;xsl:apply-templates/&gt;
     &lt;/xsl:template&gt;
     &lt;xsl:template match="*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"&gt;
-        &lt;!-/- innermost start-tag -/-&gt;
+        &lt;!-- innermost start-tag --&gt;
         &lt;xsl:element name="{name()}"&gt;
-            &lt;!-/- textual content of raised element-/-&gt;
+            &lt;!-- textual content of raised element--&gt;
             &lt;xsl:copy-of
                 select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"
             /&gt;
         &lt;/xsl:element&gt;
     &lt;/xsl:template&gt;
-    &lt;!-/- nodes inside new wrapper -/-&gt;
+    &lt;!-- nodes inside new wrapper --&gt;
     &lt;xsl:template
         match="node()[preceding-sibling::*[@th:sID][1]/@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"/&gt;
-    &lt;!-/- end-tag for new wrapper -/-&gt;
+    &lt;!-- end-tag for new wrapper --&gt;
     &lt;xsl:template
-        match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"
-    /&gt;
+        match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"/&gt;
 &lt;/xsl:stylesheet&gt;</programlisting>
         <para>We turn off indentation (line 5) to avoid deforming the whitespace.
                 <code>@exclude-result-prefixes="#all"</code> is not enough to avoid writing the
@@ -327,7 +326,7 @@
                     <para><emphasis role="bold">start-tag:</emphasis> We match elements with an
                         @th:sID attribute that has a value equal to the value of a @th:eID attribute
                         on their first following sibling element that has a @th:eID attribute (line
-                        34). This, then, matches only start-tags that contain nothing but
+                        33). This, then, matches only start-tags that contain nothing but
                             <code>text()</code> nodes and elements that have already been raised
                         (from which attributes in the <code>th:</code> namespacethat were present in
                         the input have been discarded). In other words, it matches only the
@@ -335,23 +334,22 @@
                         flattened elements. We process these hits by creating a container element
                         with the same generic identifier as the start-tag and copying all
                         following-sibling nodes that precede the end-tag that matches the start-tag
-                        we’re processing at the moment (lines 36–41). In other words, we copy the
+                        we’re processing at the moment (lines 35–40). In other words, we copy the
                         content of the newly raised element into it.</para>
                 </listitem>
                 <listitem>
                     <para><emphasis role="bold">nodes inside the new wrapper:</emphasis> We have
                         already copied the content of the newly raised element inside it, which
                         means that we don’t want to process those nodes again, since that would
-                        create duplicates. For that reason, we match all nodes between the start-
-                        and end-tags that we’re processing at the moment and suppress them by
-                        matching them inside an empty <code>&lt;xsl:template&gt;</code> element
-                        (lines 44–45).</para>
+                        create duplicates. For that reason, we suppress all nodes between the start-
+                        and end-tags that we’re processing at the moment by matching them inside an
+                        empty <code>&lt;xsl:template&gt;</code> element (lines 43–44).</para>
                 </listitem>
                 <listitem>
                     <para><emphasis role="bold">end-tag:</emphasis> Since we create real start- and
                         end-tags when we match the flattened start-tag, we have no more use for the
                         flattened end-tag, so we suppress it by matching it, too, inside an empty
-                            <code>&lt;xsl:template&gt;</code> element (lines 47–48).</para>
+                            <code>&lt;xsl:template&gt;</code> element (line 47).</para>
                 </listitem>
             </itemizedlist></para>
         <para>When the simplified original document is flattened and then raised, as described
@@ -359,7 +357,7 @@
         <para>TODO: process non-Trojan attributes</para>
         <para>TODO: use a key to find the matching end-tag</para>
         <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
-            is generic) and fix line-number references</para>
+            is generic)</para>
         <para>TODO: rewrite using a recursive named-template call for 1.0 with result element
             extension</para>
     </section>
@@ -546,8 +544,8 @@
     </section>
     <appendix>
         <title>Appendix A: Raising tessellated hierarchies (TODO: djb)</title>
-        <para>Raising tessellated hierarchies is a common requirement for hierarchy
-                <emphasis role="ital">inversion</emphasis>.<footnote>
+        <para>Raising tessellated hierarchies is a common requirement for hierarchy <emphasis
+                role="ital">inversion</emphasis>.<footnote>
                 <para><emphasis role="ital">Tessellated</emphasis> structures cover an entire domain
                     with the same pattern without gaps or self-overlap, much as mosaic tiles might
                     cover an entire floor.</para>
