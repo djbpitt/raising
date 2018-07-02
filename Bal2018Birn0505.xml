@@ -386,6 +386,7 @@
             </itemizedlist></para>
         <para>When the simplified original document is flattened and then raised, as described
             above, the output of the raising operation matches the original input.</para>
+        <para>TODO: process non-Trojan attributes</para>
         <para>TODO: use a key to find the matching end-tag</para>
         <para>TODO: describe raising <emphasis role="ital">Frankenstein</emphasis> (current version
             is generic) and fix line-number references</para>
