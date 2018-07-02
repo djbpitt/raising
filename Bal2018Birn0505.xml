@@ -465,7 +465,7 @@
             right-sibling recursion in its single-passedness. Example to follow ...]</para>
     </section>
     <section>
-        <title>Global search and replace using regular expressions (TODO: David)</title>
+        <title>Global search and replace using regular expressions)</title>
         <para>It is not possible to parse arbitrary XML with regular expressions (regex), but it is
             not difficult to identify and process Trojan milestones.<footnote>
                 <para>In terms of the Chomsky hierarchy, XML is a Type 2 (context-free) grammar and
@@ -539,14 +539,41 @@
             </footnote></para>
         <para>A more serious limitation of this method is that because it is not XML-aware, it can
             be used only in situations where raising is guaranteed not to create overlap. For
-            example, given input like: <figure>
-                <programlisting>
-            
-        </programlisting>
+            example, given input like:<figure>
+                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"&gt;
+    &lt;page th:sID="page1"/&gt;
+    &lt;para th:sID="para1"/&gt;Content on page 1 in paragraph 1 
+    &lt;page th:eID="page1"/&gt;
+    &lt;page th:sID="page2"/&gt;Content on page 2 in para 1 
+    &lt;para th:eID="para1"/&gt;
+    &lt;para th:sID="para2"/&gt;Content on page 2 in para 2
+    &lt;para th:eID="para2"/&gt;
+    &lt;page th:eID="page2"/&gt;
+&lt;/root&gt;</programlisting>
                 <caption>
                     <para>XML that cannot be unflattened without creating overlap</para>
                 </caption>
-            </figure></para>
+            </figure> the result of converting all Trojan milestones to real start- and end-tags
+            would be: <figure>
+                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+    &lt;page&gt;
+        &lt;para&gt;Content on page 1 in paragraph 1 
+    &lt;/page&gt;
+    &lt;page&gt;Content on page 2 in para 1 
+        &lt;/para&gt;
+        &lt;para&gt;Content on page 2 in para 2&lt;/para&gt;
+    &lt;/page&gt;
+&lt;/root&gt;</programlisting>
+                <caption>
+                    <para>Invalid (overlapping) result of converting all Trojan milestones to real
+                        start and end tags</para>
+                </caption>
+            </figure> The resulting document is not well-formed because the pages and paragraphs
+            overlap. It is, however, possible to raise just pages but not paragraphs, or just
+            paragraphs but not pages, without creating overlap, and the result would be
+            well-formed.</para>
         <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
             mode, and/or Perl or Python.]</para>
     </section>
@@ -686,8 +713,8 @@
             use cases has clarified much about micropipelining for the author, and, it is hoped, for
             the reader, as well.”]</para>
     </section>
-    <appendix xml:id="tessellated" xreflabel="Appendix A: Raising tessellated hierarchies">
-        <title>Appendix A: Raising tessellated hierarchies (TODO: djb)</title>
+    <appendix xml:id="tessellated">
+        <title>Raising tessellated hierarchies (TODO: djb)</title>
         <para>Raising tessellated hierarchies is a common requirement for hierarchy <emphasis
                 role="ital">inversion</emphasis>.<footnote>
                 <para><emphasis role="ital">Tessellated</emphasis> structures cover an entire domain
