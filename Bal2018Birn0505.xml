@@ -270,7 +270,7 @@
     &lt;xsl:function name="th:raise"&gt;
         &lt;xsl:param name="input" as="document-node()"/&gt;
         &lt;xsl:choose&gt;
-            &lt;xsl:when test="exists($input//@th:sID)"&gt;
+            &lt;xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])"&gt;
                 &lt;xsl:variable name="result" as="document-node()"&gt;
                     &lt;xsl:document&gt;
                         &lt;xsl:apply-templates select="$input" mode="loop"/&gt;
@@ -325,9 +325,11 @@
                 it into the raising function (<code>&lt;xsl:sequence
                     select="th:raise(.)"/&gt;</code>, line 28).</para>
             <para>The raising function checks for the presence of @th:sID attributes in the input
-                    (<code>&lt;xsl:when test="exists($input//@th:sID)"&gt;</code>, line 14). If
-                there aren’t any (<code>&lt;xsl:otherwise&gt;</code>, lines 22–24), the recursion is
-                finished, and the function returns the result (<code>&lt;xsl:sequence
+                that are candidates for raising (<code>&lt;xsl:when
+                    test="exists($input//@th:sID)"&gt;</code>, line 14; see the discussion of this
+                test in <xref linkend="recursion_challenges"/>). If there aren’t any
+                    (<code>&lt;xsl:otherwise&gt;</code>, lines 22–24), the recursion is finished,
+                and the function returns the result (<code>&lt;xsl:sequence
                     select="$input"/&gt;</code>, line 23). If there are still <code>@th:sID</code>
                 attributes in the text, we create a variable <code>$result</code> (lines 15–19) of
                 type document and apply templates inside the newly created document node (line 17).
@@ -567,7 +569,7 @@
                 mode, and many nodes appeared repeatedly in the input: tenfold increase in size of
                 document, and more.</para>
         </section>
-        <section>
+        <section xml:id="recursion_challenges" xreflabel="Inside-out recursion challenges">
             <title>Inside-out recursion</title>
             <para>The two principal pitfalls with inside-recursion are <emphasis role="ital">double
                     processing</emphasis> and <emphasis role="ital">endless
@@ -591,7 +593,16 @@
                     situations where there are Trojan elements that cannot be raised without
                     creating overlap. Avoiding the endless loop in such situations requires a more
                     complex test, not just for the presence of Trojan attributes, but for the
-                    presence of those that can be raised without creating overlap.</para>
+                    presence of those that can be raised without creating overlap. In our simplified
+                    sample, instead of testing for <code>exists($input//@th:sID)</code>, we test for
+                    elements that can be raised without risk of overlap with:</para>
+                <figure>
+                    <programlisting>exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])</programlisting>
+                    <caption>
+                        <para>Test for Trojan milestones that can be raised without creating
+                            overlap</para>
+                    </caption>
+                </figure>
                 <para>Endless recursion is not an issue in situations where complete raising would
                     not create overlap. This is the case with our original simplified sample, where
                     the XML with Trojan markup was created by flattening original hierarchical XML,

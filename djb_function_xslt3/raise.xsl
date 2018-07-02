@@ -11,7 +11,7 @@
     <xsl:function name="th:raise">
         <xsl:param name="input" as="document-node()"/>
         <xsl:choose>
-            <xsl:when test="exists($input//@th:sID)">
+            <xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
                 <xsl:variable name="result" as="document-node()">
                     <xsl:document>
                         <xsl:apply-templates select="$input" mode="loop"/>
@@ -43,7 +43,5 @@
     <xsl:template
         match="node()[preceding-sibling::*[@th:sID][1]/@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"/>
     <!-- end-tag for new wrapper -->
-    <xsl:template
-        match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"
-    />
+    <xsl:template match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"/>
 </xsl:stylesheet>
