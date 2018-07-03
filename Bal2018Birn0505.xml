@@ -472,7 +472,12 @@
                     task (this is a practical concern).</para>
             </footnote></para>
         <para>The following regex matches Trojan start-tags:</para>
-        <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+        <figure>
+            <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+            <caption>
+                <para>Regex to match Trojan start-tags</para>
+            </caption>
+        </figure>
         <para>The regex works as follows (in <emphasis role="ital">dot-all</emphasis> mode, that is,
             where dot also matches <code>\n</code>):<itemizedlist>
                 <listitem>
@@ -516,14 +521,29 @@
                 </listitem>
             </itemizedlist></para>
         <para>We replace all matches with the following replacement pattern:</para>
-        <programlisting>\1\2\3</programlisting>
+        <figure>
+            <programlisting>\1\2\3</programlisting>
+            <caption>
+                <para>Replacement pattern for Trojan start-tags</para>
+            </caption>
+        </figure>
         <para>The regex to match Trojan end-tags is similar to the one for start-tags, and because
             real end-tags cannot contain attributes, we do not need to match or copy them. We
             capture the opening <code>&lt;</code> separately from whatever follows it, so that we
             can write a <code>/</code> into the replacement after it. The regex is:</para>
-        <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?\/(&gt;)</programlisting>
+        <figure>
+            <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?\/(&gt;)</programlisting>
+            <caption>
+                <para>Regex to match Trojan end-tags</para>
+            </caption>
+        </figure>
         <para>and the replacement pattern is:</para>
-        <programlisting>\1/\2\3</programlisting>
+        <figure>
+            <programlisting>\1/\2\3</programlisting>
+            <caption>
+                <para>Replacement pattern for Trojan end-tags</para>
+            </caption>
+        </figure>
         <para>This method will incorrectly apply the replacement to matching patterns within XML
             comments and CDATA marked sections. With insincere apologies for disappointing Regex
             Edge-Case Bounty Hunters, coping with matches in these contexts, which would not
