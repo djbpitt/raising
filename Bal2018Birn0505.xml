@@ -625,7 +625,7 @@ output = []
 with open('flattened.xml') as input:
     for event, node in parseString(input.read()):
         if event == START_ELEMENT:
-            if node.hasAttribute('th:eID'):    
+            if node.hasAttribute('th:eID'):
                 output.append('&lt;/')
             else: # Trojan start tags and non-Trojan
                 output.append('&lt;')
@@ -635,9 +635,7 @@ with open('flattened.xml') as input:
                     output.append(' ' + attname + '="' + attvalue + '"')
             output.append('>')
         if event == END_ELEMENT:
-            if node.hasAttribute('th:sID') or node.hasAttribute('th:eID'):
-                continue
-            else:
+            if not node.hasAttribute('th:sID') and not node.hasAttribute('th:eID'):
                 output.append('&lt;/' + node.localName + '>')
         elif event == CHARACTERS:
             output.append(node.data)
