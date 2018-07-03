@@ -591,6 +591,69 @@
             a streaming protocol, it can be considered a form of depth-first traversal, which is to
             say that it begins at the document node and processes each element on a single
             traversal, maintaining the current context in a stack.</para>
+        <section>
+            <title>String output</title>
+            <para>The following Python 3 code replaces Trojan milestones with strings equivalent to
+                real XML start- and end-tags:</para>
+            <figure>
+                <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
+
+output = []
+with open('flattened.xml') as input:
+    for event, node in parseString(input.read()):
+        if event == START_ELEMENT:
+            if node.hasAttribute('th:eID'):    
+                output.append('&lt;/')
+            else: # Trojan start tags and non-Trojan
+                output.append('&lt;')
+            output.append(node.nodeName)
+            for attname, attvalue in node.attributes.items():
+                if not(attname.startswith('th:')):
+                    output.append(' ' + attname + '="' + attvalue + '"')
+            output.append('>')
+        if event == END_ELEMENT:
+            if node.hasAttribute('th:sID') or node.hasAttribute('th:eID'):
+                continue
+            else:
+                output.append('&lt;/' + node.localName + '>')
+        elif event == CHARACTERS:
+            output.append(node.data)
+print("".join(output))</programlisting>
+                <caption>
+                    <para>Python code that constructs the XML output as a string</para>
+                </caption>
+            </figure>
+            <para>We create an empty list to hold the output, read in the source, and examine each
+                event. In this simplified example, we process only <code>START_ELEMENT</code>,
+                    <code>END_ELEMENT</code>, and <code>CHARACTERS</code>, as follows:</para>
+            <itemizedlist>
+                <listitem>
+                    <para><code>START_ELEMENT.</code> Trojan milestones with <code>@th:eID</code>
+                        attributes are flattened end-tags, so when we encounter one, we output
+                            <code>&lt;/</code>; for other <figure>START_ELEMENT</figure> events we
+                        output only <code>&lt;</code>. We follow this with the gi
+                            (<code>node.nodeName</code>) and then iterate over the attributes. For
+                        each non-Trojan attribute, we output a space, the attribute name, an equal
+                        sign, and the attribute value in quotation marks. Finally, we output the
+                        closing <code>&gt;</code>.</para>
+                </listitem>
+                <listitem>
+                    <para><code>END_ELEMENT.</code> Although Trojan milestones are single tags, they
+                        fire both <code>START_ELEMENT</code> and <code>END_ELEMENT</code> events.
+                        Since we process all Trojan milestones at their <code>START_ELEMENT</code>
+                        events, we ignore their <code>END_ELEMENT</code> events. For other
+                            <code>END_ELEMENT</code> events, we create a regular end-tag.</para>
+                </listitem>
+                <listitem>
+                    <para><code>CHARACTERS.</code> We add character data content to the
+                        output.</para>
+                </listitem>
+            </itemizedlist>
+            <para>We are parsing the input XML in an XML-aware manner, which is reasonably robust,
+                but we are constructing the output XML as a string, which is not. See below for a
+                discussion of the limitations.</para>
+            <para>[TODO: namespace-aware, instead of string-matching on attribute names?]</para>
+        </section>
     </section>
     <section>
         <title>Some things that can go wrong</title>
@@ -684,7 +747,25 @@
         </section>
         <section>
             <title>Python pull parsing (TODO: David)</title>
-            <para>DJB’s complications: Python pull parsing</para>
+            <para>The Python pull parser reads the input XML as XML and responds to parse events. We
+                handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
+                    <code>CHARACTERS</code>, and ignore other events. We use XML-aware methods to
+                access attributes. With respect to managing the input, then, this is a reasonably
+                robust strategy. The quality of the output handling depends on whether we create
+                output as as string or as an XML DOM.</para>
+            <section>
+                <title>String output</title>
+                <para>Creating XML output as a string is a brittle strategy. In this case we
+                    explicitly wrap attribute values in double-quote characters (<code>"</code>),
+                    which will produce results that are not well-formed if the attribute value
+                    happens to have contained the double-quote character originally. Python has an
+                    escape mechanism that is capable of dealing with awkwardly nested single- and
+                    double-quote characters in strings, but the Python escape strategy is different
+                    from the XPath one, and the code to perform this sort of string maniupation is
+                    difficult to read and write. For that reason, it is safer to use XML methods to
+                    create the XML output as a DOM tree, which can then be serialized, instead of
+                    directly as a string.</para>
+            </section>
         </section>
     </section>
     <section>
