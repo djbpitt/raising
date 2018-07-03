@@ -581,16 +581,19 @@
                     to our attention. The example at his
                         <link>https://github.com/rhdekker/python_xml_pull_parser_example</link>
                     GitHub repository is the model for the examples here.</para>
-            </footnote> The pull parser can create output in two ways, as a string or as XML. With
-            string output, this method is comparable to the regex replacement strategy described
-            above: it passes all events through unchanged except for Trojan milestones, which it
-            replaces with regular XML start- and end-tags. Because the output construction is not
-            XML-aware, it has the same limitations as the regex approach: it is capable of creating
-            output that includes overlap, and that therefore is not well formed XML. With XML
-            output, it uses <code>xml.dom.minidom</code> to create XML elements. Insofar as this is
-            a streaming protocol, it can be considered a form of depth-first traversal, which is to
-            say that it begins at the document node and processes each element on a single
-            traversal, maintaining the current context in a stack.</para>
+            </footnote> The output of pull parsering can be fashioned into output in two ways, as a
+            string or as XML. With string output, this method is comparable to the regex replacement
+            strategy described above: it passes all events through unchanged except for Trojan
+            milestones, which it replaces with regular XML start- and end-tags. Because the output
+            construction is not XML-aware, it has the same limitations as the regex approach: most
+            significantly, it is capable of creating output that includes overlap, and that
+            therefore is not well formed XML. With XML output, it uses <code>xml.dom.minidom</code>
+            to create XML elements within a DOM structure, and this is necessarily well-formed.
+            Insofar as pull parsing is a streaming operation, it is a depth-first traversal, which
+            is to say that it begins at the document node and processes each element once on a
+            single traversal. With string output, the procedure can create write output as it
+            handles the event; with XML output, it is necessary to maintain the current context in a
+            stack.</para>
         <section>
             <title>String output</title>
             <para>The following Python 3 code replaces Trojan milestones with strings equivalent to
@@ -630,7 +633,7 @@ print("".join(output))</programlisting>
                 <listitem>
                     <para><code>START_ELEMENT.</code> Trojan milestones with <code>@th:eID</code>
                         attributes are flattened end-tags, so when we encounter one, we output
-                            <code>&lt;/</code>; for other <figure>START_ELEMENT</figure> events we
+                            <code>&lt;/</code>; for other <code>START_ELEMENT</code> events we
                         output only <code>&lt;</code>. We follow this with the gi
                             (<code>node.nodeName</code>) and then iterate over the attributes. For
                         each non-Trojan attribute, we output a space, the attribute name, an equal
@@ -749,22 +752,24 @@ print("".join(output))</programlisting>
             <title>Python pull parsing (TODO: David)</title>
             <para>The Python pull parser reads the input XML as XML and responds to parse events. We
                 handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
-                    <code>CHARACTERS</code>, and ignore other events. We use XML-aware methods to
-                access attributes. With respect to managing the input, then, this is a reasonably
+                    <code>CHARACTERS</code>, and ignore other events, and we use XML-aware methods
+                to access attributes. With respect to managing the input, then, this is a reasonably
                 robust strategy. The quality of the output handling depends on whether we create
-                output as as string or as an XML DOM.</para>
+                output as a string or as an XML DOM.</para>
             <section>
                 <title>String output</title>
-                <para>Creating XML output as a string is a brittle strategy. In this case we
-                    explicitly wrap attribute values in double-quote characters (<code>"</code>),
-                    which will produce results that are not well-formed if the attribute value
-                    happens to have contained the double-quote character originally. Python has an
-                    escape mechanism that is capable of dealing with awkwardly nested single- and
-                    double-quote characters in strings, but the Python escape strategy is different
-                    from the XPath one, and the code to perform this sort of string maniupation is
-                    difficult to read and write. For that reason, it is safer to use XML methods to
-                    create the XML output as a DOM tree, which can then be serialized, instead of
-                    directly as a string.</para>
+                <para>Creating XML output as a string is a brittle strategy. Not only is it
+                    susceptible to writing overlapping tags or the same reason as the regex method
+                    described earlier, but we also explicitly wrap attribute values in double-quote
+                    characters (<code>"</code>). This will produce results that are not well-formed
+                    if the attribute value happens to have contained the double-quote character
+                    originally. Python has an escape mechanism that is capable of dealing with
+                    awkwardly nested single- and double-quote characters in strings, as does XML,
+                    but the Python escape strategy is different from the XML one, and the code to
+                    perform the string manipulation needed to mediate between the two is difficult
+                    to read and write. For that reason, it is safer to use XML methods to create the
+                    XML output as a (necessarily well-formed) DOM tree, which can then be
+                    serialized, instead of creating the output directly as a string.</para>
             </section>
         </section>
     </section>
