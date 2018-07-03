@@ -596,23 +596,23 @@
     <section>
         <title>Pull parsing in Python</title>
         <para>The Python <code>xml.dom.pulldom</code> module that can be used to stream an XML
-            document past an event handler that can be used to raise a flattened hierarchy.<footnote>
+            document past an event handler that can be instructed to raise a flattened hierarchy.<footnote>
                 <para>The authors are grateful to Ronald Haentjens Dekker for bringing this method
                     to our attention. The example at his
                         <link>https://github.com/rhdekker/python_xml_pull_parser_example</link>
                     GitHub repository is the model for the examples here.</para>
-            </footnote> The output of pull parsering can be fashioned into output in two ways, as a
+            </footnote> The result of pull parsering can be fashioned into output in two ways, as a
             string or as XML. With string output, this method is comparable to the regex replacement
             strategy described above: it passes all events through unchanged except for Trojan
             milestones, which it replaces with regular XML start- and end-tags. Because the output
             construction is not XML-aware, it has the same limitations as the regex approach: most
             significantly, it is capable of creating output that includes overlap, and that
-            therefore is not well formed XML. With XML output, it uses <code>xml.dom.minidom</code>
-            to create XML elements within a DOM structure, and this is necessarily well-formed.
-            Insofar as pull parsing is a streaming operation, it is a depth-first traversal, which
-            is to say that it begins at the document node and processes each element once on a
-            single traversal. With string output, the procedure can create write output as it
-            handles the event; with XML output, it is necessary to maintain the current context in a
+            therefore is not well formed XML. With XML output, though, we use
+                <code>xml.dom.minidom</code> to create XML elements within a DOM structure, and the
+            result is necessarily well-formed. Pull parsing operates as a single depth-first
+            traversal, which is to say that it begins at the document node and touches each element
+            only once. With string output, the procedure can create write output as it handles each
+            event; with XML output, it is necessary to maintain the current context in a
             stack.</para>
         <section>
             <title>String output</title>
