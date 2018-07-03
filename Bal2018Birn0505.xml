@@ -37,7 +37,7 @@
                 <jobtitle>Professor of Slavic Languages and Literatures</jobtitle>
                 <orgname>University of Pittsburgh, Pittsburgh, PA</orgname>
             </affiliation>
-            <email>ebb8@pitt.edu</email>
+            <email>djbpitt@gmail.com</email>
         </author>
         <author>
             <personname>
@@ -458,13 +458,6 @@
             this.]</para>
     </section>
     <section>
-        <title>Pull parsing (TODO: David)</title>
-        <para>[This is a fairly simple and straightforward task with a Python pull parser, which
-            combines XML-awareness with single-pass streaming. It does maintain a stack, the maximum
-            depth of which is the maximum depth of the XML nesting, but it is also similar to
-            right-sibling recursion in its single-passedness. Example to follow ...]</para>
-    </section>
-    <section>
         <title>Global search and replace using regular expressions</title>
         <para>It is not possible to parse arbitrary XML with regular expressions (regex), but it is
             not difficult to identify and process Trojan milestones.<footnote>
@@ -479,7 +472,12 @@
                     task (this is a practical concern).</para>
             </footnote></para>
         <para>The following regex matches Trojan start-tags:</para>
-        <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+        <figure>
+            <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+            <caption>
+                <para>Regex to match Trojan start-tags</para>
+            </caption>
+        </figure>
         <para>The regex works as follows (in <emphasis role="ital">dot-all</emphasis> mode, that is,
             where dot also matches <code>\n</code>):<itemizedlist>
                 <listitem>
@@ -523,14 +521,29 @@
                 </listitem>
             </itemizedlist></para>
         <para>We replace all matches with the following replacement pattern:</para>
-        <programlisting>\1\2\3</programlisting>
+        <figure>
+            <programlisting>\1\2\3</programlisting>
+            <caption>
+                <para>Replacement pattern for Trojan start-tags</para>
+            </caption>
+        </figure>
         <para>The regex to match Trojan end-tags is similar to the one for start-tags, and because
             real end-tags cannot contain attributes, we do not need to match or copy them. We
             capture the opening <code>&lt;</code> separately from whatever follows it, so that we
             can write a <code>/</code> into the replacement after it. The regex is:</para>
-        <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?\/(&gt;)</programlisting>
+        <figure>
+            <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?\/(&gt;)</programlisting>
+            <caption>
+                <para>Regex to match Trojan end-tags</para>
+            </caption>
+        </figure>
         <para>and the replacement pattern is:</para>
-        <programlisting>\1/\2\3</programlisting>
+        <figure>
+            <programlisting>\1/\2\3</programlisting>
+            <caption>
+                <para>Replacement pattern for Trojan end-tags</para>
+            </caption>
+        </figure>
         <para>This method will incorrectly apply the replacement to matching patterns within XML
             comments and CDATA marked sections. With insincere apologies for disappointing Regex
             Edge-Case Bounty Hunters, coping with matches in these contexts, which would not
@@ -579,6 +592,89 @@
             well-formed.</para>
         <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
             mode, and/or Perl or Python.]</para>
+    </section>
+    <section>
+        <title>Pull parsing in Python</title>
+        <para>The Python <code>xml.dom.pulldom</code> module that can be used to stream an XML
+            document past an event handler that can be instructed to raise a flattened hierarchy.<footnote>
+                <para>The authors are grateful to Ronald Haentjens Dekker for bringing this method
+                    to our attention. The example at his
+                        <link>https://github.com/rhdekker/python_xml_pull_parser_example</link>
+                    GitHub repository is the model for the examples here.</para>
+            </footnote> The result of pull parsering can be fashioned into output in two ways, as a
+            string or as XML. With string output, this method is comparable to the regex replacement
+            strategy described above: it passes all events through unchanged except for Trojan
+            milestones, which it replaces with regular XML start- and end-tags. Because the output
+            construction is not XML-aware, it has the same limitations as the regex approach: most
+            significantly, it is capable of creating output that includes overlap, and that
+            therefore is not well formed XML. With XML output, though, we use
+                <code>xml.dom.minidom</code> to create XML elements within a DOM structure, and the
+            result is necessarily well-formed. Pull parsing operates as a single depth-first
+            traversal, which is to say that it begins at the document node and touches each element
+            only once. With string output, the procedure can create write output as it handles each
+            event; with XML output, it is necessary to maintain the current context in a
+            stack.</para>
+        <section>
+            <title>String output</title>
+            <para>The following Python 3 code replaces Trojan milestones with strings equivalent to
+                real XML start- and end-tags:</para>
+            <figure>
+                <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
+
+output = []
+with open('flattened.xml') as input:
+    for event, node in parseString(input.read()):
+        if event == START_ELEMENT:
+            if node.hasAttribute('th:eID'):
+                output.append('&lt;/')
+            else: # Trojan start tags and non-Trojan
+                output.append('&lt;')
+            output.append(node.nodeName)
+            for attname, attvalue in node.attributes.items():
+                if not(attname.startswith('th:')):
+                    output.append(' ' + attname + '="' + attvalue + '"')
+            output.append('>')
+        if event == END_ELEMENT:
+            if not node.hasAttribute('th:sID') and not node.hasAttribute('th:eID'):
+                output.append('&lt;/' + node.localName + '>')
+        elif event == CHARACTERS:
+            output.append(node.data)
+print("".join(output))</programlisting>
+                <caption>
+                    <para>Python code that constructs the XML output as a string</para>
+                </caption>
+            </figure>
+            <para>We create an empty list to hold the output, read in the source, and examine each
+                event. In this simplified example, we process only <code>START_ELEMENT</code>,
+                    <code>END_ELEMENT</code>, and <code>CHARACTERS</code>, as follows:</para>
+            <itemizedlist>
+                <listitem>
+                    <para><code>START_ELEMENT.</code> Trojan milestones with <code>@th:eID</code>
+                        attributes are flattened end-tags, so when we encounter one, we output
+                            <code>&lt;/</code>; for other <code>START_ELEMENT</code> events we
+                        output only <code>&lt;</code>. We follow this with the gi
+                            (<code>node.nodeName</code>) and then iterate over the attributes. For
+                        each non-Trojan attribute, we output a space, the attribute name, an equal
+                        sign, and the attribute value in quotation marks. Finally, we output the
+                        closing <code>&gt;</code>.</para>
+                </listitem>
+                <listitem>
+                    <para><code>END_ELEMENT.</code> Although Trojan milestones are single tags, they
+                        fire both <code>START_ELEMENT</code> and <code>END_ELEMENT</code> events.
+                        Since we process all Trojan milestones at their <code>START_ELEMENT</code>
+                        events, we ignore their <code>END_ELEMENT</code> events. For other
+                            <code>END_ELEMENT</code> events, we create a regular end-tag.</para>
+                </listitem>
+                <listitem>
+                    <para><code>CHARACTERS.</code> We add character data content to the
+                        output.</para>
+                </listitem>
+            </itemizedlist>
+            <para>We are parsing the input XML in an XML-aware manner, which is reasonably robust,
+                but we are constructing the output XML as a string, which is not. See below for a
+                discussion of the limitations.</para>
+            <para>[TODO: namespace-aware, instead of string-matching on attribute names?]</para>
+        </section>
     </section>
     <section>
         <title>Some things that can go wrong</title>
@@ -672,7 +768,27 @@
         </section>
         <section>
             <title>Python pull parsing (TODO: David)</title>
-            <para>DJB’s complications: Python pull parsing</para>
+            <para>The Python pull parser reads the input XML as XML and responds to parse events. We
+                handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
+                    <code>CHARACTERS</code>, and ignore other events, and we use XML-aware methods
+                to access attributes. With respect to managing the input, then, this is a reasonably
+                robust strategy. The quality of the output handling depends on whether we create
+                output as a string or as an XML DOM.</para>
+            <section>
+                <title>String output</title>
+                <para>Creating XML output as a string is a brittle strategy. Not only is it
+                    susceptible to writing overlapping tags or the same reason as the regex method
+                    described earlier, but we also explicitly wrap attribute values in double-quote
+                    characters (<code>"</code>). This will produce results that are not well-formed
+                    if the attribute value happens to have contained the double-quote character
+                    originally. Python has an escape mechanism that is capable of dealing with
+                    awkwardly nested single- and double-quote characters in strings, as does XML,
+                    but the Python escape strategy is different from the XML one, and the code to
+                    perform the string manipulation needed to mediate between the two is difficult
+                    to read and write. For that reason, it is safer to use XML methods to create the
+                    XML output as a (necessarily well-formed) DOM tree, which can then be
+                    serialized, instead of creating the output directly as a string.</para>
+            </section>
         </section>
     </section>
     <section>
