@@ -792,7 +792,7 @@ print("".join(output))</programlisting>
             <section>
                 <title>String output</title>
                 <para>Creating XML output as a string is a brittle strategy. Not only is it
-                    susceptible to writing overlapping tags or the same reason as the regex method
+                    susceptible to writing overlapping tags for the same reason as the regex method
                     described earlier, but we also explicitly wrap attribute values in double-quote
                     characters (<code>"</code>). This will produce results that are not well-formed
                     if the attribute value happens to have contained the double-quote character
