@@ -987,8 +987,7 @@ print("".join(output))</programlisting>
         <bibliomixed xml:id="tei_p5" xreflabel="TEI P5">P5: <emphasis role="ital">Guidelines for
                 electronic text encoding and interchange.</emphasis>
             <link>http://www.tei-c.org/guidelines/P5/</link></bibliomixed>
-        <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein"><emphasis role="ital"
-                >Pittsburgh</emphasis> Frankenstein <emphasis role="ital">Project.</emphasis>
+        <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein">Frankenstein <emphasis role="ital">Variorum Project.</emphasis>
             <link>https://github.com/PghFrankenstein/Pittsburgh_Frankenstein</link></bibliomixed>
         <bibliomixed xml:id="saxon" xreflabel="Saxon-HE">Saxon-HE (home edition).
                 <link>http://saxon.sourceforge.net/</link></bibliomixed>
