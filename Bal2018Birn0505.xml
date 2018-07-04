@@ -93,13 +93,13 @@
             for page beginnings, column beginnings, line beginnings, etc. [<xref linkend="tei_p5"
             />], or as <emphasis>Trojan horse markup</emphasis>, after the technique described by
             Steve DeRose [<xref linkend="derose_2004"/>]). When we do, we will often wish, later, to
-           restore the content elements we flattened. The three co-authors discovered
-            recently that we had each had occasion to perform this task, and that we had undertaken
-            it using different techniques.</para>
-        <para>The purpose of this late-breaking presentation is to survey multiple ways to
-            perform the task of unflattening or of raising: restoring a conventional XML element
-            structure of content elements from a flattened XML document instance (or part of one),
-            and comparing different solutions to see what we can learn from them. Nothing here is
+            restore the content elements we flattened. The three co-authors discovered recently that
+            we had each had occasion to perform this task, and that we had undertaken it using
+            different techniques.</para>
+        <para>The purpose of this late-breaking presentation is to survey multiple ways to perform
+            the task of unflattening or of raising: restoring a conventional XML element structure
+            of content elements from a flattened XML document instance (or part of one), and
+            comparing different solutions to see what we can learn from them. Nothing here is
             profoundly difficult or new, but each of us found it challenging and interesting enough
             that we think it may be worth while to share what we have learned with others.</para>
         <para>In the following sections, we describe first a concrete instance of the task, with
@@ -110,57 +110,141 @@
             difficulty and costs in space and time.</para>
     </section>
     <section>
-        <title>The concrete sample task</title>
-        <para>As a concrete example, we can consider the form taken by this task in the <emphasis>Variorum
-            Frankenstein [<xref linkend="frankenstein"/>]</emphasis> project edited by the second author. In
-            this project, different encodings of the novel deriving from multiple digital sources
-            are collated using the software CollateX [<xref linkend="collatex"/>], which
-            necessitates flattening the source markup to generate a new XML hierarchy that would
-            overlap the original structure. It is necessary to retain markup information in the
-            eventual collation output without letting it interfere with the alignment
-            process.</para>
+        <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
+        <para>As a concrete example, we can consider the form taken by this task in the
+                <emphasis>Variorum Frankenstein [<xref linkend="frankenstein"/>]</emphasis> project
+            edited by the second author. In this project, different encodings of the novel deriving
+            from multiple digital sources are collated using the software CollateX [<xref
+                linkend="collatex"/>], which necessitates flattening the source markup to generate a
+            new XML hierarchy that would overlap the original structure. It is necessary to retain
+            markup information in the eventual collation output without letting it interfere with
+            the alignment process.</para>
         <!--2018-07-02 ebb: I'll continue rewriting here and patch in examples from the frankenData directory. -->
-        <para>The process of collation involves comparing around and across structural markup in the source documents. We compare five distinct witnesses of <emphasis>Frankenstein</emphasis>, and divergent passages may include structural boundaries such as paragraph breaks in some editions that are missing in others. The XML output of collation with collateX transforms any input element tags into their text equivalents with escape characters replacing the angle brackets. If we submitted the original edition markup unaltered to the collation process, we knew we would face a challenge in raising well-formed output on the other side, because the critical apparatus is expected to include fragmented start and end tags, as for example, where paragraphs sometimes break inside a reading witness, or only the beginning of a deleted passage in a manuscript witness is comparable to material we see in other witnesses. We wind up with an original start-tag inside one container element and its corresponding original end-tag inside another, and we cannot reconstruct that element without creating overlap. Knowing we were generating a conflicting hierarchy, we opted to flatten the elements in the original edition that we expected would be broken or overlapped by the critical apparatus markup.</para>          
-           <para>To illustrate the problem, here is an example from the output of collateX representing a single divergent witness in the <quote>Thomas copy</quote> of <emphasis>Frankenstein</emphasis> before all witnesses align.</para> 
-           <programlisting>
-    &lt;app&gt;
-        &lt;rdg wit="#fThomas"&gt;contortions that ever and anon con&lt;del/&gt;pulsvulsed &amp; deformed
-            his un-human features.&lt;p loc="novel1_letter4_chapter4_p133__End"/&gt;&lt;p
-            loc="novel1_letter4_chapter4_p134__Start"/&gt;The &lt;/rdg&gt;
-    &lt;/app&gt;
-    &lt;app type="invariant"&gt;
-        &lt;rdg wit="#f1818"&gt;different accidents of life are &lt;/rdg&gt;
-        &lt;rdg wit="#f1823"&gt;different accidents of life are &lt;/rdg&gt;
-        &lt;rdg wit="#f1831"&gt;different accidents of life are &lt;/rdg&gt;
-        &lt;rdg wit="#fMS"&gt;different accidents of life are &lt;/rdg&gt;
-        &lt;rdg wit="#fThomas"&gt;different accidents of life are &lt;/rdg&gt;
-    &lt;/app&gt;
-           </programlisting>  
-           <para>When we completed the collation process, we wrote XSLT to separate the five witnesses into separate files to construct new edition files that retain information about variant <quote>hotspots</quote> from the collation. In the first stage of up-conversion from the collation output, all elements are flattened in anticipation of conflicting hierarchies were they to be fully constructed all at once. Here is a sample passage from the Thomas copy edition file showing the reconstructed but flattened elements.</para>
-        <programlisting>
-&lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions that ever and anon 
+        <para>The process of collation involves comparing around and across structural markup in the
+            source documents. We compare five distinct witnesses of
+                <emphasis>Frankenstein</emphasis>, and divergent passages may include structural
+            boundaries such as paragraph breaks in some editions that are missing in others. The XML
+            output of collation with collateX transforms any input element tags into their text
+            equivalents with escape characters replacing the angle brackets. If we submitted the
+            original edition markup unaltered to the collation process, we knew we would face a
+            challenge in raising well-formed output on the other side, because the critical
+            apparatus is expected to include fragmented start and end tags, as for example, where
+            paragraphs sometimes break inside a reading witness, or only the beginning of a deleted
+            passage in a manuscript witness is comparable to material we see in other witnesses. We
+            wind up with an original start-tag inside one container element and its corresponding
+            original end-tag inside another, and we cannot reconstruct that element without creating
+            overlap. Knowing we were generating a conflicting hierarchy, we opted to flatten the
+            elements in the original edition that we expected would be broken or overlapped by the
+            critical apparatus markup.</para>
+        <para>To illustrate the problem, here is an example from the output of CollateX representing
+            a single divergent witness in the <quote>Thomas copy</quote> of
+                <emphasis>Frankenstein</emphasis> before all witnesses align.</para>
+        <figure>
+            <programlisting>&lt;app&gt;
+    &lt;rdg wit="#fThomas"&gt;contortions that ever and anon con&lt;del/&gt;pulsvulsed &amp;amp;
+        deformed his un-human features.&lt;p loc="novel1_letter4_chapter4_p133__End"/&gt;&lt;p
+        loc="novel1_letter4_chapter4_p134__Start"/&gt;The &lt;/rdg&gt;
+&lt;/app&gt;
+&lt;app type="invariant"&gt;
+    &lt;rdg wit="#f1818"&gt;different accidents of life are &lt;/rdg&gt;
+    &lt;rdg wit="#f1823"&gt;different accidents of life are &lt;/rdg&gt;
+    &lt;rdg wit="#f1831"&gt;different accidents of life are &lt;/rdg&gt;
+    &lt;rdg wit="#fMS"&gt;different accidents of life are &lt;/rdg&gt;
+    &lt;rdg wit="#fThomas"&gt;different accidents of life are &lt;/rdg&gt;
+&lt;/app&gt;</programlisting>
+            <caption>
+                <para>Sample collation output</para>
+            </caption>
+        </figure>
+        <para>After we completed the collation process, we wrote XSLT to separate the five witnesses
+            into separate files that could be used in a new edition files that retained information
+            about variant moment of variation (<emphasis role="ital">hotspots</emphasis>) in the
+            collation. A prerequisite of up-conversion from the collation outputis to flatten all
+            markup in anticipation of conflicting hierarchies were all logical containers to be
+            represented simultaneously with regular start- and end-tags. Here is a sample passage
+            from the Thomas copy edition file showing the reconstructed but flattened
+            elements:</para>
+        <figure>
+            <programlisting>&lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions that ever and anon 
 con&lt;del loc="fThomas_C10-del_2" ana="start"/&gt;puls&lt;del loc="fThomas_C10-del_2" ana="end"/&gt;vulsed
-&amp; deformed  his un-human features.&lt;p loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
-&lt;p loc="novel1_letter4_chapter4_p134" ana="start"/&gt;The &lt;seg xml:id="C10_app90-fThomas_end"/&gt;
-        </programlisting>
-       <para>In the passage above, the milestone-style <code>&lt;seg/&gt;</code> elements indicate the start and end points of the variant passage in the Thomas copy, and their <code>@xml:id</code> values indicate the collation unit and numbered <code>&lt;app&gt;</code> element in the collation output: this was the apparatus number 90 that held a lone divergent witness, where the Thomas copy diverges from all the other editions. Inside, the self-closed elements frame a deleted portion of a word, <quote>puls</quote>, and mark the end of paragraph 133 in Chapter 4, followed by the beginning of paragraph 134 in the same chapter. Our task is now to find the best method to raise the flattened elements and give them content. Our task, the use case for this paper, is to raise the structural elements from the original edition, leaving the <code>&lt;seg/&gt;</code> elements flattened. The output will look something like this for the ending of paragraph 133 and the start of paragraph 134 in the Thomas edition:</para> 
-        <programlisting>
-&lt;p loc="novel1_letter4_chapter4_p133"&gt;. . .&lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions
-        that ever and anon con&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp; deformed his
-        un-human features.&lt;/p&gt;
+&amp;amp; deformed  his un-human features.&lt;p loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
+&lt;p loc="novel1_letter4_chapter4_p134" ana="start"/&gt;The &lt;seg xml:id="C10_app90-fThomas_end"/&gt;</programlisting>
+            <caption>
+                <para>Sample reconstruction of the Thomas file, with flattened markup</para>
+            </caption>
+        </figure>
+        <para>In the passage above, the empty <code>&lt;seg&gt;</code> elements indicate the start
+            and end points of the variant passage in the Thomas copy. Their partially shared
+                <code>@xml:id</code> values coindex them while pointing to the collation unit and
+            numbered <code>&lt;app&gt;</code> element in the collation output; the trailing
+            underscore separator and the string <code>start</code> or <code>end</code> distinguish
+            start- from end-tags. In this example, <code>&lt;seg
+                xml:id="C10_app90-fThomas_start"/&gt;</code> means that this is the start of a
+            variant from apparatus unit 90, where the Thomas copy diverges from a reading shared by
+            all of the other editions.</para>
+        <para>Within the Trojan <code>&lt;seg&gt;</code> container, the first two Trojan
+                <code>&lt;del&gt;</code> elements frame a deleted portion of a word
+                (<quote>puls</quote>), and the third marks the end of paragraph 133 in Chapter 4,
+            followed by the beginning of paragraph 134 in the same chapter. The use of attributes
+            here differs from that with the <code>&lt;seg&gt;</code> elements; the shared
+                <code>@loc</code> attribute identifies the location and coindexes the start- and
+            end-tags, and the <code>@ana</code> attribute marks the attribute as either a start-tag
+            or an end-tag.<footnote>
+                <para>Using different formats for the Trojan markup of different flattened elements
+                    makes it easy to raise one group of flattened element types while leaving
+                    another in its flattened stage. Alternatively, we could have used the same
+                    attributes for all Trojan elements and made the distinction instead at the
+                    processing stage by specifying then which ones we wanted to raise.</para>
+            </footnote></para>
+        <para>The use case that serves as a testing ground for the comparison of raising methods in
+            this report is to raise the structural elements from the original edition (such as
+                <code>&lt;p&gt;</code> and <code>&lt;del&gt;</code>), while leaving the
+                <code>&lt;seg&gt;</code> elements flattened. The output will look something like the
+            following for the ending of paragraph 133 and the start of paragraph 134 in the Thomas
+            edition:</para>
+        <figure>
+            <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt; … &lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions
+that ever and anon con&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp;amp; deformed his
+un-human features.&lt;/p&gt;
 &lt;p loc="novel1_letter4_chapter4_p134"&gt;The &lt;seg xml:id="C10_app90-fThomas_end"/&gt;
-different accidents of life are not so changeable as the feelings of human nature. . . .&lt;/p&gt; 
-        </programlisting>
-        <para>When the <code>&lt;seg/&gt;</code> elements are raised, the set that breaks around the paragraph boundaries will need to be broken into parts around the reconstructed edition elements, like so:</para>
-        <programlisting>      
-&lt;p loc="novel1_letter4_chapter4_p133"&gt;. . .&lt;seg xml:id="C10_app90-fThomas__Pt1"&gt;contortions 
-        that ever and anon con&lt;/seg&gt;&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp; deformed his
-        un-human features.&lt;/p&gt;
+different accidents of life are not so changeable as the feelings of human nature … &lt;/p&gt;</programlisting>
+            <caption>
+                <para>The sampe passage above, after raising structural elements</para>
+            </caption>
+        </figure>
+        <para>When, later in the production process, we raise the <code>&lt;seg&gt;</code> elements,
+            we avoid overlap by separating the one that overlaps with a paragraph boundary into two
+            parts:</para>
+        <figure>
+            <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt; … &lt;seg xml:id="C10_app90-fThomas__Pt1"&gt;contortions 
+    that ever and anon con&lt;/seg&gt;&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp;amp; deformed his
+    un-human features.&lt;/p&gt;
 &lt;p loc="novel1_letter4_chapter4_p134"&gt;&lt;seg xml:id="C10_app90-fThomas__Pt2"&gt;The &lt;/seg&gt; 
-different accidents of life are not so changeable as the feelings of human nature. . . .&lt;/p&gt;
-        </programlisting>
-      <para>The split <code>&lt;seg&gt;</code> elements in the passage above now indicate their association with one another with <quote>__Pt1</quote> and <quote>__Pt2</quote> appended to the original value of apparatus and reading witness location.</para>
-        <para>Our process of raising the new edition files depends first of all on constructing all the elements that comprise the source edition, before raising the <code>&lt;seg&gt;</code> elements, and that is the task that motivated the experimental transformations tested and discussed in this paper.</para>   
+different accidents of life are not so changeable as the feelings of human nature … &lt;/p&gt;</programlisting>
+            <caption>
+                <para>Because raising <code>&lt;seg&gt;</code> would create overlap, we split the
+                    element into parts</para>
+            </caption>
+        </figure>
+        <para>The split <code>&lt;seg&gt;</code> elements in the passage above now indicate their
+            association with one another with <quote>__Pt1</quote> and <quote>__Pt2</quote> appended
+            to the original value of the apparatus and reading witness location.</para>
+        <para>Our process of raising the new edition files thus entails the following steps:<orderedlist>
+                <listitem>
+                    <para>Flatten all markup</para>
+                </listitem>
+                <listitem>
+                    <para>Reconstruct (raise) the structural elements from the source edition (e.g.,
+                            <code>&lt;p&gt;</code>, <code>&lt;del&gt;</code>)</para>
+                </listitem>
+                <listitem>
+                    <para>Raise the <code>&lt;seg&gt;</code> elements, which indicate moment of
+                        variation in the collation, splitting the raised elements into parts where
+                        that is required to avoid creating overlap</para>
+                </listitem>
+            </orderedlist> The experimental transformations tested and discussed in this report
+            focus primarily on the middle of these three steps, raising the structural
+            markup.</para>
     </section>
     <section xml:id="simplified" xreflabel="Simplified sample data">
         <title>Illustration (simplified data)</title>
