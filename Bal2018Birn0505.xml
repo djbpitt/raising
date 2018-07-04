@@ -139,22 +139,27 @@
            <para>When we completed the collation process, we wrote XSLT to separate the five witnesses into separate files to construct new edition files that retain information about variant <quote>hotspots</quote> from the collation. In the first stage of up-conversion from the collation output, all elements are flattened in anticipation of conflicting hierarchies were they to be fully constructed all at once. Here is a sample passage from the Thomas copy edition file showing the reconstructed but flattened elements.</para>
         <programlisting>
 &lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions that ever and anon 
-con&lt;del loc="fThomas_C10-del_2" ana="start"/&gt;puls&lt;del loc="fThomas_C10-del_2" ana="end"/&gt;vulsed &amp; deformed  his un-human features.&lt;p loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
+con&lt;del loc="fThomas_C10-del_2" ana="start"/&gt;puls&lt;del loc="fThomas_C10-del_2" ana="end"/&gt;vulsed
+&amp; deformed  his un-human features.&lt;p loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
 &lt;p loc="novel1_letter4_chapter4_p134" ana="start"/&gt;The &lt;seg xml:id="C10_app90-fThomas_end"/&gt;
         </programlisting>
        <para>In the passage above, the milestone-style <code>&lt;seg/&gt;</code> elements indicate the start and end points of the variant passage in the Thomas copy, and their <code>@xml:id</code> values indicate the collation unit and numbered <code>&lt;app&gt;</code> element in the collation output: this was the apparatus number 90 that held a lone divergent witness, where the Thomas copy diverges from all the other editions. Inside, the self-closed elements frame a deleted portion of a word, <quote>puls</quote>, and mark the end of paragraph 133 in Chapter 4, followed by the beginning of paragraph 134 in the same chapter. Our task is now to find the best method to raise the flattened elements and give them content. Our task, the use case for this paper, is to raise the structural elements from the original edition, leaving the <code>&lt;seg/&gt;</code> elements flattened. The output will look something like this for the ending of paragraph 133 and the start of paragraph 134 in the Thomas edition:</para> 
         <programlisting>
-&lt;p loc="novel1_letter4_chapter4_p133"&gt;. . .&lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions that ever and anon con&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp; deformed
-            his un-human features.&lt;/p&gt;
-            &lt;p loc="novel1_letter4_chapter4_p134"&gt;The &lt;seg xml:id="C10_app90-fThomas_end"/&gt;different accidents of life are not so changeable as the feelings of human nature. . . .&lt;/p&gt;   
+&lt;p loc="novel1_letter4_chapter4_p133"&gt;. . .&lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions
+        that ever and anon con&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp; deformed his
+        un-human features.&lt;/p&gt;
+&lt;p loc="novel1_letter4_chapter4_p134"&gt;The &lt;seg xml:id="C10_app90-fThomas_end"/&gt;
+different accidents of life are not so changeable as the feelings of human nature. . . .&lt;/p&gt; 
         </programlisting>
-        <para>When the <code>&lt;seg/&gt;</code> elements are raised, the set that breaks around the paragraph boundaries will need to be broken into parts around the reconstructed edition elements, like so:
+        <para>When the <code>&lt;seg/&gt;</code> elements are raised, the set that breaks around the paragraph boundaries will need to be broken into parts around the reconstructed edition elements, like so:</para>
         <programlisting>      
-            &lt;p loc="novel1_letter4_chapter4_p133"&gt;. . .&lt;seg xml:id="C10_app90-fThomas__Pt1"&gt;contortions that ever and anon con&lt;/seg&gt;&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp; deformed
-            his un-human features.&lt;/p&gt;
-            &lt;p loc="novel1_letter4_chapter4_p134"&gt;&lt;seg xml:id="C10_app90-fThomas__Pt2"&gt;The &lt;/seg&gt;different accidents of life are not so changeable as the feelings of human nature. . . .&lt;/p&gt;
+&lt;p loc="novel1_letter4_chapter4_p133"&gt;. . .&lt;seg xml:id="C10_app90-fThomas__Pt1"&gt;contortions 
+        that ever and anon con&lt;/seg&gt;&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed &amp; deformed his
+        un-human features.&lt;/p&gt;
+&lt;p loc="novel1_letter4_chapter4_p134"&gt;&lt;seg xml:id="C10_app90-fThomas__Pt2"&gt;The &lt;/seg&gt; 
+different accidents of life are not so changeable as the feelings of human nature. . . .&lt;/p&gt;
         </programlisting>
-      The split <code>&lt;seg&gt;</code> elements in the passage above now indicate their association with one another with <quote>__Pt1</quote> and <quote>__Pt2</quote> appended to the original value of apparatus and reading witness location.</para>
+      <para>The split <code>&lt;seg&gt;</code> elements in the passage above now indicate their association with one another with <quote>__Pt1</quote> and <quote>__Pt2</quote> appended to the original value of apparatus and reading witness location.</para>
         <para>Our process of raising the new edition files depends first of all on constructing all the elements that comprise the source edition, before raising the <code>&lt;seg&gt;</code> elements, and that is the task that motivated the experimental transformations tested and discussed in this paper.</para>   
     </section>
     <section xml:id="simplified" xreflabel="Simplified sample data">
