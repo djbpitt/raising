@@ -9,9 +9,10 @@ with open('Thomas_C10.xml') as input:
             else: # Trojan start tags and non-Trojan
                 output.append('<')
             output.append(node.nodeName)
-            for attname, attvalue in node.attributes.items():
-                if not(attname.startswith('ana:')):
-                    output.append(' ' + attname + '="' + attvalue + '"')
+            if not(node.getAttribute('ana') == 'end'):
+                for attname, attvalue in node.attributes.items():
+                    if not(attname.startswith('ana:')):
+                        output.append(' ' + attname + '="' + attvalue + '"')
             output.append('>')
         if event == END_ELEMENT:
             if not node.hasAttribute('ana'):
