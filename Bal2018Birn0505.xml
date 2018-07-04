@@ -42,7 +42,7 @@
         <author>
             <personname>
                 <firstname>Elisa</firstname>
-                <othername>Eileen</othername>
+                <othername>E.</othername>
                 <surname>Beshero-Bondar</surname>
             </personname>
             <personblurb>
@@ -119,7 +119,6 @@
             new XML hierarchy that would overlap the original structure. It is necessary to retain
             markup information in the eventual collation output without letting it interfere with
             the alignment process.</para>
-        <!--2018-07-02 ebb: I'll continue rewriting here and patch in examples from the frankenData directory. -->
         <para>The process of collation involves comparing around and across structural markup in the
             source documents. We compare five distinct witnesses of
                 <emphasis>Frankenstein</emphasis>, and divergent passages may include structural
@@ -141,7 +140,8 @@
                 <emphasis>Frankenstein</emphasis> before all witnesses align.</para>
         <figure>
             <programlisting>&lt;app&gt;
-    &lt;rdg wit="#fThomas"&gt;contortions that ever and anon con&lt;del/&gt;pulsvulsed &amp;amp;
+    &lt;rdg wit="#fThomas"&gt;contortions that ever and anon 
+    con&lt;del loc="fThomas_C10-del_2" ana="start"/&gt;puls&lt;del loc="fThomas_C10-del_2" ana="end"/&gt;vulsed &amp;amp;
         deformed his un-human features.&lt;p loc="novel1_letter4_chapter4_p133__End"/&gt;&lt;p
         loc="novel1_letter4_chapter4_p134__Start"/&gt;The &lt;/rdg&gt;
 &lt;/app&gt;
