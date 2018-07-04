@@ -654,8 +654,9 @@ different accidents of life are not so changeable as the feelings of human natur
             </footnote></para>
         <para>A more serious limitation of this method is that because it is not XML-aware, it can
             be used only in situations where raising is guaranteed not to create overlap. For
-            example, given input like:<figure>
-                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            example, given input like:</para>
+        <figure>
+            <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"&gt;
     &lt;page th:sID="page1"/&gt;
     &lt;para th:sID="para1"/&gt;Content on page 1 in paragraph 1 
@@ -666,12 +667,14 @@ different accidents of life are not so changeable as the feelings of human natur
     &lt;para th:eID="para2"/&gt;
     &lt;page th:eID="page2"/&gt;
 &lt;/root&gt;</programlisting>
-                <caption>
-                    <para>XML that cannot be unflattened without creating overlap</para>
-                </caption>
-            </figure> the result of converting all Trojan milestones to real start- and end-tags
-            would be: <figure>
-                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            <caption>
+                <para>XML that cannot be unflattened without creating overlap</para>
+            </caption>
+        </figure>
+        <para>the result of converting all Trojan milestones to real start- and end-tags would
+            be:</para>
+        <figure>
+            <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root&gt;
     &lt;page&gt;
         &lt;para&gt;Content on page 1 in paragraph 1 
@@ -681,14 +684,15 @@ different accidents of life are not so changeable as the feelings of human natur
         &lt;para&gt;Content on page 2 in para 2&lt;/para&gt;
     &lt;/page&gt;
 &lt;/root&gt;</programlisting>
-                <caption>
-                    <para>Invalid (overlapping) result of converting all Trojan milestones to real
-                        start and end tags</para>
-                </caption>
-            </figure> The resulting document is not well-formed because the pages and paragraphs
-            overlap. It is, however, possible to raise just pages but not paragraphs, or just
-            paragraphs but not pages, without creating overlap, and the result would be
-            well-formed.</para>
+            <caption>
+                <para>Invalid (overlapping) result of converting all Trojan milestones to real start
+                    and end tags</para>
+            </caption>
+        </figure>
+
+        <para>The resulting document is not well-formed because the pages and paragraphs overlap. It
+            is, however, possible to raise just pages but not paragraphs, or just paragraphs but not
+            pages, without creating overlap, and the result would be well-formed.</para>
         <para>[In order to time this, we will want to perform these tasks with sed, emacs in batch
             mode, and/or Perl or Python.]</para>
     </section>
@@ -987,7 +991,8 @@ print("".join(output))</programlisting>
         <bibliomixed xml:id="tei_p5" xreflabel="TEI P5">P5: <emphasis role="ital">Guidelines for
                 electronic text encoding and interchange.</emphasis>
             <link>http://www.tei-c.org/guidelines/P5/</link></bibliomixed>
-        <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein">Frankenstein <emphasis role="ital">Variorum Project.</emphasis>
+        <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein">Frankenstein <emphasis
+                role="ital">Variorum Project.</emphasis>
             <link>https://github.com/PghFrankenstein/Pittsburgh_Frankenstein</link></bibliomixed>
         <bibliomixed xml:id="saxon" xreflabel="Saxon-HE">Saxon-HE (home edition).
                 <link>http://saxon.sourceforge.net/</link></bibliomixed>
