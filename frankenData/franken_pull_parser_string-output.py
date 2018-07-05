@@ -5,7 +5,7 @@ with open('Thomas_C10.xml') as input:
     for event, node in parseString(input.read()):
         if event == START_ELEMENT:
             if node.getAttribute('ana') == 'end':
-                output.append('</' + node.tagName + '>')
+                output.append('</')
             else: # Trojan start tags and non-Trojan
                 output.append('<')
             output.append(node.nodeName)
