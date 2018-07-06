@@ -906,9 +906,447 @@ nature … &lt;/p&gt;</programlisting>
     </section>
 
     <section>
-        <title>An XSLT 3.0 solution using accumulators (TODO: Michael)</title>
-        <para>[To be written. I am assuming that we can find a way to use accumulators to handle
-            this.]</para>
+        <title>An XSLT 3.0 solution using accumulators</title>
+        <para>Another approach to the problem avoids recursion by
+        performing a single pass over the input, maintaining a stack
+        of partly-raised elements using the
+        <emphasis>accumulator</emphasis> construction introduced in
+        XSLT 3.0.</para>
+	<para>An accumulator is a sequence of values associated with
+	the nodes of a tree; each node has both a
+	<emphasis>before</emphasis> value (calculated before
+	descendants are processed) and an <emphasis>after</emphasis>
+	value (calculated after descendants are traversed).  The
+	declaration of an accumulator specifies how to calculate the
+	before and after values to be associated with a node, given
+	the after values associated with the previous node and with
+	the node's last child.  (One simple way to calculate all the
+	values of an accumulator would be to visit each node in the
+	document in a pre-and-post-order traversal, calculating the
+	before value on the first visit to a node and the after value
+	on the second.  When streaming processing is requested, the
+	calculation rules are not allowed to look ahead in the
+	document.  But accumulators can be used even when streaming is
+	not requested.)
+	</para>
+	<para>As a simple example, we can make an accumulator
+	to keep track of the number of open virtual elements at any
+	given point in the flattened input document:  when we
+	encounter a start-marker we will add one to the accumulated
+	value, and when we encounter and end-marker we will
+	subtract one.
+	An accumulator is declared using an
+	<code>xsl:accumulator</code>
+	declaration, which contains a sequence of
+	<code>xsl:accumulator-rule</code>
+	elements describing how the accumulator's values
+	are calculated.  Within an accumulator rule,
+	the variable <code>value</code> gives the
+	value of the accumulator assigned by the
+	immediately preceding node.
+	</para>
+	<figure>
+	  <programlisting><![CDATA[<xsl:accumulator name="level" as="xs:integer"
+		   initial-value="0"
+		   streamable="yes" >
+    <xsl:accumulator-rule match="*[@th:sID]"
+			  select="$value + 1"/>
+    <xsl:accumulator-rule match="*[@th:eID]"
+			  select="$value - 1"/>
+</xsl:accumulator>]]></programlisting>
+	  <para>The declaration for a simple accumulator</para>
+	</figure>
+	<para>
+	The pattern in the accumulator rules assumes that start- and
+	end-markers use the <code>th:sID</code> and
+	<code>th:eID</code> attributes described above.
+	</para>
+	<para>
+	  At any point in a tree to which this accumulator applies,
+	  we can refer to the current node's before value of the
+	  accumulator with the expression
+	  <code>accumulator-before('stack')</code>
+	  and to the after value with 
+	  <code>accumulator-after('stack')</code>.
+	  (In streaming processing, references to the after value
+	  can only be located after any <code>apply-templates</code>
+	  or other expression that requires that descendants
+	  be processed.)
+	</para>
+	<para>
+	  Without accumulators, we could keep track of the relevant
+	  information by replacing references to
+	  <code>accumlator-before('stack')</code> with references to
+	  <code>count(preceding::*[@th:sID]) -
+	  count(preceding::[@th:eID])</code>
+	</para>
+	<para>To solve the raising problem with accumulators, we
+	declare an accumulator whose value is an array (if the XPath
+	3.1 feature is supported) or a map, with which we maintain a
+	stack of virtual elements which have been started, but not
+	finished.  The first member of the array will track the
+	contents of the outermost element, the second member will
+	track the contents of a second-level virtual element, and so
+	forth.  Each member of the array is a sequence of nodes
+	containing a start marker (the first item in the sequence) and
+	all the nodes seen so far that should be children of the
+	raised content element.</para>
+	<para>The processing rules are relatively straightforward
+	and may feel familiar to anyone who has ever constructed
+	an in-memory tree from a SAX event stream:
+	<itemizedlist>
+	  <listitem>
+	    <para>Each time we see a start-marker, we will push a new
+	    sequence onto the stack.</para>
+	  </listitem>
+	  <listitem>
+	    <para>Each time we see a a text node, comment, processing
+	    instruction, or content element, we will append it to the
+	    sequence on the top of the stack.</para>
+	  </listitem>
+	  <listitem>
+	    <para>Each time we see an end-marker, we will</para>
+	    <itemizedlist>
+	      <listitem>
+		<para>Create a content element from the sequence on top
+		of the stack:  the element type and attributes come
+		from the start-marker at
+		<code>$stack(array:size($stack))[1]</code>,
+		and the contents come from the rest of the sequence:
+		<code>$stack(array:size($stack))[position() gt 1]</code>.
+		</para>
+	      </listitem>
+	      <listitem>
+		<para>Pop the stack (i.e. discard the topmost member,
+		whose purpose has been served now it has been turned
+		into a content element).</para>
+	      </listitem>
+	      <listitem>
+		<para>Append the newly created content element
+		to the sequence now at the top of the stack.</para>
+	      </listitem>
+	    </itemizedlist>
+	    <para>Special handling is required for the case in which
+	    the element just ending is at level 1 in the stack,
+	    because once the stack has been popped there is no
+	    top level to which to append the new element.  (It
+	    should be written to the output tree instead.)</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+	<section>
+	  <title>Some utility functions</title>
+	  <para>In order to allow the stylesheet to be used with
+	  either the <code>th</code> attributes or with the
+	  <code>ana="start|end"</code> convention, we
+	  isolate the definition of start- and end-markers in
+	  two functions we place in the Trojan-Horse namespace.
+	  </para>
+	  <figure>
+	    <programlisting><![CDATA[<!--* th:trojan-start($e as element()):  true iff $e is a Trojan
+    * start-tag we want to process.
+    *-->
+<xsl:function name="th:trojan-start" as="xs:boolean">
+    <xsl:param name="e" as="element()"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="exists($e/@th:sID)"/>
+    <xsl:value-of use-when="$th-style = 'ana' "
+	select="$e/@ana='start' "/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+	select="ends-with($e/@xml:id,'_start')"/>
+    
+ </xsl:function>
+  
+<!--* th:trojan-end($e as element()):  true iff $e is a Trojan
+    * end-tag we want to process.
+    *-->
+<xsl:function name="th:trojan-end" as="xs:boolean">
+    <xsl:param name="e" as="element()"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="exists($e/@th:eID)"/>
+    <xsl:value-of use-when="$th-style = 'ana' "
+	select="$e/@ana='end' "/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+		  select="ends-with($e/@xml:id,'_end')"/>
+    
+</xsl:function>]]></programlisting>
+	    <para>Two functions to encapsulate the definition of markers</para>
+	  </figure>
+	  <para>These functions rely on a static parameter
+	  which identifies the idiom in use for markers.
+	  </para>
+	  <figure>
+	    <programlisting><![CDATA[<xsl:param name="th-style" select=" 'ana' " static="yes"/>]]></programlisting>
+	    <para>A static parameter to control the definition of markers</para>
+	  </figure>
+	  <para>Marking the parameter as static allows the
+	  choice among definitions to made during static analysis
+	  of the stylesheet (informally, at <quote>compile
+	  time</quote>)
+	  and not with a dynamic (<quote>run-time</quote>)
+	  <code>choose/when</code> construct.</para>
+	  <para>Another function constructs a content element
+	  from a sequence of nodes beginning with a start-marker.
+	  </para>
+	  <figure>
+	    <programlisting><![CDATA[<!--* th:make-element($ln as node()+):  make an element out of
+    * one stack entry *-->
+<!--* We package this as a function because it's called from
+    * two different locations in the stylesheet *-->
+<xsl:function name="th:make-element" as="element()">
+    <xsl:param name="ln" as="node()+"/>
+    
+    <xsl:copy select="$ln[1]">
+      <!--* first copy (and filter) attributes *-->
+      <xsl:sequence select="$ln[1]/(@* except @th:*)"
+		    use-when="$th-style = 'th' "/>
+      <xsl:sequence use-when="$th-style = 'ana' ">
+	<xsl:sequence select="$ln[1]/(@* except (@ana, @loc))"/>
+	<xsl:attribute name="xml:id" select="$ln[1]/@loc"/>
+      </xsl:sequence>
+		    
+      <xsl:sequence use-when="$th-style='xmlid'">
+	<xsl:sequence select="$ln[1]/@*"/>
+	<xsl:attribute name="xml:id" 
+	    select="replace($ln[1]/@xml:id, '_start$','')"/>
+      </xsl:sequence>
+      
+      <!--* then copy children *-->
+      <xsl:sequence select="$ln[position() gt 1]"/>
+    </xsl:copy>
+    
+</xsl:function>]]></programlisting>
+	    <para>A function to construct a content element from a
+	    start marker and sequence of nodes</para>
+	  </figure>
+	  <para><emphasis>The functions just presented are not
+	  specific to the use of accumulators; they or analogous
+	  functions could be used in any of the XSLT stylesheets
+	  described here.  But most of the other code shown in the
+	  current version of this paper does not use them; 
+	  they are described here because the other code in
+	  this section uses them and would be hard to understand
+	  if they were not presented.</emphasis></para>
+	</section>
+	<section>
+	  <title>Declaring the accumulator and making it applicable</title>
+	  <para>The overall pattern of accumulator declarations was
+	  shown above; the declaration for an accumulator to be used
+	  as a stack follows the same pattern, though the rules
+	  are slightly more complex.</para>
+	  <figure>
+	    <programlisting><![CDATA[  <!--* Declare stack accumulator to keep track of contents. *-->
+  <!--* Start with empty array. *-->
+  <xsl:accumulator name="stack" as="array(node()*)"
+                   initial-value="[]"
+                   streamable="yes"
+                   >
+    <!--* On Trojan start-tag, push the start-tag onto the stack *-->
+    <xsl:accumulator-rule match="*[th:trojan-start(.)]"
+                          select="array:append($value, .)"/>
+    
+    <!--* On Trojan end-tag, make the currently pending element,
+        pop the stack, and insert the pending element at the
+        end of the new top item. *-->
+    <xsl:accumulator-rule match="*[th:trojan-end(.)]"                     
+                          phase="end">
+      
+      <xsl:variable name="level" as="xs:integer"
+                    select="array:size($value)"/>
+      <xsl:variable name="e" as="element()"
+                    select="th:make-element($value($level))"/>
+      <xsl:choose>
+        <xsl:when test="$level eq 1">
+          <!--* at outermost level, we have no previous
+              level to add anything to, so we just pop the
+              stack. *-->
+          <xsl:sequence select="[]"/>
+        </xsl:when>
+        <xsl:otherwise>   
+          <xsl:sequence select="array:put(
+                                array:remove($value, $level),
+                                $level - 1,
+                                ($value($level - 1), $e))"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:accumulator-rule>
+    
+    <!--* On any other node, append current node
+        * to the top sequence in the stack *-->
+    <xsl:accumulator-rule
+        match="node()[not(self::element())
+                or (not(th:trojan-start(.)) 
+                and not(th:trojan-end(.)))]"
+        select="for $level in array:size($value) return
+                if ($level eq 0)
+                then []
+                else array:put(
+                     $value,
+                     $level,
+                     ($value($level), .))"/>
+  </xsl:accumulator>]]></programlisting>
+	    <para>Declaration of an accumulator to be used as a stack</para>
+	  </figure>
+	  <para>Since accumulators were introduced largely to
+	  support the streaming processing of very large inputs,
+	  and since the pointless calculation of accumulator values
+	  would make that processing unnecessarily difficult,
+	  XSLT 3.0 requires that any accumulators be
+	  associated more or less explicitly with an input tree
+	  or a mode.  (If the accumulator is not made applicable
+	  to a given tree in this way, references to the
+	  <code>accumulator-before</code> and 
+	  <code>accumulator-after</code> functions
+	  will raise errors.)
+	  <!--* Dont ask why I know this and find it worth
+	      mentioning. *-->
+	  We handle that by declaring the default mode of
+	  the stylesheet and adding a <code>use-accumulators</code>
+	  attribute naming the accumulators to be calculated.
+	  </para>
+	  <figure>
+	    <programlisting><![CDATA[  <!--* declare default mode; we make it fail on no match
+      * because it turns out we need templates for all nodes.
+      *-->
+  <xsl:mode on-no-match="fail"
+	    use-accumulators="stack"
+	    streamable="yes"/>
+]]></programlisting>
+	    <para>Declaration of mode with <code>use-accumulators</code></para>
+	  </figure>
+	  <para>Note that the <code>streamable="yes"</code>
+	  is not required unless streaming processing is to be
+	  requested.  (Despite Saxon's apparent belief to the
+	  contrary, the declarative statement that the
+	  accumulator is streamable does not constitute a
+	  request that the XSLT processor perform streaming
+	  processing of the input; it is merely a claim
+	  that streaming processing is possible.)
+	  <!--* Are you listening to me, Mike?  Mike?  Mik- oh,
+	      forget it, no, he never listens to me on this.
+	      Sigh. *-->
+	  </para>
+	</section>
+	<section>
+	  <title>Templates</title>
+	  <para>The templates in this stylesheet have very
+	  little work to do:  their primary task is to
+	  override the default templates and ensure
+	  that nodes are not copied unnecessarily to
+	  the output tree.</para>
+	  <para>The template for start-markers does nothing;
+	  all the work is handled by the declaration of the
+	  accumulator.</para>
+	  <figure>
+	    <programlisting><![CDATA[  <!--************************************************
+      * 1.  Virtual start-tags 
+      ************************************************-->
+  <xsl:template match="*[th:trojan-start(.)]" priority="10">
+    <!--* Nothing to do, all the work 
+        * is done by the accumulator *-->
+  </xsl:template>  ]]></programlisting>
+	    <para>Template for start-markers</para>
+	  </figure>
+	  <para>The template for end-markers is more
+	  complicated, because it must handle
+	  the case where the end-marker marks the
+	  end of an outermost virtual element.
+	  The normal accumulator rules cannot handle
+	  this case, because they write the newly constructed
+	  element into the new top member of the stack.
+	  But after we pop the stack at level one, the
+	  stack is empty and there is no top member.
+	  So we need to make the element and write
+	  it to the output tree ourselves.
+	  In all other cases, this template has no work
+	  to do.</para>
+	  <figure>
+	    <programlisting><![CDATA[  <!--************************************************
+      * 2.  Virtual end-tags 
+      ************************************************-->  
+  <xsl:template match="*[th:trojan-end(.)]" priority="10">
+    <xsl:choose>
+      <xsl:when
+          test="array:size(accumulator-before('stack')) eq 1">	
+	<!--* if this end-tag ends the outermost element,
+	    * emit the element *-->
+        <xsl:sequence
+          select="th:make-element(accumulator-before('stack')(1))"/>		    
+      </xsl:when>
+      <xsl:otherwise>
+	<!--* Otherwise, nothing to do *-->
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  ]]></programlisting>
+	    <para>Template for end-markers</para>
+	  </figure>
+	  <para>The template for the document node
+	  is identical to the default template; it is
+	  made necessary by the specification
+	  <code>on-no-match="fail"</code> on the
+	  mode declaration.</para>
+	  <figure>	    
+	    <programlisting><![CDATA[
+  <!--************************************************
+      * 3.  All other nodes 
+      ************************************************-->
+  <!--* 3.1 Document node *-->
+  <xsl:template match="/">
+    <xsl:apply-templates/>
+  </xsl:template>
+    ]]></programlisting>
+	    <para>Template for document node</para>
+	  </figure>xs
+	  <para>The templates for other nodes make the
+	  same distinction as that for end-markers:
+	  when the stack is empty, the node is copied
+	  to the output tree, and otherwise all the work
+	  is left to the accumulator.</para>
+	  <figure>
+	    <programlisting><![CDATA[
+  <!--* 3.2 Non-marker element nodes *-->
+  <xsl:template match="node()[self::element()
+		       and not(th:trojan-start(.))
+		       and not(th:trojan-end(.)) ]">
+    <!--* If we are outside the flattened area, copy the node;
+	* otherwise, do nothing and leave everything 
+	* to the accumulator *-->
+    <xsl:choose>
+      <xsl:when 
+          test="array:size(accumulator-before('stack')) eq 0">
+	<xsl:copy>
+	  <xsl:copy-of select="@*"/>
+	  <xsl:apply-templates/>
+	</xsl:copy>
+      </xsl:when>
+      <xsl:otherwise/>
+    </xsl:choose>    
+  </xsl:template>
+  ]]></programlisting>
+	    <para>Template for content elements (or
+	    non-selected markers)</para>
+	  </figure>
+	  <figure>	    
+	    <programlisting><![CDATA[  
+  <!--* 3.3 Non-element nodes *-->
+  <xsl:template match="node()[not(self::element())]">
+    <!--* If we are outside the flattened area, copy the node;
+	* otherwise, do nothing and leave everything 
+	* to the accumulator *-->
+    <xsl:choose>
+      <xsl:when
+          test="array:size(accumulator-before('stack')) eq 0">
+	<xsl:sequence select="."/>
+      </xsl:when>
+      <xsl:otherwise/>
+    </xsl:choose>    
+  </xsl:template>]]></programlisting>
+	    <para>Template for non-element nodes</para>
+	  </figure>
+	</section>
     </section>
     <section>
         <title>Global search and replace using regular expressions</title>
