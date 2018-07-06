@@ -48,7 +48,7 @@
            <!--ebb: stylesheet produces all nodes, but heavily duplicates them with this general xsl:apply-templates call
                <xsl:apply-templates/>-->
             
-       <xsl:apply-templates select="descendant::*[@loc and @ana='start'][@loc = following-sibling::*[@ana='end'][position() gt 1]/@loc]"/>  
+       <xsl:apply-templates select="descendant::*[@loc and @ana='start'][@loc = following-sibling::*[@ana='start']/following-sibling::*[@ana='end']/@loc]"/>  
             
            <!--ebb: If I wanted to start from "inside out", to raise the innermost level of the hierarchy first, I'd uncomment this. 
                <xsl:apply-templates select="descendant::*[@loc = following-sibling::*[@loc][1]/@loc]"/> -->
@@ -71,7 +71,12 @@
                     <xsl:value-of select="current()"/>
                 </xsl:attribute>   
             </xsl:for-each>
-          <xsl:apply-templates select="following-sibling::node()[following-sibling::*[@loc=$currentLoc and @ana='end']]"/>   
+          <xsl:apply-templates select="following-sibling::node()[following-sibling::*[@loc][1]]"/>
+            <xsl:choose><xsl:when test="following-sibling::*[@loc and @ana='start'][1][@loc ne $currentLoc]"><xsl:apply-templates select="following-sibling::*[@loc and @ana='start'][1][@loc ne $currentLoc]"/></xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="following-sibling::node()[preceding-sibling::*[@loc = $currentNode/following-sibling::*[@loc][1]/@loc and @ana='end']][following-sibling::*[@loc = $currentLoc]]"/>
+            </xsl:otherwise>
+            </xsl:choose>
         </xsl:element>
      <!--  <xsl:apply-templates select="$currentNode/following-sibling::node()[preceding-sibling::*[@loc][1][@loc = $currentLoc and @ana='end']][following-sibling::*[@loc and @ana='start'][1][@loc = $currentNode/following-sibling::*[@loc][1]/@loc] or self::*[@loc and @ana='start'][@loc = $currentNode/following-sibling::*[@loc][1]/@loc]]"/>-->
     </xsl:template>
