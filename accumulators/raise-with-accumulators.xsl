@@ -65,7 +65,7 @@
       />
   
   <!--* declare default mode as shallow-copy *-->
-  <xsl:mode on-no-match="shallow-copy"
+  <xsl:mode on-no-match="fail"
 	    use-accumulators="level stack"
 	    streamable="yes"/>
 
@@ -105,10 +105,10 @@
 	  <!--* at outermost level, we have no previous
 	      level to add anything to, so we just pop the
 	      stack. *-->
-	  <xsl:value-of select="[]"/>
+	  <xsl:sequence select="[]"/>
 	</xsl:when>
 	<xsl:otherwise>	  
-	  <xsl:value-of select="array:put(
+	  <xsl:sequence select="array:put(
 				array:remove($value, $level),
 				$level - 1,
 				($value($level - 1), $e))"/>
@@ -120,7 +120,9 @@
     <xsl:accumulator-rule match="node()[not(self::element())
 				 or (not(th:trojan-start(.)) and not(th:trojan-end(.)))]"
 			  select="for $level in array:size($value) return
-				  array:put($value, $level, ($value($level), .))"/>
+				  if ($level eq 0)
+				  then []
+				  else array:put($value, $level, ($value($level), .))"/>
   </xsl:accumulator>  
 
 
@@ -128,12 +130,7 @@
       * 1.  Virtual start-tags 
       ****************************************************************-->
   <xsl:template match="*[th:trojan-start(.)]" priority="10">
-    
-    <xsl:copy-of select="."/>
-    
-    <xsl:text>&#xA;</xsl:text>
-    <xsl:comment>* level = <xsl:value-of select="accumulator-after('level')"/> *</xsl:comment>
-    <xsl:text>&#xA;</xsl:text>
+    <!--* nothing to do, all the work is done by the accumulator *--> 
   </xsl:template>
   
   <!--****************************************************************
@@ -154,7 +151,21 @@
   <!--****************************************************************
       * 3.  All other nodes 
       ****************************************************************-->
-
+  <xsl:template match="/">
+    <xsl:apply-templates/>
+  </xsl:template>
+  <xsl:template match="node()[not(self::element()) 
+		       or (not(th:trojan-start(.)) and not(th:trojan-end(.))) ]">
+    <!--* If we are outside the flattened area, copy the node;
+	* otherwise, do nothing and leave everything to the accumulator *-->
+    <xsl:choose>
+      <xsl:when test="array:size(accumulator-before('stack')) eq 0">
+	<xsl:sequence select="."/>
+      </xsl:when>
+      <xsl:otherwise/>
+    </xsl:choose>    
+  </xsl:template>
+    
   <!--****************************************************************
       * 4.  Functions 
       ****************************************************************-->
