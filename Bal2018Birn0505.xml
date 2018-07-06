@@ -410,25 +410,25 @@ different accidents of life are not so changeable as the feelings of human natur
             element has the following structure:</para>
         <figure>
             <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="shallow-to-deep">
-<xsl:variable name="ns" select="namespace-uri()"/>
-<xsl:variable name="ln" as="xs:string" select="local-name()"/>
-<xsl:variable name="sID" as="xs:string" select="@th:sID"/>
-
-<!--* 1: handle this element *-->
-<xsl:copy>
-  <xsl:copy-of select="@* except @th:sID"/>
-  <xsl:apply-templates select="following-sibling::node()[1]"
-		   mode="shallow-to-deep">
-  </xsl:apply-templates>
-</xsl:copy>
-  
-<!--* 2: continue after this element *-->
-<xsl:apply-templates select="following-sibling::*[@th:eID = $sID 
-			 and namespace-uri()=$ns
-			 and local-name()=$ln]
-			 /following-sibling::node()[1]"
-		 mode="shallow-to-deep">
-</xsl:apply-templates>
+    <xsl:variable name="ns" select="namespace-uri()"/>
+    <xsl:variable name="ln" as="xs:string" select="local-name()"/>
+    <xsl:variable name="sID" as="xs:string" select="@th:sID"/>
+    
+    <!--* 1: handle this element *-->
+    <xsl:copy>
+      <xsl:copy-of select="@* except @th:sID"/>
+      <xsl:apply-templates select="following-sibling::node()[1]"
+    		   mode="shallow-to-deep">
+      </xsl:apply-templates>
+    </xsl:copy>
+      
+    <!--* 2: continue after this element *-->
+    <xsl:apply-templates select="following-sibling::*[@th:eID = $sID 
+    			 and namespace-uri()=$ns
+    			 and local-name()=$ln]
+    			 /following-sibling::node()[1]"
+    		 mode="shallow-to-deep">
+    </xsl:apply-templates>
 </xsl:template>]]></programlisting>
             <caption>
                 <para>Template for empty element</para>
@@ -458,11 +458,11 @@ different accidents of life are not so changeable as the feelings of human natur
             should stop. The template for Trojan end-tags will thus look like this:</para>
         <figure>
             <programlisting><![CDATA[<xsl:template match="*[@th:eID]" mode="shallow-to-deep">
+        
+    <!--* no action necessary *-->
+    <!--* we do NOT recur to our right.  We leave it to our parent to do 
+        that. *-->	
     
-<!--* no action necessary *-->
-<!--* we do NOT recur to our right.  We leave it to our parent to do 
-    that. *-->	
-
 </xsl:template>]]></programlisting>
             <caption>
                 <para>Template for Trojan end tags</para>
