@@ -8,6 +8,7 @@
     <xsl:variable name="P3-BridgeColl-C10" as="document-node()+" select="collection('bridge-P3-C10')"/>
     <xsl:variable name="testerDoc" as="document-node()" select="doc('bridge-P3-C10/P3-fThomas_C10.xml')"/>  
 <!--In Bridge Construction Phase 4, we are converting self-closed edition elements into full elements to "unflatten" the edition files . -->    
+    
    <xsl:template match="/">
        <xsl:for-each select="$P3-BridgeColl-C10//TEI">
            <xsl:variable name="currentP3File" as="element()" select="current()"/>
