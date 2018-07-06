@@ -295,8 +295,11 @@
                 </tr>
             </tbody>
         </table>
-    </section>
+      </section>
+      
     <section>
+        <title>The problem</title>
+	<section>
         <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
         <para>As a concrete example, we can consider the form taken by this task in the
                 <emphasis>Variorum Frankenstein [<xref linkend="frankenstein"/>]</emphasis> project
@@ -453,7 +456,7 @@ nature … &lt;/p&gt;</programlisting>
             </orderedlist> The experimental transformations tested and discussed in this report
             focus primarily on the middle of these three steps, raising the structural
             markup.</para>
-    </section>
+	  </section>	  
 
     <section xml:id="simplified" xreflabel="Simplified sample data">
         <title>Illustration (simplified data)</title>
@@ -462,8 +465,11 @@ nature … &lt;/p&gt;</programlisting>
             discussing program logic we use a small contrived hierarchical XML sample.<footnote>
                 <para>All files discussed in this report, as well as the report itself, are
                     available in <link>https://github.com/djbpitt/raising</link>.</para>
-            </footnote> The original input is:</para>
-        <figure>
+        </footnote> </para>
+	<section xml:id="simplified-original">
+	  <title>The starting point</title>
+	  <para>The original input is:</para>
+          <figure>
             <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root&gt;
     &lt;p&gt;This is a
@@ -483,7 +489,46 @@ nature … &lt;/p&gt;</programlisting>
         <para>We modify the Trojan milestone markup method described in <xref linkend="derose_2004"
             /> by putting the <code>@sID</code> and <code>@eID</code> attributes in a namespace, for
             which we bind the prefix <code>th:</code> to the URI
-                <code>http://www.blackmesatech.com/2017/nss/trojan-horse</code>. The flattened
+        <code>http://www.blackmesatech.com/2017/nss/trojan-horse</code>. </para>
+	</section>
+        <section>
+          <title>Flattening</title>
+          <para>To test the method on our <xref linkend="simplified"/>, we first flatten the
+                original XML with the following XSLT, which converts all tags except the root (which
+                must be preserved as a container element to ensure that the XML is well formed) to
+                Trojan milestones. The original generic identifier is retained, the start-tag is
+                replaced by an empty element that adds a <code>@th:sID</code> attribute with a
+                generated value, and the end-tag is replaced by an empty element that adds a
+                    <code>th:eID</code> attribute with the same generated value:</para>
+            <figure>
+                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
+    xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="#all"
+    version="3.0"&gt;
+    &lt;xsl:output method="xml" indent="no"/&gt;
+    &lt;xsl:template match="/*"&gt;
+        &lt;xsl:copy&gt;
+            &lt;xsl:namespace name="th" select="'http://www.blackmesatech.com/2017/nss/trojan-horse'"/&gt;
+            &lt;xsl:apply-templates/&gt;
+        &lt;/xsl:copy&gt;
+    &lt;/xsl:template&gt;
+    &lt;xsl:template match="*"&gt;
+        &lt;xsl:element name="{name()}"&gt;
+            &lt;xsl:attribute name="th:sID" select="generate-id()"/&gt;
+        &lt;/xsl:element&gt;
+        &lt;xsl:apply-templates/&gt;
+        &lt;xsl:element name="{name()}"&gt;
+            &lt;xsl:attribute name="th:eID" select="generate-id()"/&gt;
+        &lt;/xsl:element&gt;
+    &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</programlisting>
+                <caption>
+                    <para>XSLT to flatten hierarchical XML to Trojan milestones</para>
+                </caption>
+            </figure>	
+	<para>The flattened
             version looks like:</para>
         <figure>
             <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -508,8 +553,25 @@ nature … &lt;/p&gt;</programlisting>
             </caption>
         </figure>
         <para>The output of raising must match the original XML.</para>
+        </section>
+	<section xml:id="marker-styles">
+	  <title>Different styles of marker</title>
+	  <para>For historical reasons, the markers in the
+	  <emphasis role="ital">Frankenstein</emphasis> data
+          differ from those of our simplified test sample. </para>
+	  <para>Specifically, start-markers in
+          <emphasis role="ital">Frankenstein</emphasis> have an <code>@ana</code>
+          attribute with the value <code>start</code>, end-tags have an <code>@ana</code>
+          attribute with the value <code>end</code>, and start- and end-tags are paired by
+          sharing a unique value of a <code>@loc</code> attribute. The output requirements are
+          to remove the <code>@ana</code> attribute and refactor the <code>@loc</code>
+          attribute as an <code>@xml:id</code> attribute.</para>
+	</section>
+      </section>
     </section>
 
+    <section>
+      <title>Solutions to the problem</title>
     <section>
       <title>Right-sibling traversal</title>
         <para>One way to construct content elements from flattened XML
@@ -626,59 +688,23 @@ nature … &lt;/p&gt;</programlisting>
 
     <section xml:id="inside-out-function" xreflabel="Inside-out recursion">
         <title>Inside-out recursion</title>
-        <para>Inside-out recursion works by finding all innermost pairs of Trojan milestones, that
-            is, those that do not contain other Trojan milestones.<footnote>
-                <para>We call this <emphasis role="ital">inside-out</emphasis>, rather than
-                        <emphasis role="ital">bottom-up</emphasis>, because in fully flattened XML
-                    all empty elements are on the same hierarchical level, and any original
-                    hierarchy has been refactored as containment between Trojan milestones. While
-                    the result of raising is constructed in a bottom-up fashion, the nodes to be
-                    raised are processed from the inside outward.</para>
-            </footnote> They may contain anything else, including <code>text()</code> nodes, empty
-            elements that are not Trojan milestones, and container elements. The transformation
-            forms all innermost pairs that it finds into container elements and passes the resulting
-            new document back into the recursive function, where the innermost pairs of Trojan
-            milestones are now outside the newly created container elements. The function recurs
-            until there are no more Trojan milestones. The maximum possible depth of recursion is
-            equal to the depth in the original (pre-flattening) XML hierarchy.</para>
-        <section>
-            <title>Flattening</title>
-            <para>To test the method on our <xref linkend="simplified"/>, we first flatten the
-                original XML with the following XSLT, which converts all tags except the root (which
-                must be preserved as a container element to ensure that the XML is well formed) to
-                Trojan milestones. The original generic identifier is retained, the start-tag is
-                replaced by an empty element that adds a <code>@th:sID</code> attribute with a
-                generated value, and the end-tag is replaced by an empty element that adds a
-                    <code>th:eID</code> attribute with the same generated value:</para>
-            <figure>
-                <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
-    xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="#all"
-    version="3.0"&gt;
-    &lt;xsl:output method="xml" indent="no"/&gt;
-    &lt;xsl:template match="/*"&gt;
-        &lt;xsl:copy&gt;
-            &lt;xsl:namespace name="th" select="'http://www.blackmesatech.com/2017/nss/trojan-horse'"/&gt;
-            &lt;xsl:apply-templates/&gt;
-        &lt;/xsl:copy&gt;
-    &lt;/xsl:template&gt;
-    &lt;xsl:template match="*"&gt;
-        &lt;xsl:element name="{name()}"&gt;
-            &lt;xsl:attribute name="th:sID" select="generate-id()"/&gt;
-        &lt;/xsl:element&gt;
-        &lt;xsl:apply-templates/&gt;
-        &lt;xsl:element name="{name()}"&gt;
-            &lt;xsl:attribute name="th:eID" select="generate-id()"/&gt;
-        &lt;/xsl:element&gt;
-    &lt;/xsl:template&gt;
-&lt;/xsl:stylesheet&gt;</programlisting>
-                <caption>
-                    <para>XSLT to flatten hierarchical XML to Trojan milestones</para>
-                </caption>
-            </figure>
-        </section>
+        <para>Inside-out recursion works by finding all innermost
+	pairs of start- and end-markers, that
+        is, those that mark virtual elements which do not contain any
+	markers or other virtual elements.<footnote>
+        <para>We call this <emphasis role="ital">inside-out</emphasis>, rather than
+        <emphasis role="ital">bottom-up</emphasis>, because in fully flattened XML
+        all empty elements are on the same hierarchical level, and any original
+        hierarchy has been refactored as containment between Trojan milestones. While
+        the result of raising is constructed in a bottom-up fashion, the nodes to be
+        raised are processed from the inside outward.</para>
+        </footnote> They may contain anything else, including <code>text()</code> nodes, empty
+        elements that are not Trojan milestones, and container elements. The transformation
+        forms all innermost pairs that it finds into container elements and passes the resulting
+        new document back into the recursive function, where the innermost pairs of Trojan
+        milestones are now outside the newly created container elements. The function recurs
+        until there are no more Trojan milestones. The maximum possible depth of recursion is
+        equal to the depth in the original (pre-flattening) XML hierarchy.</para>
         <section>
             <title>Raising</title>
             <para>The output of the preceding transformation is included in the <xref
@@ -832,14 +858,11 @@ nature … &lt;/p&gt;</programlisting>
         </section>
         <section>
             <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
-            <para>The Trojan markup in the <emphasis role="ital">Frankenstein</emphasis> data
-                differs from that of our simplified test sample. Specifically, Trojan start-tags in
-                    <emphasis role="ital">Frankenstein</emphasis> have an <code>@ana</code>
-                attribute with the value <code>start</code>, end-tags have an <code>@ana</code>
-                attribute with the value <code>end</code>, and start- and end-tags are paired by
-                sharing a unique value of a <code>@loc</code> attribute. The output requirements are
-                to remove the <code>@ana</code> attribute and refactor the <code>@loc</code>
-                attribute as an <code>@xml:id</code> attribute. We do that with:</para>
+            <para>As described above, the virtual-element markup in
+            the <emphasis role="ital">Frankenstein</emphasis> data
+            differs from that of our simplified test sample. We handle
+            the variations in style and satisfy the additional
+            refactoring requirements with:</para>
             <figure>
                 <programlisting>&lt;xsl:element name="{name()}"&gt;
     &lt;xsl:attribute name="xml:id" select="@loc"/&gt;
@@ -1109,6 +1132,7 @@ print("".join(output))</programlisting>
                 discussion of the limitations.</para>
             <para>[TODO: namespace-aware, instead of string-matching on attribute names?]</para>
         </section>
+      </section>
     </section>
     <section>
         <title>Some things that can go wrong</title>
