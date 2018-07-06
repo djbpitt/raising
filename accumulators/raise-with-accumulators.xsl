@@ -1,5 +1,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+		xmlns:map="http://www.w3.org/2005/xpath-functions/map"
 		xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
 		exclude-result-prefixes="xs"
 		version="3.0"
@@ -64,7 +66,7 @@
   
   <!--* declare default mode as shallow-copy *-->
   <xsl:mode on-no-match="shallow-copy"
-	    use-accumulators="level"
+	    use-accumulators="level stack"
 	    streamable="yes"/>
 
   <!--* declare level accumulator to keep track of stack depth *-->
@@ -77,6 +79,49 @@
     <xsl:accumulator-rule match="*[th:trojan-end(.)]"
 			  select="$value - 1"/>
   </xsl:accumulator>
+
+  <!--* Declare stack accumulator to keep track of contents. *-->
+  <!--* Start with empty array. *-->
+  <xsl:accumulator name="stack" as="array(node()*)"
+		   initial-value="[]"
+		   streamable="yes"
+		   >
+    <!--* On Trojan start-tag, push the start-tag onto the stack *-->
+    <xsl:accumulator-rule match="*[th:trojan-start(.)]"
+			  select="array:append($value, .)"/>
+    
+    <!--* On Trojan end-tag, make the currently pending element,
+	pop the stack, and insert the pending element at the
+	end of the new top item. *-->
+    <xsl:accumulator-rule match="*[th:trojan-end(.)]"			  
+			  phase="end">
+      
+      <xsl:variable name="level" as="xs:integer"
+		    select="array:size($value)"/>
+      <xsl:variable name="e" as="element()"
+		    select="th:make-element($value($level))"/>
+      <xsl:choose>
+	<xsl:when test="$level eq 1">
+	  <!--* at outermost level, we have no previous
+	      level to add anything to, so we just pop the
+	      stack. *-->
+	  <xsl:value-of select="[]"/>
+	</xsl:when>
+	<xsl:otherwise>	  
+	  <xsl:value-of select="array:put(
+				array:remove($value, $level),
+				$level - 1,
+				($value($level - 1), $e))"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:accumulator-rule>
+    
+    <!--* On any other node, append current node to the top sequence in the stack *-->
+    <xsl:accumulator-rule match="node()[not(self::element())
+				 or (not(th:trojan-start(.)) and not(th:trojan-end(.)))]"
+			  select="for $level in array:size($value) return
+				  array:put($value, $level, ($value($level), .))"/>
+  </xsl:accumulator>  
 
 
   <!--****************************************************************
@@ -95,12 +140,15 @@
       * 2.  Virtual end-tags 
       ****************************************************************-->  
   <xsl:template match="*[th:trojan-end(.)]" priority="10">
-    
-    <xsl:copy-of select="."/>
-    
-    <xsl:text>&#xA;</xsl:text>
-    <xsl:comment>* level = <xsl:value-of select="accumulator-after('level')"/> *</xsl:comment>
-    <xsl:text>&#xA;</xsl:text>
+    <xsl:choose>
+      <xsl:when test="array:size(accumulator-before('stack')) eq 1">
+	<!--* if this end-tag ends the outermost element, emit the element *-->
+	<xsl:sequence select="th:make-element(accumulator-before('stack')(1))"/>
+      </xsl:when>
+      <xsl:otherwise>
+	<!--* Otherwise, nothing to do *-->
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!--****************************************************************
@@ -129,5 +177,19 @@
     <xsl:param name="e" as="element()"/>
     <xsl:value-of select="exists($e/@th:eID)"/>
   </xsl:function>
-  
+
+  <!--* th:make-element($ln as node()+):  make an element out of
+      * one stack entry *-->
+  <!--* We package this as a function because it's called from
+      * two different locations in the stylesheet *-->
+  <xsl:function name="th:make-element" as="element()">
+    <xsl:param name="ln" as="node()+"/>
+    <xsl:copy select="$ln[1]">
+      <!--* copy attributes *-->
+      <xsl:sequence select="$ln[1]/(@* except @th:*)"/>
+      <!--* copy children *-->
+      <xsl:sequence select="$ln[position() gt 1]"/>
+    </xsl:copy>
+  </xsl:function>
+		
 </xsl:stylesheet>
