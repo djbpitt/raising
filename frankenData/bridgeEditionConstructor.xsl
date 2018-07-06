@@ -3,7 +3,7 @@
     xmlns="http://www.tei-c.org/ns/1.0"  
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="3.0">
-
+<!--2018-07-05 ebb: retooling this to work recursively from "outside in", that is, from processing elements intended to be "outer" elements holding elements inside them, and to process elements with no more content to raise last.  -->
 <!--<xsl:mode on-no-match="shallow-copy"/>-->
     <xsl:variable name="P3-BridgeColl-C10" as="document-node()+" select="collection('bridge-P3-C10')"/>
     <xsl:variable name="testerDoc" as="document-node()" select="doc('bridge-P3-C10/P3-fThomas_C10.xml')"/>  
@@ -45,56 +45,22 @@
     </xsl:template>
     <xsl:template match="div[@type='collation']">
         <div type="collation">
-           <xsl:apply-templates select="descendant::*[@loc = following-sibling::*[@loc][1]/@loc]"/> 
-          <!--  <xsl:apply-templates select="descendant::*[@loc]"/>-->
+           <!--ebb: stylesheet produces all nodes, but heavily duplicates them with this general xsl:apply-templates call
+               <xsl:apply-templates/>-->
+            
+       <xsl:apply-templates select="descendant::*[@loc and @ana='start'][@loc = following-sibling::*[@ana='start']/following-sibling::*[@ana='end']/@loc]"/>  
+            
+           <!--ebb: If I wanted to start from "inside out", to raise the innermost level of the hierarchy first, I'd uncomment this. 
+               <xsl:apply-templates select="descendant::*[@loc = following-sibling::*[@loc][1]/@loc]"/> -->
+            
+        <!--ebb: Starting processing from the "outside in". -->
+          <!--  <xsl:apply-templates select="*[@ana='start' and @loc = following-sibling::*[@ana][1]/following-sibling::*[@ana='end']/@loc]"/> -->   
         </div>
-    </xsl:template>
- 
- <xsl:template match="*[@loc = following-sibling::*[@loc][1]/@loc]">
-     <xsl:variable name="currNode" select="current()" as="node()"/>
-        <xsl:variable name="currLoc" select="@loc" as="xs:string"/>
-        <xsl:comment>This template rule for text- and sig-bearing loc nodes is firing now.</xsl:comment>
-     
-   <xsl:variable name="beforeThis" as="node()*">
-        <!-- <xsl:copy-of select="preceding-sibling::node()"/>-->
-        <xsl:copy-of select="$currNode/preceding-sibling::node()[preceding-sibling::*[@loc]/@loc = $currNode/preceding-sibling::*[@loc][1]/@loc or self::*[@loc = $currNode/preceding-sibling::*[@loc][1]/@loc]]"/>
-     </xsl:variable>
-     <xsl:choose><xsl:when test="$beforeThis[self::*[@loc]]">
-        <xsl:comment>Found @loc node(s) before this point: <xsl:value-of select="$beforeThis[self::*[@loc]]/name()"/></xsl:comment>
-         <xsl:apply-templates select="$beforeThis[self::*[@loc]]"/>
-     </xsl:when>
-     <xsl:otherwise>
-         <xsl:copy-of select="$beforeThis[not(@loc)]"/>
-     </xsl:otherwise>
-     </xsl:choose>
-        <xsl:element name="{name()}">
-            <xsl:for-each select="@*[not(name() = 'ana')]">
-                <xsl:attribute name="{current()/name()}">
-                    <xsl:value-of select="current()"/>
-                </xsl:attribute>
-            </xsl:for-each>
-            <xsl:copy-of select="following-sibling::node()[following-sibling::*[@loc = $currLoc]]"/>
-        </xsl:element>
-    <xsl:variable name="afterThis" as="node()*">
-         <!--<xsl:copy-of select="following-sibling::node()[preceding-sibling::*[@loc][1][@loc = $currLoc and @ana='end']]"/>-->
-         <xsl:copy-of select="$currNode/following-sibling::node()[self::*[@loc = $currNode/preceding-sibling::*[@loc][1]/@loc] or preceding-sibling::*[@loc eq $currLoc and @ana='end'] and following-sibling::*[@loc]/@loc = $currNode/following-sibling::*[@loc][1]/@loc]"/>
-     </xsl:variable>
-     <xsl:choose><xsl:when test="$afterThis[@loc]">
-         <xsl:comment>Found @loc node(s) after this point: <xsl:value-of select="$afterThis[@loc]/name()"/></xsl:comment>
-         <xsl:apply-templates select="$afterThis[@loc]"/></xsl:when>
-     <xsl:otherwise>
-             <xsl:apply-templates select="$afterThis[not(@loc)]"/>
-     </xsl:otherwise>
-     </xsl:choose>
-    </xsl:template>
-   
-    <xsl:template match="div[@type='collation']//*[not(@loc)]">
-        <xsl:copy-of select="."/>
-    </xsl:template>
-    
+    </xsl:template>   
     
     <xsl:template match="*[@ana='start' and @loc = following-sibling::*[@ana][1]/following-sibling::*[@ana='end']/@loc]">
-        <xsl:comment>This template rule for outer-hull elements is firing now.</xsl:comment>
+        <xsl:comment>This template rule for "outer-hull" elements is firing now.</xsl:comment>
+        <xsl:variable name="currentNode" as="node()" select="current()"/>
         <xsl:variable name="currentLoc" as="xs:string" select="@loc"/>
         <xsl:comment>The value of currentLoc is <xsl:value-of select="$currentLoc"/></xsl:comment>
         <xsl:variable name="thisEndTag" select="following-sibling::*[@loc = $currentLoc and @ana='end']" as="element()"/>
@@ -105,11 +71,32 @@
                     <xsl:value-of select="current()"/>
                 </xsl:attribute>   
             </xsl:for-each>
-            <xsl:apply-templates select="following-sibling::node()[following-sibling::*[@loc][1][@loc ne $currentLoc] and following-sibling::*[@loc=$currentLoc and @ana='end']]"/>
- 
+          <xsl:apply-templates select="following-sibling::node()[following-sibling::*[@loc][1]]"/>
+            <xsl:choose><xsl:when test="following-sibling::*[@loc and @ana='start'][1][@loc ne $currentLoc]"><xsl:apply-templates select="following-sibling::*[@loc and @ana='start'][1][@loc ne $currentLoc]"/></xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="following-sibling::node()[preceding-sibling::*[@loc = $currentNode/following-sibling::*[@loc][1]/@loc and @ana='end']][following-sibling::*[@loc = $currentLoc]]"/>
+            </xsl:otherwise>
+            </xsl:choose>
         </xsl:element>
+     <!--  <xsl:apply-templates select="$currentNode/following-sibling::node()[preceding-sibling::*[@loc][1][@loc = $currentLoc and @ana='end']][following-sibling::*[@loc and @ana='start'][1][@loc = $currentNode/following-sibling::*[@loc][1]/@loc] or self::*[@loc and @ana='start'][@loc = $currentNode/following-sibling::*[@loc][1]/@loc]]"/>-->
     </xsl:template>
     
+ <xsl:template match="*[@loc = following-sibling::*[@loc][1]/@loc]">
+     <xsl:variable name="currNode" select="current()" as="node()"/>
+        <xsl:variable name="currLoc" select="@loc" as="xs:string"/>
+        <xsl:comment>This template rule for text- and sig-bearing loc nodes is firing now.</xsl:comment>
+        <xsl:element name="{name()}">
+            <xsl:for-each select="@*[not(name() = 'ana')]">
+                <xsl:attribute name="{current()/name()}">
+                    <xsl:value-of select="current()"/>
+                </xsl:attribute>
+            </xsl:for-each>
+            <xsl:copy-of select="following-sibling::node()[following-sibling::*[@loc = $currLoc]]"/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="div[@type='collation']//*[not(@loc)]">
+        <xsl:copy-of select="."/>
+    </xsl:template>    
   <xsl:template match="*[@ana='end'][@loc = preceding-sibling::*[@ana='start']/@loc]">
     </xsl:template>
 </xsl:stylesheet>
