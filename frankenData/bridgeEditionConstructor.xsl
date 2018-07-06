@@ -45,7 +45,10 @@
     </xsl:template>
     <xsl:template match="div[@type='collation']">
         <div type="collation">
-            <xsl:apply-templates/>
+           <!--ebb: stylesheet produces all nodes, but heavily duplicates them with this general xsl:apply-templates call
+               <xsl:apply-templates/>-->
+            
+       <xsl:apply-templates select="descendant::*[@loc and @ana='start'][@loc = following-sibling::*[@ana='end'][position() gt 1]/@loc]"/>  
             
            <!--ebb: If I wanted to start from "inside out", to raise the innermost level of the hierarchy first, I'd uncomment this. 
                <xsl:apply-templates select="descendant::*[@loc = following-sibling::*[@loc][1]/@loc]"/> -->
