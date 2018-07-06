@@ -512,13 +512,15 @@ nature … &lt;/p&gt;</programlisting>
 
     <section>
       <title>Right-sibling traversal</title>
-        <para>One way to construct content elements from flattened XML is to use a "right-sibling
-            traversal" of the input tree, in which each container element calls apply-template only
-            on its first child, and each template passes control to its immediate right
-            sibling.</para>
-        <para>In this appraoch the task of constructing the content element is assigned to the
-            template which matches the Trojan-Horse start-tag. The template for such an empty
-            element has the following structure:</para>
+        <para>One way to construct content elements from flattened XML
+        is to use a <quote>right-sibling traversal</quote> of the
+        input tree, in which each container element calls
+        apply-template only on its first child, and each template
+        passes control to its immediate right sibling.</para>
+        <para>In this approach the task of constructing the content
+        element is assigned to the template which matches the
+        start-marker. The template for such a start-marker has the
+        following structure:</para>
         <figure>
             <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="shallow-to-deep">
     <xsl:variable name="ns" select="namespace-uri()"/>
@@ -534,7 +536,8 @@ nature … &lt;/p&gt;</programlisting>
     </xsl:copy>
       
     <!--* 2: continue after this element *-->
-    <xsl:apply-templates select="following-sibling::*[@th:eID = $sID 
+    <xsl:apply-templates select="following-sibling::*
+                         [@th:eID = $sID 
                          and namespace-uri()=$ns
                          and local-name()=$ln]
                          /following-sibling::node()[1]"
@@ -542,43 +545,78 @@ nature … &lt;/p&gt;</programlisting>
     </xsl:apply-templates>
 </xsl:template>]]></programlisting>
             <caption>
-                <para>Template for empty element</para>
+                <para>Template for start-marker</para>
             </caption>
         </figure>
-        <para>First, it creates an element with the name and attributes given by the Trojan Horse
-            start element, then it passes control not to its immediately following sibling (which is
-            either the first child of the virtual element or its Trojan Horse end tag) but to the
-            node immediately to the right of the Trojan Horse end tag.</para>
-        <para> Each child of the virtual element copies itself into the element being created. The
-            templates for <code>text()</code> nodes, comments, processing instructions, and any
-            content elements present in the input all have essentially the same structure:</para>
+        <para>Note that there are two calls to
+        <code>xsl:apply-templates</code>.  The first occurs within an
+        <code>xsl:copy</code> element (which constructs an element
+        with the name and attributes given by the start-marker); it
+        selects the immediately following sibling node, which will in
+        the normal run of things be the first child node of the new
+        content element.
+	The second occurs after the new content element and selects
+        not the start-marker's immediately following sibling but the
+        node immediately to the right of the end-marker.</para>
+        <para>Each child of the virtual element copies itself into the
+        content element being created. The templates for
+        <code>text()</code> nodes, comments, processing instructions,
+        and any content elements present in the input all have
+        essentially the same structure:</para>
         <figure>
-            <programlisting><![CDATA[<xsl:copy-of select="."/>
-<xsl:apply-templates select="following-sibling::node()[1]"
-                 mode="shallow-to-deep"/>]]></programlisting>
-            <caption>
-                <para>Template for <code>text()</code> nodes, comments, processing instructions, and
-                    content elements</para>
-            </caption>
+          <programlisting><![CDATA[<xsl:template match="text()
+        | comment() 
+        | processing-instruction 
+        | *[not(@th:*)]"
+        mode="shallow-to-deep"
+	>
+    <xsl:copy-of select="."/>
+    <xsl:apply-templates 
+        select="following-sibling::node()[1]"
+        mode="shallow-to-deep"/>
+</xsl:template>
+	]]></programlisting>
+          <caption>
+            <para>Template for <code>text()</code> nodes, comments, processing instructions, and
+            content elements</para>
+          </caption>
         </figure>
-        <para>(If content elements can contain further Trojan-Horse markup at other levels of the
-            tree, the <code>copy-of</code> should be replaced by a shallow copy and a recursive
-                <code>apply-templates select="child::node()[1]</code>.) </para>
-        <para>When a Trojan-Horse end-tag is encountered, the contents of the virtual element whose
-            end it marks have now all been accumulated, and the right-sibling traversal of the input
-            should stop. The template for Trojan end-tags will thus look like this:</para>
+        <para>If content elements can contain further markers
+        at other levels of the tree, the <code>copy-of</code>
+        should be replaced by a shallow copy and a recursive
+        <code>apply-templates select="child::node()[1]</code>.  That
+        is not the case with our test data.</para>
+        <para>When a Trojan-Horse end-tag is encountered, the contents
+        of the virtual element whose end it marks have now all been
+        accumulated, and the right-sibling traversal of the input
+        should stop. The template for Trojan end-tags will thus look
+        like this:</para>
         <figure>
             <programlisting><![CDATA[<xsl:template match="*[@th:eID]" mode="shallow-to-deep">
         
-    <!--* no action necessary *-->
-    <!--* we do NOT recur to our right.  We leave it to our parent to do 
-        that. *-->      
+    <!--* No action necessary *-->
+    <!--* We do NOT recur to our right.
+        * We leave it to our parent to do that.
+        *-->      
     
 </xsl:template>]]></programlisting>
             <caption>
-                <para>Template for Trojan end tags</para>
+                <para>Template for end-markers</para>
             </caption>
         </figure>
+	
+	<para>It will be noted that the templates shown each handle a
+	single node and then call <code>apply-templates</code>
+	selecting the next node to be processed.  The template
+	activation stack in the XSLT processor thus contains no sets
+	of nodes waiting to be processed, but the call stack may
+	become rather deep: in our sample data, the maximum depth of
+	the template stack is the number of nodes in the flattened
+	portion of the input.  An XSLT processor which does not
+	eliminate tail-recursive template calls may thus run out of
+	stack space (at least in theory -- in practice, we have not
+	ever seen a right-sibling recursion blow the stack on real
+	input).</para>
 	
         <para><emphasis>For purposes of performance measurement, we
         expect to implement this algorithm in both XSLT 1.0 and XSLT
