@@ -240,8 +240,11 @@
       <!--* first copy (and filter) attributes *-->
       <xsl:sequence select="$ln[1]/(@* except @th:*)"
 		    use-when="$th-style = 'th' "/>
-      <xsl:sequence select="$ln[1]/(@* except @ana)"
-		    use-when="$th-style = 'ana' "/>
+      <xsl:sequence use-when="$th-style = 'ana' ">
+	<xsl:sequence select="$ln[1]/(@* except (@ana, @loc))"/>
+	<xsl:attribute name="xml:id" select="$ln[1]/@loc"/>
+      </xsl:sequence>
+		    
       <xsl:sequence use-when="$th-style='xmlid'">
 	<xsl:sequence select="$ln[1]/@*"/>
 	<xsl:attribute name="xml:id" select="replace($ln[1]/@xml:id, '_start$','')"/>
