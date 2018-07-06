@@ -880,7 +880,7 @@ different accidents of life are not so changeable as the feelings of human natur
                 <para>The authors are grateful to Ronald Haentjens Dekker for bringing this method
                     to our attention. The example at his
                         <link>https://github.com/rhdekker/python_xml_pull_parser_example</link>
-                    GitHub repository is the model for the examples here.</para>
+                    GitHub repository is a partial model for the examples here.</para>
             </footnote> The result of pull parsering can be fashioned into output in two ways, as a
             string or as XML. With string output, this method is comparable to the regex replacement
             strategy described above: it passes all events through unchanged except for Trojan
