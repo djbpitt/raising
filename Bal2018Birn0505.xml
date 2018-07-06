@@ -92,7 +92,10 @@
                 elements</emphasis>, after the milestone technique described in the TEI Guidelines
             for page beginnings, column beginnings, line beginnings, etc. [<xref linkend="tei_p5"
             />], or as <emphasis>Trojan horse markup</emphasis>, after the technique described by
-            Steve DeRose [<xref linkend="derose_2004"/>]). When we do, we will often wish, later, to
+            Steve DeRose [<xref linkend="derose_2004"/>]; to avoid
+	    over-stressing the particular syntax used, we will
+	    generally call them <emphasis>markers</emphasis>). When we
+	    do flatten our documents, we will often wish, later, to
             restore the content elements we flattened. The three co-authors discovered recently that
             we had each had occasion to perform this task, and that we had undertaken it using
             different techniques.</para>
@@ -107,19 +110,72 @@
             that arose in a concrete project. We then present several approaches to solving the
             problem, including some false starts, which illustrate possible wrong turnings along the
             way. We then discuss and compare the different solutions with respect to coding
-            difficulty and costs in space and time. Our approaches for raising flattened XML may be
-            categorized according to the following parameters:<itemizedlist>
-                <listitem>
-                    <para>Whether they read their input as XML or as a string.</para>
-                </listitem>
-                <listitem>
-                    <para>Whether they construct their output as XML or as a string.</para>
-                </listitem>
-                <listitem>
-                    <para>For those that read the input as XML, whether they process the flattened
-                        content from left to right or from the inside outward.</para>
-                </listitem>
-            </itemizedlist></para>
+            difficulty and costs in space and time. </para>
+	<para>In the discussions which follow, we adopt the following
+	terminology in an attempt to avoid unnecessary confusion.
+	First, we distinguish content elements (marked by standard XML
+	start- and end-tags) from virtual elements (marked by markers).
+	<variablelist>
+	  <varlistentry>
+	    <term>content element</term>
+	    <listitem>
+	      <para>a conventional XML element marked by start- and
+	      end-tags with (possibly empty) content between them, or
+	      by a sole-tag.  Cf. <emphasis
+	      role="ital">marker</emphasis>.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>virtual element</term>
+	    <listitem>
+	      <para>a <quote>logical</quote> element marked by start-
+	      and end-markers.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>marker</term>
+	    <listitem>
+	      <para>an empty XML elements serving to mark the start or
+	      end of a virtual element.</para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+	</para>
+	<para>We are interested in two processes which shift between
+	content elements and virtual elements marked by markers:
+	<variablelist>	  
+	  <varlistentry>
+	    <term>flattening</term>
+	    <listitem>
+	      <para>the process of replacing the start- and end-tags
+	      of (selected) content elements with corresponding start-
+	      and end-markers.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term>raising (aka <emphasis>unflattening</emphasis>)</term>
+	    <listitem>
+	      <para>the process of replacing (selected) pairs of start- and end-markers
+	      of (selected) content elements with corresponding start-
+	      and end-markers.</para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+	</para>
+	<para>Our approaches for raising flattened XML may be
+        categorized according to the following parameters:<itemizedlist>
+        <listitem>
+          <para>Whether they read their input as XML or as a string.</para>
+        </listitem>
+        <listitem>
+          <para>Whether they construct their output as XML or as a string.</para>
+        </listitem>
+        <listitem>
+          <para>For those that read the input as XML, whether they process the flattened
+          content from left to right or from the inside outward.</para>
+        </listitem>
+      </itemizedlist>
+	</para>
         <para>The methods that work with the input and output as XML are typically recursive
             (whether the recursion is implemented through functions or
             templates<!--
@@ -135,18 +191,34 @@
 	    *-->),
             and the recursion follows one of two patterns:<itemizedlist>
                 <listitem>
-                    <para>The input is traversed from left to right and the output is constructed
-                        from the top down. We refer to the traversal of the input as left-to-right,
-                        rather than as depth-first, because although it is technically depth-first,
-                        insofar as the milestones and their content are all siblings, it has no
-                        meaningful depth.</para>
+                    <para>The input is traversed from left to right
+                    and the output is constructed in start-tag/end-tag
+                    order in a single pass.</para>
+		    <para>We refer to the traversal of the input as
+		    left-to-right, rather than as depth-first, because
+		    insofar as the markers and the content of the
+		    virtual elements they mark are all siblings, the
+		    input document typically has no meaningful depth
+		    and there is no difference between depth- and
+		    breadth-first traversal.</para>
+		    <para>We refer to the construction as tag-order
+		    because the construction of the virtual elements
+		    begins in the order of their start-markers and
+		    ends in the order of their end-markers.
+		    </para>
                 </listitem>
                 <listitem>
-                    <para>The input is traversed from the inside outward and the output is
-                        constructed from the bottom up. As in the preceding case, because the input
-                        has no meaningful depth, it is more appropriate to describe the traversal
-                        without using hierarchical terms, although bottom-up is an appropriate way
-                        to refer to the construction of the hierarchical output.</para>
+                  <para>The input is traversed left-to-right in multiple passes;		 
+		  on each pass the innermost or bottom-most virtual
+		  element(s) are raised to become content elements.</para>
+		  <para>We refer to the construction as bottom up
+		  because in each parent-child pair of the ouput, the
+		  construction of the child begins and ends before the
+		  construction of the parent begins.</para>
+		  <para>As in the preceding case, because the input
+                  has no meaningful depth, it is more appropriate to describe the traversal
+                  without using hierarchical terms, although bottom-up is an appropriate way
+                  to refer to the construction of the hierarchical output.</para>
                 </listitem>
             </itemizedlist></para>
 
@@ -160,17 +232,19 @@
                     <th>Input traversal</th>
                     <th>Output type</th>
                     <th>Output construction</th>
-                    <th>Recursive/stack?</th>
+                    <th>Recursive / stack?</th>
+                    <th>Passes</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th>Left-to-right traversal</th>
+                    <th>Right-sibling traversal</th>
                     <td>XML</td>
-                    <td>???</td>
+                    <td>Depth-first (first child, then first following sibling)</td>
                     <td>XML</td>
-                    <td>???</td>
-                    <td>Yes</td>
+                    <td>Left to right</td>
+                    <td>Recursive template application</td>
+		    <td>Single pass</td>
                 </tr>
                 <tr>
                     <th>Inside-out recursion</th>
@@ -178,15 +252,19 @@
                     <td>Inside out</td>
                     <td>XML</td>
                     <td>Bottom up</td>
-                    <td>Yes</td>
+                    <td>Recursive function calls</td>
+		    <td>Multiple passes (<emphasis>n</emphasis> =
+		    height of tree of virtual elements)</td>
                 </tr>
                 <tr>
                     <th>Accumulator</th>
                     <td>XML</td>
-                    <td>???</td>
+                    <td>Pre- and post-traversal</td>
                     <td>XML</td>
-                    <td>???</td>
-                    <td>???</td>
+                    <td>Left to right</td>
+                    <td>Stack maintained as an accumulator; no
+		    recursive calls</td>
+                    <td>Single pass</td>
                 </tr>
                 <tr>
                     <th>Regex replacement</th>
@@ -195,6 +273,7 @@
                     <td>String</td>
                     <td>Left to right</td>
                     <td>No</td>
+                    <td>Single pass</td>
                 </tr>
                 <tr>
                     <th>Python pull parser 1</th>
@@ -203,6 +282,7 @@
                     <td>String</td>
                     <td>Left to right</td>
                     <td>No</td>
+                    <td>???</td>
                 </tr>
                 <tr>
                     <th>Python pull parser 2</th>
@@ -211,6 +291,7 @@
                     <td>XML</td>
                     <td>Top down</td>
                     <td>Yes</td>
+                    <td>???</td>
                 </tr>
             </tbody>
         </table>
