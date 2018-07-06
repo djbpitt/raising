@@ -54,8 +54,7 @@
         <xsl:element name="{name()}">
             <!-- textual content of raised element-->
             <xsl:attribute name="xml:id" select="@loc"/>
-            <xsl:copy-of
-                select="following-sibling::node()[following-sibling::*[@loc eq current()/@loc]]"/>
+            <xsl:copy-of         select="following-sibling::node()[following-sibling::*[@loc eq current()/@loc]]"/>
         </xsl:element>
     </xsl:template>
     <!-- nodes inside new wrapper -->

@@ -21,7 +21,7 @@
               <xsl:text>P4-</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()] ! substring-after(., 'P3-')"/>
            </xsl:variable>
          <xsl:variable name="chunk" as="xs:string" select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/> 
-           <xsl:result-document method="xml" indent="yes" href="frankenColl-output/oi-{$filename}">
+           <xsl:result-document method="xml" indent="yes" href="frankenColl-output/io-{$filename}">
         <TEI>
             <xsl:apply-templates select="descendant::teiHeader"/>
         <text>
