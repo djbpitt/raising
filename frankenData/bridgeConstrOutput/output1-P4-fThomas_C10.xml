@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns:pitt="https://github.com/ebeshero/Pittsburgh_Frankenstein"
+     xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Bridge Phase 4:  Witness fThomas, Collation unit C10</title>
+         </titleStmt>
+         <publicationStmt>
+            <authority>Frankenstein Variorum Project</authority>
+            <date>2018</date>
+            <availability>
+               <licence>Distributed under a Creative Commons
+                                Attribution-ShareAlike 3.0 Unported License</licence>
+            </availability>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Produced from collation output: 2018-05-17 09:45:57.032761 </p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <div type="collation"><!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is novel1_letter4_chapter4_p133-->
+            <p loc="novel1_letter4_chapter4_p133">How <seg xml:id="C10_app41-fThomas_end"/>can I describe my <seg xml:id="C10_app43-fThomas_start"/>emotions <seg xml:id="C10_app43-fThomas_end"/>at this <seg xml:id="C10_app45-fThomas_start"/>catastrophe, <seg xml:id="C10_app45-fThomas_end"/>or how delineate the wretch whom with such infinite pains and care I had endeavoured to <seg xml:id="C10_app51-fThomas_start"/>form? <seg xml:id="C10_app51-fThomas_end"/>His limbs were in <seg xml:id="C10_app53-fThomas_start"/>proportion, <seg xml:id="C10_app53-fThomas_end"/>and I had selected his features as <seg xml:id="C10_app57-fThomas_start"/>beautiful. Beautiful!—Great <seg xml:id="C10_app57-fThomas_end"/>God! His <seg xml:id="C10_app59-fThomas_start"/>yellow <seg xml:id="C10_app59-fThomas_end"/>skin scarcely covered the work of muscles and arteries beneath; his hair <seg xml:id="C10_app63-fThomas_start"/>was of <seg xml:id="C10_app63-fThomas_end"/>a lustrous <seg xml:id="C10_app65-fThomas_start"/>black, <seg xml:id="C10_app65-fThomas_end"/>and <seg xml:id="C10_app67-fThomas_start"/>flowing; <seg xml:id="C10_app67-fThomas_end"/>his teeth of a pearly <seg xml:id="C10_app69-fThomas_start"/>whiteness; <seg xml:id="C10_app69-fThomas_end"/>but these <seg xml:id="C10_app71-fThomas_start"/>luxuriances <seg xml:id="C10_app71-fThomas_end"/>only formed a more horrid contrast with his <seg xml:id="C10_app77-fThomas_start"/>watery eyes, <seg xml:id="C10_app77-fThomas_end"/>that seemed almost of the same colour as the dun white sockets in which they were set, his shrivelled <seg xml:id="C10_app83-fThomas_start"/>complexion, <seg xml:id="C10_app83-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <del loc="fThomas_C10-del_1">and</del>and 
+            <seg xml:id="C10_app85-fThomas_start"/>straight <seg xml:id="C10_app85-fThomas_end"/>black <seg xml:id="C10_app87-fThomas_start"/>lips. <seg xml:id="C10_app87-fThomas_end"/>
+               <seg xml:id="C10_app88-fThomas_start"/>And <seg xml:id="C10_app88-fThomas_end"/>
+               <seg xml:id="C10_app89-fThomas_start"/>the <seg xml:id="C10_app89-fThomas_end"/>
+               <seg xml:id="C10_app90-fThomas_start"/>contortions that ever and anon con<!--This template rule for text- and sig-bearing loc nodes is firing now.--><del loc="fThomas_C10-del_2">puls</del>pulsvulsed &amp; deformed
+            his un-human features.</p>
+            <!--This template rule for "outer-hull" elements is firing now.-->
+            <!--The value of currentLoc is novel1_letter4_chapter4_p139-->
+            <p loc="novel1_letter4_chapter4_p139"> 
+               <seg xml:id="C10_app426-fThomas_end"/>
+               <seg type="invariant-MissingWit" xml:id="C10_app427-fThomas_start"/>
+               <!--This template rule for "outer-hull" elements is firing now.-->   <!--The value of currentLoc is fThomas_C10-cit_1-->   <cit loc="fThomas_C10-cit_1"> 
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-quote_1-->      <quote loc="fThomas_C10-quote_1"> 
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-lg_1-->         <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->            <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                           <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                        <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                        <!--This template rule for text- and sig-bearing loc nodes is firing now.-->            <l loc="fThomas_C10-l_4"> 
+                           <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                        <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                        <!--This template rule for text- and sig-bearing loc nodes is firing now.-->            <l loc="fThomas_C10-l_5"> 
+                           <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                        <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                        <!--This template rule for text- and sig-bearing loc nodes is firing now.-->            <l loc="fThomas_C10-l_6"> 
+                           <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                        <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg> 
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                        <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_4"> 
+                        <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_5"> 
+                        <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_6"> 
+                        <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+             
+            </quote> 
+                  <!--This template rule for "outer-hull" elements is firing now.-->      <!--The value of currentLoc is fThomas_C10-lg_1-->      <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                        <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_4"> 
+                        <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_5"> 
+                        <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_6"> 
+                        <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg> 
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_4"> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_5"> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_6"> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+             
+             
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-note_1--><note loc="fThomas_C10-note_1"> * <seg xml:id="C10_app448-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <bibl loc="fThomas_C10-bibl_1"> 
+                        <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.” </bibl> 
+                     <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.”  
+            </note> * <seg xml:id="C10_app448-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <bibl loc="fThomas_C10-bibl_1"> 
+                     <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.” </bibl> 
+                  <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.”  
+            
+            </cit> 
+               <!--This template rule for "outer-hull" elements is firing now.-->   <!--The value of currentLoc is fThomas_C10-quote_1-->   <quote loc="fThomas_C10-quote_1"> 
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-lg_1-->      <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                        <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_4"> 
+                        <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_5"> 
+                        <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_6"> 
+                        <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg> 
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_4"> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_5"> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_6"> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+             
+            </quote> 
+               <!--This template rule for "outer-hull" elements is firing now.-->   <!--The value of currentLoc is fThomas_C10-lg_1-->   <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_4"> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_5"> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_6"> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg> 
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+               <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_4"> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+               <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_5"> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+               <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_6"> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+               <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+             
+             
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-note_1--><note loc="fThomas_C10-note_1"> * <seg xml:id="C10_app448-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <bibl loc="fThomas_C10-bibl_1"> 
+                     <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.” </bibl> 
+                  <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.”  
+            </note> * <seg xml:id="C10_app448-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <bibl loc="fThomas_C10-bibl_1"> 
+                  <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.” </bibl> 
+               <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.”  
+            
+            
+            </p>
+            <!--This template rule for "outer-hull" elements is firing now.-->
+            <!--The value of currentLoc is fThomas_C10-cit_1-->
+            <cit loc="fThomas_C10-cit_1"> 
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-quote_1-->   <quote loc="fThomas_C10-quote_1"> 
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-lg_1-->      <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                        <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_4"> 
+                        <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_5"> 
+                        <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                     <!--This template rule for text- and sig-bearing loc nodes is firing now.-->         <l loc="fThomas_C10-l_6"> 
+                        <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg> 
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_4"> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_5"> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_6"> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+             
+            </quote> 
+               <!--This template rule for "outer-hull" elements is firing now.-->   <!--The value of currentLoc is fThomas_C10-lg_1-->   <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_4"> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_5"> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_6"> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg> 
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+               <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_4"> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+               <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_5"> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+               <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_6"> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+               <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+             
+             
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-note_1--><note loc="fThomas_C10-note_1"> * <seg xml:id="C10_app448-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <bibl loc="fThomas_C10-bibl_1"> 
+                     <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.” </bibl> 
+                  <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.”  
+            </note> * <seg xml:id="C10_app448-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <bibl loc="fThomas_C10-bibl_1"> 
+                  <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.” </bibl> 
+               <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.”  
+            
+            </cit>
+            <!--This template rule for "outer-hull" elements is firing now.-->
+            <!--The value of currentLoc is fThomas_C10-quote_1-->
+            <quote loc="fThomas_C10-quote_1"> 
+            <!--This template rule for "outer-hull" elements is firing now.--><!--The value of currentLoc is fThomas_C10-lg_1-->   <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                     <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_4"> 
+                     <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_5"> 
+                     <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+                  <!--This template rule for text- and sig-bearing loc nodes is firing now.-->      <l loc="fThomas_C10-l_6"> 
+                     <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg> 
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+               <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_4"> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+               <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_5"> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+               <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_6"> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+               <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+             
+            </quote>
+            <!--This template rule for "outer-hull" elements is firing now.-->
+            <!--The value of currentLoc is fThomas_C10-lg_1-->
+            <lg loc="fThomas_C10-lg_1"> 
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_1"> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road, </l> Like <seg xml:id="C10_app427-fThomas_end"/>one <seg xml:id="C10_app429-fThomas_start"/>who, <seg xml:id="C10_app429-fThomas_end"/>on a <seg xml:id="C10_app431-fThomas_start"/>lonely road,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_2"> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread, </l> Doth <seg xml:id="C10_app431-fThomas_end"/>walk in fear and <seg xml:id="C10_app433-fThomas_start"/>dread,  
+            <!--This template rule for text- and sig-bearing loc nodes is firing now.--><l loc="fThomas_C10-l_3"> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+                  <seg xml:id="C10_app436-fThomas_start"/>round, walks on, </l> And, <seg xml:id="C10_app433-fThomas_end"/>having once <seg xml:id="C10_app435-fThomas_start"/>turn’d <seg xml:id="C10_app435-fThomas_end"/>
+               <seg xml:id="C10_app436-fThomas_start"/>round, walks on,  
+            <seg xml:id="C10_app436-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_4"> 
+                  <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head; </l> 
+               <seg xml:id="C10_app438-fThomas_start"/>And <seg xml:id="C10_app438-fThomas_end"/>turns no more his <seg xml:id="C10_app440-fThomas_start"/>head;  
+            <seg xml:id="C10_app440-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_5"> 
+                  <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend </l> 
+               <seg xml:id="C10_app442-fThomas_start"/>Because <seg xml:id="C10_app442-fThomas_end"/>he knows a frightful <seg xml:id="C10_app444-fThomas_start"/>fiend  
+            <seg xml:id="C10_app444-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <l loc="fThomas_C10-l_6"> 
+                  <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*. </l> 
+               <seg xml:id="C10_app446-fThomas_start"/>Doth <seg xml:id="C10_app446-fThomas_end"/>close behind him <seg xml:id="C10_app448-fThomas_start"/>tread*.  
+            </lg>
+            <!--This template rule for "outer-hull" elements is firing now.-->
+            <!--The value of currentLoc is fThomas_C10-note_1-->
+            <note loc="fThomas_C10-note_1"> * <seg xml:id="C10_app448-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <bibl loc="fThomas_C10-bibl_1"> 
+                  <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.” </bibl> 
+               <seg xml:id="C10_app450-fThomas_start"/>Coleridge’s “Ancient Mariner.”  
+            </note>
+            <!--This template rule for "outer-hull" elements is firing now.-->
+            <!--The value of currentLoc is novel1_letter4_chapter4_p150-->
+            <p loc="novel1_letter4_chapter4_p150">This <seg xml:id="C10_app887-fThomas_end"/>was the commencement of a nervous <seg xml:id="C10_app889-fThomas_start"/>fever, <seg xml:id="C10_app889-fThomas_end"/>which confined me for several months. During all <seg xml:id="C10_app895-fThomas_start"/>that <seg xml:id="C10_app895-fThomas_end"/>time Henry was my only nurse. I afterwards learned <seg xml:id="C10_app899-fThomas_start"/>that, <seg xml:id="C10_app899-fThomas_end"/>knowing my <seg xml:id="C10_app901-fThomas_start"/>father’s <seg xml:id="C10_app901-fThomas_end"/>advanced <seg xml:id="C10_app903-fThomas_start"/>age, <seg xml:id="C10_app903-fThomas_end"/>and unfitness for so long a <seg xml:id="C10_app905-fThomas_start"/>journey, <seg xml:id="C10_app905-fThomas_end"/>and <seg type="invariant-MissingWit" xml:id="C10_app907-fThomas_start"/>how <seg xml:id="C10_app907-fThomas_end"/>wretched <seg xml:id="C10_app909-fThomas_start"/>my sickness <seg xml:id="C10_app909-fThomas_end"/>would <seg xml:id="C10_app911-fThomas_start"/>make Elizabeth, <seg xml:id="C10_app911-fThomas_end"/>he spared them this <seg xml:id="C10_app915-fThomas_start"/>grief <seg xml:id="C10_app915-fThomas_end"/>by <seg xml:id="C10_app917-fThomas_start"/>concealing <seg xml:id="C10_app917-fThomas_end"/>
+               <!--This template rule for text- and sig-bearing loc nodes is firing now.-->   <del loc="fThomas_C10-del_3">the extent of my <seg xml:id="C10_app919-fThomas_start"/>disorder.</del>the extent of my <seg xml:id="C10_app919-fThomas_start"/>disorder.the violence of the attack. <seg xml:id="C10_app919-fThomas_end"/>He knew that I could not have a more kind and attentive nurse than <seg xml:id="C10_app923-fThomas_start"/>himself; and, <seg xml:id="C10_app923-fThomas_end"/>firm in the hope he <seg xml:id="C10_app925-fThomas_start"/>felt <seg xml:id="C10_app925-fThomas_end"/>of my <seg xml:id="C10_app927-fThomas_start"/>recovery, <seg xml:id="C10_app927-fThomas_end"/>he did not doubt <seg xml:id="C10_app929-fThomas_start"/>that, <seg xml:id="C10_app929-fThomas_end"/>instead of doing <seg xml:id="C10_app931-fThomas_start"/>harm, <seg xml:id="C10_app931-fThomas_end"/>he performed the kindest action that he could towards <seg xml:id="C10_app935-fThomas_start"/>them.</p>
+         </div>
+      </body>
+   </text>
+</TEI>
