@@ -16,7 +16,7 @@
            </xsl:variable>
          <xsl:variable name="chunk" as="xs:string" select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/> 
            <xsl:variable name="flat-not-p" select="$currentP3File//*[@ana and @loc and not(self::p)]" as="element()+"/>
-           <xsl:result-document method="xml" indent="yes" href="bridgeConstrOutput/output1-{$filename}">
+           <xsl:result-document method="xml" indent="yes" href="frankenColl-output/oi-{$filename}">
         <TEI>
             <xsl:apply-templates select="descendant::teiHeader"/>
         <text>
@@ -27,7 +27,7 @@
         </TEI>
          </xsl:result-document>
        </xsl:for-each>
-       
+      
    </xsl:template>
  <xsl:template match="teiHeader">
      <teiHeader>
