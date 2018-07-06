@@ -3,7 +3,7 @@
 		xmlns:array="http://www.w3.org/2005/xpath-functions/array"
 		xmlns:map="http://www.w3.org/2005/xpath-functions/map"
 		xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
-		exclude-result-prefixes="xs"
+		exclude-result-prefixes="#all"
 		version="3.0"
 		>
 
@@ -61,9 +61,16 @@
       * 0.  Setup:  parameters, variables, accumulators etc. 
       ****************************************************************-->
   <xsl:output
-      indent="yes"
+      indent="no"
       />
-  
+
+  <!--* What kind of Trojan-Horse elements are we merging? *-->
+  <!--* Expected values are 'th' for @th:sID and @th:eID,
+      * 'ana' for @ana=start|end
+      * 'xmlid' for @xml:id matching (_start|_end)$
+      *-->
+  <xsl:param name="th-style" select=" 'ana' " static="yes"/>
+
   <!--* declare default mode as shallow-copy *-->
   <xsl:mode on-no-match="fail"
 	    use-accumulators="level stack"
@@ -130,7 +137,7 @@
       * 1.  Virtual start-tags 
       ****************************************************************-->
   <xsl:template match="*[th:trojan-start(.)]" priority="10">
-    <!--* nothing to do, all the work is done by the accumulator *--> 
+    <!--* nothing to do, all the work is done by the accumulator *-->
   </xsl:template>
   
   <!--****************************************************************
@@ -138,9 +145,9 @@
       ****************************************************************-->  
   <xsl:template match="*[th:trojan-end(.)]" priority="10">
     <xsl:choose>
-      <xsl:when test="array:size(accumulator-before('stack')) eq 1">
+      <xsl:when test="array:size(accumulator-before('stack')) eq 1">	
 	<!--* if this end-tag ends the outermost element, emit the element *-->
-	<xsl:sequence select="th:make-element(accumulator-before('stack')(1))"/>
+	<xsl:sequence select="th:make-element(accumulator-before('stack')(1))"/>	
       </xsl:when>
       <xsl:otherwise>
 	<!--* Otherwise, nothing to do *-->
@@ -151,11 +158,30 @@
   <!--****************************************************************
       * 3.  All other nodes 
       ****************************************************************-->
+  <!--* 3.1 Document node *-->
   <xsl:template match="/">
     <xsl:apply-templates/>
   </xsl:template>
-  <xsl:template match="node()[not(self::element()) 
-		       or (not(th:trojan-start(.)) and not(th:trojan-end(.))) ]">
+  
+  <!--* 3.2 Non-trojan element nodes *-->
+  <xsl:template match="node()[self::element()
+		       and not(th:trojan-start(.))
+		       and not(th:trojan-end(.)) ]">
+    <!--* If we are outside the flattened area, copy the node;
+	* otherwise, do nothing and leave everything to the accumulator *-->
+    <xsl:choose>
+      <xsl:when test="array:size(accumulator-before('stack')) eq 0">
+	<xsl:copy>
+	  <xsl:copy-of select="@*"/>
+	  <xsl:apply-templates/>
+	</xsl:copy>
+      </xsl:when>
+      <xsl:otherwise/>
+    </xsl:choose>    
+  </xsl:template>
+  
+  <!--* 3.3 Non-element nodes *-->
+  <xsl:template match="node()[not(self::element())]">
     <!--* If we are outside the flattened area, copy the node;
 	* otherwise, do nothing and leave everything to the accumulator *-->
     <xsl:choose>
@@ -176,7 +202,14 @@
       *-->
   <xsl:function name="th:trojan-start" as="xs:boolean">
     <xsl:param name="e" as="element()"/>
-    <xsl:value-of select="exists($e/@th:sID)"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="exists($e/@th:sID)"/>
+    <xsl:value-of use-when="$th-style = 'ana' "
+	select="$e/@ana='start' "/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+	select="ends-with($e/@xml:id,'_start')"/>
+    
   </xsl:function>
   
   <!--* th:trojan-end($e as element()):  true iff $e is a Trojan
@@ -186,7 +219,14 @@
       *-->
   <xsl:function name="th:trojan-end" as="xs:boolean">
     <xsl:param name="e" as="element()"/>
-    <xsl:value-of select="exists($e/@th:eID)"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="exists($e/@th:eID)"/>
+    <xsl:value-of use-when="$th-style = 'ana' "
+	select="$e/@ana='end' "/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+		  select="ends-with($e/@xml:id,'_end')"/>
+    
   </xsl:function>
 
   <!--* th:make-element($ln as node()+):  make an element out of
@@ -195,12 +235,22 @@
       * two different locations in the stylesheet *-->
   <xsl:function name="th:make-element" as="element()">
     <xsl:param name="ln" as="node()+"/>
+    
     <xsl:copy select="$ln[1]">
-      <!--* copy attributes *-->
-      <xsl:sequence select="$ln[1]/(@* except @th:*)"/>
-      <!--* copy children *-->
+      <!--* first copy (and filter) attributes *-->
+      <xsl:sequence select="$ln[1]/(@* except @th:*)"
+		    use-when="$th-style = 'th' "/>
+      <xsl:sequence select="$ln[1]/(@* except @ana)"
+		    use-when="$th-style = 'ana' "/>
+      <xsl:sequence use-when="$th-style='xmlid'">
+	<xsl:sequence select="$ln[1]/(@*"/>
+	<xsl:attribute name="xml:id" select="replace($ln[1]/@xml:id, '_start$','')"/>
+      </xsl:sequence>
+      
+      <!--* then copy children *-->
       <xsl:sequence select="$ln[position() gt 1]"/>
     </xsl:copy>
+    
   </xsl:function>
 		
 </xsl:stylesheet>
