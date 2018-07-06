@@ -120,10 +120,9 @@
                         content from left to right or from the inside outward.</para>
                 </listitem>
             </itemizedlist></para>
-        <para>The methods that work with the input and output as XML
-            are typically recursive
+        <para>The methods that work with the input and output as XML are typically recursive
             (whether the recursion is implemented through functions or
-	    templates<!--
+            templates<!--
 	    Michael, is this correct for the methods you are
 	    developing?
 	    --><!--*
@@ -133,8 +132,8 @@
 	    [Pause.]
 	    The accumulator approach, on the other hand, is not
 	    recursive.  	    
-	    *-->), and the
-            recursion follows one of two patterns:<itemizedlist>
+	    *-->),
+            and the recursion follows one of two patterns:<itemizedlist>
                 <listitem>
                     <para>The input is traversed from left to right and the output is constructed
                         from the top down. We refer to the traversal of the input as left-to-right,
@@ -352,8 +351,8 @@ different accidents of life are not so changeable as the feelings of human natur
             </orderedlist> The experimental transformations tested and discussed in this report
             focus primarily on the middle of these three steps, raising the structural
             markup.</para>
-	  </section>
-	  
+    </section>
+
     <section xml:id="simplified" xreflabel="Simplified sample data">
         <title>Illustration (simplified data)</title>
         <para>We report below on the application of different raising methods to authentic data from
@@ -396,78 +395,81 @@ different accidents of life are not so changeable as the feelings of human natur
         </figure>
         <para>The output of raising must match the original XML.</para>
     </section>
-    
+
     <section>
         <title>Right-sibling traversal (TODO: Michael)</title>
         <para>[Description of the algorithm in the shallow-to-deep.xsl stylesheet on <link
                 xlink:href="http://uyghur.ittc.ku.edu">shallow-to-deep.xsl</link>. Possibly two
             versions, for 1.0 and 3.0.]</para>
-	<para>One way to construct content elements from flattened XML
-	is to use a "right-sibling traversal" of the input tree, in
-	which each container element calls apply-template only on its
-	first child, and each template passes control to its immediate
-	right sibling.</para>	
-	<para>In this appraoch the task of constructing the content
-	element is assigned to the template which matches the
-	Trojan-Horse start-tag.  The template for such an empty
-	element has the following structure:	
-	<programlisting><![CDATA[  <xsl:template match="*[@th:sID]" mode="shallow-to-deep">
+        <para>One way to construct content elements from flattened XML is to use a "right-sibling
+            traversal" of the input tree, in which each container element calls apply-template only
+            on its first child, and each template passes control to its immediate right
+            sibling.</para>
+        <para>In this appraoch the task of constructing the content element is assigned to the
+            template which matches the Trojan-Horse start-tag. The template for such an empty
+            element has the following structure:</para>
+        <figure>
+            <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="shallow-to-deep">
     <xsl:variable name="ns" select="namespace-uri()"/>
     <xsl:variable name="ln" as="xs:string" select="local-name()"/>
     <xsl:variable name="sID" as="xs:string" select="@th:sID"/>
-
+    
     <!--* 1: handle this element *-->
     <xsl:copy>
       <xsl:copy-of select="@* except @th:sID"/>
       <xsl:apply-templates select="following-sibling::node()[1]"
-			   mode="shallow-to-deep">
+    		   mode="shallow-to-deep">
       </xsl:apply-templates>
     </xsl:copy>
       
     <!--* 2: continue after this element *-->
     <xsl:apply-templates select="following-sibling::*[@th:eID = $sID 
-				 and namespace-uri()=$ns
-				 and local-name()=$ln]
-				 /following-sibling::node()[1]"
-			 mode="shallow-to-deep">
+    			 and namespace-uri()=$ns
+    			 and local-name()=$ln]
+    			 /following-sibling::node()[1]"
+    		 mode="shallow-to-deep">
     </xsl:apply-templates>
-  </xsl:template>
-  ]]></programlisting>
-	First, it creates an element with the name and attributes
-	given by the Trojan Horse start element, then it passes
-	control not to its immediately following sibling
-	(which is either the first child of the virtual element
-	or its Trojan Horse end tag) but to the node immediately
-	to the right of the Trojan Horse end tag.</para>
-	<para>
-	  Each child of the virtual element copies itself into the
-	  element being created.  The templates for text nodes,
- 	  comments, processing instructions, and any content
-	  elements present in the input all have essentially the
-	  same structure:
-	  <programlisting><![CDATA[    <xsl:copy-of select="."/>
-    <xsl:apply-templates select="following-sibling::node()[1]"
-			 mode="shallow-to-deep"/>
-]]></programlisting>
-	  (If content elements can contain further Trojan-Horse
-	  markup at other levels of the tree, the <code>copy-of</code>
-	  should be replaced by a shallow copy and a recursive
-	  <code>apply-templates select="child::node()[1]</code>.)
-	</para>
-	<para>When a Trojan-Horse end-tag is encountered,
-	the contents of the virtual element whose end it marks
-	have now all been accumulated, and the right-sibling
-	traversal of the input should stop.  The template for
-	Trojan end-tags will thus look like this:
-	<programlisting><![CDATA[  <xsl:template match="*[@th:eID]" mode="shallow-to-deep">
-    
+</xsl:template>]]></programlisting>
+            <caption>
+                <para>Template for empty element</para>
+            </caption>
+        </figure>
+        <para>First, it creates an element with the name and attributes given by the Trojan Horse
+            start element, then it passes control not to its immediately following sibling (which is
+            either the first child of the virtual element or its Trojan Horse end tag) but to the
+            node immediately to the right of the Trojan Horse end tag.</para>
+        <para> Each child of the virtual element copies itself into the element being created. The
+            templates for <code>text()</code> nodes, comments, processing instructions, and any
+            content elements present in the input all have essentially the same structure:</para>
+        <figure>
+            <programlisting><![CDATA[<xsl:copy-of select="."/>
+<xsl:apply-templates select="following-sibling::node()[1]"
+		 mode="shallow-to-deep"/>]]></programlisting>
+            <caption>
+                <para>Template for <code>text()</code> nodes, comments, processing instructions, and
+                    content elements</para>
+            </caption>
+        </figure>
+        <para>(If content elements can contain further Trojan-Horse markup at other levels of the
+            tree, the <code>copy-of</code> should be replaced by a shallow copy and a recursive
+                <code>apply-templates select="child::node()[1]</code>.) </para>
+        <para>When a Trojan-Horse end-tag is encountered, the contents of the virtual element whose
+            end it marks have now all been accumulated, and the right-sibling traversal of the input
+            should stop. The template for Trojan end-tags will thus look like this:</para>
+        <figure>
+            <programlisting><![CDATA[<xsl:template match="*[@th:eID]" mode="shallow-to-deep">
+        
     <!--* no action necessary *-->
     <!--* we do NOT recur to our right.  We leave it to our parent to do 
-	    that. *-->	
-
-  </xsl:template>]]></programlisting></para>
-    </section>
+        that. *-->	
     
+</xsl:template>]]></programlisting>
+            <caption>
+                <para>Template for Trojan end tags</para>
+            </caption>
+        </figure>
+    </section>
+
     <section xml:id="inside-out-function" xreflabel="Inside-out recursion">
         <title>Inside-out recursion</title>
         <para>Inside-out recursion works by finding all innermost pairs of Trojan milestones, that
@@ -724,8 +726,8 @@ different accidents of life are not so changeable as the feelings of human natur
             <para>TODO: rewrite using a recursive named-template call for 1.0 with result element
                 extension</para>
         </section>
-      </section>
-      
+    </section>
+
     <section>
         <title>An XSLT 3.0 solution using accumulators (TODO: Michael)</title>
         <para>[To be written. I am assuming that we can find a way to use accumulators to handle
@@ -878,7 +880,7 @@ different accidents of life are not so changeable as the feelings of human natur
                 <para>The authors are grateful to Ronald Haentjens Dekker for bringing this method
                     to our attention. The example at his
                         <link>https://github.com/rhdekker/python_xml_pull_parser_example</link>
-                    GitHub repository is the model for the examples here.</para>
+                    GitHub repository is a partial model for the examples here.</para>
             </footnote> The result of pull parsering can be fashioned into output in two ways, as a
             string or as XML. With string output, this method is comparable to the regex replacement
             strategy described above: it passes all events through unchanged except for Trojan
