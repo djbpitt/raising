@@ -107,7 +107,102 @@
             that arose in a concrete project. We then present several approaches to solving the
             problem, including some false starts, which illustrate possible wrong turnings along the
             way. We then discuss and compare the different solutions with respect to coding
-            difficulty and costs in space and time.</para>
+            difficulty and costs in space and time. Our approaches for raising flattened XML may be
+            categorized according to the following parameters:<itemizedlist>
+                <listitem>
+                    <para>Whether they read their input as XML or as a string.</para>
+                </listitem>
+                <listitem>
+                    <para>Whether they construct their output as XML or as a string.</para>
+                </listitem>
+                <listitem>
+                    <para>For those that read the input as XML, whether they process the flattened
+                        content from left to right or from the inside outward.</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>The methods that work with the input and output as XML are necessarily recursive
+            (whether the recursion is implemented through functions or templates
+            <!-- Michael, is this correct for the methods you are developing? -->), and the
+            recursion follows one of two patterns:<itemizedlist>
+                <listitem>
+                    <para>The input is traversed from left to right and the output is constructed
+                        from the top down. We refer to the traversal of the input as left-to-right,
+                        rather than as depth-first, because although it is technically depth-first,
+                        insofar as the milestones and their content are all siblings, it has no
+                        meaningful depth.</para>
+                </listitem>
+                <listitem>
+                    <para>The input is traversed from the inside outward and the output is
+                        constructed from the bottom up. As in the preceding case, because the input
+                        has no meaningful depth, it is more appropriate to describe the traversal
+                        without using hierarchical terms, although bottom-up is an appropriate way
+                        to refer to the construction of the hierarchical output.</para>
+                </listitem>
+            </itemizedlist></para>
+        <para>With respect to those parameters, the methods discussed below may be classified as
+            follows:</para>
+        <table>
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Input type</th>
+                    <th>Input traversal</th>
+                    <th>Output type</th>
+                    <th>Output construction</th>
+                    <th>Recursive/stack?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Left-to-right traversal</th>
+                    <td>XML</td>
+                    <td>???</td>
+                    <td>XML</td>
+                    <td>???</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <th>Inside-out recursion</th>
+                    <td>XML</td>
+                    <td>Inside out</td>
+                    <td>XML</td>
+                    <td>Bottom up</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <th>Accumulator</th>
+                    <td>XML</td>
+                    <td>???</td>
+                    <td>XML</td>
+                    <td>???</td>
+                    <td>???</td>
+                </tr>
+                <tr>
+                    <th>Regex replacement</th>
+                    <td>String</td>
+                    <td>Left to right</td>
+                    <td>String</td>
+                    <td>Left to right</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <th>Python pull parser 1</th>
+                    <td>XML</td>
+                    <td>Left to right</td>
+                    <td>String</td>
+                    <td>Left to right</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <th>Python pull parser 2</th>
+                    <td>XML</td>
+                    <td>Left to right</td>
+                    <td>XML</td>
+                    <td>Top down</td>
+                    <td>Yes</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
     <section>
         <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
