@@ -472,7 +472,7 @@ the feelings of human nature … &lt;/p&gt;</programlisting>
                         reflowing)</para>
                 </caption>
             </figure>
-            <para>When, later in the production process, we raise the <code>&lt;seg&gt;</code>
+            <para>When, later in the production process, we also raise the <code>&lt;seg&gt;</code>
                 elements, we avoid overlap by fragmenting the one that spans a paragraph boundary
                 into two parts:</para>
             <figure>
@@ -494,7 +494,7 @@ nature … &lt;/p&gt;</programlisting>
                 </caption>
             </figure>
             <para>The split <code>&lt;seg&gt;</code> elements in the passage above now indicate
-                their association with one another with <code>__Pt1</code> and <code>__Pt2</code>
+                their association with each other with <code>__Pt1</code> and <code>__Pt2</code>
                 appended to the original value of the apparatus and reading witness location.</para>
             <para>Our process of raising the new edition files thus entails the following steps:<orderedlist>
                     <listitem>
