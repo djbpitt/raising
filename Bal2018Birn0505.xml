@@ -256,7 +256,7 @@
                     <td>Left to right</td>
                     <td>No</td>
                     <td>No</td>
-                    <td>Single</td>
+                    <td>Single or double</td>
                     <td>No</td>
                 </tr>
                 <tr>
@@ -314,9 +314,13 @@
                     used by the method to maintain a stack.</para>
             </listitem>
             <listitem>
-                <para>All methods make a single pass through the input except inside-out recursion,
-                    where the number of passes is equal to the maximum depth of the hierarchical
-                    XML.</para>
+                <para>All methods make a single pass through the input with two exceptions. With
+                    inside-out recursion, the number of passes is equal to the maximum depth of the
+                    hierarchical XML. Regex replacement is easiest to implement in two passes: we
+                    replace start-markers globally and then end-markers globally in a pipeline (or
+                    vice versa). Matching both types of marker with a single regex is easy, but
+                    because the replacements are different (start-markers may contain non-Trojan
+                    attributes), the replacement logic may be more complex.</para>
             </listitem>
             <listitem>
                 <para><emphasis role="ital">Well-formed?</emphasis> refers to the behavior in
