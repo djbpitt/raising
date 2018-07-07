@@ -393,7 +393,7 @@
     &lt;rdg wit="#fThomas"&gt;different accidents of life are &lt;/rdg&gt;
 &lt;/app&gt;</programlisting>
                 <caption>
-                    <para>Sample collation output</para>
+                    <para>Sample CollateX output</para>
                 </caption>
             </figure>
             <para>In the example above, there is only one <code>&lt;rdg&gt;</code> element inside
@@ -404,9 +404,12 @@
             <para>After we completed the collation process, we wrote XSLT to separate the five
                 witnesses into separate files that could be used in new editions of each witness
                 that would retain information about moments of variation (<emphasis role="ital"
-                    >hotspots</emphasis>) in the collation. A prerequisite of up-conversion from the
-                collation output is to flatten all markup in anticipation of conflicting
-                hierarchies. The elements to be flattened were all logical containers, and therefore
+                    >hotspots</emphasis>) in the collation, which we tag as <code>&lt;seg></code>
+                elements. Because these hotspots may overlap with structural markup, a prerequisite
+                of conversion from the collation output to the individual edition files is to
+                flatten all markup, which we will later raise in a way that avoids overlap. The
+                elements to be flattened before the introduction of the <code>&lt;seg></code>
+                hotspot tagging were all properly nested logical containers, and therefore
                 represented simultaneously with regular start- and end-tags. Here is a sample
                 passage from the Thomas copy edition file showing the reconstructed but flattened
                 elements:</para>
@@ -424,21 +427,24 @@ loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
             </figure>
             <para>In the passage above, the empty <code>&lt;seg&gt;</code> elements indicate the
                 start and end points of the variant passage in the Thomas copy. Their partially
-                shared <code>@xml:id</code> values coindex them while pointing to the collation unit
-                and numbered <code>&lt;app&gt;</code> element in the collation output; the trailing
-                underscore separator and the string <code>start</code> or <code>end</code>
-                distinguish start- from end-tags. In this example, <code>&lt;seg
+                shared <code>@xml:id</code> values coindex them while also pointing to the collation
+                unit and numbered <code>&lt;app&gt;</code> element in the collation output; the
+                trailing underscore separator and the string <code>start</code> or <code>end</code>
+                distinguish start- from end-markers. In this example, <code>&lt;seg
                     xml:id="C10_app90-fThomas_start"/&gt;</code> means that this is the start of a
                 variant from apparatus unit 90, where the Thomas copy diverges from a reading shared
-                by all of the other editions.</para>
+                by all of the other editions (in this case, the type of variation is that the other
+                witnesses have no corresponding reading).</para>
             <para>Within the <code>&lt;seg&gt;</code> virtual element, the first two
                     <code>&lt;del&gt;</code> markers (start- and end-) frame a deleted portion of a
                 word (<quote>puls</quote>), and the third marks the end of paragraph 133 in Chapter
                 4, followed by the beginning of paragraph 134 in the same chapter. The use of
-                attributes here differs from that with the <code>&lt;seg&gt;</code> elements; the
-                shared <code>@loc</code> attribute points to the location in the source and
-                coindexes the start- and end-markers, and the <code>@ana</code> attribute identifies
-                the element as either a start-marker or an end-marker.<footnote>
+                attributes on <code>&lt;del></code> and <code>&lt;p></code> markers differs from
+                that with the <code>&lt;seg&gt;</code> elements; in the case of
+                    <code>&lt;del></code> and <code>&lt;p></code>, the shared <code>@loc</code>
+                attribute points to the location in the source and coindexes the start- and
+                end-markers, and the <code>@ana</code> attribute identifies the element as either a
+                start-marker or an end-marker.<footnote>
                     <para>Using different formats for the markup of different flattened elements
                         makes it easy to raise one group of flattened element types while leaving
                         another in its flattened stage. Alternatively, we could have used the same
