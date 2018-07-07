@@ -1771,10 +1771,10 @@ print("".join(output))</programlisting>
             are unable to employ an XSLT processor that performs tail-call optimization may favor
             inside-out processing over right-sibling traversal because inside-out processing is
             likely to require less stack space.</para>
-        <para>(TODO: Michael: I find the inside-out approach simpler, that is, easier to understand,
+        <para><!--(TODO: Michael: I find the inside-out approach simpler, that is, easier to understand,
             but I don’t know whether that’s because it is simpler, or because of the greater
             familiarity that comes with having developed it. If it is objectively simpler, should we
-            mention that in our comparison?)</para>
+            mention that in our comparison?) (Elisa: I agree that the inside-out approach is simpler to understand and write, having spent some time attempting to try it from outside-in and deciding that to do so would seem to require writing more code, to account for a) the possibility of intervening elements to be raised, and b) the lack of such elements.)-->Developing the XSLT to reconstruct elements from the inside out may be more efficient than to do so from the outside in. Attempts to write code that does not control the order of processing must always account for the potential presence of intervening nodes to be reconstructed on the inside, that risk becoming duplicate (or triplicate, or quadruplicate, etc) nodes in the output depending on the depth of the hierarchy to be reconstructed.</para>
         <para>TODO: Unassigned: [Measurement of time and space complexity running all solutions on
             the same data (as large as we can manage—e.g., all of <emphasis role="ital"
                 >Frankenstein</emphasis>, or an artificial document containing 10 or 100 copies of
