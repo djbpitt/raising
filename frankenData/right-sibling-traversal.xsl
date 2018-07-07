@@ -21,6 +21,8 @@
         3. Copy the @loc attribute value as the value of a new @xml:id attribute
     -->
    <xsl:mode on-no-match="shallow-copy"/>
+    
+    
     <xsl:template match="*[@loc and @ana='start']">
         <xsl:comment>In shallow-to-deep mode, template match on *[@loc and @ana='start'] is matching now.</xsl:comment>
         <!--   <xsl:variable name="ns" select="namespace-uri()"/>-->
@@ -30,7 +32,9 @@
         
         <!--* 1: handle this element *-->
         <xsl:copy>
-            <xsl:copy-of select="@* except @ana"/>
+           <xsl:attribute name="xml:id">
+               <xsl:value-of select="@loc"/>
+           </xsl:attribute>
             <xsl:apply-templates select="following-sibling::node()[1]"
                 mode="shallow-to-deep">
             </xsl:apply-templates>
