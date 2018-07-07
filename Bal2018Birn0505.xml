@@ -1582,11 +1582,11 @@ print("".join(output))</programlisting>
         show that the method is not ultimately suitable for realistic
         use cases. In this section we review briefly the complications
         for each method.</para>
-        <section>
+      <!--  <section>  ebb: I suggest striking this because the issues with looping are already pretty well discussed below. I'm not sure my false starts are all that interesting. 
             <title>EBB’s implementation of right-sibling recursion (TODO: Elise)</title>
             <para>EBB’s implementation of right-sibling recursion, with analysis and
                 discussion.</para>
-        </section>
+        </section>-->
         <section>
           <title>Applying templates in right-sibling traversal</title>
           <para>Two elusive bugs in an initial implementation of the
