@@ -598,6 +598,29 @@ nature … &lt;/p&gt;</programlisting>
                 </figure>
                 <para>The output of raising must match the original XML.</para>
             </section>
+            <section>
+                <title>Overlapping markers</title>
+                <para>To test the behavior of the methods with input that cannot be fully raised
+                    without creating overlap, we use the following sample:</para>
+                <figure>
+                    <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+    <page th:sID="page1"/>
+    <para th:sID="para1"/>Content on page 1 in paragraph 1
+    <page th:eID="page1"/>
+    <page th:sID="page2"/>Content on page 2 in para 1
+    <para th:eID="para1"/>
+    <para th:sID="para2"/>Content on page 2 in para 2
+    <para th:eID="para2"/>
+    <page th:eID="page2"/>
+</root>]]></programlisting>
+                    <caption>
+                        <para>Flattened XML that cannot be raised without creating overlap</para>
+                    </caption>
+                </figure>
+                <para>This represents a document with two pages and two paragraphs, where the
+                    paragraph break falls in the middle of the second page.</para>
+            </section>
             <section xml:id="marker-styles">
                 <title>Different styles of marker</title>
                 <para>For historical reasons, the markers in the <emphasis role="ital"
