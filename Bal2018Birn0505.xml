@@ -351,9 +351,10 @@
                 novel deriving from multiple digital sources are collated using the software
                 CollateX [<xref linkend="collatex"/>], which necessitates flattening the source
                 markup, as in its output CollateX generates a new XML hierarchy that would overlap
-                the original structure. It is therefore necessary to retain original markup
-                information in the eventual collation output without letting it interfere with the
-                alignment process.</para>
+                the original structure. Because we need to retain original markup information in the
+                eventual collation output for later use, flattening it allows us to do that without
+                letting it interfere with the alignment process or the new hierarchical output of
+                CollateX.</para>
             <para>The process of collation involves comparing around and across structural markup in
                 the source documents. We compare five distinct witnesses of
                     <emphasis>Frankenstein</emphasis>, and divergent passages may include structural
