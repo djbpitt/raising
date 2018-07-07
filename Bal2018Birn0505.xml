@@ -1350,23 +1350,25 @@ nature … &lt;/p&gt;</programlisting>
     </section>
     <section>
         <title>Global search and replace using regular expressions</title>
-        <para>It is not possible to parse arbitrary XML with regular expressions (regex), but it is
-            not difficult to identify and process Trojan milestones.<footnote>
-                <para>In terms of the Chomsky hierarchy, XML is a Type 2 (context-free) grammar and
-                    regular expressions are a Type 3 (regular) grammar. Parsing a context-free
-                    grammar, which permits recursion, requires a stack, which is not available in
-                    regular grammars. While some modern regular expression implementations support
-                    back-referencing and recursion and thus go beyond the limitations of a Chomsky
-                    regular grammar, whether methods that rely on these extensions should be
-                    considered regular-expression parsing is unclear (this is a theoretical issue),
-                    as is the role of legibility in evaluating the suitability of the method to the
-                    task (this is a practical concern).</para>
-            </footnote></para>
-        <para>The following regex matches Trojan start-tags:</para>
+        <para>It is not, in general, advisable to attempt to process
+	arbitrary XML solely with regular expressions (regex), but it is
+        not difficult to identify and process markers of the kind we
+	are concerned with here.<footnote>
+        <para>In terms of the Chomsky hierarchy, XML is a Type 2 (context-free) grammar and
+        regular expressions are a Type 3 (regular) grammar. Parsing a context-free
+        grammar, which permits recursion, requires a stack, which is not available in
+        regular grammars. While some modern regular expression implementations support
+        back-referencing and recursion and thus go beyond the limitations of a Chomsky
+        regular grammar, whether methods that rely on these extensions should be
+        considered regular-expression parsing is unclear (this is a theoretical issue),
+        as is the role of legibility in evaluating the suitability of the method to the
+        task (this is a practical concern).</para>
+        </footnote></para>
+        <para>The following regex matches start-markers:</para>
         <figure>
             <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
             <caption>
-                <para>Regex to match Trojan start-tags</para>
+                <para>Regex to match start-markers</para>
             </caption>
         </figure>
         <para>The regex works as follows (in <emphasis role="ital">dot-all</emphasis> mode, that is,
@@ -1513,7 +1515,11 @@ nature … &lt;/p&gt;</programlisting>
             <title>String output</title>
             <para>The following Python 3 code replaces Trojan milestones with strings equivalent to
                 real XML start- and end-tags:</para>
-            <figure>
+		<figure>
+		  <!--* Lines are long and should be broken.
+		      * I can't do it because I don't remember
+		      * Python's conventions for line continuation.
+		      *-->
                 <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
 
 output = []
@@ -1574,22 +1580,47 @@ print("".join(output))</programlisting>
     </section>
     <section>
         <title>Some things that can go wrong</title>
-        <para>Each of the methods described above comes with its own complications. Some of these
-            are challenges that can be overcome, others are limitations in what the method can
-            manage, and others are deal-breakers that show that the method is not ultimately
-            suitable for realistic use cases. In this section we review briefly the complications
-            for each method.</para>
+        <para>Each of the methods described above comes with its own
+        complications. (And it was in the discussion of these
+        complications that this paper originated.)  Some of these are
+        challenges that can be overcome, others are limitations in
+        what the method can manage, and others are deal-breakers that
+        show that the method is not ultimately suitable for realistic
+        use cases. In this section we review briefly the complications
+        for each method.</para>
         <section>
             <title>EBB’s implementation of right-sibling recursion (TODO: Elise)</title>
             <para>EBB’s implementation of right-sibling recursion, with analysis and
                 discussion.</para>
         </section>
         <section>
-            <title>Right-sibling traversal (TODO: Michael)</title>
-            <para>MSM’s bugs include a failure to specify the correct mode on an apply-templates
-                call, which meant that processing slipped out of the special mode and into default
-                mode, and many nodes appeared repeatedly in the input: tenfold increase in size of
-                document, and more.</para>
+          <title>Applying templates in right-sibling traversal</title>
+          <para>Two elusive bugs in an initial implementation of the
+          right-sibling traversal algorithm took the better part of a
+	  day or two to identify.</para>
+	  <para>It is remarkably easy to write
+	  <code>select="following-sibling::node()"</code>
+	  instead of 
+	  <code>select="following-sibling::node()[1]"</code>,
+	  and remarkably easy to overlook the error when scanning
+	  the code looking for the reason that the output is an
+	  order of magnitude larger than the input instead of
+	  approximately the same size.  The symptom is that
+	  single nodes in the input appear more than once in
+	  the output.
+	  </para>
+	  <para>Similarly, it is remarkably easy to write
+	  <code>&lt;xsl:apply-templates select="..."/></code>
+	  instead of 
+	  <code>&lt;xsl:apply-templates select="..."
+	  mode="shallow-to-deep"/></code>.
+	  The symptom is the reverse of the preceding:  some
+	  nodes in the input drop out of the output.
+	  </para>
+	  <para><emphasis>[Fuller examination of the
+	  version-control history of the stylesheets will
+	  probably reveal further errors which it may be
+	  helpful to discuss.]</emphasis></para>
         </section>
         <section xml:id="recursion_challenges" xreflabel="Inside-out recursion challenges">
             <title>Inside-out recursion</title>
@@ -1641,8 +1672,47 @@ print("".join(output))</programlisting>
             </section>
         </section>
         <section>
-            <title>Accumulators (TODO: Michael)</title>
-            <para>MSM's single combat with accumulators</para>
+            <title>Accumulators</title>
+            <para>The primary problems we encountered in our
+	    implementation using accumulators were:
+	    <itemizedlist>
+	      <listitem>
+		<para>Failure to use a fully implemented XSLT 3.0
+		processor.</para>
+		<para>Initial tests used Saxon HE 9.6.0.5, which
+		does not complain or warn about
+		<code>version="3.0"</code> but which appears not to
+		support all of the 3.0 constructs used.  The main
+		symptom was an error message reporting that
+		<quote>XTSE0010: Element xsl:mode must not appear
+		directly within xsl:stylesheet</quote> (which led to a
+		wild goose chase through the 3.0 spec trying to locate
+		constraints on where mode declarations are allowed),
+		followed unobtrusively by the message <quote>XTSE0010:
+		Unknown XSLT element: mode</quote>.</para>
+		<para>
+		Upgrading to Saxon 9.8.0.12 solved this problem.
+		</para>
+	      </listitem>
+	      <listitem>
+		<para>Failure to specify
+		<code>use-accumulators</code>.</para>
+		<para>The next problem was the persistent repetition
+		of the error message <quote>Accumulator stack is not applicable to the
+		current document</quote>; several attempts of
+		increasing complexity (and, to be honest, decreasing
+		plausibility) to make it applicable failed, until
+		eventually
+		it became
+		clear that the only thing needed was to specify
+		<code>use-accumulators="stack"</code> on
+		the mode declaration for the default unnamed mode.
+		(The mode declaration was already present; if
+		it had not been, it would have needed to be introduced.)
+		</para>
+	      </listitem>
+	    </itemizedlist>
+	    </para>
         </section>
         <section>
             <title>Regex</title>
