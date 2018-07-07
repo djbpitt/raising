@@ -83,10 +83,10 @@
         <title>Overview</title>
         <para>From time to time, it may be necessary or expedient to flatten our XML documents by
             replacing the start- and end-tags of conventional XML content elements with empty
-            place-marker elements (variously known as <emphasis role="ital">milestone
+            place-marker elements. (These place-markers are variously known as <emphasis role="ital">milestone
                 elements</emphasis>, after the milestone technique described in the TEI Guidelines
             for page beginnings, column beginnings, line beginnings, etc. [<xref linkend="tei_p5"
-            />], or as <emphasis>Trojan horse markup</emphasis>, after the technique described by
+            />], or <emphasis>Trojan horse markup</emphasis>, after the technique described by
             Steve DeRose [<xref linkend="derose_2004"/>]; to avoid
             over-stressing the particular syntax used, we will
             generally call them <emphasis>markers</emphasis>). When we
