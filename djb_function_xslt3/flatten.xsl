@@ -13,6 +13,7 @@
     </xsl:template>
     <xsl:template match="*">
         <xsl:element name="{name()}">
+            <xsl:copy-of select="@*"/>
             <xsl:attribute name="th:sID" select="generate-id()"/>
         </xsl:element>
         <xsl:apply-templates/>
