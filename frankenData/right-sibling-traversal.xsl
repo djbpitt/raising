@@ -20,7 +20,7 @@
         2. Remove @ana attributes
         3. Copy the @loc attribute value as the value of a new @xml:id attribute
     -->
-    <xsl:mode on-no-match="shallow-copy"/>
+   <xsl:mode on-no-match="shallow-copy"/>
     <xsl:template match="*[@loc and @ana='start']">
         <xsl:comment>Template match on *[@loc and @ana='start'] is matching now.</xsl:comment>
      <!--   <xsl:variable name="ns" select="namespace-uri()"/>-->
@@ -44,7 +44,7 @@
             mode="shallow-to-deep">
         </xsl:apply-templates>
     </xsl:template>
-    <xsl:template match="text()
+  <xsl:template match="text()
         | comment() 
         | processing-instruction 
         | *[not(@ana)]"
