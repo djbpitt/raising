@@ -345,6 +345,7 @@
                     <para>Sample collation output</para>
                 </caption>
             </figure>
+            <para>In the example above, there is only one <code>&lt;rdg&gt;</code> element inside the first <code>&lt;app&gt;</code> because at this point the Thomas edition contains material not present in the other editions, which have no material to compare with it. Following this point, the witnesses all agree, as shown in the next <code>&lt;app&gt;</code> element.</para>
             <para>After we completed the collation process, we wrote XSLT to separate the five
                 witnesses into separate files that could be used in a new edition files that
                 retained information about variant moment of variation (<emphasis role="ital"
