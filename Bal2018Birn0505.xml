@@ -46,12 +46,7 @@
                 <surname>Beshero-Bondar</surname>
             </personname>
             <personblurb>
-                <para>Elisa Beshero-Bondar is a member of the TEI Technical Council, as well as an
-                    Associate Professor of English and Director of the Center for the Digital Text
-                    at the University of Pittsburgh at Greensburg. Her projects investigate complex
-                    texts such as epics, plays, and multi-volume voyage logs, and she is the founder
-                    and organizer of the <link xlink:href="http://digitalmitford.org">Digital
-                        Mitford project</link> and its annual coding school.</para>
+                <para>Elisa Beshero-Bondar is a member of the TEI Technical Council, as well as an Associate Professor of English and Director of the Center for the Digital Text at the University of Pittsburgh at Greensburg. Her projects investigate complex texts such as epics, plays, and multi-volume voyage logs, and involve her in experimentations with the TEI, including refining methods for computer-assisted collation of editions and probing questions of interoperability to reconcile diplomatic and critical edition encodings. She is the founder and organizer of the <link xlink:href="http://digitalmitford.org">Digital Mitford project</link> and its annual coding school.</para>
             </personblurb>
             <affiliation>
                 <jobtitle>Associate Professor of English</jobtitle>
@@ -135,7 +130,7 @@
           <varlistentry>
             <term>marker</term>
             <listitem>
-              <para>an empty XML elements serving to mark the start or
+              <para>an empty XML element serving to mark the start or
               end of a virtual element.</para>
             </listitem>
           </varlistentry>
@@ -1299,7 +1294,7 @@ nature … &lt;/p&gt;</programlisting>
   </xsl:template>
     ]]></programlisting>
 	    <para>Template for document node</para>
-	  </figure>xs
+	  </figure>
 	  <para>The templates for other nodes make the
 	  same distinction as that for end-markers:
 	  when the stack is empty, the node is copied
