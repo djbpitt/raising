@@ -203,11 +203,12 @@
             <thead>
                 <tr>
                     <th>Method</th>
-                    <th>Input type</th>
+                    <th>Input</th>
+                    <th>Output</th>
                     <th>Input traversal</th>
-                    <th>Output type</th>
                     <th>Output construction</th>
-                    <th>Recursive / stack?</th>
+                    <th>Recursive?</th>
+                    <th>Stack?</th>
                     <th>Passes</th>
                     <th>Well-formed?</th>
                 </tr>
@@ -216,39 +217,44 @@
                 <tr>
                     <th>Right-sibling traversal</th>
                     <td>XML</td>
-                    <td>Depth-first (first child, then first following sibling)</td>
                     <td>XML</td>
+                    <td>Depth first (first child, then first following sibling)</td>
                     <td>Left to right</td>
-                    <td>Recursive template application</td>
+                    <td>Template</td>
+                    <td>No</td>
                     <td>Single</td>
-                    <td>Yes</td>
+                    <td>Yes<!-- Michael, is this correct? Partial or full?--></td>
                 </tr>
                 <tr>
                     <th>Inside-out recursion</th>
                     <td>XML</td>
-                    <td>Inside out</td>
                     <td>XML</td>
+                    <td>Inside out</td>
                     <td>Bottom up</td>
-                    <td>Recursive function calls</td>
-                    <td>Multiple (<emphasis>n</emphasis> = depth of tree of virtual elements)</td>
-                    <td>Yes</td>
+                    <td>Function</td>
+                    <td>No</td>
+                    <td>Multiple</td>
+                    <td>Yes (partial)</td>
                 </tr>
                 <tr>
                     <th>Accumulator</th>
                     <td>XML</td>
-                    <td>Pre- and post-traversal</td>
                     <td>XML</td>
+                    <td>Pre- and
+                        post-traversal<!-- Michael, is this the *traversal method*? --></td>
                     <td>Left to right</td>
-                    <td>Stack maintained as an accumulator; no recursive calls</td>
+                    <td>No</td>
+                    <td>Accumulator</td>
                     <td>Single</td>
-                    <td>???</td>
+                    <td>Yes<!-- Michael, is this correct? Partial or full?--></td>
                 </tr>
                 <tr>
                     <th>Regex replacement</th>
                     <td>String</td>
-                    <td>Left to right</td>
                     <td>String</td>
                     <td>Left to right</td>
+                    <td>Left to right</td>
+                    <td>No</td>
                     <td>No</td>
                     <td>Single</td>
                     <td>No</td>
@@ -256,9 +262,10 @@
                 <tr>
                     <th>Python pull parser 1</th>
                     <td>XML</td>
-                    <td>Left to right</td>
                     <td>String</td>
+                    <td>Depth first (left to right)</td>
                     <td>Left to right</td>
+                    <td>No</td>
                     <td>No</td>
                     <td>Single</td>
                     <td>No</td>
@@ -266,26 +273,67 @@
                 <tr>
                     <th>Python pull parser 2</th>
                     <td>XML</td>
-                    <td>Left to right</td>
                     <td>XML</td>
+                    <td>Depth first (left to right)</td>
                     <td>Left to right</td>
-                    <td>Stack maintained as a list (depth = depth of tree of virtual elements); no
-                        recursive calls</td>
+                    <td>No</td>
+                    <td>List</td>
                     <td>Single</td>
-                    <td>Yes</td>
+                    <td>Yes (full)</td>
                 </tr>
             </tbody>
         </table>
-        <para>The column labeled <emphasis role="ital">Well-formed?</emphasis> refers to the
-            behavior in situations where full unflattening would create overlap. <emphasis
-                role="ital">Yes</emphasis> means that the method raises only as much as it can
-            without creating overlap, and the output is guaranteed to be well formed. <emphasis
-                role="ital">No</emphasis> means that it converts all start- and end-markers to
-            start- and end-tags, even when that creates XML that is not well formed because of
-            overlap. The methods with an <emphasis role="ital">Output</emphasis> type of <emphasis
-                role="ital">String</emphasis> may create output that is not well formed; those with
-            an output type of <emphasis role="ital">XML</emphasis> necessarily create well-formed
-            XML.</para>
+        <itemizedlist>
+            <listitem>
+                <para>We implement the first four methods in XSLT and the last two in Python. The
+                    Accumulator method requires XSLT 3.0, and inside-out recursion uses recursive
+                    function calls in XSLT 3.0 and recursive template calls in XSLT 1.0. </para>
+            </listitem>
+            <listitem>
+                <para><emphasis role="ital">Input</emphasis> and <emphasis role="ital"
+                        >Output</emphasis> refer to whether the input is read as XML or as a string,
+                    and whether the output is constructed as a DOM tree or as a string.</para>
+            </listitem>
+            <listitem>
+                <para><emphasis role="ital">Input traversal</emphasis> describes how the method
+                    chooses the input to process at a given moment. <quote>Depth first</quote> is
+                    equivalent to left-to-right order of the start-markers and start-tags (which may
+                    be present in partially flattened input). The Regex replacement method is
+                    described only as <quote>left to right</quote> because it does not engage with
+                    the input as a tree at all.</para>
+            </listitem>
+            <listitem>
+                <para>The <emphasis role="ital">Recursive?</emphasis> column describes the means of
+                    recursion. The maximum depth of recursion for Right-sibling traversal is equal
+                    to XXX<!--Michael, can you fix this please?-->, and the maximum depth of
+                    inside-out recursion is equal to the maximum depth of the hierarchical
+                    XML.</para>
+            </listitem>
+            <listitem>
+                <para>The <emphasis role="ital">Stack?</emphasis> column shows the native datatype
+                    used by the method to maintain a stack.</para>
+            </listitem>
+            <listitem>
+                <para>All methods make a single pass through the input except inside-out recursion,
+                    where the number of passes is equal to the maximum depth of the hierarchical
+                    XML.</para>
+            </listitem>
+            <listitem>
+                <para><emphasis role="ital">Well-formed?</emphasis> refers to the behavior in
+                    situations where full unflattening would create overlap. <emphasis role="ital"
+                        >Yes (partial)</emphasis> means that the method raises only as much as it
+                    can without creating overlap, leaving some markers unraised. <emphasis
+                        role="ital">Yes (full)</emphasis> means that the method raises all elements,
+                    effectively moving start- and end-tags to create well-formed output. <emphasis
+                        role="ital">No</emphasis> means that the method converts all start- and
+                    end-markers to start- and end-tags without rearrangement, even when that creates
+                    XML that is not well formed because of overlap. It is not surprising that the
+                    methods with an <emphasis role="ital">Output</emphasis> type of <emphasis
+                        role="ital">String</emphasis> may create output that is not well formed,
+                    while those with an output type of <emphasis role="ital">XML</emphasis>
+                    necessarily create well-formed XML.</para>
+            </listitem>
+        </itemizedlist>
     </section>
 
     <section>
@@ -883,8 +931,8 @@ nature … &lt;/p&gt;</programlisting>
             </section>
         </section>
 
-        <section>
-            <title>An XSLT 3.0 solution using accumulators</title>
+        <section xml:id="accumulators" xreflabel="Accumulators">
+            <title>Accumulators</title>
             <para>Another approach to the problem avoids recursion by performing a single pass over
                 the input, maintaining a stack of partly-raised elements using the
                     <emphasis>accumulator</emphasis> construction introduced in XSLT 3.0.</para>
@@ -1410,12 +1458,14 @@ nature … &lt;/p&gt;</programlisting>
                 output construction is not XML-aware, it has the same limitations as the regex
                 approach: most significantly, it is capable of creating output that includes
                 overlap, and that therefore is not well formed XML. With XML output, though, we use
-                    <code>xml.dom.minidom</code> to create XML elements within a DOM structure, and
-                the result is necessarily well-formed. Pull parsing operates as a single traversal,
-                which is to say that it begins at the document node and touches each element only
-                once. With string output, the procedure can create write output as it handles each
-                event; with XML output, it is necessary to maintain the current context in a
-                stack.</para>
+                    <code>xml.dom.minidom</code> to create XML elements within a DOM structure,
+                which means that the result is necessarily well-formed. Pull parsing operates as a
+                single traversal, which is to say that it begins at the document node and touches
+                each element only once. With string output, the procedure can create write output as
+                it handles each event; with XML output it is necessary to maintain the current
+                context in a stack, which is similar to the use of a stack in the <xref
+                    linkend="accumulators"/> method described. The maximum depth of the stack is
+                equal to the maximum depth of nesting in the hierarchical XML. </para>
             <section>
                 <title>String output</title>
                 <para>The following Python 3 code replaces markers with strings equivalent to real
