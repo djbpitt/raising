@@ -3,7 +3,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all" version="3.0">
     <xsl:output method="xml" indent="no"/>
-<!--2018-07-05 ebb: retooling this to work recursively from "outside in", that is, from processing elements intended to be "outer" elements holding elements inside them, and to process elements with no more content to raise last.  -->
+    <!--2018-07-07 ebb: This stylesheet works to raise "trojan elements" from the inside out, this time over a collection of Frankenstein files output from collation.  -->
    <!--<xsl:mode on-no-match="shallow-copy"/>-->
 <xsl:template match="@* | node()" mode="#all">
         <xsl:copy copy-namespaces="no">
