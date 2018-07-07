@@ -326,16 +326,17 @@
                 <para><emphasis role="ital">Well-formed?</emphasis> refers to the behavior in
                     situations where full unflattening would create overlap. <emphasis role="ital"
                         >Yes (partial)</emphasis> means that the method raises only as much as it
-                    can without creating overlap, leaving some markers unraised. <emphasis
-                        role="ital">Yes (full)</emphasis> means that the method raises all elements,
-                    effectively moving start- and end-tags to create well-formed output. <emphasis
-                        role="ital">No</emphasis> means that the method converts all start- and
-                    end-markers to start- and end-tags without rearrangement, even when that creates
-                    XML that is not well formed because of overlap. It is not surprising that the
-                    methods with an <emphasis role="ital">Output</emphasis> type of <emphasis
-                        role="ital">String</emphasis> may create output that is not well formed,
-                    while those with an output type of <emphasis role="ital">XML</emphasis>
-                    necessarily create well-formed XML.</para>
+                    can without creating overlap, producing well-formed XML byleaving some markers
+                    unraised. <emphasis role="ital">Yes (full)</emphasis> means that the method
+                    raises all elements, producing well-formed XML by effectively moving start- and
+                    end-tags where necessary. <emphasis role="ital">No</emphasis> means that the
+                    method converts all start- and end-markers to start- and end-tags without
+                    rearrangement, even when that creates XML that is not well formed because of
+                    overlap. It is not surprising that the methods with an <emphasis role="ital"
+                        >Output</emphasis> type of <emphasis role="ital">String</emphasis> may
+                    create output that is not well formed, while those with an output type of
+                        <emphasis role="ital">XML</emphasis> necessarily create well-formed
+                    XML.</para>
             </listitem>
         </itemizedlist>
     </section>
