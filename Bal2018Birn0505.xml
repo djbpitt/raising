@@ -515,16 +515,19 @@ nature … &lt;/p&gt;</programlisting>
         </section>
 
         <section xml:id="simplified" xreflabel="Simplified sample data">
-            <title>Illustration (simplified data)</title>
-            <para>We report below on the application of different raising methods to authentic data
-                from <xref linkend="frankenstein"/>, described above, but for illustrative purposes
-                when discussing program logic we use a small contrived hierarchical XML sample.<footnote>
+            <title>Simplified sample data</title>
+            <para>In addition to exploring and reporting on the application of different raising
+                methods to authentic data from <xref linkend="frankenstein"/>, described above, for
+                illustrative and development purposes when discussing program logic we use a small
+                contrived hierarchical XML sample, described here. The simplified data comes in
+                three forms, which we call <emphasis role="ital">basic</emphasis>, <emphasis
+                    role="ital">extended</emphasis>, and <emphasis role="ital">overlap</emphasis>.<footnote>
                     <para>All files discussed in this report, as well as the report itself, are
                         available in <link>https://github.com/djbpitt/raising</link>.</para>
                 </footnote></para>
             <section xml:id="simplified-original">
-                <title>The starting point</title>
-                <para>The original input is:</para>
+                <title>Basic sample</title>
+                <para>The original (basic) input is:</para>
                 <figure>
                     <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root&gt;
@@ -573,6 +576,7 @@ nature … &lt;/p&gt;</programlisting>
     &lt;/xsl:template&gt;
     &lt;xsl:template match="*"&gt;
         &lt;xsl:element name="{name()}"&gt;
+            &lt;xsl:copy-of select="@*"/>
             &lt;xsl:attribute name="th:sID" select="generate-id()"/&gt;
         &lt;/xsl:element&gt;
         &lt;xsl:apply-templates/&gt;
@@ -611,6 +615,46 @@ nature … &lt;/p&gt;</programlisting>
                 <para>The output of raising must match the original XML.</para>
             </section>
             <section>
+                <title>Extended basic sample</title>
+                <para>The basic sample contains no non-Trojan empty elements and no non-Trojan
+                    attributes. We can test wheter those features are handled properly with the
+                    following slightly more complicated sample:</para>
+                <figure>
+                    <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+    <p th:sID="d1e3"/>This is a <word th:sID="d1e5"/>paragraph<word th:eID="d1e5"/> that contains
+    some <nonTrojan type="test"/> stuff.<p th:eID="d1e3"/>
+    <p th:sID="d1e11"/>This is <emphasis role="bold">another <emphasis role="ital" th:sID="d1e15"
+            />silly<emphasis th:eID="d1e15"/> paragraph</emphasis>
+    <phrase th:sID="d1e19"/><word n="1" th:sID="d1e20"/>that<word th:eID="d1e20"/>
+    <word n="2" th:sID="d1e23"/>contains<word th:eID="d1e23"/>
+    <word n="3" th:sID="d1e26"/>more<word th:eID="d1e26"/><phrase th:eID="d1e19"/> stuff.<p
+        th:eID="d1e11"/>
+</root>]]></programlisting>
+                    <caption>
+                        <para>Extended basic sample input</para>
+                    </caption>
+                </figure>
+                <para>The extended basic sample adds the following features:<itemizedlist>
+                        <listitem>
+                            <para>There is a non-Trojan empty element, without Trojan attributes:
+                                    <code>&lt;nonTrojan type="test"&gt;</code>.</para>
+                        </listitem>
+                        <listitem>
+                            <para>The three <code>&lt;word&gt;</code> elements in the second
+                                paragraph have, in addition to their Trojan attributes,
+                                    <code>@n</code> attributes. The Trojan attributes must be
+                                removed during raising, but the non-Trojan attributes must be
+                                retained.</para>
+                        </listitem>
+                    <listitem>
+                        <para>The content is not completely flat; there is an <code>&lt;emphasis
+                                    role="bold"></code> container element that contains both plain
+                                text and a Trojan <code>&lt;emphasis role="ital"></code> element. </para>
+                    </listitem>
+                </itemizedlist></para>
+            </section>
+            <section>
                 <title>Overlapping markers</title>
                 <para>To test the behavior of the methods with input that cannot be fully raised
                     without creating overlap, we use the following sample:</para>
@@ -634,7 +678,7 @@ nature … &lt;/p&gt;</programlisting>
                     paragraph break falls in the middle of the second page.</para>
             </section>
             <section xml:id="marker-styles">
-                <title>Different styles of marker</title>
+                <title><emphasis role="ital">Frankenstein</emphasis> markers</title>
                 <para>For historical reasons, the markers in the <emphasis role="ital"
                         >Frankenstein</emphasis> data differ from those of our simplified test
                     sample. Specifically, start-markers in <emphasis role="ital"
