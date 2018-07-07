@@ -32,12 +32,13 @@
     </xsl:template>
     <xsl:template match="*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]">
         <!-- innermost start-tag -->
-        <xsl:element name="{name()}">
+        <xsl:copy copy-namespaces="no">
+            <xsl:copy-of select="@* except @th:sID"/>
             <!-- textual content of raised element-->
             <xsl:copy-of
                 select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"
             />
-        </xsl:element>
+        </xsl:copy>
     </xsl:template>
     <!-- nodes inside new wrapper -->
     <xsl:template
