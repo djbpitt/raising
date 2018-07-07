@@ -350,9 +350,8 @@
         <para>After we completed the collation process, we wrote XSLT to separate the five witnesses
             into separate files that could be used in a new edition files that retained information
             about variant moment of variation (<emphasis role="ital">hotspots</emphasis>) in the
-            collation. A prerequisite of up-conversion from the collation outputis to flatten all
-            markup in anticipation of conflicting hierarchies were all logical containers to be
-            represented simultaneously with regular start- and end-tags. Here is a sample passage
+            collation. A prerequisite of up-conversion from the collation output is to flatten all
+            markup in anticipation of conflicting hierarchies. The elements to be flattened were all logical containers, and therefore represented simultaneously with regular start- and end-tags. Here is a sample passage
             from the Thomas copy edition file showing the reconstructed but flattened
             elements:</para>
         <figure>
