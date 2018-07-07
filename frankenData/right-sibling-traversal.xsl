@@ -22,8 +22,8 @@
     -->
    <xsl:mode on-no-match="shallow-copy"/>
     <xsl:template match="*[@loc and @ana='start']">
-        <xsl:comment>Template match on *[@loc and @ana='start'] is matching now.</xsl:comment>
-     <!--   <xsl:variable name="ns" select="namespace-uri()"/>-->
+        <xsl:comment>In shallow-to-deep mode, template match on *[@loc and @ana='start'] is matching now.</xsl:comment>
+        <!--   <xsl:variable name="ns" select="namespace-uri()"/>-->
         <!--<xsl:variable name="ln" as="xs:string" select="local-name()"/> ebb: Note that local-name() is used for retrieving the part of the name that isn't namespaced. That doesn't apply to the Frankenstein data. -->      
         <xsl:variable name="ln" as="xs:string" select="name()"/>
         <xsl:variable name="sID" as="xs:string" select="@loc"/>
