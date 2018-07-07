@@ -641,10 +641,10 @@ nature … &lt;/p&gt;</programlisting>
             <title>Right-sibling traversal</title>
             <para>One way to construct content elements from flattened XML is to use a <emphasis
                     role="ital">right-sibling traversal</emphasis> of the input tree, in which each
-                container element calls apply-template only on its first child, and each template
-                passes control to its immediate right sibling. In this approach the task of
-                constructing the content element is assigned to the template that matches the
-                start-marker, which has the following structure:</para>
+                container element calls <code>&lt;xsl:apply-templates&gt;</code> only on its first
+                child, and each template passes control to its immediate right sibling. In this
+                approach the task of constructing the content element is assigned to the template
+                that matches the start-marker, which has the following structure:</para>
             <figure>
                 <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="shallow-to-deep">
     <xsl:variable name="ns" select="namespace-uri()"/>
