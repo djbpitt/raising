@@ -20,10 +20,16 @@
         2. Remove @ana attributes
         3. Copy the @loc attribute value as the value of a new @xml:id attribute
     -->
-   <xsl:mode on-no-match="shallow-copy"/>
-    
-    
-    <xsl:template match="*[@loc and @ana='start']">
+   <xsl:template match="/">
+    <TEI>   <xsl:copy-of select="//teiHeader"/>
+    <text><body><div type="collation"> <xsl:apply-templates select="//text/body/div[@type='collation']"/>
+    </div></body></text>
+<!--ebb:  -->   </TEI>    
+   </xsl:template>
+ <xsl:template match="div[@type='collation']">
+     <xsl:apply-templates select="child::node()[1]" mode="shallow-to-deep"/>
+ </xsl:template>  
+    <xsl:template match="*[@loc and @ana='start']" mode="shallow-to-deep">
         <xsl:comment>In shallow-to-deep mode, template match on *[@loc and @ana='start'] is matching now.</xsl:comment>
         <!--   <xsl:variable name="ns" select="namespace-uri()"/>-->
         <!--<xsl:variable name="ln" as="xs:string" select="local-name()"/> ebb: Note that local-name() is used for retrieving the part of the name that isn't namespaced. That doesn't apply to the Frankenstein data. -->      
@@ -35,13 +41,12 @@
            <xsl:attribute name="xml:id">
                <xsl:value-of select="@loc"/>
            </xsl:attribute>
-            <xsl:apply-templates select="following-sibling::node()[1]"
-                mode="shallow-to-deep">
+            <xsl:apply-templates select="following-sibling::node()[1]" mode="shallow-to-deep">
             </xsl:apply-templates>
         </xsl:copy>
         
         <!--* 2: continue after this element *-->
-        <xsl:apply-templates select="following-sibling::*
+      <xsl:apply-templates select="following-sibling::*
             [@ana='end' and @loc= $sID 
             and name()=$ln]
             /following-sibling::node()[1]"
@@ -51,7 +56,7 @@
   <xsl:template match="text()
         | comment() 
         | processing-instruction 
-        | *[not(@ana)]"
+        | *[not(@loc)]"
         mode="shallow-to-deep"
         >
         <xsl:copy-of select="."/>
