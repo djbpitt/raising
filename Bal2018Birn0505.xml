@@ -647,12 +647,13 @@ nature … &lt;/p&gt;</programlisting>
                                 removed during raising, but the non-Trojan attributes must be
                                 retained.</para>
                         </listitem>
-                    <listitem>
-                        <para>The content is not completely flat; there is an <code>&lt;emphasis
+                        <listitem>
+                            <para>The content is not completely flat; there is an <code>&lt;emphasis
                                     role="bold"></code> container element that contains both plain
-                                text and a Trojan <code>&lt;emphasis role="ital"></code> element. </para>
-                    </listitem>
-                </itemizedlist></para>
+                                text and a Trojan <code>&lt;emphasis role="ital"></code> element.
+                            </para>
+                        </listitem>
+                    </itemizedlist></para>
             </section>
             <section>
                 <title>Overlapping markers</title>
@@ -1529,7 +1530,9 @@ nature … &lt;/p&gt;</programlisting>
                     <para>The authors are grateful to Ronald Haentjens Dekker for bringing this
                         method to our attention. The example at his
                             <link>https://github.com/rhdekker/python_xml_pull_parser_example</link>
-                        GitHub repository is a partial model for the examples here.</para>
+                        GitHub repository is a partial model for the examples here, and we
+                        appreciate his assistance in debugging the Trojan attribute pitfall
+                        described below under <xref linkend="python_xml_challenges"/>.</para>
                 </footnote> The result of pull parsering can be fashioned into output in two ways,
                 as a string or as XML. With string output, the method is comparable to the regex
                 replacement strategy described above: it passes all events through unchanged except
@@ -1622,7 +1625,7 @@ print("".join(output))</programlisting>
             realistic use cases. In this section we review briefly the complications for each
             method.</para>
         <section>
-            <title>Applying templates in right-sibling traversal</title>
+            <title>Right-sibling traversal</title>
             <para>Two elusive bugs in an initial implementation of the right-sibling traversal
                 algorithm took the better part of a day or two to identify:</para>
             <itemizedlist>
@@ -1764,9 +1767,105 @@ print("".join(output))</programlisting>
                     XML output as a (necessarily well-formed) DOM tree, which can then be
                     serialized, instead of creating the output directly as a string.</para>
             </section>
-            <section>
+            <section xml:id="python_xml_challenges" xreflabel="Python XML output challenges">
                 <title>XML output</title>
-                <para><emphasis role="ital">[Under development]</emphasis></para>
+                <para>Generating XML output with Python <code>minidom</code> is reasonably robust
+                    and straightforward, but potentially confusing for the following reasons:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>The pull parser responds not to start- and end-tags, but to
+                                <code>START_ELEMENT</code> and <code>END_ELEMENT</code> events.
+                            Although markers are single tags (sole-tags), they fire both events, one
+                            after the other. Since a start-marker and an end-marker both fire both
+                            types of events, dealing with the two different senses of <emphasis
+                                role="ital">start</emphasis> and <emphasis role="ital"
+                                >end</emphasis> (marker vs event) simultaneously is potentially
+                            confusion for the developer. We also need to decide whether to process
+                            the marker at the <code>START_ELEMENT</code> and
+                                <code>END_ELEMENT</code> event, or two divide the processing of a
+                            marker over the two events. Since the two events always follow each
+                            other immediately, it might seem not to matter, but that assumption led
+                            us into error when dealing with removing Trojan attributes, about which
+                            see the following issue.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Attributes in <code>minidom</code> are part of a dictionary-like
+                            property of the element node. We had decided (somewhat arbitrarily) to
+                            process start-markers at the <code>START_ELEMENT</code> event, and we
+                            wanted to remove Trojan attributes from those elements when we raised
+                            them. Initially we removed them when processing the
+                                <code>START_ELEMENT</code> event without noticing that we use them
+                            as part of the decision process on <code>END_ELEMENT</code> events.
+                            Because <code>minidom</code> objects are mutable, once we had removed
+                            the attribute at the <code>START_ELEMENT</code> event it was no longer
+                            available when we needed to test for it at the <code>END_ELEMENT</code>
+                            event, which led to errors in our stack management. We fixed the problem
+                            by removing the Trojan attributes only at the <code>END_ELEMENT</code>
+                            event. An alternative strategy, which also worked under testing, was to
+                            clone the node at the <code>START_ELEMENT</code> event, remove the
+                            Trojan attributes from the clone, and add the clone to the output tree
+                            and the stack. Since this approach does not remove the attribute from
+                            the original node, it is still available for testing when the
+                                <code>END_ELEMENT</code> event fires.</para>
+                    </listitem>
+                    <listitem>
+                        <para>The relationships among namespaces, namespace prefixes, and namespace
+                            delcarations in <code>minidom</code> are alien to the XML view of
+                            namespaces. <code>minidom</code> is namespace-aware at the level of the
+                            model, but that is not integrated with the serialization supported by
+                            the <code>toxml()</code> method. Here is a partial summary of the
+                            details:</para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>Whether <code>minidom</code> writes the prefix into a
+                                    serialization depends only on whether the prefix was specified
+                                    when the element was created. It has nothing to do with whether
+                                    the element is really in a namespace. It is possible to create
+                                    and serialize an element with a namespace prefix that is not
+                                    really in the namespace. It is also possible to create an
+                                    element in a namespace without a prefix and when you serialize
+                                    it, it will emerge without a prefix, which means that when the
+                                    serialization is parsed downstream, the element will be in
+                                    whatever the default namespace is for its context.</para>
+                            </listitem>
+                            <listitem>
+                                <para><code>minidom</code> will not write namespace declarations
+                                    (default or prefix-binding) unless you create them explicitly as
+                                    attributes. This means that you can create an element with a
+                                    prefix and serialize output where the prefix is not actually
+                                    declared, which is not well-formed.</para>
+                            </listitem>
+                            <listitem>
+                                <para><code>minidom</code> will let you create and serialize an
+                                    element with a namespace prefix with
+                                        <code>createElement()</code> even though the element is not
+                                    really in a namespace. An element is in a namespace only if it
+                                    is created with <code>createElementNS()</code>.</para>
+                            </listitem>
+                            <!--This needs to be tested; it may not be fully correct as written.
+                                
+                                <listitem>
+                                <para>Matching a namespaced node (such as a Trojan
+                                        <code>@th:sID</code>) requires matching it as it is spelled.
+                                    This can be done with <code>getAttribute('th:sID')</code> or
+                                        <code>getAttributeNS('http://www.blackmesatech.com/2017/nss/trojan-horse','th:sID')</code>.
+                                    You cannot match it with
+                                        <code>getAttributeNS('http://www.blackmesatech.com/2017/nss/trojan-horse','sID')</code>
+                                    even if you have bound the <code>th:</code> prefix to the
+                                        <code>http://www.blackmesatech.com/2017/nss/trojan-horse</code>
+                                    namespace URI.</para>
+                            </listitem>-->
+                        </itemizedlist>
+                        <para>These behaviors are very far from XML-idiomatic, but they prove not to
+                            be much of a practical obstacle during processing. Creating XML with
+                                <code>minidom</code> that is intended primarily to be serialized for
+                            subsequent downstream processing should focus on the serialization,
+                            which means writing namespace prefixes and namespace declarations (as
+                            attributes) explicitly where you want them in the output, and matching
+                            namespaced elements and attributes with the prefix where it is used in
+                            the serialized input and without the prefix where it is not.</para>
+                    </listitem>
+                </itemizedlist>
             </section>
         </section>
     </section>
