@@ -1381,7 +1381,7 @@ nature … &lt;/p&gt;</programlisting>
             </section>
         </section>
         <section>
-            <title>Global search and replace using regular expressions</title>
+            <title>Regex</title>
             <para>It is not, in general, advisable to attempt to process arbitrary XML solely with
                 regular expressions (regex), but it is not difficult to identify and process markers
                 of the kind we are concerned with here.<footnote>
@@ -1742,7 +1742,7 @@ print("".join(output))</programlisting>
                 harder to read and develop.</para>
         </section>
         <section>
-            <title>Python pull parsing</title>
+            <title>Pull parsing in Python</title>
             <para>The Python pull parser reads the input XML as XML and responds to parse events. We
                 handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
                     <code>CHARACTERS</code>, and ignore other events, and we use XML-aware methods
