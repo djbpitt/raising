@@ -380,7 +380,7 @@
                 an inserted passage not present in the other editions, which have no material to compare with
                 it. Following this point, the witnesses all agree, as shown in the next
                     <code>&lt;app&gt;</code> element.</para>
-            <para>Following the collation process, we use the XML output as the basis for reconstructing the individual edition files so that they may individually indicate <quote>hotspots</quote>, or passages that vary in the other editions. We wrote XSLT over the collation XML output, to produce a separate file for each reading witness, and to mark each witness’s hotspots with <code>&lt;seg></code> elements. Because these hotspots will sometimes overlap with structural markup from the input editions, we must also insert these elements as flattened start and end markers. Our task, then, is to find a way to raise both the original markup we flattened from the source editions with the conflicting hierarchy posed by the <code>seg</code> elements derived from the collation process. Here is a sample
+            <para>Following the collation process, we use the XML output as the basis for reconstructing the individual edition files so that they may individually indicate <quote>hotspots</quote>, or passages that vary in the other editions. We write XSLT over the collation XML output to produce a separate file for each reading witness. In this XSLT, we apply <code>&lt;xsl:analyze-string&gt;</code> to convert the text-strings to start- and end- marker elements and to mark each witness’s hotspots with <code>&lt;seg></code> elements. Because these hotspots will sometimes overlap with structural markup from the input editions, we must also insert these elements as flattened start and end markers. Our task, then, is to find a way to raise both the original markup we flattened from the source editions with the conflicting hierarchy posed by the <code>seg</code> elements derived from the collation process. Here is a sample
                 passage from the Thomas copy edition file showing the reconstructed but flattened
                 elements:</para>
             <figure>
@@ -468,7 +468,7 @@ nature … &lt;/p&gt;</programlisting>
                 appended to the original value of the apparatus and reading witness location.</para>
             <para>Our process of raising the new edition files thus entails the following steps:<orderedlist>
                     <listitem>
-                        <para>Flatten all markup</para>
+                        <para>Flatten all markup (prior to and following the collation process)</para>
                     </listitem>
                     <listitem>
                         <para>Reconstruct (raise) the structural elements from the source edition
@@ -481,7 +481,7 @@ nature … &lt;/p&gt;</programlisting>
                     </listitem>
                 </orderedlist> The experimental transformations tested and discussed in this report
                 focus primarily on the middle of these three steps, raising the structural
-                markup.</para>
+                markup. <!--2018-07-08 ebb: Shall we revisit this in light of our discussions of raising seg elements in our process?  --></para>
         </section>
 
         <section xml:id="simplified" xreflabel="Simplified sample data">
@@ -667,11 +667,8 @@ nature … &lt;/p&gt;</programlisting>
         <section>
             <title>Right-sibling traversal</title>
             <para>One way to construct content elements from flattened XML is to use a <emphasis
-                    role="ital">right-sibling traversal</emphasis> of the input tree, in which each
-                container element calls <code>&lt;xsl:apply-templates&gt;</code> only on its first
-                child, and each template passes control to its immediate right sibling. In this
-                approach the task of constructing the content element is assigned to the template
-                that matches the start-marker, which has the following structure:</para>
+                    role="ital">right-sibling traversal</emphasis> of the input tree, which proceeds one element at a time processing along the following-sibling axis. Each marker element calls <code>&lt;xsl:apply-templates&gt;</code> only on its first
+                child, and each template passes control to its immediate right sibling. The process requires a template rule matching a (real) container element that wraps the marker elements to be reconstructed, and applies templates selectively to the first element child. We construct each new content element in a template that matches the start-marker. For raising elements in our simple example, this has the following structure:</para>
             <figure>
                 <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="shallow-to-deep">
     <xsl:variable name="ns" select="namespace-uri()"/>
@@ -712,12 +709,8 @@ nature … &lt;/p&gt;</programlisting>
                 instructions, and any content elements present in the input all have essentially the
                 same structure:</para>
             <figure>
-                <programlisting><![CDATA[<xsl:template match="text()
-        | comment() 
-        | processing-instruction 
-        | *[not(@th:*)]"
-        mode="shallow-to-deep"
-        >
+                <programlisting><![CDATA[<xsl:template match="text() | comment() | processing-instruction | *[not(@th:*)]"
+        mode="shallow-to-deep">
     <xsl:copy-of select="."/>
     <xsl:apply-templates 
         select="following-sibling::node()[1]"
@@ -757,9 +750,49 @@ nature … &lt;/p&gt;</programlisting>
                 tail-recursive template calls may thus run out of stack space (at least in theory—in
                 practice, we have never seen a right-sibling recursion blow the stack on real
                 input).</para>
-            <para><emphasis>For purposes of performance measurement, we expect to implement this
+            <section><title>Raising <emphasis>Frankenstein</emphasis></title>
+                <para>For raising <emphasis>Frankenstein</emphasis> using right-sibling traversal, we adapt the code lightly to apply to its project markup in the following template rules:</para>
+            <figure>
+                <programlisting>
+     &lt;xsl:template match="div[@type='collation']"&gt;
+     &lt;xsl:apply-templates select="child::node()[1]" mode="shallow-to-deep"/&gt;
+ &lt;/xsl:template&gt;  
+    &lt;xsl:template match="*[@loc and @ana='start']" mode="shallow-to-deep"&gt;     
+        &lt;xsl:variable name="ln" as="xs:string" select="name()"/&gt;
+        &lt;xsl:variable name="sID" as="xs:string" select="@loc"/&gt;
+        
+        &lt;!--* 1: handle this element *--&gt;
+        &lt;xsl:copy&gt;
+           &lt;xsl:attribute name="xml:id"&gt;
+               &lt;xsl:value-of select="@loc"/&gt;
+           &lt;/xsl:attribute&gt;
+            &lt;xsl:apply-templates select="following-sibling::node()[1]" mode="shallow-to-deep"&gt;
+            &lt;/xsl:apply-templates&gt;
+        &lt;/xsl:copy&gt;
+        
+        &lt;!--* 2: continue after this element *--&gt;
+      &lt;xsl:apply-templates select="following-sibling::*
+            [@ana='end' and @loc= $sID 
+            and name()=$ln]
+            /following-sibling::node()[1]"
+            mode="shallow-to-deep"&gt;
+        &lt;/xsl:apply-templates&gt;
+    &lt;/xsl:template&gt;
+  &lt;xsl:template match="text() | comment() | processing-instruction | *[not(@loc)]"
+        mode="shallow-to-deep"&gt;
+        &lt;xsl:copy-of select="."/&gt;
+        &lt;xsl:apply-templates 
+            select="following-sibling::node()[1]"
+            mode="shallow-to-deep"/&gt;
+    &lt;/xsl:template&gt;
+    &lt;xsl:template match="*[@loc and @ana='end']" mode="shallow-to-deep"/&gt;
+                </programlisting>
+                <caption><para>Right sibling traversal method applied to <emphasis>Frankenstein</emphasis></para></caption>
+            </figure></section>
+           <section><title>XSLT 1.0</title> 
+               <para><emphasis>For purposes of performance measurement, we expect to implement this
                     algorithm in both XSLT 1.0 and XSLT 2.0 or 3.0. At the time of submission, no
-                    XSLT 1.0 version is available.</emphasis></para>
+                    XSLT 1.0 version is available.</emphasis></para></section>
         </section>
         <section xml:id="inside-out-function" xreflabel="Inside-out recursion">
             <title>Inside-out recursion</title>
