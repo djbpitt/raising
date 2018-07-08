@@ -1,11 +1,18 @@
 # Brown corpus files
 
+## TODO
+
+* Figure out how to raise full corpus before my coffee gets cold
+* Add raised version of full corpus
+* Switch full corpus files to GitHub large file storage so that GitHub will stop scolding me
+
 ## Files
 
 * `Corpus.xml` Entire Brown corpus as a single TEI file
 * `Corpus_flattened.xml` Version flattened with `flatten.xsl` (below)
-* `Corpus_raised.xml` Version raised with `raise.xsl` (below; inside-out recursive function method)
-* `Corpus_diff.txt` Output of `xmldiff Corpus.xml Corpus_raised.xml` (using <https://github.com/Shoobx/xmldiff>)
+* `r02.xml` Sample corpus file (56k)
+* `r02_flattened.xml` Flattened version of sample
+* `r02_raised.xml` Raised version of sample
 
 ## Source
 
@@ -30,12 +37,12 @@
         </xsl:copy>
     </xsl:template>
     <xsl:template match="*">
-        <xsl:element name="{name()}">
+        <xsl:copy copy-namespaces="no">
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="th:sID" select="generate-id()"/>
         </xsl:element>
         <xsl:apply-templates/>
-        <xsl:element name="{name()}">
+        <xsl:copy copy-namespaces="no">
             <xsl:attribute name="th:eID" select="generate-id()"/>
         </xsl:element>
     </xsl:template>
