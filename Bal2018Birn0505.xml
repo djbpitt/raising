@@ -1842,9 +1842,9 @@ print(open_elements.pop().toxml())</programlisting>
                             types of events, dealing with the two different senses of <emphasis
                                 role="ital">start</emphasis> and <emphasis role="ital"
                                 >end</emphasis> (marker vs event) simultaneously is potentially
-                            confusion for the developer. We also need to decide whether to process
+                            confusing for the developer. We also need to decide whether to process
                             the marker at the <code>START_ELEMENT</code> and
-                                <code>END_ELEMENT</code> event, or two divide the processing of a
+                                <code>END_ELEMENT</code> event, or to divide the processing of a
                             marker over the two events. Since the two events always follow each
                             other immediately, it might seem not to matter, but that assumption led
                             us into error when dealing with removing Trojan attributes, about which
@@ -1866,29 +1866,30 @@ print(open_elements.pop().toxml())</programlisting>
                             event. An alternative strategy, which also worked under testing, was to
                             clone the node at the <code>START_ELEMENT</code> event, remove the
                             Trojan attributes from the clone, and add the clone to the output tree
-                            and the stack. Since this approach does not remove the attribute from
-                            the original node, it is still available for testing when the
-                                <code>END_ELEMENT</code> event fires.</para>
+                            and the stack. Since this approach does not remove anything from the
+                            original node, any original Trojan attribute is still available for
+                            testing when the <code>END_ELEMENT</code> event fires.</para>
                     </listitem>
                     <listitem>
                         <para>The relationships among namespaces, namespace prefixes, and namespace
                             delcarations in <code>minidom</code> are alien to the XML view of
                             namespaces. <code>minidom</code> is namespace-aware at the level of the
-                            model, but that is not integrated with the serialization supported by
-                            the <code>toxml()</code> method. Here is a partial summary of the
-                            details:</para>
+                            model, but that awareness is not integrated with the serialization
+                            supported by the <code>toxml()</code> method (and some others). Here is
+                            a partial summary of the details:</para>
                         <itemizedlist>
                             <listitem>
-                                <para>Whether <code>minidom</code> writes the prefix into a
+                                <para>Whether <code>minidom</code> writes a namespace prefix into a
                                     serialization depends only on whether the prefix was specified
                                     when the element was created. It has nothing to do with whether
                                     the element is really in a namespace. It is possible to create
                                     and serialize an element with a namespace prefix that is not
                                     really in the namespace. It is also possible to create an
                                     element in a namespace without a prefix and when you serialize
-                                    it, it will emerge without a prefix, which means that when the
-                                    serialization is parsed downstream, the element will be in
-                                    whatever the default namespace is for its context.</para>
+                                    it, it will emerge without a prefix even if the namespace is not
+                                    in scope, which means that when the serialization is parsed
+                                    downstream, the element will be in whatever the default
+                                    namespace is for its context.</para>
                             </listitem>
                             <listitem>
                                 <para><code>minidom</code> will not write namespace declarations
