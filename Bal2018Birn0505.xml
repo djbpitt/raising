@@ -347,14 +347,41 @@
             <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
             <para>As a concrete example, we can consider the form taken by this task in the
                     <emphasis>Variorum Frankenstein</emphasis> [<xref linkend="frankenstein"/>]
-                project edited by the second author. In this project, we collate different encodings of the
-                novel deriving from five digital sources using the software
-                CollateX [<xref linkend="collatex"/>], which reads the input texts to locate their moments of alignment and variation. The process of collation compares XML documents as text files, which means that XML tags are treated as text so that strings of text that compare structural boundaries like paragraph breaks in one version of a document can be aligned with passages containing the same (or nearly the same) text lacking those boundaries. CollateX provides XML output that represents in one file the collation of all the variant input documents, and its output raises a new hierarchy simply comprised of a root element and TEI critical apparatus elements designed to mark where the documents align in comparable and variant passages. When XML elements are supplied in the input to the collation process, their tags are returned as text with angle brackets given in escape characters, as shown in the figure below.</para>
-            <para>To prepare the editions for collation we began by flattening the original structural markup, converting elements that wrapped volumes, chapters, paragraphs, and lines (among others) into self-closed start and end markers. We flattened these elements in anticipation of reconstructing them on the other side of the collation process. Because we need to retain original markup information in the eventual collation output for later use, flattening it allows us to preserve it without letting it interfere with the alignment process or the new hierarchical output of CollateX. The XML output produced by CollateX includes (as we expect and want) many fragmented start and end tags, showing us not only where paragraphs break inside one reading witness but not the others, but also where part (but not all) of a deleted passage in the manuscript draft aligns with material in the published editions of the novel. In such situations, we wind up with an original start-tag inside one container element and its corresponding original end-tag inside another, and we cannot reconstruct that element without creating overlap. Knowing that the collation process by design will generate a hierarchy in conflict with the structural markup of our input documents, we prepared the input source documents in advance to flatten their hierarchies, because we intended to reconstruct the elements later building on the collation output.</para>
-            <para>Here is an example from the output of CollateX
-                representing a single divergent reading in the <quote>Thomas copy</quote> of
-                    <emphasis>Frankenstein</emphasis> before all witnesses align. (Line breaks have
-                been introduced within markup here to make the lines shorter.)</para>
+                project edited by the second author. In this project, we collate different encodings
+                of the novel deriving from five digital sources using the software CollateX [<xref
+                    linkend="collatex"/>], which reads the input texts to locate their moments of
+                alignment and variation. The process of collation compares XML documents as text
+                files, which means that XML tags are treated as text so that strings of text that
+                compare structural boundaries like paragraph breaks in one version of a document can
+                be aligned with passages containing the same (or nearly the same) text lacking those
+                boundaries. CollateX provides XML output that represents in one file the collation
+                of all the variant input documents, and its output raises a new hierarchy simply
+                comprised of a root element and TEI critical apparatus elements designed to mark
+                where the documents align in comparable and variant passages. When XML elements are
+                supplied in the input to the collation process, their tags are returned as text with
+                angle brackets given in escape characters, as shown in the figure below.</para>
+            <para>To prepare the editions for collation we began by flattening the original
+                structural markup, converting elements that wrapped volumes, chapters, paragraphs,
+                and lines (among others) into self-closed start and end markers. We flattened these
+                elements in anticipation of reconstructing them on the other side of the collation
+                process. Because we need to retain original markup information in the eventual
+                collation output for later use, flattening it allows us to preserve it without
+                letting it interfere with the alignment process or the new hierarchical output of
+                CollateX. The XML output produced by CollateX includes (as we expect and want) many
+                fragmented start and end tags, showing us not only where paragraphs break inside one
+                reading witness but not the others, but also where part (but not all) of a deleted
+                passage in the manuscript draft aligns with material in the published editions of
+                the novel. In such situations, we wind up with an original start-tag inside one
+                container element and its corresponding original end-tag inside another, and we
+                cannot reconstruct that element without creating overlap. Knowing that the collation
+                process by design will generate a hierarchy in conflict with the structural markup
+                of our input documents, we prepared the input source documents in advance to flatten
+                their hierarchies, because we intended to reconstruct the elements later building on
+                the collation output.</para>
+            <para>Here is an example from the output of CollateX representing a single divergent
+                reading in the <quote>Thomas copy</quote> of <emphasis>Frankenstein</emphasis>
+                before all witnesses align. (Line breaks have been introduced within markup here to
+                make the lines shorter.)</para>
             <figure>
                 <programlisting>&lt;app&gt;
     &lt;rdg wit="#fThomas"&gt;contortions that ever and anon 
@@ -377,12 +404,20 @@
             </figure>
             <para>In the example above, there is only one <code>&lt;rdg&gt;</code> element inside
                 the first <code>&lt;app&gt;</code> because at this point the Thomas edition contains
-                an inserted passage not present in the other editions, which have no material to compare with
-                it. Following this point, the witnesses all agree, as shown in the next
+                an inserted passage not present in the other editions, which have no material to
+                compare with it. Following this point, the witnesses all agree, as shown in the next
                     <code>&lt;app&gt;</code> element.</para>
-            <para>Following the collation process, we use the XML output as the basis for reconstructing the individual edition files so that they may individually indicate <quote>hotspots</quote>, or passages that vary in the other editions. We wrote XSLT over the collation XML output, to produce a separate file for each reading witness, and to mark each witness’s hotspots with <code>&lt;seg></code> elements. Because these hotspots will sometimes overlap with structural markup from the input editions, we must also insert these elements as flattened start and end markers. Our task, then, is to find a way to raise both the original markup we flattened from the source editions with the conflicting hierarchy posed by the <code>seg</code> elements derived from the collation process. Here is a sample
-                passage from the Thomas copy edition file showing the reconstructed but flattened
-                elements:</para>
+            <para>Following the collation process, we use the XML output as the basis for
+                reconstructing the individual edition files so that they may individually indicate
+                    <quote>hotspots</quote>, or passages that vary in the other editions. We wrote
+                XSLT over the collation XML output, to produce a separate file for each reading
+                witness, and to mark each witness’s hotspots with <code>&lt;seg></code> elements.
+                Because these hotspots will sometimes overlap with structural markup from the input
+                editions, we must also insert these elements as flattened start and end markers. Our
+                task, then, is to find a way to raise both the original markup we flattened from the
+                source editions with the conflicting hierarchy posed by the <code>seg</code>
+                elements derived from the collation process. Here is a sample passage from the
+                Thomas copy edition file showing the reconstructed but flattened elements:</para>
             <figure>
                 <programlisting>&lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions that ever and anon 
 con&lt;del loc="fThomas_C10-del_2" ana="start"/&gt;puls&lt;del
@@ -421,9 +456,9 @@ loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
                         attributes for all flattened elements and specify which ones we wanted to
                         raise at the processing stage.</para>
                 </footnote></para>
-            <para>The primary use case that serves as a testing ground for the comparison of raising methods
-                in this report is to raise the structural elements from the original edition (such
-                as <code>&lt;p&gt;</code> and <code>&lt;del&gt;</code>), while leaving the
+            <para>The primary use case that serves as a testing ground for the comparison of raising
+                methods in this report is to raise the structural elements from the original edition
+                (such as <code>&lt;p&gt;</code> and <code>&lt;del&gt;</code>), while leaving the
                     <code>&lt;seg&gt;</code> elements flattened. The output will look something like
                 the following for the end of paragraph 133 and the start of paragraph 134 in the
                 Thomas edition:</para>
@@ -442,9 +477,10 @@ the feelings of human nature … &lt;/p&gt;</programlisting>
                         reflowing)</para>
                 </caption>
             </figure>
-            <para>A secondary use case is to raise the <code>&lt;seg/&gt;</code> elements. When, later in the production process, we also raise the <code>&lt;seg&gt;</code>
-                elements, we avoid overlap, or, rather we mark a moment of intersecting hierarchy, by fragmenting the one that spans a paragraph boundary
-                into two parts:</para>
+            <para>A secondary use case is to raise the <code>&lt;seg/&gt;</code> elements. When,
+                later in the production process, we also raise the <code>&lt;seg&gt;</code>
+                elements, we avoid overlap, or, rather we mark a moment of intersecting hierarchy,
+                by fragmenting the one that spans a paragraph boundary into two parts:</para>
             <figure>
                 <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt; …
 &lt;seg xml:id="C10_app90-fThomas__Pt1"&gt;contortions 
@@ -1590,8 +1626,8 @@ print("".join(output))</programlisting>
                 <para>The general approach to parsing with <code>pulldom</code> and constructing
                     output with <code>minidom</code> is similar to the <xref linkend="accumulators"
                     /> method described above. Specifically, the flattened XML is traversed in a
-                    single pass from left to right (technically a depth-first traversal, which how
-                        <code>pulldom</code> sees it) and events (we focus on
+                    single pass from left to right (technically a depth-first traversal, which is
+                    how <code>pulldom</code> sees it) and events (we focus on
                         <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
                         <code>CHARACTERS</code>) are handled as they occur. The output is assembled
                     in memory as a tree, using <code>minidom</code> to create and attach nodes as
@@ -1649,18 +1685,20 @@ print(open_elements.pop().toxml())</programlisting>
                     elements (whether empty or not).</para>
                 <itemizedlist>
                     <listitem>
-                        <para>In the case start-markers and regular elements we append the new node
-                            as a child of the item at the top of the stack (initially the document
-                            node; thereafter an element node) and then push the node onto the stack
-                            so that it becomes the new top element. The operations serve different
-                            but related purposes. Appending it makes it a descendant of the document
-                            node, which will be the eventual output tree. Pushing it makes it the
-                            current context, so that subsequent nodes will be added as children to
-                            it as long as it remains the current context. Nodes are passed by
-                            reference, rather than value, so after these operations we point to the
-                            same new current node from three places: the original input document,
-                            the top of the stack, and the location in the tree we are assembling
-                            under the output document node, which is at the bottom of the
+                        <para>In the case of start-markers and regular elements, we append the new
+                            node as a child of the item at the top of the stack (initially the
+                            document node; thereafter an element node) and then push the node onto
+                            the stack so that it becomes the new context element. The
+                                <code>appendChild()</code> and <code>push()</code> operations serve
+                            different but related purposes. Appending the new node to the current
+                            context (whatever is at the top of the stack) adds it to the correct
+                            location on the eventual output tree. Pushing it makes it the new
+                            current context, so that subsequent nodes will be added to it as
+                            children to it as long as it remains the current context. Nodes are
+                            passed by reference, rather than value, so after these operations we
+                            point to the same new current node from three places: the original input
+                            document, the top of the stack, and the location in the tree we are
+                            assembling under the output document node, which is at the bottom of the
                             stack.</para>
                         <para>We ignore <code>START_ELEMENT</code> events for end-markers; all of
                             their processing happens on their <code>END_ELEMENT</code> event. This
@@ -1698,12 +1736,13 @@ print(open_elements.pop().toxml())</programlisting>
                                     event of the end-marker, rather than the start-marker.</para>
                             </listitem>
                             <listitem>
-                                <para>The first two clauses processed the root element and
+                                <para>The first two clauses process the root element and
                                     start-markers, both of which we leave on the stack after their
                                         <code>END_ELEMENT</code> events. In the remaining cases
-                                    (end-markers and regular elements, whether empty of not) we pop
+                                    (end-markers and regular elements, whether empty of not), we pop
                                     the stack at the <code>END_ELEMENT</code> event, which makes its
-                                    parent the current context for the next event.</para>
+                                    parent in the output tree that we are constructing the current
+                                    context for the next event.</para>
                             </listitem>
                         </itemizedlist>
                     </listitem>
@@ -1900,8 +1939,9 @@ print(open_elements.pop().toxml())</programlisting>
                     XML output as a (necessarily well-formed) DOM tree, which can then be
                     serialized, instead of creating the output directly as a string. The use of
                         <code>pulldom</code> to parse the input XML also requires accommodations to
-                    the peculiarities of <code>pulldom</code> namespace handling, which is discussed
-                    imediately below, under <xref linkend="python_xml_challenges"/>.</para>
+                    the peculiarities of <code>pulldom</code> namespace handling, which are
+                    discussed imediately below, under <xref linkend="python_xml_challenges"
+                    />.</para>
             </section>
             <section xml:id="python_xml_challenges" xreflabel="Python XML output challenges">
                 <title>XML output</title>
@@ -2010,11 +2050,11 @@ print(open_elements.pop().toxml())</programlisting>
                             far from XML-idiomatic, but except for the syntactic dependencies they
                             impose (where namespaces are declared, how the declarations are spelled,
                             how they are bound to prefixes), they prove not to be much of a
-                            practical obstacle during processing. The required accommodation
-                            requires writing namespace prefixes and namespace declarations (as
-                            attributes) explicitly where we want them in the output, and matching
-                            namespaced elements and attributes with the prefix where it is used in
-                            the serialized input and without the prefix where it is not.</para>
+                            practical obstacle during processing. The required accommodation entails
+                            writing namespace prefixes and namespace declarations (as attributes)
+                            explicitly where we want them in the output, and matching namespaced
+                            elements and attributes with the prefix where it is used in the
+                            serialized input and without the prefix where it is not.</para>
                     </listitem>
                 </itemizedlist>
             </section>
