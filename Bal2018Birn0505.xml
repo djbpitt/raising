@@ -1612,7 +1612,69 @@ print("".join(output))</programlisting>
                 <para>We are parsing the input XML in an XML-aware manner, which is reasonably
                     robust, but we are constructing the output XML as a string, which is not. See
                     below for a discussion of the limitations.</para>
-                <!--<para>[TODO: namespace-aware, instead of string-matching on attribute names?]</para>-->
+            </section>
+            <section>
+                <title>XML output</title>
+                <para>The general approach to parsing with <code>pulldom</code> and constructing
+                    output with <code>minidom</code> is similar to the <xref linkend="accumulators"
+                    /> method described above. Specifically, the flattened XML is traversed in a
+                    single pass from left to right (technically a depth-first traversal, which how
+                        <code>pulldom</code> sees it) and events (we focus on
+                        <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
+                        <code>CHARACTERS</code>) are handled as they occur. The output is assembled
+                    in memory as a tree, using <code>minidom</code> to create and attach nodes as
+                    needed. Open elements are stored on a stack, the maximum depth of which is,
+                    therefore, equal to the maximum depth of the unflattened XML. The code
+                    is:</para>
+                <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
+from xml.dom.minidom import Document
+
+
+class Stack(list):
+    def push(self, item):
+        self.append(item)
+
+    def peek(self):
+        return self[-1]
+
+
+open_elements = Stack()
+d = Document()
+open_elements.push(d)
+
+with open('flattened.xml') as input:
+    for event, node in parseString(input.read()):
+        if event == START_ELEMENT:
+            if not node.hasAttribute('th:eID'): # process pseudo-end-tags on END_ELEMENT event
+                open_elements.peek().appendChild(node)
+                open_elements.push(node)
+        elif event == END_ELEMENT:
+            if node.hasAttribute('xmlns:th'): # don't declare now-unused th: namespace
+                node.removeAttribute('xmlns:th')
+            if node.hasAttribute('th:sID'): # can't remove @start until we're done with the node
+                node.removeAttribute('th:sID') 
+            else: # pop only on container elements and Trojan end-tags
+                open_elements.pop()
+        elif event == CHARACTERS:
+            t = d.createTextNode(node.data)
+            open_elements.peek().appendChild(t)
+
+print(open_elements.pop().toxml())</programlisting>
+                <para>Parsing is the same as described above, so we import the same items from
+                        <code>pulldom</code>. From <code>minidom</code> we import only the
+                        <code>Document</code> class, which we use to initialize our output XML
+                    document. Our <code>Stack</code> class is a Python list adorned with
+                    stack-idiomatic terminology: we alias <code>append()</code> as
+                        <code>push()</code> (lists already have a <code>pop()</code> method), and we
+                    add <code>peek()</code> to provide access to the item at the top of the stack.
+                    That item represents the most recently opened element, and we peek at it in
+                    order to append child elements and child <code>text()</code> nodes as we
+                    encouter them. We begin by pushing the document node onto the stack.</para>
+                <para>We handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
+                        <code>CHARACTERS</code> events in an <code>if/elif/else</code> structure,
+                    silently ignoring other events.</para>
+                <para><emphasis role="ital">[TODO: Add description of event
+                    handlers]</emphasis></para>
             </section>
         </section>
     </section>
