@@ -1525,6 +1525,8 @@ nature … &lt;/p&gt;</programlisting>
         </section>
         <section>
             <title>Pull parsing in Python</title>
+            <!-- TODO: Not as comparable to regex as the description suggests; the output construction is,
+            but parsing the tags is smarter because it’s XML-aware -->
             <para>The Python <code>xml.dom.pulldom</code> module can be used to stream an XML
                 document past an event handler that can be instructed to raise a flattened hierarchy.<footnote>
                     <para>The authors are grateful to Ronald Haentjens Dekker for bringing this
