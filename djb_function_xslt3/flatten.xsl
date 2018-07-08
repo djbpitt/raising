@@ -12,13 +12,13 @@
         </xsl:copy>
     </xsl:template>
     <xsl:template match="*">
-        <xsl:element name="{name()}">
+        <xsl:copy copy-namespaces="no">
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="th:sID" select="generate-id()"/>
-        </xsl:element>
+        </xsl:copy>
         <xsl:apply-templates/>
-        <xsl:element name="{name()}">
+        <xsl:copy copy-namespaces="no">
             <xsl:attribute name="th:eID" select="generate-id()"/>
-        </xsl:element>
+        </xsl:copy>
     </xsl:template>
 </xsl:stylesheet>
