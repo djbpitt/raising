@@ -2,9 +2,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all">
-   
-<!--<xsl:mode on-no-match="shallow-copy"/> -->  
-    <!--2018-07-07 ebb: This stylesheet isn't working properly! Perhaps the way we're calling templates is the problem. Elements wrap in the wrong way, and their output is duplicated. Try running it with and without the identity transform above. I think we don't want the id transform line, but notice how the elements reconstruct themselves when we don't use it. -->
     <xsl:template match="root">
         <root><xsl:apply-templates mode="shallow-to-deep" /></root> 
     </xsl:template>
