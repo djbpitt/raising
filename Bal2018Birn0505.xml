@@ -347,32 +347,11 @@
             <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
             <para>As a concrete example, we can consider the form taken by this task in the
                     <emphasis>Variorum Frankenstein</emphasis> [<xref linkend="frankenstein"/>]
-                project edited by the second author. In this project, different encodings of the
-                novel deriving from multiple digital sources are collated using the software
-                CollateX [<xref linkend="collatex"/>], which necessitates flattening the source
-                markup, as in its output CollateX generates a new XML hierarchy that would overlap
-                the original structure. Because we need to retain original markup information in the
-                eventual collation output for later use, flattening it allows us to do that without
-                letting it interfere with the alignment process or the new hierarchical output of
-                CollateX.</para>
-            <para>The process of collation involves comparing around and across structural markup in
-                the source documents. We compare five distinct witnesses of
-                    <emphasis>Frankenstein</emphasis>, and divergent passages may include structural
-                boundaries such as paragraph breaks in some editions that are missing in others. The
-                XML output of collation with CollateX transforms any input element tags into their
-                text equivalents with escape characters replacing the angle brackets. If we
-                submitted the original edition markup unaltered to the collation process, we knew we
-                would face a challenge in raising well-formed output on the other side, because the
-                critical apparatus is expected to include fragmented start and end tags, as, for
-                example, where paragraphs sometimes break inside a reading witness, or only the
-                beginning of a deleted passage in a manuscript witness is comparable to material we
-                see in other witnesses. In those situations, we wind up with an original start-tag
-                inside one container element and its corresponding original end-tag inside another,
-                and we cannot reconstruct that element without creating overlap. Knowing we were
-                generating a conflicting hierarchy, we opted to flatten the elements in the original
-                edition that we expected would be broken or overlapped by the critical apparatus
-                markup.</para>
-            <para>To illustrate the problem, here is an example from the output of CollateX
+                project edited by the second author. In this project, we collate different encodings of the
+                novel deriving from five digital sources using the software
+                CollateX [<xref linkend="collatex"/>], which reads the input texts to locate their moments of alignment and variation. The process of collation compares XML documents as text files, which means that XML tags are treated as text so that strings of text that compare structural boundaries like paragraph breaks in one version of a document can be aligned with passages containing the same (or nearly the same) text lacking those boundaries. CollateX provides XML output that represents in one file the collation of all the variant input documents, and its output raises a new hierarchy simply comprised of a root element and TEI critical apparatus elements designed to mark where the documents align in comparable and variant passages. When XML elements are supplied in the input to the collation process, their tags are returned as text with angle brackets given in escape characters, as shown in the figure below.</para>
+            <para>To prepare the editions for collation we began by flattening the original structural markup, converting elements that wrapped volumes, chapters, paragraphs, and lines (among others) into self-closed start and end markers. We flattened these elements in anticipation of reconstructing them on the other side of the collation process. Because we need to retain original markup information in the eventual collation output for later use, flattening it allows us to preserve it without letting it interfere with the alignment process or the new hierarchical output of CollateX. The XML output produced by CollateX includes (as we expect and want) many fragmented start and end tags, showing us not only where paragraphs break inside one reading witness but not the others, but also where part (but not all) of a deleted passage in the manuscript draft aligns with material in the published editions of the novel. In such situations, we wind up with an original start-tag inside one container element and its corresponding original end-tag inside another, and we cannot reconstruct that element without creating overlap. Knowing that the collation process by design will generate a hierarchy in conflict with the structural markup of our input documents, we prepared the input source documents in advance to flatten their hierarchies, because we intended to reconstruct the elements later building on the collation output.</para>
+            <para>Here is an example from the output of CollateX
                 representing a single divergent reading in the <quote>Thomas copy</quote> of
                     <emphasis>Frankenstein</emphasis> before all witnesses align. (Line breaks have
                 been introduced within markup here to make the lines shorter.)</para>
@@ -398,19 +377,10 @@
             </figure>
             <para>In the example above, there is only one <code>&lt;rdg&gt;</code> element inside
                 the first <code>&lt;app&gt;</code> because at this point the Thomas edition contains
-                material not present in the other editions, which have no material to compare with
+                an inserted passage not present in the other editions, which have no material to compare with
                 it. Following this point, the witnesses all agree, as shown in the next
                     <code>&lt;app&gt;</code> element.</para>
-            <para>After we completed the collation process, we wrote XSLT to separate the five
-                witnesses into separate files that could be used in new editions of each witness
-                that would retain information about moments of variation (<emphasis role="ital"
-                    >hotspots</emphasis>) in the collation, which we tag as <code>&lt;seg></code>
-                elements. Because these hotspots may overlap with structural markup, a prerequisite
-                of conversion from the collation output to the individual edition files is to
-                flatten all markup, which we will later raise in a way that avoids overlap. The
-                elements to be flattened before the introduction of the <code>&lt;seg></code>
-                hotspot tagging were all properly nested logical containers, and therefore
-                represented simultaneously with regular start- and end-tags. Here is a sample
+            <para>Following the collation process, we use the XML output as the basis for reconstructing the individual edition files so that they may individually indicate <quote>hotspots</quote>, or passages that vary in the other editions. We wrote XSLT over the collation XML output, to produce a separate file for each reading witness, and to mark each witness’s hotspots with <code>&lt;seg></code> elements. Because these hotspots will sometimes overlap with structural markup from the input editions, we must also insert these elements as flattened start and end markers. Our task, then, is to find a way to raise both the original markup we flattened from the source editions with the conflicting hierarchy posed by the <code>seg</code> elements derived from the collation process. Here is a sample
                 passage from the Thomas copy edition file showing the reconstructed but flattened
                 elements:</para>
             <figure>
@@ -447,11 +417,11 @@ loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
                 start-marker or an end-marker.<footnote>
                     <para>Using different formats for the markup of different flattened elements
                         makes it easy to raise one group of flattened element types while leaving
-                        another in its flattened stage. Alternatively, we could have used the same
-                        attributes for all flattened elements specified which ones we wanted to
+                        another in its flattened stage. Alternatively, we could use the same
+                        attributes for all flattened elements and specify which ones we wanted to
                         raise at the processing stage.</para>
                 </footnote></para>
-            <para>The use case that serves as a testing ground for the comparison of raising methods
+            <para>The primary use case that serves as a testing ground for the comparison of raising methods
                 in this report is to raise the structural elements from the original edition (such
                 as <code>&lt;p&gt;</code> and <code>&lt;del&gt;</code>), while leaving the
                     <code>&lt;seg&gt;</code> elements flattened. The output will look something like
@@ -472,8 +442,8 @@ the feelings of human nature … &lt;/p&gt;</programlisting>
                         reflowing)</para>
                 </caption>
             </figure>
-            <para>When, later in the production process, we also raise the <code>&lt;seg&gt;</code>
-                elements, we avoid overlap by fragmenting the one that spans a paragraph boundary
+            <para>A secondary use case is to raise the <code>&lt;seg/&gt;</code> elements. When, later in the production process, we also raise the <code>&lt;seg&gt;</code>
+                elements, we avoid overlap, or, rather we mark a moment of intersecting hierarchy, by fragmenting the one that spans a paragraph boundary
                 into two parts:</para>
             <figure>
                 <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt; …
@@ -490,7 +460,7 @@ not so changeable as the feelings of human
 nature … &lt;/p&gt;</programlisting>
                 <caption>
                     <para>Because raising <code>&lt;seg&gt;</code> would create overlap, we split
-                        the element into parts</para>
+                        the element into parts.</para>
                 </caption>
             </figure>
             <para>The split <code>&lt;seg&gt;</code> elements in the passage above now indicate
