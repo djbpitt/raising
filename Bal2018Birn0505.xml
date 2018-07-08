@@ -1671,7 +1671,7 @@ print(open_elements.pop().toxml())</programlisting>
                     order to append child elements and child <code>text()</code> nodes as we
                     encouter them. We begin by pushing the document node onto the stack.</para>
                 <para>We handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
-                        <code>CHARACTERS</code> events in an <code>if/elif/else</code> structure,
+                        <code>CHARACTERS</code> events in an <code>if/elif/elif</code> structure,
                     silently ignoring other events.</para>
                 <para><emphasis role="ital">[TODO: Add description of event
                     handlers]</emphasis></para>
