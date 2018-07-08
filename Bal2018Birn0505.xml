@@ -1669,14 +1669,113 @@ print(open_elements.pop().toxml())</programlisting>
                     stack-idiomatic terminology: we alias <code>append()</code> as
                         <code>push()</code> (lists already have a <code>pop()</code> method), and we
                     add <code>peek()</code> to provide access to the item at the top of the stack.
-                    That item represents the most recently opened element, and we peek at it in
-                    order to append child elements and child <code>text()</code> nodes as we
-                    encouter them. We begin by pushing the document node onto the stack.</para>
+                    That top item is the most recently opened element, and we peek at it in order to
+                    append child elements and child <code>text()</code> nodes as we encouter them.
+                    We begin by pushing the document node onto the stack.</para>
                 <para>We handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
                         <code>CHARACTERS</code> events in an <code>if/elif/elif</code> structure,
-                    silently ignoring other events.</para>
-                <para><emphasis role="ital">[TODO: Add description of event
-                    handlers]</emphasis></para>
+                    silently ignoring other events. There are three types of elements whose start
+                    and end events we need to process: start-markers, end-markers, and regular
+                    elements (whether empty or not).</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>In the case start-markers and regular elements we append the new node
+                            as a child of the item at the top of the stack (initially the document
+                            node; thereafter an element node) and then push the node onto the stack
+                            so that it becomes the new top element. The operations serve different
+                            but related purposes. Appending it makes it a descendant of the document
+                            node, which will be the eventual output tree. Pushing it makes it the
+                            current context, so that subsequent nodes will be added as children to
+                            it as long as it remains the current context. Nodes are passed by
+                            reference, rather than value, so after these operations we point to the
+                            same new current node from three places: the original input document,
+                            the top of the stack, and the location in the tree we are assembling
+                            under the output document node, which is at the bottom of the
+                            stack.</para>
+                        <para>We ignore <code>START_ELEMENT</code> events for end-markers; all of
+                            their processing happens on their <code>END_ELEMENT</code> event. This
+                            is a somewhat arbitrary decision.</para>
+                    </listitem>
+                    <listitem>
+                        <para>The three mutually excluse clauses in the <code>if/elif/elif</code>
+                            block that processes <code>END_ELEMENT</code> events work as
+                            follows:</para>
+                        <itemizedlist>
+                            <listitem>
+                                <para><code>minidom</code> treats namespace declarations as
+                                    attributes, so the presence of an attribute with the name
+                                        <code>xmlns:th</code> identifies the root note. In our
+                                    examples we are raising all markers, and therefore removing all
+                                    attributes in the Trojan namespace, so we remove this
+                                    declaration to avoid the clutter of an unneeded namespace
+                                    declaration in the output. Because we identify Trojan attributes
+                                    by their lexical shape (that is, by the presence of an explicit
+                                        <code>th:</code> prefix), removing the namespace declaration
+                                    early in the processing does not impinge on our ability to
+                                    identify attribute instances that use the prefix. Because we
+                                    never pop the root element, it will be at the top of the stack
+                                    when our processing concludes.</para>
+                            </listitem>
+                            <listitem>
+                                <para>We remove the Trojan <code>th:sID</code> attribute from the
+                                    start-marker. We want to remove it eventually because it is not
+                                    needed in the output, but we cannot remove it until the
+                                        <code>END_ELEMENT</code> event of the start-marker because
+                                    its presence tells us not to pop the stack at that
+                                        <code>END_ELEMENT</code> event. In this way we push the
+                                    element we are currently raising onto the top of the stack at
+                                    its start-marker, and pop it at the <code>END_ELEMENT</code>
+                                    event of the end-marker, rather than the start-marker.</para>
+                            </listitem>
+                            <listitem>
+                                <para>The first two clauses processed the root element and
+                                    start-markers, both of which we leave on the stack after their
+                                        <code>END_ELEMENT</code> events. In the remaining cases
+                                    (end-markers and regular elements, whether empty of not) we pop
+                                    the stack at the <code>END_ELEMENT</code> event, which makes its
+                                    parent the current context for the next event.</para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>In the case of <code>CHARACTERS</code>, we create a
+                                <code>text()</code> node and append it as a child of the current
+                            context, that is, the element at the top of the stack.</para>
+                    </listitem>
+                </itemizedlist>
+                <para>Conceptually, the entire start-marker functions as if it were the
+                        <code>START_ELEMENT</code> event for a regular element, and the entire
+                    corresponding end-marker functions as if it were the <code>END_ELEMENT</code>
+                    event for the same regular element. This means that we push a start-marker on
+                    its <code>START_ELEMENT</code> event (ignoring its <code>END_ELEMENT</code>
+                    event), and pop it on the corresponding end-marker’s <code>END_ELEMENT</code>
+                    event (ignoring its <code>START_ELEMENT</code> event). In tabular form:</para>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element type</th>
+                            <th><code>START_ELEMENT</code></th>
+                            <th><code>END_ELEMENT</code></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Regular</th>
+                            <td>Push</td>
+                            <td>Pop</td>
+                        </tr>
+                        <tr>
+                            <th>Start-marker</th>
+                            <td>Push</td>
+                            <td>Remove <code>@th:sID</code></td>
+                        </tr>
+                        <tr>
+                            <th>End-marker</th>
+                            <td>Ignore</td>
+                            <td>Pop</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </section>
     </section>
@@ -1829,7 +1928,10 @@ print(open_elements.pop().toxml())</programlisting>
                     perform the string manipulation needed to mediate between the two is difficult
                     to read and write. For that reason, it is safer to use XML methods to create the
                     XML output as a (necessarily well-formed) DOM tree, which can then be
-                    serialized, instead of creating the output directly as a string.</para>
+                    serialized, instead of creating the output directly as a string. The use of
+                        <code>pulldom</code> to parse the input XML also requires accommodations to
+                    the peculiarities of <code>pulldom</code> namespace handling, which is discussed
+                    imediately below, under <xref linkend="python_xml_challenges"/>.</para>
             </section>
             <section xml:id="python_xml_challenges" xreflabel="Python XML output challenges">
                 <title>XML output</title>
@@ -1845,12 +1947,11 @@ print(open_elements.pop().toxml())</programlisting>
                                 role="ital">start</emphasis> and <emphasis role="ital"
                                 >end</emphasis> (marker vs event) simultaneously is potentially
                             confusing for the developer. We also need to decide whether to process
-                            the marker at the <code>START_ELEMENT</code> and
-                                <code>END_ELEMENT</code> event, or to divide the processing of a
-                            marker over the two events. Since the two events always follow each
-                            other immediately, it might seem not to matter, but that assumption led
-                            us into error when dealing with removing Trojan attributes, about which
-                            see the following issue.</para>
+                            the marker at the <code>START_ELEMENT</code> or <code>END_ELEMENT</code>
+                            event, or to divide the processing of a marker over the two events.
+                            Since the two events always follow each other immediately, it might seem
+                            not to matter, but that assumption led us into error when dealing with
+                            removing Trojan attributes, about which see the following issue.</para>
                     </listitem>
                     <listitem>
                         <para>Attributes in <code>minidom</code> are part of a dictionary-like
@@ -1874,7 +1975,7 @@ print(open_elements.pop().toxml())</programlisting>
                     </listitem>
                     <listitem>
                         <para>The relationships among namespaces, namespace prefixes, and namespace
-                            delcarations in <code>minidom</code> are alien to the XML view of
+                            declarations in <code>minidom</code> are alien to the XML view of
                             namespaces. <code>minidom</code> is namespace-aware at the level of the
                             model, but that awareness is not integrated with the serialization
                             supported by the <code>toxml()</code> method (and some others). Here is
@@ -1921,12 +2022,27 @@ print(open_elements.pop().toxml())</programlisting>
                                     namespace URI.</para>
                             </listitem>-->
                         </itemizedlist>
-                        <para>These behaviors are very far from XML-idiomatic, but they prove not to
-                            be much of a practical obstacle during processing. Creating XML with
-                                <code>minidom</code> that is intended primarily to be serialized for
-                            subsequent downstream processing should focus on the serialization,
-                            which means writing namespace prefixes and namespace declarations (as
-                            attributes) explicitly where you want them in the output, and matching
+                        <para>Because <code>pulldom</code> and <code>minidom</code> are essentially
+                            blind to namespace declarations, this also means that when we remove the
+                            declaration of the Trojan namespace while processing the root element
+                            (which changes the in-memory tree because <code>pulldom</code> and
+                                <code>minidom</code> objects are mutable), we can nonetheless still
+                            find Trojan attributes by their lexical shape, that is, by their
+                            explicit prefixes. It also means that our code is depending on those
+                            lexical forms: we rely on the presence of an explicit declaration of the
+                            Trojan namespace prefix only on the root element, and we rely on the use
+                            of the string <code>th:</code> as the namespace prefix. This means that
+                            XML that expresses the same namespace information in different ways
+                            (e.g., by binding a different prefix to the namespace URI, or by using
+                            namespace declarations on individual elements, instead of a prefix) will
+                            not be processed correctly.</para>
+                        <para>These <code>pulldom</code> and <code>minidom</code> behaviors are very
+                            far from XML-idiomatic, but except for the syntactic dependencies they
+                            impose (where namespaces are declared, how the declarations are spelled,
+                            how they are bound to prefixes), they prove not to be much of a
+                            practical obstacle during processing. The required accommodation
+                            requires writing namespace prefixes and namespace declarations (as
+                            attributes) explicitly where we want them in the output, and matching
                             namespaced elements and attributes with the prefix where it is used in
                             the serialized input and without the prefix where it is not.</para>
                     </listitem>
