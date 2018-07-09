@@ -22,7 +22,7 @@
 	passed as parameter *-->
     <xsl:function name="th:raise">
         <xsl:param name="input" as="document-node()"/>
-        <xsl:message>raise() called with <xsl:value-of select="count($input//*)"/>-element document</xsl:message>
+        <xsl:message>raise() called with <xsl:value-of select="count($input//*)"/>-element document (<xsl:value-of select="count($input//*[@th:sID])"/> Trojan pairs)</xsl:message>
         <xsl:choose>
             <xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
                 <!--* If we have more work to do, do it *-->
