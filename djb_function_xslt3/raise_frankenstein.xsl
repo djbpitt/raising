@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns="http://www.tei-c.org/ns/1.0"
-    xmlns:pitt="https://github.com/ebeshero/Pittsburgh_Frankenstein"    
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" xmlns:pitt="https://github.com/ebeshero/Pittsburgh_Frankenstein"    
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="no"/>
@@ -23,7 +23,7 @@
     -->
     <!-- identity template (all modes) -->
     <xsl:template match="@* | node()" mode="#all">
-        <xsl:copy copy-namespaces="no">
+        <xsl:copy>
             <xsl:apply-templates select="@* | node()"/>
         </xsl:copy>
     </xsl:template>
