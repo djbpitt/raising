@@ -1,0 +1,7 @@
+truncate -s 0 log.txt
+for i in `seq 1 10`;
+do
+echo "Iteration  $i"
+	java -jar ${SAXON_HOME}/saxon9he.jar -t -s:r02_flattened.xml -xsl:../djb_function_xslt3/raise.xsl -o:raised.xml 2>> log.txt
+done
+grep Execution log.txt | awk '{sub(/s/,"", $3); sum += $3; print sum}' | echo "Average time: `tail -1`"
