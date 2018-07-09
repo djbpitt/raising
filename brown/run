@@ -1,7 +1,9 @@
 truncate -s 0 log.txt
-for i in `seq 1 10`;
+samples=10
+for i in `seq 1 $samples`
 do
 echo "Iteration  $i"
 	java -jar ${SAXON_HOME}/saxon9he.jar -t -s:r02_flattened.xml -xsl:../djb_function_xslt3/raise.xsl -o:raised.xml 2>> log.txt
 done
-grep Execution log.txt | awk '{sub(/s/,"", $3); sum += $3; print sum}' | echo "Average time: `tail -1`"
+total=`grep Execution log.txt | awk '{sub(/s/,"", $3); sum += $3; print sum}' | tail -1` 
+echo "scale=4; $total/$samples" | bc
