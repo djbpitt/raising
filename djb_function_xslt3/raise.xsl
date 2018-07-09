@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
-    exclude-result-prefixes="#all">
-  
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all">
+
     <!--* Setup *-->
     <xsl:output method="xml" indent="no"/>
 
@@ -23,8 +22,7 @@
 	passed as parameter *-->
     <xsl:function name="th:raise">
         <xsl:param name="input" as="document-node()"/>
-	<xsl:message>raise() called with <xsl:value-of
-	select="count($input//*)"/>-element document</xsl:message>
+        <xsl:message>raise() called with <xsl:value-of select="count($input//*)"/>-element document</xsl:message>
         <xsl:choose>
             <xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
                 <!--* If we have more work to do, do it *-->
@@ -37,7 +35,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <!--* We have no more work to do, return the input unchanged. *-->
-		<xsl:message>raise() returning.</xsl:message>
+                <xsl:message>raise() returning.</xsl:message>
                 <xsl:sequence select="$input"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -56,15 +54,17 @@
     </xsl:template>
 
     <!--* Innermost start-marker *-->
-    <xsl:template match="*[@th:sID eq
-			 following-sibling::*[@th:eID][1]/@th:eID]">
+    <xsl:template
+        match="
+            *[@th:sID eq
+            following-sibling::*[@th:eID][1]/@th:eID]">
         <xsl:copy copy-namespaces="no">
             <xsl:copy-of select="@* except @th:sID"/>
             <!-- content of raised element; no foreign end-markers
 		 here (but possibly start-markers); just copy the
 		 nodes -->
-	    
-	    <!--* v.Prev had:
+
+            <!--* v.Prev had:
             <xsl:copy-of
                 select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"
 		/>
@@ -77,9 +77,8 @@
 		select="following-sibling::node()[not(preceding-sibling::*[@th:eID eq current()/@th:sID])]"
 		but it's simpler to be more obvious:
 		*-->
-	    <xsl:variable name="end-marker" as="element()"
-			  select="following-sibling::*[@th:eID][1]"/>
-	    <xsl:copy-of select="following-sibling::node()[. &lt;&lt; $end-marker]"/>
+            <xsl:variable name="end-marker" as="element()" select="key('end-markers', @th:sID)"/>
+            <xsl:copy-of select="following-sibling::node()[. &lt;&lt; $end-marker]"/>
         </xsl:copy>
     </xsl:template>
 
