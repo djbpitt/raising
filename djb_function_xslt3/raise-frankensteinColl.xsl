@@ -10,7 +10,7 @@
             <xsl:apply-templates select="@* | node()"/>
        </xsl:copy>
     </xsl:template>
-    <xsl:variable name="C10-coll" as="document-node()+" select="collection('../input/frankenstein/c10-coll')"/>  
+    <xsl:variable name="C10-coll" as="document-node()+" select="collection('../input/frankenstein/c10-coll/')"/>  
     <xsl:function name="th:raise">
         <xsl:param name="input" as="element()"/>
         <xsl:choose>
@@ -31,10 +31,10 @@
        <xsl:for-each select="$C10-coll//TEI">
            <xsl:variable name="currentP3File" as="element()" select="current()"/>
            <xsl:variable name="filename">
-              <xsl:text>P4-</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()] ! substring-after(., 'P3-')"/>
+              <xsl:text>target-</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()]"/>
            </xsl:variable>
          <xsl:variable name="chunk" as="xs:string" select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/> 
-           <xsl:result-document method="xml" indent="yes" href="frankenColl-output/io-{$filename}">
+           <xsl:result-document method="xml" indent="yes" href="target-c10-coll/{$filename}">
         <TEI>
             <xsl:apply-templates select="descendant::teiHeader"/>
         <text>
