@@ -3,14 +3,14 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all" version="3.0">
     <xsl:output method="xml" indent="no"/>
-    <!--2018-07-07 ebb: This stylesheet works to raise "trojan elements" from the inside out, this time over a collection of Frankenstein files output from collation.  -->
+    <!--2018-07-07 ebb: This stylesheet works to raise "trojan elements" from the inside out, this time over a collection of Frankenstein files output from collation. It also adapts djb's function to process an element node rather than a document node in memory to perform its recursive processing. -->
    <!--<xsl:mode on-no-match="shallow-copy"/>-->
 <xsl:template match="@* | node()" mode="#all">
         <xsl:copy copy-namespaces="no">
             <xsl:apply-templates select="@* | node()"/>
        </xsl:copy>
     </xsl:template>
-    <xsl:variable name="C10-coll" as="document-node()+" select="collection('bridge-P3-C10')"/>  
+    <xsl:variable name="C10-coll" as="document-node()+" select="collection('../input/frankenstein/c10-coll')"/>  
     <xsl:function name="th:raise">
         <xsl:param name="input" as="element()"/>
         <xsl:choose>
