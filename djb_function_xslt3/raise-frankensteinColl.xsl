@@ -34,7 +34,7 @@
               <xsl:text>target-</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()]"/>
            </xsl:variable>
          <xsl:variable name="chunk" as="xs:string" select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/> 
-           <xsl:result-document method="xml" indent="yes" href="target-c10-coll/{$filename}">
+           <xsl:result-document method="xml" indent="yes" href="../input/frankenstein/target-c10-coll/{$filename}">
         <TEI>
             <xsl:apply-templates select="descendant::teiHeader"/>
         <text>
