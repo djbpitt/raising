@@ -10,12 +10,25 @@
             <xsl:apply-templates select="@* | node()"/>
        </xsl:copy>
     </xsl:template>
-    <xsl:variable name="P3-BridgeColl-C10" as="document-node()+" select="collection('bridge-P3-C10')"/>
-    <xsl:variable name="testerDoc" as="document-node()" select="doc('bridge-P3-C10/P3-fThomas_C10.xml')"/>  
-<!--In Bridge Construction Phase 4, we are converting self-closed edition elements into full elements to "unflatten" the edition files . -->  
-    
+    <xsl:variable name="C10-coll" as="document-node()+" select="collection('bridge-P3-C10')"/>  
+    <xsl:function name="th:raise">
+        <xsl:param name="input" as="element()"/>
+        <xsl:choose>
+            <xsl:when test="exists($input//@ana)">
+                <xsl:variable name="result" as="element()">
+                    <div type="collation">
+                        <xsl:apply-templates select="$input" mode="loop"/>                            
+                    </div>
+                </xsl:variable>
+                <xsl:sequence select="th:raise($result)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="$input"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>  
    <xsl:template match="/">
-       <xsl:for-each select="$P3-BridgeColl-C10//TEI">
+       <xsl:for-each select="$C10-coll//TEI">
            <xsl:variable name="currentP3File" as="element()" select="current()"/>
            <xsl:variable name="filename">
               <xsl:text>P4-</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()] ! substring-after(., 'P3-')"/>
@@ -54,23 +67,6 @@
     <xsl:template match="div[@type='collation']" mode="loop">
         <xsl:apply-templates/>
     </xsl:template> 
-    <xsl:function name="th:raise">
-        <xsl:param name="input" as="element()"/>
-        <xsl:choose>
-            <xsl:when test="exists($input//@ana)">
-                <xsl:variable name="result" as="element()">
-                        <div type="collation">
-                            <xsl:apply-templates select="$input" mode="loop"/>                            
-                    </div>
-                </xsl:variable>
-                <xsl:sequence select="th:raise($result)"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:sequence select="$input"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:function>
-
     <xsl:template match="*[@ana='start' and @loc eq following-sibling::*[@ana eq 'end'][1]/@loc]">
      <xsl:variable name="currNode" select="current()" as="element()"/>
         <xsl:variable name="currLoc" select="@loc" as="xs:string"/>

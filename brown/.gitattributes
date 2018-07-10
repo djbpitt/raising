@@ -1,2 +1,0 @@
-Corpus.xml filter=lfs diff=lfs merge=lfs -text
-Corpus_flattened.xml filter=lfs diff=lfs merge=lfs -text
