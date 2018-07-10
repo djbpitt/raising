@@ -88,6 +88,26 @@ To eliminate the need for separate stylesheets for the different styles of marke
 
 The `doc` directory will contain our Balisage paper and a subdirectory named `balisage` with the Balisage authors' kit (stylesheets, sample document and its images, etc.).
 
-## The `lib` directory
+## The `lib` directory 
 
 As we attempt to improve our code, we may find ourselves reusing bits (for example, functions to determine whether a given node is or is not a start- or end-marker).  To simplify maintenance, modules containing such reused code should be placed in the `lib` directory.
+
+## The `testing` directory 
+
+*At the time of writing, it's not clear exactly what will need to go here; the following proposal will need revision in the light of experience.*
+
+The `testing` directory has several subdirectories:
+
+* `bin` for testing scripts, processing scripts, etc.
+* `raw` for raw test output (if, for example, we acquire timing data by copying stderr and stdout into files to be parsed for the times, the raw logs go here).
+* `reports` for final output of a test script
+
+It also contains a `README.md` file to record any special information needed.
+
+For the moment, we assume all test reports will be XML, either in an ad hoc vocabulary or in XHTML.
+
+A test report should begin with a summary, but should normally either contain or link to full data on the test results.  If full data and summary are in separate files, the filename should have the form `full.` or `summary.` + _yyyymmddThhmmss.ss_ + '.xml' or `.xhtml`.  If they are in the same document, the filename prefix should be `report.`.
+
+If the test report is selective (only certain input data, only certain methods), the file name should use infixes to signal what it covers, and the meaning of the infixes used should be recorded in `README.md`.
+
+We give test reports names include a creation time in order to allow ourselves to keep more than one set of test results around.
