@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
+    xmlns="http://www.tei-c.org/ns/1.0"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" xmlns:pitt="https://github.com/ebeshero/Pittsburgh_Frankenstein"    
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="no"/>
     <!--
         Input document properties:
         
-        1. The document is in no namespace
+        1. The document is in the TEI namespace and a project-specific pitt namespace.
         2. Only Trojan milestones have @ana attributes, the values of which start with (are not necessarily
             equal to) 'start' or 'end' (case-insensitive). Actual values are 'start', 'Start', and 'startTag',
             and the corresponding end values. There are no other uses of @ana.
@@ -21,7 +23,7 @@
     -->
     <!-- identity template (all modes) -->
     <xsl:template match="@* | node()" mode="#all">
-        <xsl:copy copy-namespaces="no">
+        <xsl:copy>
             <xsl:apply-templates select="@* | node()"/>
         </xsl:copy>
     </xsl:template>

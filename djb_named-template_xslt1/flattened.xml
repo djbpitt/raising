@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><root>
-    <p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e3"/>This is a <word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e5"/>paragraph<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e5"/> that contains some stuff.<p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e3"/>
-    <p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e9"/>This is another paragraph <phrase xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e11"/><word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e12"/>that<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e12"/>
-            <word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e15"/>contains<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e15"/>
-            <word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="d1e18"/>more<word xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e18"/><phrase xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e11"/> stuff.<p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="d1e9"/>
-</root>
