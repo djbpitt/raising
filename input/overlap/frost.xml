@@ -1,0 +1,10 @@
+<!--* Example adapted from LMNL sawtooth syntax
+    * at http://piez.org/wendell/LMNL/lmnl-page.html
+    *-->
+<excerpt xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+ <source th:sID="source"/>The Housekeeper<source th:eID="source"/>
+ <author th:sID="author"/>Robert Frost<author th:eID="author"/>
+ <s th:sID="s1"/><l th:sID="L144" n="144/>He manages to keep the upper hand<l th:eID="L144"/>
+ <l n="145" th:sID="L145"/>On his own farm.<s th:eID="s1"/> <s th:sID="s2"/>He's boss.<s th:eID="s2"/> <s th:sID="s3"/>But as to hens:<l th:eID="L145"/>
+ <l n="146" th:sID="L146"/>We fence our flowers in and the hens range.<l th:eID="L146"/><s th:eID="s3"/>
+</excerpt>

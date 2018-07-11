@@ -12,6 +12,10 @@
       *-->
 
   <!--* Revisions:
+      * 2018-07-10 : CMSMcQ : declare trojan-start() and -end()
+      *     as streamable.
+      *     Rewrite accumulator rules to make copies, to make
+      *     them streamable, too.
       * 2018-07-05 : CMSMcQ : try to make good on that
       *     conjecture:  start with just keeping track of level.
       * 2018-06-28 : CMSMcQ : conjecture that a solution with
@@ -69,9 +73,11 @@
       * 'ana' for @ana=start|end
       * 'xmlid' for @xml:id matching (_start|_end)$
       *-->
-  <xsl:param name="th-style" select=" 'ana' " static="yes"/>
+  <xsl:param name="th-style" select=" 'th' " static="yes"/>
 
-  <!--* declare default mode as shallow-copy *-->
+  <!--* declare default mode; we make it fail on no match
+      * because it turns out we need templates for all nodes.
+      *-->
   <xsl:mode on-no-match="fail"
 	    use-accumulators="level stack"
 	    streamable="yes"/>
@@ -95,7 +101,19 @@
 		   >
     <!--* On Trojan start-tag, push the start-tag onto the stack *-->
     <xsl:accumulator-rule match="*[th:trojan-start(.)]"
-			  select="array:append($value, .)"/>
+      phase="end">
+      <xsl:variable name="this" as="element()">
+        <xsl:copy>
+          <xsl:copy-of select="@*"/>
+        </xsl:copy>
+      </xsl:variable>
+      <xsl:sequence select="array:append($value, $this)"/>
+    </xsl:accumulator-rule>
+    <!--* select="array:append($value, snapshot())" *-->
+    <!--* original version was not streamable (the . is problematic):
+    <xsl:accumulator-rule match="*[th:trojan-start(.)]"
+      select="array:append($value, .)"/>
+      *-->
     
     <!--* On Trojan end-tag, make the currently pending element,
 	pop the stack, and insert the pending element at the
@@ -108,28 +126,42 @@
       <xsl:variable name="e" as="element()"
 		    select="th:make-element($value($level))"/>
       <xsl:choose>
-	<xsl:when test="$level eq 1">
-	  <!--* at outermost level, we have no previous
+        <xsl:when test="$level eq 1">
+          <!--* at outermost level, we have no previous
 	      level to add anything to, so we just pop the
 	      stack. *-->
-	  <xsl:sequence select="[]"/>
-	</xsl:when>
-	<xsl:otherwise>	  
-	  <xsl:sequence select="array:put(
-				array:remove($value, $level),
-				$level - 1,
-				($value($level - 1), $e))"/>
-	</xsl:otherwise>
+          <xsl:sequence select="[]"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence
+            select="
+              array:put(
+              array:remove($value, $level),
+              $level - 1,
+              ($value($level - 1), $e))"
+          />
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:accumulator-rule>
     
     <!--* On any other node, append current node to the top sequence in the stack *-->
     <xsl:accumulator-rule match="node()[not(self::element())
+      or (not(th:trojan-start(.)) and not(th:trojan-end(.)))]">
+      <xsl:variable name="this" as="node()">
+        <xsl:copy/>
+      </xsl:variable>
+      <xsl:sequence
+      select="for $level in array:size($value) return
+      if ($level eq 0)
+      then []
+      else array:put($value, $level, ($value($level), $this))"/>
+    </xsl:accumulator-rule>
+    <!--* <xsl:accumulator-rule match="node()[not(self::element())
 				 or (not(th:trojan-start(.)) and not(th:trojan-end(.)))]"
 			  select="for $level in array:size($value) return
 				  if ($level eq 0)
 				  then []
-				  else array:put($value, $level, ($value($level), .))"/>
+				  else array:put($value, $level, ($value($level), .))"/>* -->
   </xsl:accumulator>  
 
 
@@ -186,7 +218,7 @@
 	* otherwise, do nothing and leave everything to the accumulator *-->
     <xsl:choose>
       <xsl:when test="array:size(accumulator-before('stack')) eq 0">
-	<xsl:sequence select="."/>
+        <xsl:sequence select="copy-of(.)"/>
       </xsl:when>
       <xsl:otherwise/>
     </xsl:choose>    
@@ -200,7 +232,7 @@
       * (Current implementation assumes we always process
       * anything with @th:sID.)
       *-->
-  <xsl:function name="th:trojan-start" as="xs:boolean">
+  <xsl:function name="th:trojan-start" as="xs:boolean" streamability="inspection">
     <xsl:param name="e" as="element()"/>
     
     <xsl:value-of use-when="$th-style = 'th' "
@@ -217,7 +249,8 @@
       * (Current implementation assumes we always process
       * anything with @th:eID.)
       *-->
-  <xsl:function name="th:trojan-end" as="xs:boolean">
+  <xsl:function name="th:trojan-end" as="xs:boolean"
+    streamability="inspection">
     <xsl:param name="e" as="element()"/>
     
     <xsl:value-of use-when="$th-style = 'th' "
