@@ -1,9 +1,10 @@
-truncate -s 0 log.txt
-samples=10
-for i in `seq 1 $samples`
+truncate -s 0 log-deep.txt
+truncate -s 0 log-shallow.txt
+for i in `seq 1 100`;
 do
-echo "Iteration  $i"
-	java -jar ${SAXON_HOME}/saxon9he.jar -t -s:r02_flattened.xml -xsl:../djb_function_xslt3/raise.xsl -o:raised.xml 2>> log.txt
+	echo "Iteration $i ..."
+	java -jar /opt/saxon/saxon9he.jar -t -s:r02_flattened.xml -xsl:../../djb_function_xslt3/raise-shallow.xsl 2>&1 > /dev/null | grep Execution | awk '{print $3}' | sed s/s// >> log-shallow.txt
+	java -jar /opt/saxon/saxon9he.jar -t -s:r02_flattened.xml -xsl:../../djb_function_xslt3/raise.xsl 2>&1 > /dev/null | grep Execution | awk '{print $3}' | sed s/s// >> log-deep.txt
 done
-total=`grep Execution log.txt | awk '{sub(/s/,"", $3); sum += $3; print sum}' | tail -1` 
-echo "scale=4; $total/$samples" | bc
+cat log-shallow.txt | awk '{s+=$1}END{print "shallow:" s/NR}'
+cat log-deep.txt | awk '{s+=$1}END{print "deep:" s/NR}'
