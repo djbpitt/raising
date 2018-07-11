@@ -7,7 +7,7 @@ These are conventions for organizing the repository, proposed for discussion and
 The main repo has several subdirectories:
 
 * `input` for all input files and all canonical results
-* one directory for each solution to the task (at the time of writing, these are `accumulator`, `inside-out`, `python_string`, `python_xml`, `right-sibling`, and `regex`, but more may be added as we think of new solutions)
+* one directory for each solution to the task (at the time of writing, these are `accumulators`, `inside-out`, `python_string`, `python_xml`, `right-sibling`, and `regex`, but more may be added as we think of new solutions)
 * `doc` for our Balisage paper and the Balisage author-kit artifacts
 * `lib` for any shared code
 * `testing` for data and code related to testing for correctness or performance
@@ -53,18 +53,20 @@ When raising (in _Frankenstein_) elements marked with `@xml:id`: include `@xml:i
 
 ## Code directories
 
-There is one code subdirectory in the main repo for each method, called `accumulator`, `inside-out`, `python_string`, `python_xml`, `right-sibling`, and `regex`. 
+There is one code subdirectory in the main repo for each method, called `accumulators`, `inside-out`, `python_string`, `python_xml`, `right-sibling`, and `regex` (etc.).
 
 ### Code of the solution
 
 Each code directory _must_ contain, as a single file (if possible) `raise` with an appropriate filename extension (e.g., `raise.xsl`, `raise.py`, `raise.sh`). The same file should work for the first three of our four input types: basic, extended, and overlap. If _Frankenstein_ input requires a different transformation file, it should be called `raise_frankenstein.xsl`, etc. Notes:
 
-* If we write multiple versions of any given method, their names should have the form `raise` + _infix + `.` + _extension_.   For example, versions written for XSLT 1.0 and 3.0 might be `raise_1.0.xsl` and `raise_3.0.xsl`; versions which differ in using a function or a named template might be `raise_f.xsl` and `raise_t.xsl`.  The simplest version (the one for someone to look at first to understand the method) should be `raise.xsl`. 
+* If we write multiple versions of any given method, their names should have the form `raise` + _infix_ + `.` + _extension_.   For example, versions written for XSLT 1.0 and 3.0 might be `raise_1.0.xsl` and `raise_3.0.xsl`; versions which differ in using a function or a named template might be `raise_f.xsl` and `raise_t.xsl`.  The simplest version (the one for someone to look at first to understand the method) should be `raise.xsl`. 
 * To avoid operating-system-specific command-line oddities with regex, regular expressions should be either in a Python file (`raise.py`) or a sed file (`raise.sed`).  The latter may be invoked by a shell script.
 
 ### Output of the solution
 
-Code directories _must_ contain a subdirectory called `output` that contains the results of the raising operations on the input files.  The `output` directory should contain sub-subdirectories matching those of `input`.  The output for an input file whose name is of the form `flattened.` + _filename_ + `.xml` should be `raised.` + _filename_ + `xml`. For example, the result of raising `input/basic/flattened.xml` would be in `.../output/basic/raised.xml`. If an attempt at raising produces no output (e.g. because the method dies on that particular input), an empty output file may be left to signal the failure.  If possible, a file named _filename_ + `.stderr` should be provided to record the error(s) raised. 
+Code directories _must_ contain a subdirectory called `output` that contains the results of the raising operations on the input files.  The `output` directory should contain sub-subdirectories matching those of `input`.  The output for an input file whose name is of the form `flattened.` + _filename_ + `.xml` should be `raised.` + _filename_ + `xml`. For example, the result of raising `input/basic/flattened.xml` would be in `.../output/basic/raised.xml`. If an attempt at raising produces no output (e.g. because the method dies on that particular input), an empty output file may be left to signal the failure.  If possible, a file named _filename_ + `.stderr` should be provided to record the error(s) raised.
+
+When there are multiple versions of the implementation (e.g. `raise_1.0` and `raise_3.0`), and when we test with multiple processors (e.g. xsltproc, Saxon 6.5.3, Saxon 9.8 HE), the output filename should take the form `raised_` + _version_ + `_` + _processor_ + `.xml`.
 
 ### Readme and shell scripts
 
@@ -86,7 +88,7 @@ To eliminate the need for separate stylesheets for the different styles of marke
 
 ## The `doc` directory
 
-The `doc` directory will contain our Balisage paper and a subdirectory named `balisage` with the Balisage authors' kit (stylesheets, sample document and its images, etc.).
+The `doc` directory will contain our Balisage paper, a stylesheet named `local.xsl`, and a subdirectory named `balisage` with the Balisage authors' kit (stylesheets, sample document and its images, etc.).  The main purpose of `local.xsl` is to redefine various parameters so that the CSS and XSLT stylesheets do not need to be in the same directory as the document.
 
 ## The `lib` directory 
 
