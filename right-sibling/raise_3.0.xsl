@@ -60,13 +60,13 @@
   <xsl:mode on-no-match="shallow-copy"/>
 
  <xsl:template name="shallow-copy">
-   <xsl:copy>
+   <xsl:copy copy-namespaces="no">
      <xsl:apply-templates select="@*|node()"/>
    </xsl:copy>
  </xsl:template>
 
  <!--* special rule for root *-->
- <xsl:template match="/*" priority="100">
+ <xsl:template match="/*" priority="100" mode="abandoned">
    <xsl:element name="{name()}" namespace="{namespace-uri()}">
      <xsl:copy-of select="namespace::*
 			  [not(. = 'http://www.blackmesatech.com/2017/nss/trojan-horse')
@@ -93,7 +93,7 @@
       <xsl:message>Shifting to shallow-to-deep on <xsl:value-of
       select="name()"/></xsl:message>
     </xsl:if>    
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:copy-of select="@*"/>
       <xsl:apply-templates mode="shallow-to-deep" select="child::node()[1]"/>
     </xsl:copy>    
@@ -108,7 +108,7 @@
     
     <!--* 1: handle this element *-->
     
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:copy-of select="@* except @th:*" use-when=" $th-style='th' "/>
       <xsl:copy-of select="@* except (@ana, @loc)" use-when=" $th-style='ana' "/>
       <xsl:attribute name="xml:id" select="@loc" use-when=" $th-style='ana' "/>
@@ -130,7 +130,7 @@
       * 4 End-markers
       *-->
 
-  <xsl:template match="*[@th:eID]" mode="shallow-to-deep">
+  <xsl:template match="*[th:is-end-marker(.)]" mode="shallow-to-deep">
     
     <!--* no action necessary *-->
     <!--* we do NOT recur to our right.  We leave it to our parent to do 
@@ -147,7 +147,7 @@
       * be processed recursively; otherwise just copy
       * Oddly this is almost identical to what deep-to-shallow does
       *-->  
-  <xsl:template match="*[not(th:is-start-marker(.))]"
+  <xsl:template match="*[not(th:is-marker(.))]"
 		mode="shallow-to-deep">
     <xsl:if test="$debug = 'yes' ">
       <xsl:message>Non-marker in shallow-to-deep: <xsl:value-of select="name()"/> </xsl:message>
@@ -170,9 +170,6 @@
   
   <xsl:template match="text()"
 		mode="shallow-to-deep">
-    <xsl:if test="$debug = 'yes' ">
-      <xsl:message>Text node in shallow-to-deep </xsl:message>
-    </xsl:if>
     <xsl:copy/>
     <xsl:apply-templates select="following-sibling::node()[1]"
 			 mode="shallow-to-deep"/>
