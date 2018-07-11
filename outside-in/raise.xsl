@@ -51,7 +51,7 @@
       * 'ana' for @ana=start|end
       * 'xmlid' for @xml:id matching (_start|_end)$
       *-->
-  <xsl:param name="th-style" select=" 'ana' " static="yes"/>
+  <xsl:param name="th-style" select=" 'th' " static="yes"/>
 
   <!--* declare default mode as requiring templates *-->
   <xsl:mode on-no-match="shallow-copy"/>
