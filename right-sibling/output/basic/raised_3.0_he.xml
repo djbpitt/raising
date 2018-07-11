@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><root>
+    <p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">This is a <word>paragraph<word th:eID="d1e5"/> that contains some stuff.<p th:eID="d1e3"/>
+    <p>This is another paragraph <phrase><word>that<word th:eID="d1e12"/>
+            <word>contains<word th:eID="d1e15"/>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>contains<word th:eID="d1e15"/>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</phrase> stuff.<p th:eID="d1e9"/>
+</p>
+</word> that contains some stuff.<p th:eID="d1e3"/>
+    <p>This is another paragraph <phrase><word>that<word th:eID="d1e12"/>
+            <word>contains<word th:eID="d1e15"/>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>contains<word th:eID="d1e15"/>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</phrase> stuff.<p th:eID="d1e9"/>
+</p>
+</p>
+    <p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">This is another paragraph <phrase><word>that<word th:eID="d1e12"/>
+            <word>contains<word th:eID="d1e15"/>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>contains<word th:eID="d1e15"/>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word>
+            <word>more<word th:eID="d1e18"/><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</word><phrase th:eID="d1e11"/> stuff.<p th:eID="d1e9"/>
+</phrase> stuff.<p th:eID="d1e9"/>
+</p>
+</root>

@@ -85,7 +85,8 @@
  </xsl:template>
 
  <!--* special rule for root *-->
- <xsl:template match="/*" priority="100">
+ 
+ <xsl:template match="/*" priority="100" mode="abandoned">
    <xsl:element name="{name()}" namespace="{namespace-uri()}">
      <xsl:copy-of select="namespace::*
 			  [not(. = 'http://www.blackmesatech.com/2017/nss/trojan-horse')
@@ -124,6 +125,10 @@
   <xsl:template match="*[*[@ana='start' or @ana='end']]">
     <xsl:choose>
       <xsl:when test="$th-style = 'ana'">
+	<xsl:if test="$debug = 'yes' ">
+	  <xsl:message>Shifting to shallow-to-deep on <xsl:value-of
+	  select="name()"/></xsl:message>
+	</xsl:if>
 	<xsl:copy>
 	  <xsl:apply-templates select="@*"/>
 	  <xsl:apply-templates mode="shallow-to-deep-ana" select="child::node()[1]"/>
@@ -163,7 +168,7 @@
     </xsl:apply-templates>
   </xsl:template>
 
-  <xsl:template match="*[@ana='start']" mode="ana-shallow-to-deep">
+  <xsl:template match="*[@ana='start']" mode="shallow-to-deep-ana">
     <xsl:variable name="ns" select="namespace-uri()"/>
     <xsl:variable name="ln" as="xs:string" select="local-name()"/>
     <xsl:variable name="ID" as="xs:string" select="@loc"/>
@@ -172,7 +177,7 @@
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="no-ana"/>
       <xsl:apply-templates select="following-sibling::node()[1]"
-			   mode="ana-shallow-to-deep">
+			   mode="shallow-to-deep-ana">
       </xsl:apply-templates>
     </xsl:copy>
     
@@ -181,7 +186,7 @@
 				 and namespace-uri()=$ns
 				 and local-name()=$ln]
 				 /following-sibling::node()[1]"
-			 mode="ana-shallow-to-deep">
+			 mode="shallow-to-deep-ana">
     </xsl:apply-templates>
   </xsl:template>
 
@@ -217,10 +222,14 @@
       *-->
 
   <xsl:template match="*[@th:eID]" mode="shallow-to-deep">
+    
+    <!--* no action necessary *-->
+    <!--* we do NOT recur to our right.  We leave it to our parent to do 
+	that. *-->
+    
+  </xsl:template>
 
-    <xsl:variable name="ns" select="namespace-uri()"/>
-    <xsl:variable name="ln" as="xs:string" select="local-name()"/>
-    <xsl:variable name="eID" as="xs:string" select="@th:eID"/>
+  <xsl:template match="*[@ana='end']" mode="shallow-to-deep-ana">
     
     <!--* no action necessary *-->
     <!--* we do NOT recur to our right.  We leave it to our parent to do 
@@ -245,9 +254,22 @@
 			 mode="shallow-to-deep"/>
   </xsl:template>
   
+  <xsl:template match="*[not(@ana='start' or @ana='end')]"
+		mode="shallow-to-deep-ana">
+    <xsl:if test="$debug = 'yes' ">
+      <xsl:message>Found non-marker element in shallow-to-deep-ana mode: <xsl:value-of
+      select="name()"/></xsl:message>
+    </xsl:if>
+    <xsl:apply-templates select="."/>
+    <!--* and recur to right sibling *-->
+    <xsl:apply-templates select="following-sibling::node()[1]"
+			 mode="shallow-to-deep-ana"/>
+  </xsl:template>
+  
   <!--****************************************************************
       * 7 Other node types, in shallow-to-deep mode 
       *-->
+  <!--* shallow-to-deep (th-style = 'th') *-->
   <xsl:template match="comment() | processing-instruction()"
 		mode="shallow-to-deep">
     <xsl:copy/>
@@ -260,6 +282,21 @@
     <xsl:copy/>
     <xsl:apply-templates select="following-sibling::node()[1]"
 			 mode="shallow-to-deep"/>
+  </xsl:template>
+
+  <!--* shallow-to-deep-ana (th-style = 'ana') *-->  
+  <xsl:template match="comment() | processing-instruction()"
+		mode="shallow-to-deep-ana">
+    <xsl:copy/>
+    <xsl:apply-templates select="following-sibling::node()[1]"
+			 mode="shallow-to-deep-ana"/>
+  </xsl:template>
+  
+  <xsl:template match="text()"
+		mode="shallow-to-deep-ana">
+    <xsl:copy/>
+    <xsl:apply-templates select="following-sibling::node()[1]"
+			 mode="shallow-to-deep-ana"/>
   </xsl:template>
 
   

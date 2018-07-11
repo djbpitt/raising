@@ -89,6 +89,10 @@
       *-->
   
   <xsl:template match="*[*[th:is-marker(.)]]">
+    <xsl:if test="$debug = 'yes' ">
+      <xsl:message>Shifting to shallow-to-deep on <xsl:value-of
+      select="name()"/></xsl:message>
+    </xsl:if>    
     <xsl:copy>
       <xsl:copy-of select="@*"/>
       <xsl:apply-templates mode="shallow-to-deep" select="child::node()[1]"/>
@@ -143,8 +147,11 @@
       * be processed recursively; otherwise just copy
       * Oddly this is almost identical to what deep-to-shallow does
       *-->  
-  <xsl:template match="*[not(@th:sID or @th:eID)]"
+  <xsl:template match="*[not(th:is-start-marker(.))]"
 		mode="shallow-to-deep">
+    <xsl:if test="$debug = 'yes' ">
+      <xsl:message>Non-marker in shallow-to-deep: <xsl:value-of select="name()"/> </xsl:message>
+    </xsl:if>
     <xsl:apply-templates select="."/>
     <!--* and recur to right sibling *-->
     <xsl:apply-templates select="following-sibling::node()[1]"
@@ -163,6 +170,9 @@
   
   <xsl:template match="text()"
 		mode="shallow-to-deep">
+    <xsl:if test="$debug = 'yes' ">
+      <xsl:message>Text node in shallow-to-deep </xsl:message>
+    </xsl:if>
     <xsl:copy/>
     <xsl:apply-templates select="following-sibling::node()[1]"
 			 mode="shallow-to-deep"/>
