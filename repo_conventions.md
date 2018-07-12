@@ -14,7 +14,7 @@ The main repo has several subdirectories:
 
 The subdirectory names and their contents are discussed below. 
 
-## Four input types, each in a separate subdirectory of an `input` directory
+## Five input types, each in a separate subdirectory of an `input` directory
 
 The main repo contains a single `input` directory with four separate subdirectories, one for each type of input, with the following directory names:
 
@@ -22,7 +22,7 @@ The main repo contains a single `input` directory with four separate subdirector
 2. `input/extended` As above, but with non-Trojan attributes (on start-markers only) and with non-Trojan empty elements. Makes sure that the method doesn’t over-generalize.
 3. `input/overlap` Uses Trojan attribute in the `th:` namespace. Simple example of overlapping hierarchies to see what the method produces. Four possible outcomes (I think): a) throws an error, b) raises as much as it can without creating overlap and leaves other markers unraised, c) raises everything, moving tags (as it were) to force proper nesting, or d) creates overlapping markup, which is not well formed.
 4. `input/frankenstein` Uses `@ana` and `@loc`. Raising all flattened elements that use `@ana` and `@loc` is guaranteed to be well-formed. Other flattened elements, not to be raised on the pass we are discussing, may use other markup (e.g., the `<seg>` elements). I would suggest that for _Frankenstein_ we put the flattened version in the TEI namespace if that’s what it’s in in Real Life, which means that the output must respect that namespace.
-
+5. `input/brown` In the TEI namespace, with Trojan attributes in `th:` namespace. Currently holds `Corpus_flattened.xml` (full corpus, 75M) and `r02_flattened.xm` (56k).
 
 
 ## Contents of input directory
