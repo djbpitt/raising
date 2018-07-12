@@ -1,7 +1,8 @@
+import sys
 from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
 
 output = []
-with open('../input/basic/flattened.xml') as input:
+with open(sys.argv[1], 'r') if len(sys.argv) > 1 else sys.stdin as input:
     for event, node in parseString(input.read()):
         if event == START_ELEMENT:
             if node.hasAttribute('th:eID'): # Trojan end tag  
