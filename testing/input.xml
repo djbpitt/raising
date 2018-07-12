@@ -1,0 +1,86 @@
+<inputs>
+    <p>This document lists standard input files for testing.</p>
+
+    <p>Basic input:</p>
+    <input id="bas"
+	   path="input/basic/flattened.xml"
+	   orig="input/basic/aux/original.xml"
+	   target="input/basic/target.xml"/>
+    
+    <p>Extended input:</p>
+    <input id="ext"
+	   path="input/extended/flattened.xml"
+	   target=""/>
+
+    <p>Input with overlapping virtual elements (and no guide to reconstruction).</p>
+    <p>None of these has a required target, since different solutions are possible.</p>
+    <input id="rf"
+	   path="input/overlap/frost.xml"/>
+    <input id="pp"
+	   path="input/overlap/page-and-para.xml "/>
+    <input id="pg"
+	   path="input/overlap/peergynt.xml "/>
+    <!--* Sample raisings of pg:
+	input/overlap/target.peergynt_io.xml 
+	input/overlap/target.peergynt_lr.xml 
+	input/overlap/target.peergynt_sp.xml 
+	input/overlap/target.peergynt_vv.xml
+	*-->
+
+
+    <p>Frankenstein project (uses @ana and @xml:id, not @th:sID)</p>
+    <input id="f18"
+	   path="input/frankenstein/c10-coll/1818_c10.xml"
+	   target="input/frankenstein/target-c10-coll/target-1818_c10.xml"/>
+    <input id="f23"
+	   path="input/frankenstein/c10-coll/1823_c10.xml"
+	   target="input/frankenstein/target-c10-coll/target-1823_c10.xml" />
+    <input id="f31"
+	   path="input/frankenstein/c10-coll/1831_c10.xml"
+	   target="input/frankenstein/target-c10-coll/target-1831_c10.xml" />
+    <input id="fth"
+	   path="input/frankenstein/c10-coll/thomas_c10.xml"
+	   target="input/frankenstein/target-c10-coll/target-thomas_c10.xml" />
+    <input id="fr"
+	   path="input/frankenstein/flattened.xml"
+	   target="input/frankenstein/target.xml"/>
+
+
+    <p>Brown-corpus data.</p>
+    
+    <p>Some of this is local, not in the repo, and may not be
+    available on everyone's system. The driver files refer to the
+    original documents using general entity references; to perform a
+    diff one will need to expand the entity references or use an XML-
+    and entity-aware diff tool (if any such exist).</p>
+    
+    <input id="bcx"
+	   path="input/brown/Corpus_flattened.xml "
+	   orig="input/brown/Corpus.xml"/>
+
+    <input id="r02"
+	   path="input/brown/r02_flattened.xml"
+	   target="input/brown/r02_raised.xml"
+	   orig="input/brown/r02.xml"/>
+
+    <input id="l18"
+	   path="input/local/flattened.l18.xml"
+	   target=""/>    
+    <input id="b02"
+	   path="input/local/flattened.brown02.xml"
+	   orig="input/local/driver.brown02.xml"/>
+    <input id="b04"
+	   path="input/local/flattened.brown04.xml"
+	   orig="input/local/driver.brown04.xml"/>
+    <input id="b16"
+	   path="input/local/flattened.brown16.xml"
+	   orig="input/local/driver.brown16.xml"/>
+    <input id="b64"
+	   path="input/local/flattened.brown64.xml"
+	   orig="input/local/driver.brown64.xml"/>
+    <input id="bc"
+	   path="input/local/flattened.Corpus.xml"
+	   orig="input/local/Corpus.xml"/>
+
+    
+</inputs>
