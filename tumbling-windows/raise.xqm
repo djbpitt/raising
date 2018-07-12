@@ -35,8 +35,9 @@ declare function th:matching(
 declare function th:inside-out(
   $ln as node()*
 ) as node()* {
-  trace((), 'th:inside-out() called with &#xA;' ||
+  (: trace((), 'th:inside-out() called with &#xA;' ||
     string-join($ln, '&#xA;  - ')),
+    :)
   for    tumbling window $n as node()*
   in     $ln
   start  $nStart at $posStart
@@ -117,7 +118,10 @@ declare function th:raise-inside-out(
   if ($n instance of element())
   then element { name($n) } {
     $n/@*,
-    trace( (), 'rio: building element ' || name($n) || '. &#xA;' ),
+    (:
+    trace( (), 
+    'rio: building element ' || name($n) || '. &#xA;' ),
+    :)
     if (exists($n/*[th:is-marker(.)]))
     then th:inside-out($n/node())
     else for $c in $n/node()
