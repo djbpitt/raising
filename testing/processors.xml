@@ -1,0 +1,24 @@
+<processors>
+    <p>This document lists processors used for testing.</p>
+
+    <p>Saxon 9.8.  Runs XSLT 1.0, 2.0, 3.0, and XQuery.</p>
+    <processor id="she" n="Saxon HE 9.8" lang="xslt10 xslt20 xslt30 xquery"/>
+    <processor id="spe" n="Saxon PE 9.8" lang="xslt10 xslt20 xslt30 xquery"/>
+    <processor id="see" n="Saxon EE 9.8" lang="xslt10 xslt20 xslt30 xquery"/>
+
+    <p>Exslt.  Runs XSLT 1.0, 2.0, 3.0.</p>
+    <!--* we should check the version number *-->
+    <processor id="exs" n="Exslt" lang="xslt10 xslt20 xslt30"/>
+
+    <p>Saxon 6.5.3.  Runs XSLT 1.0.</p>
+    <processor id="sx6" n="Saxon 6.5.3" lang="xslt10"/>
+
+    <p>XSLTproc.  Runs XSLT 1.0.</p>
+    <processor id="xpr" n="xsltproc" lang="xslt10">Using libxml 20902, libxslt 10128 and libexslt 817 9.8</processor>
+
+    <p>BaseX.  Runs XQuery 1.0, 3.0, 3.1.</p>
+    <processor id="bsx" n="BaseX" lang="xquery">Using libxml 20902, libxslt 10128 and libexslt 817 9.8</processor>    
+
+    <p>Exist (to be supplied).</p>
+    
+</processors>

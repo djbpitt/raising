@@ -1,0 +1,12 @@
+<profile>
+    <p>A sample profile document which runs all methods, in all processors, over all inputs.
+    Or, more precisely:  which runs every combination of implementation, input, and processor
+    which is not self-contradictory.
+    </p>
+
+    <select inputs="#all"
+	    processors="#all"
+	    methods="#all"
+	    implementations="#all"/>
+
+</profile>

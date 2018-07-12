@@ -1,0 +1,136 @@
+<methods>
+    <p>This document lists the different methods of solving the
+    problem we have identified, and lists the concrete implementations
+    of each method.  When methods have minor variants, each
+    variant (or variant set) in a distinct file gets a separate implementation
+    element.  (We do not currently know how to handle
+    methods with variants handled in a single implementation file.)</p>
+
+    <p>Common variants:</p>
+    <variants>
+	<feature id="function-or-template">
+	    <desc>Function or template</desc>
+	    <var id="f">core method implemented as function</var>
+	    <var id="t">core method implemented as (named) template</var>
+	</feature>
+	<feature id="marker-syntax">
+	    <desc>Marker syntax</desc>
+	    <var id="th">Start-markers identified by @th:sID, end-markers by @th:eID, coindexed by those values</var>
+	    <var id="ana">Start-markers identified by @ana='start', end-markers by @ana='end', coindexed by @loc</var>
+	    <var id="xmlid">Start-markers identified by @xml:id ending in "_start",  end-markers by @xml:id ending in "_end", coindexed by rest of @xml:id</var>
+	</feature>
+    </variants>
+    <p>Note that in each case the initial variant listed is the default.</p>
+
+    <method id="io" n="inside-out">
+	<p>Inside-out approach.  On each pass raise the
+	innermost virtual elements.  Then recur.</p>
+	
+	<variants>
+	    <feature-ref target="#function-or-template"/>
+	    <feature-ref target="#marker-syntax"/>
+	    <feature id="single-coll">
+		<desc>Process one document or collection?</desc>
+		<var id="doc">Handle single input document</var>
+		<var id="frankencoll">Hard-coded application to directory of Frankenstein data</var>
+	    </feature>	    
+	    <feature id="depth">
+		<desc>Treatment of content elements</desc>
+		<var id="deep">normal: simple template application at all levels</var>
+		<var id="shallow">shallow = does not descend into content elements</var>
+	    </feature>
+	    <feature id="passes">
+		<desc>Two-pass variant</desc>
+		<var id="onepass">unmarked or onepass = ? </var>
+		<var id="twopass">Two-pass variant (needs explanation)</var>
+	    </feature>
+	</variants>
+	
+	<p>Cf. <ref target="#twio">inside-out variant</ref> of
+	<ref target="#tw">tumbling windows</ref>.</p>
+	<implementation lang="xslt30" var="f" path="input/inside-out/raise.xsl"/>
+	<implementation lang="xslt30" var="f shallow" path="input/inside-out/raise-shallow.xsl"/>
+	<implementation lang="xslt30" var="f twopass" path="input/inside-out/raise_two-pass.xsl"/>
+	<implementation lang="xslt30" var="f ana" path="input/inside-out/raise_frankenstein.xsl"/>
+	<implementation lang="xslt30" var="f frankencoll" path="input/inside-out/raise-frankensteinColl.xsl"/>
+    </method>
+
+    <method id="oi" n="outside-in">
+	<p>Outside-in approach.  On each call, raise the
+	outermost virtual elements (or, depending on the implementation, the first of them).
+	Then recur on the children of the outermost element(s) (and if necessary on
+	the remainder of the input sequence).</p>
+
+	<variants>
+	    <feature-ref target="#function-or-template"/>
+	    <feature-ref target="#marker-syntax"/>
+	</variants>
+	
+	<p>Cf. <ref target="#twoi">outside-in variant</ref> of
+	<ref target="#tw">tumbling windows</ref>.</p>
+	<implementation lang="xslt30" var="f th ana xmlid" path="input/outside-in/raise.xsl">
+	    Use parameter th-style="ana" or "xmlid" to use alternate marker syntaxes.
+	    Default is th.
+	</implementation>
+    </method>
+
+    <method id="ac" n="accumulators">
+	<p>Accumulators approach.  Maintain a stack using an XSLT 3.0 accumulator
+	of type array.  Push and pop the stack as needed.</p>
+	
+	<variants>
+	    <feature-ref target="#marker-syntax"/>
+	</variants>
+	
+	<implementation lang="xslt30" var="th ana xmlid" path="input/accumulators/raise.xsl">
+	    Use parameter th-style="ana" or "xmlid" to use alternate marker syntaxes.
+	    Default is th.
+	</implementation>
+    </method>
+
+    <method id="rs" n="right-sibling traversal">
+	<p>Right-sibling traversal.  Traverse tree in node order
+	in a single pass, raising elements as they are encountered.</p>
+
+	<variants>
+	    <feature-ref target="#function-or-template"/>
+	    <feature-ref target="#marker-syntax"/>
+	</variants>
+	
+	<implementation lang="xslt10" var="t th ana xmlid" path="input/right-sibling/raise_1.0.xsl">
+	    Use parameter th-style="ana" or "xmlid" to use alternate marker syntaxes.
+	    Default is th.
+	</implementation>
+	<implementation lang="xslt30" var="t th ana xmlid" path="input/right-sibling/raise_3.0.xsl">
+	    Use parameter th-style="ana" or "xmlid" to use alternate marker syntaxes.
+	    Default is th.
+	</implementation>
+    </method>
+
+    <method id="tw" n="tumbling-windows">
+	<p>Tumbling windows in XQuery 3.0.</p>
+	<p>Variants
+	<list>
+	    <item>Inside-out or outside-in:
+	    <list>
+		<item id="twio">io = inside-out</item>
+		<item id="twoi">oi = outside-in</item>
+	    </list>
+	    </item>
+	</list>
+
+	<variants>
+	    <feature id="io-or-oi">
+		<desc>Inside-out or outside-in?</desc>
+		<var id="twio">Tumbling windows working inside-out</var>
+		<var id="twoi">Tumbling windows working outside-in</var>
+	    </feature>	
+	</variants>
+	
+	</p>
+	<implementation lang="xquery" var="twio twoi" path="input/tumbling-windows/raise.xqm">
+	    Use functions raise-inside-out() and raise-outside-in() on document node.
+	    Currently no convenient way to call from shell.
+	</implementation>
+    </method>    
+</methods>
