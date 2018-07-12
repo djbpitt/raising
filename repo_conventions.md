@@ -29,7 +29,7 @@ The main repo contains a single `input` directory with four separate subdirector
 
 Each of the four input subdirectories described above _must_ include two versions of each logically distinct input file, named 
 
-* _filename_`.xml`, which must be raised
+* _filename_`.xml` (or if desired for clarity `flattened.` + _filename_ + `.xml`), which is in flattened form and is to be raised
 * `target.`_filename_`.xml`, which is what it should be raised to
 
 where _filename_ uniquely identifies each logically distinct input file.
