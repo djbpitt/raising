@@ -33,9 +33,15 @@ Each of the four input subdirectories described above _must_ include two version
 * _filename_`.xml` (or if desired for clarity `flattened.` + _filename_ + `.xml`), which is in flattened form and is to be raised
 * `target.`_filename_`.xml`, which is what it should be raised to
 
-where _filename_ uniquely identifies each logically distinct input file.
+where _filename_ uniquely identifies each logically distinct input file. 
 
 Each input directory _may_ also include (in a subdirectory called `aux`) files used to create `flattened.`_filename_`.xml`, such as `original.`_filename_`.xml` and a flattening script. This genetic subdirectory is optional because information about how the files were flattened is not crucial for the purpose of raising them. The contents and filenames in the `aux` subdirectory are not standardized.
+
+### The Brown corpus
+
+It is not practical to use `diffxml` on `input/brown/Corpus_target.xml`, so a wrapped version was created with `xmllint --format Corpus_target.xml > Corpus_target.wrapped.xml`. Output of transformations can be validated by performing the same `xmllint` pretty-print operation on the output and then using regular `diff`, which does not make the same demand on resources as `diffxml`.
+
+### Trojan markup and input files
 
 The _Frankenstein_ data uses two forms of start- and end-marker:
 
@@ -69,7 +75,7 @@ Code directories _must_ contain a subdirectory called `output` that contains the
 
 When there are multiple versions of the implementation (e.g. `raise_1.0` and `raise_3.0`), and when we test with multiple processors (e.g. xsltproc, Saxon 6.5.3, Saxon 9.8 HE), the output filename should take the form `raised_` + _version_ + `_` + _processor_ + `.xml`.
 
-### Readme and shell scripts
+### README.md and shell scripts
 
 Code directories _must_ contain a very brief markdown file called `README.md` that explains how to run the transformation. It should not, at least for now explain how the code works (that’s in our paper); its purpose is just to tell users what they have to type to produce output. It should also include dependency information, e.g., Python 3 but not Python 2, XSLT 3.0 but not XSLT 1.0.
 

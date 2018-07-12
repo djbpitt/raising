@@ -1,0 +1,51 @@
+raised.xml:23: parser error : Unescaped '<' not allowed in attributes values
+l:id="C10_app2-fThomas_start"></seg>IV.<p xml:id="novel1_letter4_chapter4_p132:>
+                                                                               ^
+raised.xml:23: parser error : attributes construct error
+l:id="C10_app2-fThomas_start"></seg>IV.<p xml:id="novel1_letter4_chapter4_p132:>
+                                                                               ^
+raised.xml:23: parser error : Couldn't find end of Start Tag p line 23
+l:id="C10_app2-fThomas_start"></seg>IV.<p xml:id="novel1_letter4_chapter4_p132:>
+                                                                               ^
+raised.xml:23: parser error : Opening and ending tag mismatch: div line 22 and p
+="C10_app2-fThomas_start"></seg>IV.<p xml:id="novel1_letter4_chapter4_p132:></p>
+                                                                               ^
+raised.xml:24: parser error : Unescaped '<' not allowed in attributes values
+="C10_app41-fThomas_start"></seg>limbs.<p xml:id="novel1_letter4_chapter4_p132:>
+                                                                               ^
+raised.xml:24: parser error : attributes construct error
+="C10_app41-fThomas_start"></seg>limbs.<p xml:id="novel1_letter4_chapter4_p132:>
+                                                                               ^
+raised.xml:24: parser error : Couldn't find end of Start Tag p line 24
+="C10_app41-fThomas_start"></seg>limbs.<p xml:id="novel1_letter4_chapter4_p132:>
+                                                                               ^
+raised.xml:24: parser error : Opening and ending tag mismatch: body line 21 and p
+10_app41-fThomas_start"></seg>limbs.<p xml:id="novel1_letter4_chapter4_p132:></p
+                                                                               ^
+raised.xml:25: parser error : Unescaped '<' not allowed in attributes values
+            <p xml:id="novel1_letter4_chapter4_p133:></p>How <seg xml:id="C10_ap
+                                                     ^
+raised.xml:25: parser error : attributes construct error
+            <p xml:id="novel1_letter4_chapter4_p133:></p>How <seg xml:id="C10_ap
+                                                     ^
+raised.xml:25: parser error : Couldn't find end of Start Tag p line 25
+            <p xml:id="novel1_letter4_chapter4_p133:></p>How <seg xml:id="C10_ap
+                                                     ^
+raised.xml:25: parser error : Opening and ending tag mismatch: text line 20 and p
+            <p xml:id="novel1_letter4_chapter4_p133:></p>How <seg xml:id="C10_ap
+                                                         ^
+raised.xml:26: parser error : Unescaped '<' not allowed in attributes values
+            <del xml:id="fThomas_C10-del_1:></del>and<del xml:id="fThomas_C10-de
+                                            ^
+raised.xml:26: parser error : attributes construct error
+            <del xml:id="fThomas_C10-del_1:></del>and<del xml:id="fThomas_C10-de
+                                            ^
+raised.xml:26: parser error : Couldn't find end of Start Tag del line 26
+            <del xml:id="fThomas_C10-del_1:></del>and<del xml:id="fThomas_C10-de
+                                            ^
+raised.xml:26: parser error : Opening and ending tag mismatch: TEI line 1 and del
+            <del xml:id="fThomas_C10-del_1:></del>and<del xml:id="fThomas_C10-de
+                                                  ^
+raised.xml:26: parser error : Extra content at the end of the document
+            <del xml:id="fThomas_C10-del_1:></del>and<del xml:id="fThomas_C10-de
+                                                  ^
