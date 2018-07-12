@@ -1,6 +1,8 @@
 import sys
 from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
 
+def entities(input):
+    return input.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 output = []
 with open(sys.argv[1], 'r') if len(sys.argv) > 1 else sys.stdin as input:
     for event, node in parseString(input.read()):
@@ -18,5 +20,5 @@ with open(sys.argv[1], 'r') if len(sys.argv) > 1 else sys.stdin as input:
             if not (node.hasAttribute('th:sID') or node.hasAttribute('th:eID')): # non-Trojan only
                 output.append('</' + node.localName + '>')
         elif event == CHARACTERS:
-            output.append(node.data)
+            output.append(entities(node.data))
 print("".join(output))
