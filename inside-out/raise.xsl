@@ -10,8 +10,22 @@
     <xsl:key name="start-markers" match="*[@th:sID]" use="@th:sID"/>
     <xsl:key name="end-markers" match="*[@th:eID]" use="@th:eID"/>
 
-    <!--* In all modes, do a shallow copy, suppress namespace nodes,
-	* and recur in default (unnamed) mode. *-->
+    <!-- Prev had the following, which walks the whole tree. New version doesn't
+        descend below children of root element
+        
+        <!-\-* In all modes, do a shallow copy, suppress namespace nodes,
+	* and recur in default (unnamed) mode. *-\->
+    <xsl:template match="@* | node()" mode="#all">
+        <xsl:copy copy-namespaces="no">
+            <xsl:apply-templates select="@* | node()"/>
+        </xsl:copy>
+    </xsl:template>
+-->
+
+    <xsl:template match="/*/*/descendant::node()" mode="#all">
+        <xsl:sequence select="."/>
+    </xsl:template>
+
     <xsl:template match="@* | node()" mode="#all">
         <xsl:copy copy-namespaces="no">
             <xsl:apply-templates select="@* | node()"/>

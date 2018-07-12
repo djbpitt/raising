@@ -24,6 +24,7 @@ The main repo contains a single `input` directory with four separate subdirector
 4. `input/frankenstein` Uses `@ana` and `@loc`. Raising all flattened elements that use `@ana` and `@loc` is guaranteed to be well-formed. Other flattened elements, not to be raised on the pass we are discussing, may use other markup (e.g., the `<seg>` elements). I would suggest that for _Frankenstein_ we put the flattened version in the TEI namespace if that’s what it’s in in Real Life, which means that the output must respect that namespace.
 5. `input/brown` In the TEI namespace, with Trojan attributes in `th:` namespace. Currently holds `Corpus_flattened.xml` (full corpus, 75M) and `r02_flattened.xm` (56k).
 
+**TODO: Should the brown files be in separate subdirectories of `input`? Or separate subdirectories of `input/brown`? Otherwise they don’t fully follow the naming conventions (below) because we have to distinguish the two samples.**
 
 ## Contents of input directory
 
