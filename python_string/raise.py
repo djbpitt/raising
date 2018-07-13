@@ -18,7 +18,7 @@ with open(sys.argv[1], 'r') if len(sys.argv) > 1 else sys.stdin as input:
             output.append('>')
         if event == END_ELEMENT: 
             if not (node.hasAttribute('th:sID') or node.hasAttribute('th:eID')): # non-Trojan only
-                output.append('</' + node.localName + '>')
+                output.append('</' + node.nodeName + '>')
         elif event == CHARACTERS:
             output.append(entities(node.data))
 print("".join(output))

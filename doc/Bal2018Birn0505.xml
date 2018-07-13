@@ -1672,26 +1672,33 @@ nature … &lt;/p&gt;</programlisting>
                       which would have been long on my first 80-character monitor, but on all but ancient hardward,
                       I think these are short enough that wrapping would make them harder to read.
                       *-->
-                    <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
+                    <programlisting>import sys
+from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
 
+def entities(input):
+    return input.replace('&amp;', '&amp;amp;').replace('&lt;', '&amp;lt;').replace('&gt;', '&amp;gt;')
 output = []
-with open('flattened.xml') as input:
+with open(sys.argv[1], 'r') if len(sys.argv) > 1 else sys.stdin as input:
     for event, node in parseString(input.read()):
         if event == START_ELEMENT:
-            if node.hasAttribute('th:eID'):
+            if node.hasAttribute('th:eID'): 
+                # Trojan end tag
                 output.append('&lt;/')
-            else: # Trojan start tags and non-Trojan
+            else: 
+                # Trojan start tags and non-Trojan elements
                 output.append('&lt;')
             output.append(node.nodeName)
-            for attname, attvalue in node.attributes.items():
-                if not(attname.startswith('th:')):
+            for attname, attvalue in node.attributes.items(): 
+                # remove Trojan attributes and namespace declaration
+                if not (attname.startswith('th:') or attname == 'xmlns:th'):
                     output.append(' ' + attname + '="' + attvalue + '"')
             output.append('>')
         if event == END_ELEMENT:
-            if not node.hasAttribute('th:sID') and not node.hasAttribute('th:eID'):
-                output.append('&lt;/' + node.localName + '>')
+            if not (node.hasAttribute('th:sID') or node.hasAttribute('th:eID')): 
+                # non-Trojan only
+                output.append('&lt;/' + node.nodeName + '>')
         elif event == CHARACTERS:
-            output.append(node.data)
+            output.append(entities(node.data))
 print("".join(output))</programlisting>
                     <caption>
                         <para>Python code that constructs the XML output as a string</para>
@@ -1720,8 +1727,8 @@ print("".join(output))</programlisting>
                                 <code>END_ELEMENT</code> events, we create a regular end-tag.</para>
                     </listitem>
                     <listitem>
-                        <para><code>CHARACTERS.</code> We add character data content to the
-                            output.</para>
+                        <para><code>CHARACTERS.</code> We add character data content to the output,
+                            explicitly replacing reserved characters with XML entities.</para>
                     </listitem>
                 </itemizedlist>
                 <para>We are parsing the input XML in an XML-aware manner, which is reasonably
@@ -1812,35 +1819,43 @@ print(open_elements.pop().toxml())</programlisting>
                             is a somewhat arbitrary decision.</para>
                     </listitem>
                     <listitem>
-                        <para>The three mutually excluse clauses in the <code>if/elif/elif</code>
+                        <para>The three mutually exclusive clauses in the <code>if/elif/elif</code>
                             block that processes <code>END_ELEMENT</code> events work as
                             follows:</para>
                         <itemizedlist>
                             <listitem>
                                 <para><code>minidom</code> treats namespace declarations as
                                     attributes, so the presence of an attribute with the name
-                                        <code>xmlns:th</code> identifies the root note. In our
-                                    examples we are raising all markers, and therefore removing all
-                                    attributes in the Trojan namespace, so we remove this
-                                    declaration to avoid the clutter of an unneeded namespace
-                                    declaration in the output. Because we identify Trojan attributes
-                                    by their lexical shape (that is, by the presence of an explicit
-                                        <code>th:</code> prefix), removing the namespace declaration
-                                    early in the processing does not impinge on our ability to
-                                    identify attribute instances that use the prefix. Because we
-                                    never pop the root element, it will be at the top of the stack
-                                    when our processing concludes.</para>
+                                        <code>xmlns:th</code> identifies the root note.<footnote>
+                                        <para>It is legal to declare namespaces redundantly even
+                                            where their declarations are already in force because
+                                            they are inherited from a higher level in the tree. If
+                                            accommodating a redundant declaration of the
+                                                <code>th:</code> namespace is required, the code
+                                            could be modified to do that by revising the
+                                                <code>if/elif/elif</code> logic.</para>
+                                    </footnote> In our examples we are raising all markers, and
+                                    therefore removing all attributes in the Trojan namespace, so we
+                                    remove this declaration to avoid the clutter of an unneeded
+                                    namespace declaration in the output. Because we identify Trojan
+                                    attributes by their lexical shape (that is, by the presence of
+                                    an explicit <code>th:</code> prefix), removing the namespace
+                                    declaration early in the processing does not impinge on our
+                                    ability to identify attribute instances that use the prefix.
+                                    Because we never pop the root element, it will be at the top of
+                                    the stack when our processing concludes.</para>
                             </listitem>
                             <listitem>
-                                <para>We remove the Trojan <code>th:sID</code> attribute from the
+                                <para>We remove the Trojan <code>@th:sID</code> attribute from the
                                     start-marker. We want to remove it eventually because it is not
                                     needed in the output, but we cannot remove it until the
                                         <code>END_ELEMENT</code> event of the start-marker because
                                     its presence tells us not to pop the stack at that
                                         <code>END_ELEMENT</code> event. In this way we push the
                                     element we are currently raising onto the top of the stack at
-                                    its start-marker, and pop it at the <code>END_ELEMENT</code>
-                                    event of the end-marker, rather than the start-marker.</para>
+                                    its start-marker, but we remove its Trojan attributes only when
+                                    pop it at the <code>END_ELEMENT</code> event of the
+                                    end-marker.</para>
                             </listitem>
                             <listitem>
                                 <para>The first two clauses process the root element and
@@ -1856,7 +1871,10 @@ print(open_elements.pop().toxml())</programlisting>
                     <listitem>
                         <para>In the case of <code>CHARACTERS</code>, we create a
                                 <code>text()</code> node and append it as a child of the current
-                            context, that is, the element at the top of the stack.</para>
+                            context, that is, the element at the top of the stack. When we wrote
+                            string output earlier we had to convert reserved characters to character
+                            entities ourselves, but in this case we are writing XML output, so the
+                            system automatically performs the entity encoding for us.</para>
                     </listitem>
                 </itemizedlist>
                 <para>Conceptually, the entire start-marker functions as if it were the
@@ -1864,8 +1882,9 @@ print(open_elements.pop().toxml())</programlisting>
                     corresponding end-marker functions as if it were the <code>END_ELEMENT</code>
                     event for the same regular element. This means that we push a start-marker on
                     its <code>START_ELEMENT</code> event (ignoring its <code>END_ELEMENT</code>
-                    event), and pop it on the corresponding end-marker’s <code>END_ELEMENT</code>
-                    event (ignoring its <code>START_ELEMENT</code> event). In tabular form:</para>
+                    event, except to remove its Trojan attribute), and pop it on the corresponding
+                    end-marker’s <code>END_ELEMENT</code> event (ignoring its
+                        <code>START_ELEMENT</code> event). In tabular form:</para>
                 <table>
                     <thead>
                         <tr>
