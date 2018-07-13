@@ -6,6 +6,9 @@
     <!--* Setup *-->
     <xsl:output method="xml" indent="no"/>
 
+    <!--* Set $debug parameter to any non-null value to output messages *-->
+    <xsl:param name="debug" static="yes" required="no"/>
+
     <!--* Experimental:  try adding a key *-->
     <xsl:key name="start-markers" match="*[@th:sID]" use="@th:sID"/>
     <xsl:key name="end-markers" match="*[@th:eID]" use="@th:eID"/>
@@ -36,7 +39,7 @@
 	passed as parameter *-->
     <xsl:function name="th:raise">
         <xsl:param name="input" as="document-node()"/>
-        <xsl:message>raise() called with <xsl:value-of select="count($input//*)"/>-element document (<xsl:value-of select="count($input//*[@th:sID])"/> Trojan pairs)</xsl:message>
+        <xsl:message use-when="$debug">raise() called with <xsl:value-of select="count($input//*)"/>-element document (<xsl:value-of select="count($input//*[@th:sID])"/> Trojan pairs)</xsl:message>
         <xsl:choose>
             <xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
                 <!--* If we have more work to do, do it *-->
@@ -49,7 +52,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <!--* We have no more work to do, return the input unchanged. *-->
-                <xsl:message>raise() returning.</xsl:message>
+                <xsl:message use-when="$debug">raise() returning.</xsl:message>
                 <xsl:sequence select="$input"/>
             </xsl:otherwise>
         </xsl:choose>
