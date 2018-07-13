@@ -968,49 +968,58 @@ nature … &lt;/p&gt;</programlisting>
                         <para>XSLT to transform Trojan milestones into container elements</para>
                     </caption>
                 </figure>
-                <para>We turn off indentation (line 5) to avoid deforming the whitespace.
+                <para>We turn off indentation (line 5) to avoid deforming the whitespace and set up
+                    a debug option (line 8), controlled by a <code>$debug</code> parameter. </para>
+                <para>The traditional identity template walks the entire tree, but because anything
+                    lower than children of the root is guaranteed not to be or contain Trojan
+                    markers, we set up one identity template for those lower nodes, which just
+                    copied them to the output (lines 16–18). The regular identity template (lines
+                    21–25) applies only to the root element and its children.
                         <code>@exclude-result-prefixes="#all"</code> is not enough to avoid writing
                     the <code>th:</code> namespace onto the root element of the output, even though
                     the namespace in question is not used the output. An unused namespace
                     declaration is informationally harmless, but also needlessly distracting, so we
-                    suppress it by spelling out the identity template (for all modes) and specifying
-                        <code>@copy-namespaces="no"</code> on <code>&lt;xsl:copy&gt;</code> inside
-                    it (lines 6–10).</para>
+                    suppress it by specifying <code>@copy-namespaces="no"</code> on
+                        <code>&lt;xsl:copy&gt;</code> in the identity template that deals with
+                    Trojan markers (line 22).</para>
                 <para>Our recursive raising operation (the <code>th:raise()</code> function, lines
-                    11–26) operates on document nodes, and we need to process the original document
+                    31–52) operates on document nodes, and we need to process the original document
                     node of the input file differently from the new document nodes that we create on
                     each pass through the recursive function. For that reason, we match the original
                     document node in no mode (<code>&lt;xsl:template match="/"&gt;</code>, lines
-                    27–29) and pass it into the raising function (<code>&lt;xsl:sequence
-                        select="th:raise(.)"/&gt;</code>, line 28).</para>
+                    54–56) and pass it into the raising function (<code>&lt;xsl:sequence
+                        select="th:raise(.)"/&gt;</code>, line 55).</para>
                 <para>The raising function checks for the presence of <code>@th:sID</code>
                     attributes in the input that are candidates for raising (<code>&lt;xsl:when
-                        test="exists($input//@th:sID)"&gt;</code>, line 14; see the discussion of
-                    this test in <xref linkend="recursion_challenges"/>). If there aren’t any
-                        (<code>&lt;xsl:otherwise&gt;</code>, lines 22–24), the recursion is
+                        test="exists($input//*[@th:sID eq
+                        following-sibling::*[@th:eID][1]/@th:eID])"&gt;</code>, line 137 see the
+                    discussion of this test in <xref linkend="recursion_challenges"/>). If there
+                    aren’t any (<code>&lt;xsl:otherwise&gt;</code>, lines 46–50), the recursion is
                     finished, and the function returns the result (<code>&lt;xsl:sequence
-                        select="$input"/&gt;</code>, line 23). If there are still
+                        select="$input"/&gt;</code>, line 49). If there are still
                         <code>@th:sID</code> attributes that can be raised in the text, we create a
-                    variable <code>$result</code> (lines 15–19) of type document and apply templates
-                    inside the newly created document node (line 17). After the application of
+                    variable <code>$result</code> (lines 39–43) of type document and apply templates
+                    inside the newly created document node (line 41). After the application of
                     templates is finished, we recur and pass the result into another invocation of
                         <code>th:raise()</code> (<code>&lt;xsl:sequence
-                        select="th:raise($result)"/></code>, line 20).</para>
+                        select="th:raise($result)"/></code>, line 44).</para>
                 <para>The application of templates within the recursive function begins by applying
                     templates to the (newly created) document node in loop mode
                         (<code>&lt;xsl:apply-templates select="$input" mode="loop"/&gt;</code>, line
-                    17). The matching template (lines 30–32) simply applies templates to its
+                    41). The matching template (lines 58–60) simply applies templates to its
                     children, unlike the template that matches the original document node (in no
-                    mode, lines 27–29), which passes the document into the th:raise() function (line
-                    28), a difference in mode that is needed to avoid an endless loop. All other
-                    processing is the same for both the original document and the interim documents
-                    created inside <code>th:raise()</code>, so <code>&lt;xsl:template match="/"
-                        mode="loop"&gt;</code> (lines 30–32) is the only modal template, and it
-                    applies templates to its children in no mode.</para>
+                    mode, lines 54–56), which passes the document into the <code>th:raise()</code>
+                    function (line 55), a difference in mode that is needed to avoid an endless
+                    loop. All other processing is the same for both the original document and the
+                    interim documents created inside <code>th:raise()</code>, so
+                        <code>&lt;xsl:template match="/" mode="loop"&gt;</code> (lines 58–60) is the
+                    only modal template, and it applies templates to its children in no mode.</para>
                 <para>There are three templates that do the actual processing of the innermost
                     elements to be raised on each recursion: one that processes the start-marker,
                     one that processes the content of the newly raised container element, and one
-                    that processes the corresponding end-marker:<itemizedlist>
+                    that processes the corresponding end-marker. XSLT thinks that they hve the same
+                    priority as the identity templates, so we specify a higher priority explicitly
+                    with <code>priority="1"</code>.<itemizedlist>
                         <listitem>
                             <para><emphasis role="bold">start-marker:</emphasis> We match elements
                                 with a <code>@th:sID</code> attribute that has a value equal to the
@@ -1025,9 +1034,12 @@ nature … &lt;/p&gt;</programlisting>
                                         from markers when they are converted to tags during
                                         raising.</para>
                                 </footnote> We process these hits by creating a container element
-                                with the same generic identifier as the start-marker and copying all
-                                following-sibling nodes that precede the end-marker that matches the
-                                start-marker we’re processing at the moment (lines 35–40). In other
+                                with the same generic identifier as the start-marker; we instruct it
+                                not to copy unused namespaces, and we copy all non-Trojan
+                                attributes. We create the element content by copying all
+                                following-sibling nodes that precede the end-marker (which we find
+                                with the help of the <code>end-markers</code> key) that matches the
+                                start-marker we’re processing at the moment (lines 66–72). In other
                                 words, we copy the content of the newly raised element into
                                 it.</para>
                         </listitem>
@@ -1038,34 +1050,19 @@ nature … &lt;/p&gt;</programlisting>
                                 since that would create duplicates. For that reason, we suppress all
                                 nodes between the start- and end-markers that we’re processing at
                                 the moment by matching them inside an empty
-                                    <code>&lt;xsl:template&gt;</code> element (lines 43–44).</para>
+                                    <code>&lt;xsl:template&gt;</code> element (lines 75–78).</para>
                         </listitem>
                         <listitem>
                             <para><emphasis role="bold">end-marker:</emphasis> Since we create real
                                 start- and end-tags when we match the flattened start-marker, we
                                 have no more use for the flattened end-marker, so we suppress it by
                                 matching it, too, inside an empty <code>&lt;xsl:template&gt;</code>
-                                element (line 47).</para>
+                                element (line 80).</para>
                         </listitem>
                     </itemizedlist></para>
                 <para>When the simplified original document is flattened and then raised, as
-                    described above, the output of the raising operation matches the original input.
-                    The preceding XSLT does not copy attributes from the markers because there
-                    aren’t any non-Trojan attributes in our simplified example, but where needed,
-                    non-Trojan attributes can be copied from the start-marker to the new container
-                    by changing the element constructor to:</para>
-                <figure>
-                    <programlisting>&lt;xsl:element name="{name()}"&gt;
-    &lt;xsl:copy-of select="@* except @th:*"/&gt;
-    &lt;xsl:copy-of
-        select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"
-    /&gt;
-&lt;/xsl:element&gt;</programlisting>
-                    <caption>
-                        <para>Element constructor modified to copy non-Trojan attributes to raised
-                            elements</para>
-                    </caption>
-                </figure>
+                    described above, the output of the raising operation matches the original
+                    input.</para>
             </section>
             <section>
                 <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
