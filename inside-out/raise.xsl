@@ -71,7 +71,8 @@
     <xsl:template
         match="
             *[@th:sID eq
-            following-sibling::*[@th:eID][1]/@th:eID]">
+            following-sibling::*[@th:eID][1]/@th:eID]"
+        priority="1">
         <xsl:copy copy-namespaces="no">
             <xsl:copy-of select="@* except @th:sID"/>
             <!-- content of raised element; no foreign end-markers
@@ -98,9 +99,10 @@
 
     <!-- nodes inside new wrapper:  do nothing -->
     <xsl:template
-        match="node()[preceding-sibling::*[@th:sID][1]/@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"/>
+        match="node()[preceding-sibling::*[@th:sID][1]/@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"
+        priority="1"/>
 
     <!-- end-tag for new wrapper -->
-    <xsl:template match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"/>
+    <xsl:template match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]" priority="1"/>
 
 </xsl:stylesheet>
