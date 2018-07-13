@@ -4,8 +4,8 @@
 
 ### Trojan markup
 
-* **raise.xsl** Trojan markup, full recursion
-* **raise-shallow.xsl** Trojan markup, does not recur below children of root
+* **raise.xsl** Trojan markup, does not recur below children of root
+* **raise-deep.xsl** Trojan markup, full recursion
 * **raise_two-pass.xsl** Experimental; does not do anything interesting yet
 
 ### Frankenmarkup
