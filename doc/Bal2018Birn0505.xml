@@ -1506,7 +1506,7 @@ nature … &lt;/p&gt;</programlisting>
                 </footnote></para>
             <para>The following regex matches start-markers:</para>
             <figure>
-                <programlisting>(&lt;[^&gt;]+?)th:sID\s*?=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
+                <programlisting>(&lt;[^&gt;]+?)th:sID\s*=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
                 <caption>
                     <para>Regex to match start-markers</para>
                 </caption>
@@ -1632,8 +1632,6 @@ nature … &lt;/p&gt;</programlisting>
         </section>
         <section>
             <title>Pull parsing in Python</title>
-            <!-- TODO: Not as comparable to regex as the description suggests; the output construction is,
-            but parsing the tags is smarter because it’s XML-aware -->
             <para>The Python <code>xml.dom.pulldom</code> module can be used to stream an XML
                 document past an event handler that can be instructed to raise a flattened hierarchy.<footnote>
                     <para>The authors are grateful to Ronald Haentjens Dekker for bringing this
@@ -1643,10 +1641,9 @@ nature … &lt;/p&gt;</programlisting>
                         appreciate his assistance in debugging the Trojan attribute pitfall
                         described below under <xref linkend="python_xml_challenges"/>.</para>
                 </footnote> The result of pull parsering can be fashioned into output in two ways,
-                as a string or as XML. With string output, the method is comparable to the regex
-                replacement strategy described above: it passes all events through unchanged except
-                for markers, which it replaces with regular XML start- and end-tags. Because the
-                output construction is not XML-aware, it has the same limitations as the regex
+                as a string or as XML. With string output, it passes all events through unchanged
+                except for markers, which it replaces with regular XML start- and end-tags. Because
+                the output construction is not XML-aware, it has the same limitations as the regex
                 approach: most significantly, it is capable of creating output that includes
                 overlap, and that therefore is not well formed XML. With XML output, though, we use
                     <code>xml.dom.minidom</code> to create XML elements within a DOM structure,
@@ -1655,8 +1652,13 @@ nature … &lt;/p&gt;</programlisting>
                 each element only once. With string output, the procedure can create write output as
                 it handles each event; with XML output it is necessary to maintain the current
                 context in a stack, which is similar to the use of a stack in the <xref
-                    linkend="accumulators"/> method described. The maximum depth of the stack is
-                equal to the maximum depth of nesting in the hierarchical XML. </para>
+                    linkend="accumulators"/> method described.<footnote>
+                    <para>We buffer output by writing it to a list, which we stringify and write all
+                        at once at the end, saving the overhead of repeated write operations. With
+                        large documents and low memory, though, the method can easily be modified to
+                        stream the output to the filesystem.</para>
+                </footnote> The maximum depth of the stack is equal to the maximum depth of nesting
+                in the hierarchical XML. </para>
             <section>
                 <title>String output</title>
                 <para>The following Python 3 code replaces markers with strings equivalent to real
@@ -1665,6 +1667,10 @@ nature … &lt;/p&gt;</programlisting>
                     <!--* Lines are long and should be broken.
                       * I can't do it because I don't remember
                       * Python's conventions for line continuation.
+                      
+                      djb: "Long" is in the eye of the beholder; The longest (the first) is 79 characters,
+                      which would have been long on my first 80-character monitor, but on all but ancient hardward,
+                      I think these are short enough that wrapping would make them harder to read.
                       *-->
                     <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
 
