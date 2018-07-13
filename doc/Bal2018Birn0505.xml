@@ -1960,14 +1960,14 @@ print(open_elements.pop().toxml())</programlisting>
                 recursion</emphasis>.</para>
             <section>
                 <title>Double processing</title>
-                <para>When a start-marker is matched and raised, the nodes that belong inside it are
-                    copied into it inside the template that matches the start-marker. Because the
-                    nodes being copied are also candidates for the application of templates in the
-                    current pass through the function, we need to match them (along with the
-                    end-marker) in an empty <code>&lt;xsl:template&gt;</code> in order to avoid
-                    outputting them twice. Otherwise they would be copied when the start-marker is
-                    matched and then processed again when templates are applied to them in their own
-                    right.</para>
+                <para>When a start-marker is matched and raised, the nodes that belong inside the
+                    new container are copied into it inside the template that matches the
+                    start-marker. Because the nodes being copied are also candidates for the
+                    application of templates in the current pass through the function, we need to
+                    match them (along with the end-marker) in an empty
+                        <code>&lt;xsl:template&gt;</code> in order to avoid outputting them twice.
+                    Otherwise they would be copied when the start-marker is matched and then
+                    processed again when templates are applied to them in their own right.</para>
             </section>
             <section>
                 <title>Endless recursion</title>
@@ -1995,7 +1995,7 @@ print(open_elements.pop().toxml())</programlisting>
                     the markup that is guaranteed not to overlap. For example, if we have
                     tessellated page and paragraph hierarchies over a prose text, where both pages
                     and paragraphs have been flattened, we cannot fully raise all instances both
-                    types of elements if doing so would create overlap. But if our markup convension
+                    types of elements if doing so would create overlap. But if our markup convention
                     is that pages cannot overlap with pages and paragraphs cannot overlap with
                     paragraphs, we can modify the raising routine to raise only the pages or only
                     the paragraphs. See also <xref linkend="tessellated"/>, where we discuss an
@@ -2032,7 +2032,7 @@ print(open_elements.pop().toxml())</programlisting>
         </section>
         <section>
             <title>Regex</title>
-            <para>The only challenge to writing the regex (aside from the risk of inadvertently
+            <para>The principal challenge to writing the regex (aside from the risk of inadvertently
                 creating XML that is not well-formed because of overlap, which is discussed above)
                 is anticipating variation in the markup. For example, an XML start-tag with a single
                 attribute looks like <code>&lt;gi attname="value"&gt;</code>, but it allows optional
@@ -2047,6 +2047,10 @@ print(open_elements.pop().toxml())</programlisting>
                 achieve without computational validation, we opted for a more robust regex—that is,
                 one more accepting of variation, even though allowing for variation made the regex
                 harder to read and develop.</para>
+            <para>The regex expressions needed to raise <emphasis role="ital">Frankenstein</emphasis>
+                are more complex because the two attributes that contribute to the Trojan markup,
+                    <code>@ana</code> and <code>@loc</code>, may occur in any order with respect to
+                each other and other attributes. </para>
         </section>
         <section>
             <title>Pull parsing in Python</title>
@@ -2061,19 +2065,21 @@ print(open_elements.pop().toxml())</programlisting>
                 <para>Creating XML output as a string is a brittle strategy. Not only is it
                     susceptible to writing overlapping tags for the same reason as the regex method
                     described earlier, but we also explicitly wrap attribute values in double-quote
-                    characters (<code>"</code>). This will produce results that are not well-formed
+                    characters (<code>"</code>), which will produce results that are not well-formed
                     if the attribute value happens to have contained the double-quote character
                     originally. Python has an escape mechanism that is capable of dealing with
                     awkwardly nested single- and double-quote characters in strings, as does XML,
                     but the Python escape strategy is different from the XML one, and the code to
                     perform the string manipulation needed to mediate between the two is difficult
-                    to read and write. For that reason, it is safer to use XML methods to create the
-                    XML output as a (necessarily well-formed) DOM tree, which can then be
-                    serialized, instead of creating the output directly as a string. The use of
-                        <code>pulldom</code> to parse the input XML also requires accommodations to
-                    the peculiarities of <code>pulldom</code> namespace handling, which are
-                    discussed immediately below, under <xref linkend="python_xml_challenges"
-                    />.</para>
+                    to read and write. Furthermore, where output is created as a string, we have to
+                    replace reserved characters with character entities explicitly ourselves, while
+                    XML-aware output does that automatically. For those reasons, it is safer to use
+                    XML methods to create the XML output as a (necessarily well-formed) DOM tree,
+                    which can then be serialized, instead of creating the output directly as a
+                    string. The use of <code>pulldom</code> to parse the input XML also requires
+                    accommodations to the peculiarities of <code>pulldom</code> namespace handling,
+                    which are discussed immediately below, under <xref
+                        linkend="python_xml_challenges"/>.</para>
             </section>
             <section xml:id="python_xml_challenges" xreflabel="Python XML output challenges">
                 <title>XML output</title>
@@ -2084,9 +2090,9 @@ print(open_elements.pop().toxml())</programlisting>
                         <para>The pull parser responds not to start- and end-tags, but to
                                 <code>START_ELEMENT</code> and <code>END_ELEMENT</code> events.
                             Although markers are single tags (sole-tags), they fire both events, one
-                            after the other. Since a start-marker and an end-marker both fire both
-                            types of events, dealing with the two different senses of <emphasis
-                                role="ital">start</emphasis> and <emphasis role="ital"
+                            immediately after the other. Since a start-marker and an end-marker both
+                            fire both types of events, dealing with the two different senses of
+                                <emphasis role="ital">start</emphasis> and <emphasis role="ital"
                                 >end</emphasis> (marker vs event) simultaneously is potentially
                             confusing for the developer. We also need to decide whether to process
                             the marker at the <code>START_ELEMENT</code> or <code>END_ELEMENT</code>
@@ -2183,10 +2189,11 @@ print(open_elements.pop().toxml())</programlisting>
                             impose (where namespaces are declared, how the declarations are spelled,
                             how they are bound to prefixes), they prove not to be much of a
                             practical obstacle during processing. The required accommodation entails
-                            writing namespace prefixes and namespace declarations (as attributes)
-                            explicitly where we want them in the output, and matching namespaced
-                            elements and attributes with the prefix where it is used in the
-                            serialized input and without the prefix where it is not.</para>
+                            writing namespace prefixes and namespace declarations (using
+                            attribute-like syntax) explicitly where we want them in the output, and
+                            matching namespaced elements and attributes with the prefix where it is
+                            used in the serialized input and without the prefix where it is
+                            not.</para>
                     </listitem>
                 </itemizedlist>
             </section>
