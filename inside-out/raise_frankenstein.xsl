@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
-    xmlns="http://www.tei-c.org/ns/1.0"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0" xmlns:pitt="https://github.com/ebeshero/Pittsburgh_Frankenstein"    
+    xmlns="http://www.tei-c.org/ns/1.0" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    xmlns:pitt="https://github.com/ebeshero/Pittsburgh_Frankenstein"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="no"/>
@@ -50,20 +50,18 @@
     <xsl:template match="/" mode="loop">
         <xsl:apply-templates/>
     </xsl:template>
-    <xsl:template
-        match="*[@ana eq 'start'][@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]">
+    <xsl:template match="*[@ana eq 'start'][@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]">
         <!-- innermost start-tag -->
         <xsl:element name="{name()}">
             <!-- textual content of raised element-->
             <xsl:attribute name="xml:id" select="@loc"/>
-            <xsl:copy-of         select="following-sibling::node()[following-sibling::*[@loc eq current()/@loc]]"/>
+            <xsl:copy-of
+                select="following-sibling::node()[following-sibling::*[@loc eq current()/@loc]]"/>
         </xsl:element>
     </xsl:template>
     <!-- nodes inside new wrapper -->
     <xsl:template
-        match="node()[preceding-sibling::*[@ana eq 'start'][1]/@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"/> 
+        match="node()[preceding-sibling::*[@ana eq 'start'][1]/@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"/>
     <!-- end-tag for new wrapper -->
-    <xsl:template
-        match="*[@ana eq 'end'][@loc eq preceding-sibling::*[@ana eq 'start'][1]/@loc]"
-    />
+    <xsl:template match="*[@ana eq 'end'][@loc eq preceding-sibling::*[@ana eq 'start'][1]/@loc]"/>
 </xsl:stylesheet>
