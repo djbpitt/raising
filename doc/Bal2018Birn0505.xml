@@ -100,7 +100,13 @@
                 <emphasis>markers</emphasis>). When we do flatten our documents, we will often wish,
             later, to restore the content elements we flattened. The three co-authors discovered
             recently that we had each had occasion to perform this task, and that we had undertaken
-            it using different techniques.</para>
+            it using different techniques.<footnote>
+                <para>Community interest in flat-to-hierarchy and hierarchy-to-flat transformations
+                    is confirmed by their inclusion in Abel Braaksma’s 2014 proposal, on the XSLT
+                    mailing list, that they be included among the top 10 most used XSLT design
+                    patterns. See
+                        <link>https://www.biglist.com/lists/lists.mulberrytech.com/xsl-list/archives/201404/msg00028.html</link>.</para>
+            </footnote></para>
         <para>The purpose of this late-breaking presentation is to survey multiple ways to perform
             the task of unflattening or raising, that is, restoring a conventional XML element
             structure of content elements from a flattened XML document instance (or part of one).
@@ -2047,10 +2053,10 @@ print(open_elements.pop().toxml())</programlisting>
                 achieve without computational validation, we opted for a more robust regex—that is,
                 one more accepting of variation, even though allowing for variation made the regex
                 harder to read and develop.</para>
-            <para>The regex expressions needed to raise <emphasis role="ital">Frankenstein</emphasis>
-                are more complex because the two attributes that contribute to the Trojan markup,
-                    <code>@ana</code> and <code>@loc</code>, may occur in any order with respect to
-                each other and other attributes. </para>
+            <para>The regex expressions needed to raise <emphasis role="ital"
+                    >Frankenstein</emphasis> are more complex because the two attributes that
+                contribute to the Trojan markup, <code>@ana</code> and <code>@loc</code>, may occur
+                in any order with respect to each other and other attributes. </para>
         </section>
         <section>
             <title>Pull parsing in Python</title>
