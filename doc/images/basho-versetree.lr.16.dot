@@ -1,0 +1,76 @@
+digraph {
+  node [shape=rectangle, ordering=out];
+  edge [color=gray];
+  
+  subgraph {
+  rank = same;
+  node [color=black, shape=point, style=filled, fillcolor="#EEEEEE"];
+  starttext [label="t\n(", color=transparent, style=invisible];
+  startbody [label="b\n(", color=transparent];
+  starthead [label="h\n(", color=transparent];
+  endhead [label="h\n)", color=transparent];
+  startlg [label="lg\n(", color=transparent];
+  startl1 [label="l\n(", color=transparent];
+  endl1 [label="l\n)", color=transparent];
+  startl2 [label="l\n(", color=transparent];
+  endl2 [label="l\n)", color=transparent];
+  startl3 [label="l\n(", color=transparent];
+  endl3 [label="l\n)", color=transparent];
+  endlg [label="lg\n)", color=red];
+  endbody [label="b\n)"];
+  endtext [label="t\nend"];
+
+  node [color=black, shape=box, style=solid];
+  // shape=plaintext makes them disappear too much
+  
+  pcd0 [label="The Village without Bells"];
+  pcd1 [label="A village where they ring"];
+  pcd2 [label="no bells! -- Oh, what do they do"];
+  pcd3 [label="at dusk in spring?"]
+   }
+
+  node [shape=oval, color=gray, fontcolor=gray];
+  text [color=red, fontcolor=black, style=filled, fillcolor=pink];
+  body [color=red, fontcolor=black, style=filled, fillcolor=pink];
+  head [color=black, fontcolor=black, style=bold];
+  lg [color=red, fontcolor=black, style=filled, fillcolor=pink];
+  l1 [label="L", color=black, fontcolor=black];
+  l2 [label="L", color=black, fontcolor=black];
+  l3 [label="L" color=black, fontcolor=black];
+  text -> starttext [style=invisible, color=red, arrowhead=none];
+  text -> body [color=black];
+  text -> endtext [style=dotted];
+  
+  body -> startbody [style=invisible, color=red, arrowhead=none];
+  body -> head [color=black];
+  body -> lg [color=black];
+  body -> endbody [style=dotted];
+
+  head -> starthead [style=invisible, color=red, arrowhead=none];
+  head -> pcd0 [color=black];
+  head -> endhead [style=invisible, arrowhead=none, color=red];
+  
+
+  lg -> startlg [style=invisible, arrowhead=none, color=red];
+  lg -> l1 [color=black];
+  lg -> l2 [color=black];
+  lg -> l3 [color=black];
+  lg -> endlg [color=red, style=dotted];
+
+
+  l1 -> startl1 [color=red, style=invisible, arrowhead=none];
+  l1 -> pcd1 [color=black];
+  l1 -> endl1 [color=red, style=invisible, arrowhead=none];
+  
+
+  l2 -> startl2 [color=red, style=invisible, arrowhead=none];
+  l2 -> pcd2 [color=black];
+  l2 -> endl2 [color=red, style=invisible, arrowhead=none];
+  
+
+  l3 -> startl3 [color=red, style=invisible, arrowhead=none];
+  l3 -> pcd3 [color=black];
+  l3 -> endl3 [color=red, style=invisible, arrowhead=none];
+  
+  
+}

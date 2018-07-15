@@ -1,0 +1,74 @@
+digraph {
+  node [shape=rectangle, ordering=out];
+  edge [color=gray];
+  
+  subgraph {
+  rank = same;
+  node [color=black, shape=point, style=filled, fillcolor="#EEEEEE"];
+  starttext [label="t\n(", color=transparent, style=invisible];
+  startbody [label="b\n(", color=transparent];
+  starthead [label="h\n(", color=transparent];
+  endhead [label="h\n)"];
+  startlg [label="lg\n("];
+  startl1 [label="l\n("];
+  endl1 [label="l\n)"];
+  startl2 [label="l\n("];
+  endl2 [label="l\n)"];
+  startl3 [label="l\n("];
+  endl3 [label="l\n)"];
+  endlg [label="lg\n)"];
+  endbody [label="b\n)"];
+  endtext [label="t\nend"];
+
+  node [color=black, shape=box, style=solid];
+  // shape=plaintext makes them disappear too much
+  
+  pcd0 [label="The Village without Bells", color=red];
+  pcd1 [label="A village where they ring"];
+  pcd2 [label="no bells! -- Oh, what do they do"];
+  pcd3 [label="at dusk in spring?"]
+   }
+
+  node [shape=oval, color=gray, fontcolor=gray];
+  text [color=red, fontcolor=black, style=filled, fillcolor=pink];
+  body [color=red, fontcolor=black, style=filled, fillcolor=pink];
+  head [color=red, fontcolor=black, style=filled, fillcolor=pink];
+  lg;
+  l1 [label="L"];
+  l2 [label="L"];
+  l3 [label="L"];
+  text -> starttext [style=invisible, color=red, arrowhead=none];
+  text -> body [color=black];
+  text -> endtext [style=dotted];
+  
+  body -> startbody [style=invisible, color=red, arrowhead=none];
+  body -> head [color=black];
+  body -> lg;
+  body -> endbody [style=dotted];
+
+  head -> starthead [style=invisible, color=red, arrowhead=none];
+  head -> pcd0 [color=red];
+  head -> endhead [style=dotted];
+  
+
+  lg -> startlg [style=dotted];
+  lg -> { l1 l2 l3 };
+  lg -> endlg [style=dotted];
+
+
+  l1 -> startl1 [style=dotted];
+  l1 -> pcd1;
+  l1 -> endl1 [style=dotted];
+  
+
+  l2 -> startl2 [style=dotted];
+  l2 -> pcd2;
+  l2 -> endl2 [style=dotted];
+  
+
+  l3 -> startl3 [style=dotted];
+  l3 -> pcd3;
+  l3 -> endl3 [style=dotted];
+  
+  
+}

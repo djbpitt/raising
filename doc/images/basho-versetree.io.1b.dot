@@ -1,0 +1,76 @@
+digraph {
+  /* 1b:  raise the elements marked by the pairs just recognized */
+  node [shape=rectangle, ordering=out];
+  edge [color=gray];
+  
+  subgraph {
+  rank = same;
+  node [color=black, shape=octagon, style=filled, fillcolor="#EEEEEE"];
+  starttext [label="text\nstart"];
+  startbody [label="body\nstart"];
+  // starthead [label="head\nstart", color=red];
+  // endhead [label="head\nend", color=red];
+  startlg [label="lg\nstart"];
+  // startl1 [label="l\nstart", color=red];
+  // endl1 [label="l\nend", color=red];
+  // startl2 [label="l\nstart", color=red];
+  // endl2 [label="l\nend", color=red];
+  // startl3 [label="l\nstart", color=red];
+  // endl3 [label="l\nend", color=red];
+  endlg [label="lg\nend"];
+  endbody [label="body\nend"];
+  endtext [label="text\nend"];
+
+  node [shape=oval, color=black, fontcolor=black, style=bold];
+  head;
+  l1 [label="L"];
+  l2 [label="L"];
+  l3 [label="L"];
+   }
+
+
+  node [color=black, shape=box, style=solid];
+  // shape=plaintext makes them disappear too much
+  
+  pcd0 [label="The Village without Bells"];
+  pcd1 [label="A village where they ring"];
+  pcd2 [label="no bells! -- Oh, what do they do"];
+  pcd3 [label="at dusk in spring?"]
+ 
+
+  node [shape=oval, color=gray, fontcolor=gray];
+  text -> starttext [style=dotted];
+  text -> body;
+  text -> endtext [style=dotted];
+  
+  body -> startbody [style=dotted];
+  body -> head;
+  body -> lg;
+  body -> endbody [style=dotted];
+
+  // head -> starthead [style=dotted];
+  head -> pcd0 [color=black];
+  // head -> endhead [style=dotted];
+  
+
+  lg -> startlg [style=dotted];
+  lg -> { l1 l2 l3 };
+  lg -> endlg [style=dotted];
+
+
+  // l1 -> startl1 [style=dotted];
+  l1 -> pcd1 [color=black];
+  // l1 -> endl1 [style=dotted];
+  
+
+  // l2 -> startl2 [style=dotted];
+  l2 -> pcd2 [color=black];
+  // l2 -> endl2 [style=dotted];
+  
+
+  // l3 -> startl3 [style=dotted];
+  l3 -> pcd3 [color=black];
+  // l3 -> endl3 [style=dotted];
+  
+  
+}

@@ -1,0 +1,21 @@
+digraph {
+  node [shape=rectangle];
+  pcd0 [label="The Village without Bells"]
+  pcd1 [label="A village where they ring"]
+  pcd2a [label="no bells! -- "];
+  pcd2b [label="Oh, what do they do"]
+  pcd3 [label="at dusk in spring?"]
+
+  node [shape=oval];
+  s1 [label="s"];
+  s2 [label="s"];
+  text -> body;
+  body -> head;
+  head -> pcd0;
+  body -> ab;
+  ab -> s1 -> pcd1;
+  s1 -> pcd2a;
+  ab -> s2 -> pcd2b;
+  s2 -> pcd3;
+  
+}

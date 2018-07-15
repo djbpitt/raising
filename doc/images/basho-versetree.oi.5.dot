@@ -1,0 +1,76 @@
+digraph {
+  node [shape=rectangle, ordering=out];
+  edge [color=gray];
+  
+  subgraph {
+  rank = same;
+  node [color=black, shape=point, style=filled, fillcolor="#EEEEEE"];
+  starttext [label="t\n(", color=transparent];
+  startbody [label="b\n(", color=transparent];
+  starthead [label="h\n(", color=transparent];
+  endhead [label="h\n)", color=transparent];
+  startlg [label="lg\n(", color=transparent];
+  startl1 [label="l\n(", color=red];
+  endl1 [label="l\n)", color=red];
+  startl2 [label="l\n("];
+  endl2 [label="l\n)"];
+  startl3 [label="l\n("];
+  endl3 [label="l\n)"];
+  endlg [label="lg\n)", color=transparent];
+  endbody [label="b\n)", color=transparent];
+  endtext [label="t\nend", color=transparent];
+
+  node [color=black, shape=box, style=solid];
+  // shape=plaintext makes them disappear too much
+  
+  pcd0 [label="The Village without Bells"];
+  pcd1 [label="A village where they ring"];
+  pcd2 [label="no bells! -- Oh, what do they do"];
+  pcd3 [label="at dusk in spring?"]
+   }
+
+  node [shape=oval, color=gray, fontcolor=gray];
+  text [color=black, fontcolor=black];
+  body [color=black, fontcolor=black];
+  head [color=black, fontcolor=black];
+  lg [color=black, fontcolor=black];
+  l1 [label="L", color=red, fontcolor=black, style=filled, fillcolor=pink];
+  l2 [label="L"];
+  l3 [label="L"];
+  text -> starttext [color=red, style=invis, arrowhead=none];
+  text -> body [color=black];
+  text -> endtext [color=red, style=invis, arrowhead=none];
+  
+  body -> startbody [color=red, style=invis, arrowhead=none];
+  body -> head [color=black];
+  body -> lg [color=black];
+  body -> endbody [color=red, style=invis, arrowhead=none];
+
+  head -> starthead [color=red, style=invis, arrowhead="none"];
+  head -> pcd0 [color=black];
+  head -> endhead [color=red, style=invis, arrowhead="none"];
+  
+
+  lg -> startlg [style=invis, arrowhead=none, color=red];
+  lg -> l1;
+  lg -> l2;
+  lg -> l3;
+  lg -> endlg [style=invis, color=red, arrowhead=none];
+
+
+  l1 -> startl1 [color=red, style=dotted];
+  l1 -> pcd1;
+  l1 -> endl1 [color=red, style=dotted];
+  
+
+  l2 -> startl2 [style=dotted];
+  l2 -> pcd2;
+  l2 -> endl2 [style=dotted];
+  
+
+  l3 -> startl3 [style=dotted];
+  l3 -> pcd3;
+  l3 -> endl3 [style=dotted];
+  
+  
+}

@@ -1,0 +1,32 @@
+digraph {
+  subgraph {
+  rank=same;
+  node [shape=rectangle];
+  pcd0 [label="The Village without Bells"];
+  pcd1 [label="A village where they ring"];
+  pcd2 [label="no bells! -- Oh, what do they do"];
+  pcd3 [label="at dusk in spring?"];
+  }
+
+  node [shape=oval, color=gray];
+  edge [color=gray]
+  text;
+  body;
+  head [label="head", color=black, style=bold]
+  lg [label="lg", color=red, style=bold];
+  l1 [label="L", color=black, style=bold];
+  l2 [label="L", color=black, style=bold];
+  l3 [label="L", color=black, style=bold];
+  
+  text -> body;
+  body -> head;
+  head -> pcd0 [color=black];
+  body -> lg;
+  lg -> l1 [color=red];
+  lg -> l2 [color=red];
+  lg -> l3 [color=red];
+  l1 -> pcd1 [color=black];
+  l2 -> pcd2 [color=black];
+  l3 -> pcd3 [color=black];
+  
+}
