@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+  <tei:teiHeader th:sID="d1e3"/>
+    <tei:fileDesc th:sID="d1e5"/>
+      <tei:titleStmt th:sID="d1e7"/>
+	<tei:title th:sID="d1e9"/>The village with no bells<tei:title th:eID="d1e9"/>
+	<tei:author th:sID="d1e12"/>Matsu Bashō<tei:author th:eID="d1e12"/>
+      <tei:titleStmt th:eID="d1e7"/>
+      <tei:publicationStmt th:sID="d1e16"/>
+	<tei:p th:sID="d1e18"/>Unpublished.<tei:p th:eID="d1e18"/>
+      <tei:publicationStmt th:eID="d1e16"/>
+      <tei:sourceDesc th:sID="d1e22"/>
+	<tei:bibl th:sID="d1e24"/>Harold G. Henderson,
+	<tei:title th:sID="d1e26"/>An introduction to haiku<tei:title th:eID="d1e26"/>
+	(Garden City, New York:  Doubleday, 1958),
+	p. 48.<tei:bibl th:eID="d1e24"/>
+      <tei:sourceDesc th:eID="d1e22"/>      
+    <tei:fileDesc th:eID="d1e5"/>
+  <tei:teiHeader th:eID="d1e3"/>
+  <tei:text th:sID="d1e33"/>
+    <tei:body xml:id="body" th:sID="d1e35"/>
+      <tei:head xml:id="h1" th:sID="d1e37"/>The Village Without Bells<tei:head th:eID="d1e37"/>
+      <tei:lg xml:id="lg1" th:sID="d1e40"/>
+	<tei:l xml:id="L1" th:sID="d1e42"/>A village where they ring<tei:l th:eID="d1e42"/>
+	<tei:l xml:id="L2" th:sID="d1e45"/>no bells! — Oh, what do they do<tei:l th:eID="d1e45"/>
+	<tei:l xml:id="L3" th:sID="d1e48"/>at dusk in spring?<tei:l th:eID="d1e48"/>
+      <tei:lg th:eID="d1e40"/>
+    <tei:body th:eID="d1e35"/>
+  <tei:text th:eID="d1e33"/>
+</tei:TEI>

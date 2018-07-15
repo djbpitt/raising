@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"> 
+    <cit xml:id="fThomas_C10-cit_1" th:sID="d1e3"/> 
+        <quote xml:id="fThomas_C10-quote_1" th:sID="d1e5"/> 
+	    <lg xml:id="fThomas_C10-lg_1" th:sID="d1e7"/> 
+		<l xml:id="fThomas_C10-l_1" th:sID="d1e9"/> Like one who, on a lonely road, <l th:eID="d1e9"/>
+		<l xml:id="fThomas_C10-l_2" th:sID="d1e12"/> Doth walk in fear and dread, <l th:eID="d1e12"/>
+		<l xml:id="fThomas_C10-l_3" th:sID="d1e15"/> And, having once turn’d round, walks on, <l th:eID="d1e15"/>
+		<l xml:id="fThomas_C10-l_4" th:sID="d1e18"/> And turns no more his head; <l th:eID="d1e18"/>
+		<l xml:id="fThomas_C10-l_5" th:sID="d1e21"/> Because he knows a frightful fiend <l th:eID="d1e21"/>            
+		<l xml:id="fThomas_C10-l_6" th:sID="d1e25"/> Doth close behind him tread*. <l th:eID="d1e25"/>
+	    <lg th:eID="d1e7"/>
+	<quote th:eID="d1e5"/>
+        <note xml:id="fThomas_C10-note_1" th:sID="d1e30"/> * 
+        <bibl xml:id="fThomas_C10-bibl_1" th:sID="d1e32"/> 
+            Coleridge’s “Ancient Mariner.” 
+	<bibl th:eID="d1e32"/>
+	<note th:eID="d1e30"/>
+    <cit th:eID="d1e3"/>
+</p>

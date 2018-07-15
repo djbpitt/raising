@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">
+  <tei:teiHeader>
+    <tei:fileDesc>
+      <tei:titleStmt>
+	<tei:title>The village with no bells</tei:title>
+	<tei:author>Matsu Bashō</tei:author>
+      </tei:titleStmt>
+      <tei:publicationStmt>
+	<tei:p>Unpublished.</tei:p>
+      </tei:publicationStmt>
+      <tei:sourceDesc>
+	<tei:bibl>Harold G. Henderson,
+	<tei:title>An introduction to haiku</tei:title>
+	(Garden City, New York:  Doubleday, 1958),
+	p. 48.</tei:bibl>
+      </tei:sourceDesc>      
+    </tei:fileDesc>
+  </tei:teiHeader>
+  <tei:text
+      xmlns:tei="http://www.tei-c.org/ns/1.0"
+      xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
+      th:doc="meter sentence"
+      ><tei:body th:doc="meter sentence" th:sID="body" xml:id="body"
+      /><tei:head th:doc="meter sentence" th:sID="h1" xml:id="h1"
+      />The Village Without Bells <tei:head
+      th:doc="meter sentence" th:eID="h1"
+      /><tei:lg th:doc="meter" th:sID="lg1" xml:id="lg1"
+      /><tei:ab th:doc="sentence" th:sID="ab1" xml:id="ab1"
+      /><tei:l th:doc="meter" th:sID="L1" xml:id="L1"
+      /><tei:s th:doc="sentence" th:sID="s1" xml:id="s1"
+      />A village where they ring <tei:l th:doc="meter" th:eID="L1"
+      /><tei:l th:doc="meter" th:sID="L2" xml:id="L2"
+      />no bells! — <tei:s th:doc="sentence" th:eID="s1"
+      /><tei:s th:doc="sentence" th:sID="s2" xml:id="s2"
+      />Oh, what do they do <tei:l th:doc="meter" th:eID="L2"
+      /><tei:l th:doc="meter" th:sID="L3" xml:id="L3"
+      />at dusk in spring? <tei:l th:doc="meter" th:eID="L3"
+      /><tei:lg th:doc="meter" th:eID="lg1"
+      /><tei:s th:doc="sentence" th:eID="s2"
+      /><tei:ab th:doc="sentence" th:eID="ab1"
+      /><tei:body th:doc="meter sentence" th:eID="body" />
+  </tei:text>
+</tei:TEI>
