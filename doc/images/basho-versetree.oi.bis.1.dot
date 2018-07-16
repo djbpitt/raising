@@ -1,0 +1,57 @@
+digraph { 
+  node [ordering=out]; 
+  subgraph { 
+    rank=same; 
+start_text_10 [label="text\nstart", shape=point, color=red];
+end_text_10 [label="text\nend", shape=point, color=red];
+start_body_10 [label="body\nstart", shape=point, color=black];
+end_body_10 [label="body\nend", shape=point, color=black];
+start_head_10 [label="head\nstart", shape=point, color=black];
+end_head_10 [label="head\nend", shape=point, color=black];
+pcd7 [shape=box, label="The Village Without Bells"];
+start_lg_11 [label="lg\nstart", shape=point, color=black];
+end_lg_11 [label="lg\nend", shape=point, color=black];
+start_l_11 [label="l\nstart", shape=point, color=black];
+end_l_11 [label="l\nend", shape=point, color=black];
+pcd8 [shape=box, label="A village where they ring"];
+start_l_12 [label="l\nstart", shape=point, color=black];
+end_l_12 [label="l\nend", shape=point, color=black];
+pcd9 [shape=box, label="no bells! — Oh, what do they do"];
+start_l_13 [label="l\nstart", shape=point, color=black];
+end_l_13 [label="l\nend", shape=point, color=black];
+pcd10 [shape=box, label="at dusk in spring?"];
+  } 
+
+text_10 [label=text, color=red, shape=oval, style=filled, fillcolor=pink]; 
+body_10 [label=body, color=gray, shape=oval]; 
+head_10 [label=head, color=gray, shape=oval]; 
+lg_11 [label=lg, color=gray, shape=oval]; 
+l_11 [label=l, color=gray, shape=oval]; 
+l_12 [label=l, color=gray, shape=oval]; 
+l_13 [label=l, color=gray, shape=oval]; 
+
+text_10 -> start_text_10 [color=red, style=dotted];
+text_10 -> body_10 [color=gray];
+text_10 -> end_text_10 [color=red, style=dotted];
+body_10 -> start_body_10 [color=gray, style=dotted];
+body_10 -> head_10 [color=gray];
+body_10 -> lg_11 [color=gray];
+body_10 -> end_body_10 [color=gray, style=dotted];
+head_10 -> start_head_10 [color=gray, style=dotted];
+head_10 -> pcd7 [color=gray];
+head_10 -> end_head_10 [color=gray, style=dotted];
+lg_11 -> start_lg_11 [color=gray, style=dotted];
+lg_11 -> l_11 [color=gray];
+lg_11 -> l_12 [color=gray];
+lg_11 -> l_13 [color=gray];
+lg_11 -> end_lg_11 [color=gray, style=dotted];
+l_11 -> start_l_11 [color=gray, style=dotted];
+l_11 -> pcd8 [color=gray];
+l_11 -> end_l_11 [color=gray, style=dotted];
+l_12 -> start_l_12 [color=gray, style=dotted];
+l_12 -> pcd9 [color=gray];
+l_12 -> end_l_12 [color=gray, style=dotted];
+l_13 -> start_l_13 [color=gray, style=dotted];
+l_13 -> pcd10 [color=gray];
+l_13 -> end_l_13 [color=gray, style=dotted];
+}
