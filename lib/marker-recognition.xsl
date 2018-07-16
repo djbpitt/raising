@@ -18,6 +18,7 @@
   <!--* Expected values are 'th' for @th:sID and @th:eID,
       * 'ana' for @ana=start|end
       * 'xmlid' for @xml:id matching (_start|_end)$
+      * 'anaplus' for @ana=start|end|*_Start|*_End
       *-->
   <xsl:param name="th-style" select=" 'th' " static="yes"/>
     
@@ -34,6 +35,8 @@
 	select="exists($e/@th:sID)"/>
     <xsl:value-of use-when="$th-style = 'ana' "
 	select="$e/@ana='start' "/>
+    <xsl:value-of use-when="$th-style = 'anaplus' "
+	select="matches($e/@ana, '^start$|_Start$') "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 	select="ends-with($e/@xml:id,'_start')"/>
     
@@ -53,6 +56,8 @@
 	select="exists($e/@th:eID)"/>
     <xsl:value-of use-when="$th-style = 'ana' "
 	select="$e/@ana='end' "/>
+    <xsl:value-of use-when="$th-style = 'anaplus' "
+	select="matches($e/@ana, '^end$|_End$') "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 		  select="ends-with($e/@xml:id,'_end')"/>
     
@@ -71,6 +76,8 @@
 	select="exists($e/@th:sID or $e/@th:eID)"/>
     <xsl:value-of use-when="$th-style = 'ana' "
 	select="$e/@ana=('start', 'end')"/>
+    <xsl:value-of use-when="$th-style = 'anaplus' "
+	select="matches($e/@ana, '^start$|^end$|_Start$|_End$') "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 	select="matches($e/@xml:id,'(_start|_end)$')"/>
     
