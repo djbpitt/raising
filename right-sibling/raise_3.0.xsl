@@ -110,8 +110,8 @@
     
     <xsl:copy copy-namespaces="no">
       <xsl:copy-of select="@* except @th:*" use-when=" $th-style='th' "/>
-      <xsl:copy-of select="@* except (@ana, @loc)" use-when=" $th-style='ana' "/>
-      <xsl:attribute name="xml:id" select="@loc" use-when=" $th-style='ana' "/>
+      <xsl:copy-of select="@* except (@ana, @loc)" use-when=" $th-style=('ana', 'anaplus') "/>
+      <xsl:attribute name="xml:id" select="@loc" use-when=" $th-style=('ana', 'anaplus') "/>
       
       <xsl:apply-templates select="following-sibling::node()[1]"
 			   mode="shallow-to-deep">
@@ -183,17 +183,34 @@
     <xsl:variable name="ns" select="namespace-uri($this)"/>
     <xsl:variable name="gi" select="local-name($this)"/>
     <xsl:variable name="ID" select="$this/@th:sID" use-when="$th-style='th'"/>
-    <xsl:variable name="ID" select="$this/@loc" use-when="$th-style='ana'"/>
+    <xsl:variable name="ID" select="$this/@loc" use-when="$th-style=('ana', 'anaplus')"/>
+
     
-    <xsl:sequence select="$this/following-sibling::*[@th:eID = $ID 
+    <xsl:if test="$debug = 'yes' ">
+	<xsl:message>matching-end-marker() called for <xsl:value-of
+	select="concat($gi, ' element with ID=', $ID)"/>,
+	viz: <xsl:copy-of select="$this"/></xsl:message>
+	<xsl:message>Results: 
+	<xsl:sequence select="$this/following-sibling::*
+			      [@loc = $ID
+			      and th:is-end-marker(.)
+			      and namespace-uri()=$ns
+			      and local-name()=$gi]"
+		      use-when="$th-style=('ana', 'anaplus')"/></xsl:message>
+    </xsl:if>
+    
+    <xsl:sequence select="$this/following-sibling::*[
+			         @th:eID = $ID 
 				 and namespace-uri()=$ns
-				 and local-name()=$gi]"
+				 and local-name()=$gi][1]"
 		  use-when="$th-style='th'"/>
-    
-    <xsl:sequence select="$this/following-sibling::*[@loc = $ID 
-				 and namespace-uri()=$ns
-				 and local-name()=$gi]"
-		  use-when="$th-style='ana'"/>   
+    <xsl:sequence select="$this/following-sibling::*
+			  [@loc = $ID
+			  and th:is-end-marker(.)
+			  and namespace-uri()=$ns
+			  and local-name()=$gi][1]"
+		  use-when="$th-style=('ana', 'anaplus')"/>
+
   </xsl:function>
   
 </xsl:stylesheet>
