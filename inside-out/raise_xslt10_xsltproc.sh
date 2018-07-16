@@ -39,6 +39,7 @@ while [ $SOFAR -lt $MAX ]; do
   if [ $? -eq 0 ]; then 
       echo "After $SOFAR runs, fixed point has been reached."
       mv $ACC2 $OUTDOC
+      rm $ACC1
       exit 0
   else
       ### mv $ACC1 $ACC1.$SOFAR.xml
