@@ -75,6 +75,9 @@
       *-->
   <xsl:param name="th-style" select=" 'th' " static="yes"/>
 
+  <!--* debug:  yes or no *-->
+  <xsl:param name="debug" as="xs:string" select=" 'no' " static="yes"/>
+
   <!--* declare default mode; we make it fail on no match
       * because it turns out we need templates for all nodes.
       *-->
@@ -148,7 +151,7 @@
     <xsl:accumulator-rule match="node()[not(self::element())
       or (not(th:trojan-start(.)) and not(th:trojan-end(.)))]">
       <xsl:variable name="this" as="node()">
-        <xsl:copy/>
+        <xsl:copy-of select="."/>
       </xsl:variable>
       <xsl:sequence
       select="for $level in array:size($value) return
@@ -200,7 +203,11 @@
 		       and not(th:trojan-start(.))
 		       and not(th:trojan-end(.)) ]">
     <!--* If we are outside the flattened area, copy the node;
-	* otherwise, do nothing and leave everything to the accumulator *-->
+	* otherwise, do nothing and leave everything to the
+	accumulator *-->
+    <xsl:if test="$debug = 'yes'">
+	<xsl:message>Template 3.2 found <xsl:value-of select="name()"/></xsl:message>
+    </xsl:if>
     <xsl:choose>
       <xsl:when test="array:size(accumulator-before('stack')) eq 0">
 	<xsl:copy>
@@ -239,6 +246,8 @@
 	select="exists($e/@th:sID)"/>
     <xsl:value-of use-when="$th-style = 'ana' "
 	select="$e/@ana='start' "/>
+    <xsl:value-of use-when="$th-style = 'anaplus' "
+	select="matches($e/@ana, '^start$|_Start$') "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 	select="ends-with($e/@xml:id,'_start')"/>
     
@@ -257,6 +266,8 @@
 	select="exists($e/@th:eID)"/>
     <xsl:value-of use-when="$th-style = 'ana' "
 	select="$e/@ana='end' "/>
+    <xsl:value-of use-when="$th-style = 'anaplus' "
+	select="matches($e/@ana, '^end$|_End$') "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 		  select="ends-with($e/@xml:id,'_end')"/>
     
@@ -273,7 +284,7 @@
       <!--* first copy (and filter) attributes *-->
       <xsl:sequence select="$ln[1]/(@* except @th:*)"
 		    use-when="$th-style = 'th' "/>
-      <xsl:sequence use-when="$th-style = 'ana' ">
+      <xsl:sequence use-when="$th-style = ('ana', 'anaplus') ">
 	<xsl:sequence select="$ln[1]/(@* except (@ana, @loc))"/>
 	<xsl:attribute name="xml:id" select="$ln[1]/@loc"/>
       </xsl:sequence>
