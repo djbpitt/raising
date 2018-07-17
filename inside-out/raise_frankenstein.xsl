@@ -21,12 +21,17 @@
         2. Remove @ana attributes
         3. Copy the @loc attribute value as the value of a new @xml:id attribute
     -->
+    <!--* N.B. the characteristics just described don't hold of
+	* input/frankenstein/novel-coll/*
+	*-->
+    
     <!-- identity template (all modes) -->
     <xsl:template match="@* | node()" mode="#all">
         <xsl:copy>
             <xsl:apply-templates select="@* | node()"/>
         </xsl:copy>
     </xsl:template>
+    
     <!-- recursive function that does the raising -->
     <xsl:function name="th:raise">
         <xsl:param name="input" as="document-node()"/>
@@ -44,13 +49,18 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+    
     <xsl:template match="/">
         <xsl:sequence select="th:raise(.)"/>
     </xsl:template>
+    
     <xsl:template match="/" mode="loop">
         <xsl:apply-templates/>
     </xsl:template>
-    <xsl:template match="*[@ana eq 'start'][@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]">
+    
+    <xsl:template match="*
+			 [@ana eq 'start']
+			 [@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]">
         <!-- innermost start-tag -->
         <xsl:element name="{name()}">
             <!-- textual content of raised element-->
@@ -59,9 +69,19 @@
                 select="following-sibling::node()[following-sibling::*[@loc eq current()/@loc]]"/>
         </xsl:element>
     </xsl:template>
+    
     <!-- nodes inside new wrapper -->
     <xsl:template
-        match="node()[preceding-sibling::*[@ana eq 'start'][1]/@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"/>
+        match="node()
+	       [preceding-sibling::*[@ana eq 'start'][1]/@loc
+	       eq
+	       following-sibling::*[@ana eq 'end'][1]/@loc]"/>
+    
     <!-- end-tag for new wrapper -->
-    <xsl:template match="*[@ana eq 'end'][@loc eq preceding-sibling::*[@ana eq 'start'][1]/@loc]"/>
+    <xsl:template match="*[@ana eq 'end']
+			 [@loc
+			 eq
+			 preceding-sibling::*
+			 [@ana eq 'start'][1]/@loc]"/>
+    
 </xsl:stylesheet>

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all">
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
+    exclude-result-prefixes="#all">
+
+    <!--* Setup *-->
     <xsl:output method="xml" indent="no"/>
 
     <!--* Set $debug parameter to any non-null value to output messages *-->
     <xsl:param name="debug" static="yes" required="no"/>
 
+    <!--* Key for finding end-markers; is this faster? *-->
     <xsl:key name="end-markers" match="*[@th:eID]" use="@th:eID"/>
 
     <!-- 
@@ -66,7 +70,7 @@
     <xsl:template match="*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]" priority="1">
         <xsl:copy copy-namespaces="no">
             <xsl:copy-of select="@* except @th:sID"/>
-            <xsl:variable name="end-marker" as="element()" select="key('end-markers', @th:sID)"/>
+            <xsl:variable name="end-marker" as="element()" select="key('end-markers', @th:sID)[1]"/>
             <xsl:copy-of select="following-sibling::node()[. &lt;&lt; $end-marker]"/>
         </xsl:copy>
     </xsl:template>
