@@ -32,8 +32,23 @@ let $inputdir := '../input',
                   ($inputdir || '/local/flattened.Corpus.xml')
             ),
             
-     $doc := doc($docnames[6])
+     $doc := doc($docnames[14])
      (: N.B. 6-9 don't work because we are not set up
         for markers using @ana :)
+     (: 10-16 are from the Brown Corpus, varying in number
+        of samples included.  First time is inside-out,
+        second is outside-in :)
+     (: 10   (1):   18922.82 ms   157352.32 ms (!) :)
+     (: 11   (1):   18081.68 ms   158477.41 ms :)
+     (: 12   (2):   68887.08 ms   462262.34 ms :)
+     (: 13   (4):  284094.94 ms  1243142.58 ms :)
+     (: 14  (16): 3680705.28 ms  9839151.19 ms 
+                = 1h 2m20.705 s   2h43m59.1519s :)
+     (: 15  (64): n ms :)
+     (: 16 (500): n ms :)
   
-  return th:raise($doc)
+  return (: th:raise($doc) :)
+         (: th:raise-inside-out($doc) :)
+         ( 
+         th:raise-inside-out($doc)
+         )

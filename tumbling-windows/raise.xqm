@@ -80,19 +80,27 @@ declare function th:outside-in(
     start $nStart at $posStart
      when true()
       end $nEnd at $posEnd
+     when if (th:is-start-marker($nStart)
+              and 
+              exists($ln[position() gt $posStart
+               and th:matching($nStart, .)]))
+          then (th:matching($nStart,$nEnd))
+          else true() (: ($nEnd is $nStart) :)
+     (:
      when ($nEnd is (
             $ln[position() gt $posStart]
                [th:matching($nStart,.)]
                [1],
             $nStart
           )[1])
+     :)
    return if ($posStart eq $posEnd)
           then $n
           else element {name($nStart)} {
             $nStart/@* except $nStart/@th:*,
-            th:outside-in($ln
-              [position() gt $posStart
-              and position() lt $posEnd])
+            th:outside-in($n
+              [position() gt 1
+              and position() lt last()])
           }  
 };
 
