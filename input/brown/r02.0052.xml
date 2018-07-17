@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+  <teiHeader th:sID="d1e3"/>
+    <fileDesc th:sID="d1e5"/>
+      <titleStmt th:sID="d1e7"/><title th:sID="d1e8"/>Partial sample (52 words, 1 of 19 paragraphs) from
+      Sample R02 from  Jean Mercier, Whatever You Do, Don't Panic.
+      New York: Doubleday &amp; Company, Inc., 1961. Pp. 28-35.
+      <title th:eID="d1e8"/><titleStmt th:eID="d1e7"/>
+      <editionStmt th:sID="d1e11"/><edition th:sID="d1e12"/>A part  of the XML version of the Brown Corpus<edition th:eID="d1e12"/><editionStmt th:eID="d1e11"/>
+      <extent th:sID="d1e15"/>52 words, 2 sentences, 1 paragraph.<extent th:eID="d1e15"/>
+      <publicationStmt th:sID="d1e18"/>
+	<idno th:sID="d1e20"/>R02<idno th:eID="d1e20"/>
+	<availability th:sID="d1e23"/><p th:sID="d1e24"/>Used by permission of Doubleday &amp; Company, Inc. 0010-1780<p th:eID="d1e24"/><availability th:eID="d1e23"/>
+      <publicationStmt th:eID="d1e18"/>
+      <sourceDesc th:sID="d1e28"/>
+	<bibl th:sID="d1e30"/> Jean Mercier, Whatever You Do, Don't Panic.
+	New York: Doubleday &amp; Company, Inc., 1961. Pp. 28-35.
+	<bibl th:eID="d1e30"/>
+      <sourceDesc th:eID="d1e28"/>
+    <fileDesc th:eID="d1e5"/>
+    <encodingDesc th:sID="d1e35"/><p th:sID="d1e36"/><p th:eID="d1e36"/><encodingDesc th:eID="d1e35"/>
+    <revisionDesc th:sID="d1e38"/>
+      <change when="2008-04-27" th:sID="d1e40"/>Header auto-generated for TEI version<change th:eID="d1e40"/>
+    <revisionDesc th:eID="d1e38"/>
+  <teiHeader th:eID="d1e3"/>
+  
+<text xml:id="R02" decls="R" th:sID="d1e45"/>
+  <body th:sID="d1e47"/>
+    <p th:sID="d1e49"/><s n="1" th:sID="d1e50"/><w type="PPSS" th:sID="d1e51"/>I<w th:eID="d1e51"/> <w type="VBD" th:sID="d1e54"/>realized<w th:eID="d1e54"/> <w type="CS" th:sID="d1e57"/>that<w th:eID="d1e57"/> <w type="NP" th:sID="d1e60"/>Hamlet<w th:eID="d1e60"/> <w type="BEDZ" th:sID="d1e63"/>was<w th:eID="d1e63"/> <w type="VBN" th:sID="d1e66"/>faced<w th:eID="d1e66"/> <w type="IN" th:sID="d1e70"/>with<w th:eID="d1e70"/> <w type="AT" th:sID="d1e73"/>an<w th:eID="d1e73"/> <w type="QL" th:sID="d1e76"/>entirely<w th:eID="d1e76"/> <w type="JJ" th:sID="d1e79"/>different<w th:eID="d1e79"/> <w type="NN" th:sID="d1e82"/>problem<w th:eID="d1e82"/> <c type="pct" th:sID="d1e85"/>,<c th:eID="d1e85"/> <w type="CC" th:sID="d1e89"/>but<w th:eID="d1e89"/> <w type="PPg" th:sID="d1e92"/>his<w th:eID="d1e92"/> <w type="NN" th:sID="d1e95"/>agony<w th:eID="d1e95"/> <w type="MD" th:sID="d1e98"/>could<w th:eID="d1e98"/> <w type="HV" th:sID="d1e101"/>have<w th:eID="d1e101"/> <w type="BEN" th:sID="d1e104"/>been<w th:eID="d1e104"/> <w type="AT" th:sID="d1e108"/>no<w th:eID="d1e108"/> <w type="JJR" th:sID="d1e111"/>greater<w th:eID="d1e111"/> <c type="pct" th:sID="d1e114"/>.<c th:eID="d1e114"/> <s th:eID="d1e50"/>
+<s n="2" th:sID="d1e118"/><w type="AT" th:sID="d1e119"/>The<w th:eID="d1e119"/> <w type="AP" th:sID="d1e122"/>most<w th:eID="d1e122"/> <w type="DT" th:sID="d1e125"/>that<w th:eID="d1e125"/> <w type="BEDZ" th:sID="d1e128"/>was<w th:eID="d1e128"/> <w type="VBN" th:sID="d1e131"/>accomplished<w th:eID="d1e131"/> <w type="BEDZ" th:sID="d1e134"/>was<w th:eID="d1e134"/> <w type="VBG" th:sID="d1e138"/>adding<w th:eID="d1e138"/> <w type="NP" th:sID="d1e141"/>Mrs.<w th:eID="d1e141"/> <w type="NPg" th:sID="d1e144"/>Beige's<w th:eID="d1e144"/> <w type="NN" th:sID="d1e147"/>tray<w th:eID="d1e147"/> <w type="IN" th:sID="d1e150"/>to<w th:eID="d1e150"/> <w type="AT" th:sID="d1e153"/>the<w th:eID="d1e153"/> <w type="NN" th:sID="d1e157"/>dish<w th:eID="d1e157"/> <w type="NN" th:sID="d1e160"/>pile<w th:eID="d1e160"/> <c type="pct" th:sID="d1e163"/>,<c th:eID="d1e163"/> <w type="CC" th:sID="d1e166"/>and<w th:eID="d1e166"/> <w type="IN" th:sID="d1e169"/>by<w th:eID="d1e169"/> <w type="NNS" th:sID="d1e172"/>means<w th:eID="d1e172"/> <w type="IN" th:sID="d1e176"/>of<w th:eID="d1e176"/> <w type="VBN" th:sID="d1e179"/>repeated<w th:eID="d1e179"/> <w type="NNS" th:sID="d1e182"/>threats<w th:eID="d1e182"/> <c type="pct" th:sID="d1e185"/>,<c th:eID="d1e185"/> <w type="IN" th:sID="d1e188"/>on<w th:eID="d1e188"/> <w type="AT" th:sID="d1e191"/>an<w th:eID="d1e191"/> <w type="VBG" th:sID="d1e195"/>ascending<w th:eID="d1e195"/> <w type="NN" th:sID="d1e198"/>scale<w th:eID="d1e198"/> <c type="pct" th:sID="d1e201"/>,<c th:eID="d1e201"/> <w type="VBG" th:sID="d1e204"/>seeing<w th:eID="d1e204"/> <w type="CS" th:sID="d1e207"/>that<w th:eID="d1e207"/> <w type="AT" th:sID="d1e210"/>the<w th:eID="d1e210"/> <w type="NNS" th:sID="d1e214"/>girls<w th:eID="d1e214"/> <w type="VBD" th:sID="d1e217"/>dressed<w th:eID="d1e217"/> <w type="PPLS" th:sID="d1e220"/>themselves<w th:eID="d1e220"/> <c type="pct" th:sID="d1e223"/>,<c th:eID="d1e223"/> <w type="IN" th:sID="d1e226"/>after<w th:eID="d1e226"/> <w type="AT" th:sID="d1e229"/>a<w th:eID="d1e229"/> <w type="NN" th:sID="d1e233"/>fashion<w th:eID="d1e233"/> <c type="pct" th:sID="d1e236"/>.<c th:eID="d1e236"/> <s th:eID="d1e118"/>
+    <p th:eID="d1e49"/>
+
+
+<body th:eID="d1e47"/>
+<text th:eID="d1e45"/>
+</TEI>
