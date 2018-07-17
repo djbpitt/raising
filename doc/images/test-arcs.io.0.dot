@@ -1,0 +1,88 @@
+digraph { 
+  node [ordering=out];
+  subgraph {
+  subgraph { 
+    rank=same;
+    
+    start_text_10 [label="text\n(", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    end_text_10 [label="text\n)", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    start_body_10 [label="body\n(", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    end_body_10 [label="body\n)", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    start_head_10 [label="head\n(", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    end_head_10 [label="head\n)", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    pcd7 [shape=box, label="The Village\nWithout\nBells", color=black];
+    start_lg_11 [label="lg\n(", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    end_lg_11 [label="lg\n)", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    start_l_11 [label="l\n(", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    end_l_11 [label="l\n)", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    pcd8 [shape=box, label="A village\nwhere\nthey ring", color=black];
+    start_l_12 [label="l\n(", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    end_l_12 [label="l\n)", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    pcd9 [shape=box, label="no bells!\n— Oh,\nwhat do\nthey do", color=black];
+    start_l_13 [label="l\n(", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    end_l_13 [label="l\n)", shape=ellipse, width=0.3, fontsize=11, margin=0, color=black, style=filled, fillcolor="#EEEEEE"];
+    pcd10 [shape=box, label="at dusk\nin spring?"color=gray];
+
+/*
+    edge [color=transparent];
+    start_text_10 ->
+    start_body_10 ->
+    start_head_10 ->
+    pcd7 ->
+    end_head_10 ->
+    start_lg_11 ->
+    start_l_11 ->
+    pcd8 ->
+    end_l_11 ->
+    start_l_12 ->
+    pcd9 ->
+    end_l_12 ->
+    start_l_13 ->
+    pcd10 ->
+    end_l_13 ->
+    end_lg_11 ->
+    end_body_10 ->
+    end_text_10;
+    */
+  } 
+
+  node [shape=point, style=invis]
+  edge [color=blue, arrowhead=none];
+  text -> start_text_10;
+  text -> body [style=invis];
+  text -> end_text_10;
+  body -> start_body_10;
+  body -> head [style=invis];
+  body -> lg [style=invis];
+  body -> end_body_10;
+  head -> start_head_10;
+  head -> pcd7 [style=invis];
+  head -> end_head_10;
+
+  lg -> start_lg_11;
+  lg -> l1 [style=invis];
+  lg -> l2 [style=invis];
+  lg -> l3 [style=invis];
+  lg -> end_lg_11;
+  l1 -> start_l_11;
+  l1 -> pcd8 [style=invis];
+  l1 -> end_l_11;
+  l2 -> start_l_12;
+  l2 -> pcd9 [style=invis];
+  l2 -> end_l_12;
+  l3 -> start_l_13;
+  l3 -> pcd10 [style=invis];
+  l3 -> end_l_13;
+  }
+
+/*
+  edge [color=gray, arrowhead=none];
+  start_text_10 -> text -> end_text_10
+  start_body_10 -> body -> end_body_10
+  start_head_10 -> head -> end_head_10
+  start_lg_11 -> lg -> end_lg_11
+  start_l_11 -> l1 -> end_l_11
+  start_l_12 -> l2 -> end_l_12
+  start_l_13 -> l3 -> end_l_13
+*/
+}
