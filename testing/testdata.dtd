@@ -1,0 +1,169 @@
+<!--* testdata DTD
+    *
+    * v1 Rough sketch (target for test scripts, basis for analysis scripts)
+    *-->
+
+<!--* Revisions:
+    * 2018-07-17 : CMSMcQ : make first cut
+    *-->
+
+<!--* A testdata document consists of a number of run elements, 
+    * optionally preceded by one or more paragraphs with 
+    * whatever information we wish to convey in prose.
+    *-->
+
+<!ELEMENT testdata (p*, run*) >
+
+<!--* Each run element reports on one run of a process.  It records:
+    *
+    * environmental data (the date, who ran the test, the system it was 
+    *     run on)
+    * processor
+    * method 
+    * implementation 
+    * input file
+    * output file
+    * processor diagnostics (output of -t or similar option)
+    * system timing (as produced by time ...)
+    * misc comments (as needed)
+    *-->
+
+<!ELEMENT run (date, syst, proc, meth, impl, input, output, processor-messages, timing) >
+
+<!--* The date element records when the test was run.  (Scripts will
+    * use something like echo '<date>'`date`'</date>' to produce it.)
+    * its isodate attribute provides a standardized form.  Like all
+    * attributes here, the attribute may be provided by the test
+    * script or omitted; when omitted, we'll use later programs to
+    * provide the attributes.  Programs that produce summaries and
+    * graphs should be able to rely on the attributes
+    *-->
+
+<!ELEMENT date (#PCDATA) >
+<!ATTLIST date
+          isodate CDATA #IMPLIED >
+
+<!--* syst indicates what system the test was run on.  At the moment,
+    * this is completely unstructured, but should be made consistent
+    * for each system.  E.g. 'Salerno', 'meister', ...  The sysid
+    * attribute is for later use.
+    *-->
+<!ELEMENT syst (#PCDATA) >
+<!ATTLIST syst
+          sysid NMTOKEN #IMPLIED >
+
+<!--* proc identifies the processor used to run the test.  The procid
+    * attribute should be as specified in
+    * raising/testing/processors.xml.
+    *-->
+<!ELEMENT proc (#PCDATA) >
+<!ATTLIST proc
+          procid NMTOKEN #IMPLIED >
+
+<!--* meth identifies the method or approach.  The methid attribute
+    * should be as specified in raising/testing/methods.xml.
+    *-->
+<!ELEMENT meth (#PCDATA) >
+<!ATTLIST meth
+          methid NMTOKEN #IMPLIED >
+
+<!--* impl identifies the specific implementation of the method used
+    * in this run.  The implid attribute should be as specified in
+    * raising/testing/methods.xml.  
+    *-->
+<!ELEMENT impl (#PCDATA) >
+<!ATTLIST impl
+          implid NMTOKEN #IMPLIED >
+
+<!--* The input element identifis the input file used in the run.  The
+    * inputid attribute should be as specified in
+    * raising/testing/input.xml.
+    *-->
+<!ELEMENT input (#PCDATA) >
+<!ATTLIST input
+          inputid NMTOKEN #IMPLIED >
+
+<!--* The output element identifis the output file produced in the run.  
+    * From the filename it should be possible to identify input, impl,
+    * and proc.  But we do not save output forever: the file may be
+    * overwritten by another run of the same processor/input/code
+    * combination.  (If output should be saved, copy it someplace
+    * safe.)  The main use of saved output is checking that the result
+    * is correct.
+    *
+    * We don't provide an output ID; all outputs can be recreated at
+    * need.
+    *-->
+<!ELEMENT output (#PCDATA) >
+
+<!--* The processor-messages element provides a bag into which we
+    * dump whatever output the processor produces when asked for
+    * timing information.  (That can be none.)
+    *-->
+
+<!--* Example:  xsltproc:  
+Parsing stylesheet raise_xslt10.xsl took 0 ms
+Parsing document ../input/brown/r02.0052.xml took 0 ms
+Running stylesheet and saving result took 3673 ms
+    *-->
+<!--* Example: Saxon 6.5.5:
+
+SAXON 6.5.5 from Michael Kay
+Java version 1.8.0_65
+Preparation time: 143 milliseconds
+Processing file:/Users/cmsmcq/2018/talks/Balisage-late-breaking/raising/outside-in/../input/brown/r02.0052.xml
+Building tree for file:/Users/cmsmcq/2018/talks/Balisage-late-breaking/raising/outside-in/../input/brown/r02.0052.xml using class com.icl.saxon.tinytree.TinyBuilder
+Tree built in 33 milliseconds
+Loading java.net.URI
+Execution time: 668 milliseconds
+    *-->
+<!--* Example:  Saxon 9.8 HE:  
+Saxon-HE 9.8.0.12J from Saxonica
+Java version 1.8.0_65
+Stylesheet compilation time: 786.191114ms
+Processing file:/Users/cmsmcq/2018/talks/Balisage-late-breaking/raising/outside-in/../input/brown/r02.0052.xml
+Using parser com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser
+Building tree for file:/Users/cmsmcq/2018/talks/Balisage-late-breaking/raising/outside-in/../input/brown/r02.0052.xml using class net.sf.saxon.tree.tiny.TinyBuilder
+Tree built in 10.028675ms
+Tree size: 342 nodes, 716 characters, 226 attributes
+Execution time: 276.890537ms
+Memory used: 27,601,976
+    *-->
+
+<!ELEMENT processor-messages (#PCDATA) >
+
+<!--* The examples above motivate the choice of attributes. 
+    * ssprep = "Parsing stylesheet", "Preparation time", 
+    *   "Stylesheet compilation time"
+    * docprep = "Parsing document", "Tree built in"
+    * runtime = "Running ...", "Execution time"
+    * 
+    * We do not now extract internal-view memory usage.
+    *-->
+<!ATTLIST processor-messages
+          ssprep CDATA #IMPLIED
+          docprep CDATA #IMPLIED
+          runtime CDATA #IMPLIED >
+
+<!--* The timing element provides a bag into which we dump the output 
+    * of the 'time' command (or analogous).
+    * The attributes record real time, user time, system time, and
+    * the sum of user and system tim.
+    *-->
+
+<!ELEMENT timing (#PCDATA) >
+<!ATTLIST timing
+          r CDATA #IMPLIED 
+          u CDATA #IMPLIED 
+          s CDATA #IMPLIED 
+          us CDATA #IMPLIED 
+>
+
+
+<!--* Misc prose *-->
+<!ELEMENT p (#PCDATA | code | emph | hi | ident)* >
+<!ELEMENT code (#PCDATA) >
+<!ELEMENT emph (#PCDATA) >
+<!ELEMENT hi (#PCDATA) >
+<!ELEMENT ident (#PCDATA) >
+    

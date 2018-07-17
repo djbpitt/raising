@@ -1,0 +1,625 @@
+<testdata>
+  <p>These runs were performed 16 July on MSM's machine, without
+  a testing script.  Raw bash logs are in rawdata.*.asc in this directory.</p>
+  <p>The commands generally took a form something like this (with
+  variations, of course, in the filenames, output directory, whitespace,
+  and labeling):
+  <code>for i in $INPUTFILES ;
+  do for o in ${i##*/};
+  do echo;
+  echo "****************************************************************";
+  echo xsltproc outside-in/raise_xslt1.0 $i $o;
+  date;
+  echo;
+  time xsltproc --stringparam debug no -o output/basic/raised.${o%.xml}_1.0_xsltproc.xml raise_xslt10.xsl $i;
+  echo;
+  done;
+  done</code>
+</p>
+
+<!--* Some runs on outside-in *-->
+  
+  <run>
+    <date>Mon Jul 16 19:33:18 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/basic/flattened.xml</input>
+    <output>raised.flattened.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m0.371s
+user	0m0.008s
+sys	0m0.003s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Mon Jul 16 19:33:19 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/basic/basho.xml</input>
+    <output>raised.basho.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m0.064s
+user	0m0.047s
+sys	0m0.002s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Mon Jul 16 19:33:19 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/basic/coleridge-quote.xml</input>
+    <output>raised.coleridge-quote.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m0.040s
+user	0m0.021s
+sys	0m0.002s
+    </timing>
+  </run>
+  
+
+  <run>
+    <date>Mon Jul 16 19:35:32 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/extended/flattened.xml</input>
+    <output>raised.flattened.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m0.115s
+user	0m0.008s
+sys	0m0.004s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Mon Jul 16 19:35:32 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/extended/basho.xml</input>
+    <output>raised.basho.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m0.069s
+user	0m0.045s
+sys	0m0.002s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Mon Jul 16 19:35:32 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/extended/coleridge-quote.xml</input>
+    <output>raised.coleridge-quote.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m0.035s
+user	0m0.022s
+sys	0m0.002s
+    </timing>
+  </run>
+  
+
+  <run>
+    <date>Mon Jul 16 19:39:43 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02_flattened.xml</input>
+    <output>raised.r02_flattened.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	104m37.128s
+user	104m17.521s
+sys	0m11.553s
+    </timing>
+  </run>
+  
+
+
+  <run>
+    <date>Tue Jul 17 08:38:26 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.0052.xml</input>
+    <output>raised.r02.0052.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m3.724s
+user	0m3.587s
+sys	0m0.009s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Tue Jul 17 08:38:30 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.0125.xml</input>
+    <output>raised.r02.0125.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	0m17.876s
+user	0m17.822s
+sys	0m0.027s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Tue Jul 17 08:38:47 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.0225.xml</input>
+    <output>raised.r02.0225.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	1m1.349s
+user	1m1.229s
+sys	0m0.086s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Tue Jul 17 08:39:49 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.0329.xml</input>
+    <output>raised.r02.0329.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	2m11.580s
+user	2m10.906s
+sys	0m0.337s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Tue Jul 17 08:42:00 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.0368.xml</input>
+    <output>raised.r02.0368.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	2m37.600s
+user	2m36.721s
+sys	0m0.284s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Tue Jul 17 08:44:38 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.0441.xml</input>
+    <output>raised.r02.0441.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	3m44.253s
+user	3m43.513s
+sys	0m0.391s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Tue Jul 17 08:48:23 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.1041.xml</input>
+    <output>raised.r02.1041.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	23m31.203s
+user	23m28.127s
+sys	0m1.911s
+    </timing>
+  </run>
+  
+  <run>
+    <date>Tue Jul 17 09:11:54 MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>outside-in</meth>
+    <impl>outside-in/raise_xslt1.0 </impl>
+    <input>../input/brown/r02.1477.xml</input>
+    <output>raised.r02.1477.xml</output>
+    <processor-messages>
+    </processor-messages>
+    <timing>
+real	48m48.680s
+user	48m43.475s
+sys	0m2.693s
+    </timing>
+  </run>
+
+  <!--* And some runs on inside-out *-->
+
+  <!--*
+      [cmsmcq@Salerno inside-out (0)]$
+      for i in ../input/extended/coleridge-quote.xml ../input/extended/basho.xml ../input/extended/flattened.xml ;
+        do for o in ${i##*/};
+          do echo "********************************";
+            echo xsltproc: $i $o;
+            time ./raise_xslt10_xsltproc.sh $i output/extended/raised_${o%.xml}_xslt10_xsltproc.xml;
+            echo;
+            echo;
+          done;
+      done
+
+*-->
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/extended/coleridge-quote.xml</input>
+    <output>coleridge-quote.xml</output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After 5 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m0.490s
+user	0m0.026s
+sys	0m0.035s
+    </timing>
+  </run>
+
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/extended/basho.xml</input>
+    <output>basho.xml</output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m0.081s
+user	0m0.029s
+sys	0m0.030s
+    </timing>
+  </run>
+
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/extended/flattened.xml</input>
+    <output>flattened.xml</output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After 4 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m0.055s
+user	0m0.020s
+sys	0m0.022s
+    </timing>
+  </run>
+
+  <!--* 
+      [cmsmcq@Salerno inside-out (0)]$
+      for i in ../input/extended/coleridge-quote.xml ../input/extended/basho.xml ../input/extended/flattened.xml ;
+        do for o in ${i##*/};
+          do echo "********************************";
+          echo xsltproc: $i;
+          time ./raise_xslt10_xsltproc.sh $i output/extended/raised_${o%.xml}_xslt10_xsltproc.xml;
+          echo;
+          echo;
+        done;
+      done
+      *-->
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/extended/coleridge-quote.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After 5 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m0.184s
+user	0m0.026s
+sys	0m0.035s
+    </timing>
+  </run>
+
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/extended/basho.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m0.071s
+user	0m0.031s
+sys	0m0.031s
+    </timing>
+  </run>
+
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/extended/flattened.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After 4 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m0.051s
+user	0m0.018s
+sys	0m0.020s
+    </timing>
+  </run>
+
+  <!--* [cmsmcq@Salerno inside-out (0)]$
+      for i in ../input/brown/r02_flattened.xml ;
+        do for o in ${i##*/};
+          do echo "********************************";
+          echo xsltproc: $i;
+          time ./raise_xslt10_xsltproc.sh $i output/extended/raised_${o%_flattened.xml}_xslt10_xsltproc.xml;
+          echo;
+          echo;
+        done;
+      done
+      *-->
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/brown/r02_flattened.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m5.879s
+user	0m5.348s
+sys	0m0.067s
+    </timing>
+  </run>
+
+  <!--* [cmsmcq@Salerno inside-out (0)]$
+      for i in ../input/local/flattened.l18.xml ;
+      do for o in ${i##*/flattened.};
+      do echo "********************************";
+      echo xsltproc: $i;
+      time ./raise_xslt10_xsltproc.sh $i output/extended/raised_${o%.xml}_xslt10_xsltproc.xml;
+      echo;
+      echo;
+      done;
+      done
+      *-->
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/local/flattened.l18.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m6.196s
+user	0m5.141s
+sys	0m0.069s
+    </timing>
+  </run>
+
+  <!--* 
+      [cmsmcq@Salerno inside-out (0)]$
+      for i in ../input/local/flattened.brown??.xml ;
+      do for o in ${i##*/flattened.};
+      do echo "********************************";
+      echo xsltproc: $i;
+      time ./raise_xslt10_xsltproc.sh $i output/local/raised_${o%.xml}_xslt10_xsltproc.xml;
+      echo;
+      echo;
+      done;
+      done
+      *-->
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/local/flattened.brown02.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After run 6, output differs from input.
+After 7 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	0m26.965s
+user	0m25.950s
+sys	0m0.125s
+    </timing>
+  </run>
+
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/local/flattened.brown04.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After run 6, output differs from input.
+After 7 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	2m58.976s
+user	2m55.449s
+sys	0m0.722s
+    </timing>
+  </run>
+
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/local/flattened.brown16.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After run 6, output differs from input.
+After 7 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	65m3.687s
+user	62m45.354s
+sys	2m11.715s
+    </timing>
+  </run>
+
+  <run>
+    <date>Mon Jul 16 hh:mm:ss MDT 2018</date>
+    <syst>Salerno</syst>
+    <proc>xsltproc</proc>
+    <meth>inside-out</meth>
+    <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+    <input>../input/local/flattened.brown64.xml</input>
+    <output>
+    </output>
+    <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After run 6, output differs from input.
+After 7 runs, fixed point has been reached.
+    </processor-messages>
+    <timing>
+real	1165m24.650s
+user	1118m0.129s
+sys	46m34.583s
+    </timing>
+  </run>
+
+</testdata>

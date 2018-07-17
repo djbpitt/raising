@@ -1,0 +1,195 @@
+<testdata>
+<p>First cut at automating the XML capture.</p>
+<run>
+  <date>Tue Jul 17 12:51:49 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.0052.xml</input>
+  <output>output/local/raised_r02.0052_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m0.498s
+user	0m0.062s
+sys	0m0.033s
+  </timing>
+</run>
+
+<run>
+  <date>Tue Jul 17 12:51:49 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.0125.xml</input>
+  <output>output/local/raised_r02.0125_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m0.160s
+user	0m0.110s
+sys	0m0.035s
+  </timing>
+</run>
+
+<run>
+  <date>Tue Jul 17 12:51:50 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.0225.xml</input>
+  <output>output/local/raised_r02.0225_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m0.247s
+user	0m0.202s
+sys	0m0.033s
+  </timing>
+</run>
+
+<run>
+  <date>Tue Jul 17 12:51:50 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.0329.xml</input>
+  <output>output/local/raised_r02.0329_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m0.377s
+user	0m0.322s
+sys	0m0.037s
+  </timing>
+</run>
+
+<run>
+  <date>Tue Jul 17 12:51:50 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.0368.xml</input>
+  <output>output/local/raised_r02.0368_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m0.403s
+user	0m0.353s
+sys	0m0.035s
+  </timing>
+</run>
+
+<run>
+  <date>Tue Jul 17 12:51:51 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.0441.xml</input>
+  <output>output/local/raised_r02.0441_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m0.475s
+user	0m0.439s
+sys	0m0.034s
+  </timing>
+</run>
+
+<run>
+  <date>Tue Jul 17 12:51:51 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.1041.xml</input>
+  <output>output/local/raised_r02.1041_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m1.755s
+user	0m1.662s
+sys	0m0.044s
+  </timing>
+</run>
+
+<run>
+  <date>Tue Jul 17 12:51:53 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>xsltproc</proc>
+ <meth>inside-out</meth>
+  <impl>inside-out/raise_xslt10_xsltproc.sh</impl>
+  <input>../input/brown/r02.1477.xml</input>
+  <output>output/local/raised_r02.1477_xslt10_xsltproc.xml</output>
+  <processor-messages>
+After run 1, output differs from input.
+After run 2, output differs from input.
+After run 3, output differs from input.
+After run 4, output differs from input.
+After run 5, output differs from input.
+After 6 runs, fixed point has been reached.
+  </processor-messages>
+  <timing>
+
+real	0m3.125s
+user	0m3.035s
+sys	0m0.049s
+  </timing>
+</run>
+
+</testdata>
