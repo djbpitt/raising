@@ -26,7 +26,7 @@ declare namespace tei = "http://www.tei-c.org/ns/1.0";
    :)
    
 (: th:traversal:  What traversal order are we using?  oi, io, lr? :)
-declare variable $th:traversal as xs:string := 'oi';
+declare variable $th:traversal as xs:string := 'lr';
 
 (: th:markershape:  How shall we draw markers?  point or oval? :)
 declare variable $th:markershape as xs:string := 'oval';
@@ -36,12 +36,13 @@ declare variable $th:inputdir := '../input/basic/aux';
 
 (: th:inputfile:  what is the filename of the input? :)
 declare variable $th:inputfile := ('basho.xml', 
+                                   'basho2.xml'
                                    'coleridge-quote.xml',
                                    'coleridge.xml'
-                                  )[3];
+                                  )[2];
 
 (: th:outputdir:  where does the output go? :)
-declare variable $th:outputdir := file:base-dir() || '../doc/images/regression';
+declare variable $th:outputdir := file:base-dir() || '../doc/images/left-right';
 
 (: ****************************************************************
    * 2 Utilities (not particularly graphical)
@@ -134,12 +135,21 @@ declare function th:drawmarker(
 ) as xs:string {
   let $paren := if ($kwSE eq 'start') then '(' 
                 else if ($kwSE eq 'end') then ')'
-                else '???'
+                else '???',
+      $style := if ($color eq 'transparent')
+                then ', style=invis'
+                else if ($th:markershape eq 'oval')
+                then ', style=filled'
+                else '',
+      $fillcolor := if ($color eq 'red')
+                then ', fillcolor=pink'
+                else ', fillcolor="#EEEEEE"'
   return if ($th:markershape eq 'point') then 
       $kwSE || '_' || $id || ' ['
             || 'label="' || $gi || '\n' || $paren || '"'
             || ', shape=' || $th:markershape
             || ', color=' || $color
+            || $style
             || '];&#xA;'
   else (: if ($th:markershape eq 'oval') :)
       $kwSE || '_' || $id || ' ['
@@ -149,6 +159,8 @@ declare function th:drawmarker(
             || ', margin=0'
             || ', fontsize=11'
             || ', color=' || $color
+            || $style
+            || $fillcolor
             || '];&#xA;'
 };
 
