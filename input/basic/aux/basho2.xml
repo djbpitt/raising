@@ -1,0 +1,44 @@
+<!DOCTYPE tei:TEI [
+<!ENTITY mdash  "&#x2014;" >
+<!ENTITY omacr "&#x014D;">
+]>
+<tei:TEI xmlns:tei="http://www.tei-c.org/ns/1.0">
+  <tei:teiHeader>
+    <tei:fileDesc>
+      <tei:titleStmt>
+	<tei:title>The village with no bells</tei:title>
+	<tei:author>Matsu Bash&omacr;</tei:author>
+      </tei:titleStmt>
+      <tei:publicationStmt>
+	<tei:p>Unpublished.</tei:p>
+      </tei:publicationStmt>
+      <tei:sourceDesc>
+	<tei:bibl>Harold G. Henderson,
+	<tei:title>An introduction to haiku</tei:title>
+	(Garden City, New York:  Doubleday, 1958),
+	p. 48.</tei:bibl>
+      </tei:sourceDesc>      
+    </tei:fileDesc>
+  </tei:teiHeader>
+  <tei:text>
+    <tei:body>
+      <tei:head>The Village
+      Without
+      Bells</tei:head>
+      <tei:lg>
+	<tei:l>A
+	village
+	where
+	they ring</tei:l>
+	<tei:l>no bells!
+	&mdash; Oh,
+	what do
+	they do</tei:l>
+	<tei:l>at
+	dusk
+	in
+	spring?</tei:l>
+      </tei:lg>
+    </tei:body>
+  </tei:text>
+</tei:TEI>
