@@ -1,71 +1,72 @@
 digraph { 
+  graph [nodesep=0.03] ;
   node [ordering=out]; 
   subgraph { 
     rank=same; 
 // p_0 is past at 
-start_p_0 [label="p\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
-end_p_0 [label="p\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+start_p_0 [label="p\n(", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_p_0 [label="p\n)", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
 // pcd1 is past at 
 // cit_0 is past at 
-start_cit_0 [label="cit\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
-end_cit_0 [label="cit\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+start_cit_0 [label="cit\n(", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_cit_0 [label="cit\n)", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
 // pcd2 is past at 
 // quote_0 is past at 
-start_quote_0 [label="quote\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
-end_quote_0 [label="quote\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+start_quote_0 [label="quote\n(", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_quote_0 [label="quote\n)", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
 // pcd3 is past at 
 // lg_0 is past at 
-start_lg_0 [label="lg\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
-end_lg_0 [label="lg\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+start_lg_0 [label="lg\n(", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_lg_0 [label="lg\n)", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
 // pcd4 is past at 
 // l_0 is past at 
-start_l_0 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
-end_l_0 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+start_l_0 [label="l\n(", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_0 [label="l\n)", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
 // pcd5 is past at 
-pcd5 [shape=box, label="Like\none\nwho,\non a\nlonely\nroad,", color=black];
+pcd5 [shape=box, label="Like\none\nwho,\non a\nlonely\nroad,", color=black, margin="0.03, 0.11", width=0.3];
 // pcd6 is past at 
 // l_1 is past at 
-start_l_1 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
-end_l_1 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+start_l_1 [label="l\n(", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_1 [label="l\n)", shape=ellipse, margin=0, width=0.03, fontsize=5, color=transparent, style=invis, fillcolor="#EEEEEE"];
 // pcd7 is past at 
-pcd7 [shape=box, label="Doth\nwalk\nin\nfear\nand\ndread,", color=black];
+pcd7 [shape=box, label="Doth\nwalk\nin\nfear\nand\ndread,", color=black, margin="0.03, 0.11", width=0.3];
 // pcd8 is past at 
 // l_2 is current at 
-start_l_2 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=red, style=filled, fillcolor=pink];
-end_l_2 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=red, style=filled, fillcolor=pink];
+start_l_2 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=red, style=filled, fillcolor=pink];
+end_l_2 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=red, style=filled, fillcolor=pink];
 // pcd9 is future at 
-pcd9 [shape=box, label="And,\nhaving\nonce\nturn’d\nround,\nwalks\non,", color=black];
+pcd9 [shape=box, label="And,\nhaving\nonce\nturn’d\nround,\nwalks\non,", color=black, margin="0.03, 0.11", width=0.3];
 // pcd10 is future at 
 // l_3 is future at 
-start_l_3 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
-end_l_3 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+start_l_3 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_3 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
 // pcd11 is future at 
-pcd11 [shape=box, label="And\nturns\nno\nmore\nhis\nhead;", color=black];
+pcd11 [shape=box, label="And\nturns\nno\nmore\nhis\nhead;", color=black, margin="0.03, 0.11", width=0.3];
 // pcd12 is future at 
 // l_4 is future at 
-start_l_4 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
-end_l_4 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+start_l_4 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_4 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
 // pcd13 is future at 
-pcd13 [shape=box, label="Because\nhe\nknows\na\nfrightful\nfiend", color=black];
+pcd13 [shape=box, label="Because\nhe\nknows\na\nfrightful\nfiend", color=black, margin="0.03, 0.11", width=0.3];
 // pcd14 is future at 
 // l_5 is future at 
-start_l_5 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
-end_l_5 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+start_l_5 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_5 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
 // pcd15 is future at 
-pcd15 [shape=box, label="Doth\nclose\nbehind\nhim\ntread*.", color=black];
+pcd15 [shape=box, label="Doth\nclose\nbehind\nhim\ntread*.", color=black, margin="0.03, 0.11", width=0.3];
 // pcd16 is future at 
 // pcd17 is future at 
 // pcd18 is future at 
 // note_8 is future at 
-start_note_8 [label="note\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
-end_note_8 [label="note\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+start_note_8 [label="note\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_note_8 [label="note\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
 // pcd19 is future at 
-pcd19 [shape=box, label="*\n", color=black];
+pcd19 [shape=box, label="*\n", color=black, margin="0.03, 0.11", width=0.3];
 // bibl_8 is future at 
-start_bibl_8 [label="bibl\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
-end_bibl_8 [label="bibl\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+start_bibl_8 [label="bibl\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_bibl_8 [label="bibl\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
 // pcd20 is future at 
-pcd20 [shape=box, label="Coleridge’s\n“Ancient\nMariner.”", color=black];
+pcd20 [shape=box, label="Coleridge’s\n“Ancient\nMariner.”", color=black, margin="0.03, 0.11", width=0.3];
 // pcd21 is future at 
 // pcd22 is future at 
 // pcd23 is future at 
