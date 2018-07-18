@@ -1,0 +1,188 @@
+digraph { 
+  node [ordering=out]; 
+  subgraph { 
+    rank=same; 
+// TEI_0 is current at 
+start_TEI_0 [label="TEI\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=red, style=filled, fillcolor=pink];
+end_TEI_0 [label="TEI\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=red, style=filled, fillcolor=pink];
+// pcd1 is future at 
+// teiHeader_0 is future at 
+start_teiHeader_0 [label="teiHeader\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_teiHeader_0 [label="teiHeader\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd2 is future at 
+// fileDesc_0 is future at 
+start_fileDesc_0 [label="fileDesc\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_fileDesc_0 [label="fileDesc\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd3 is future at 
+// titleStmt_0 is future at 
+start_titleStmt_0 [label="titleStmt\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_titleStmt_0 [label="titleStmt\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd4 is future at 
+// title_0 is future at 
+start_title_0 [label="title\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_title_0 [label="title\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd5 is future at 
+pcd5 [shape=box, label="The village with no bells", color=black];
+// pcd6 is future at 
+// author_1 is future at 
+start_author_1 [label="author\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_author_1 [label="author\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd7 is future at 
+pcd7 [shape=box, label="Matsu Bashō", color=black];
+// pcd8 is future at 
+// pcd9 is future at 
+// publicationStmt_3 is future at 
+start_publicationStmt_3 [label="publicationStmt\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_publicationStmt_3 [label="publicationStmt\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd10 is future at 
+// p_3 is future at 
+start_p_3 [label="p\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_p_3 [label="p\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd11 is future at 
+pcd11 [shape=box, label="Unpublished.", color=black];
+// pcd12 is future at 
+// pcd13 is future at 
+// sourceDesc_5 is future at 
+start_sourceDesc_5 [label="sourceDesc\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_sourceDesc_5 [label="sourceDesc\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd14 is future at 
+// bibl_5 is future at 
+start_bibl_5 [label="bibl\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_bibl_5 [label="bibl\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd15 is future at 
+pcd15 [shape=box, label="Harold G. Henderson,\n", color=black];
+// title_5 is future at 
+start_title_5 [label="title\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_title_5 [label="title\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd16 is future at 
+pcd16 [shape=box, label="An introduction to haiku", color=black];
+// pcd17 is future at 
+pcd17 [shape=box, label="\n(Garden City, New York: Doubleday, 1958),\np. 48.", color=black];
+// pcd18 is future at 
+// pcd19 is future at 
+// pcd20 is future at 
+// pcd21 is future at 
+// text_10 is future at 
+start_text_10 [label="text\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_text_10 [label="text\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd22 is future at 
+// body_10 is future at 
+start_body_10 [label="body\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_body_10 [label="body\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd23 is future at 
+// head_10 is future at 
+start_head_10 [label="head\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_head_10 [label="head\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd24 is future at 
+pcd24 [shape=box, label="The Village\nWithout\nBells", color=black];
+// pcd25 is future at 
+// lg_11 is future at 
+start_lg_11 [label="lg\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_lg_11 [label="lg\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd26 is future at 
+// l_11 is future at 
+start_l_11 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_11 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd27 is future at 
+pcd27 [shape=box, label="A\nvillage\nwhere\nthey ring", color=black];
+// pcd28 is future at 
+// l_12 is future at 
+start_l_12 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_12 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd29 is future at 
+pcd29 [shape=box, label="no bells!\n— Oh,\nwhat do\nthey do", color=black];
+// pcd30 is future at 
+// l_13 is future at 
+start_l_13 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_13 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd31 is future at 
+pcd31 [shape=box, label="at\ndusk\nin\nspring?", color=black];
+// pcd32 is future at 
+// pcd33 is future at 
+// pcd34 is future at 
+// pcd35 is future at 
+  } 
+
+TEI_0 [label=TEI, color=red, shape=oval, style=filled, fillcolor=pink]; 
+teiHeader_0 [label=teiHeader, color=gray, shape=oval]; 
+fileDesc_0 [label=fileDesc, color=gray, shape=oval]; 
+titleStmt_0 [label=titleStmt, color=gray, shape=oval]; 
+title_0 [label=title, color=gray, shape=oval]; 
+author_1 [label=author, color=gray, shape=oval]; 
+publicationStmt_3 [label=publicationStmt, color=gray, shape=oval]; 
+p_3 [label=p, color=gray, shape=oval]; 
+sourceDesc_5 [label=sourceDesc, color=gray, shape=oval]; 
+bibl_5 [label=bibl, color=gray, shape=oval]; 
+title_5 [label=title, color=gray, shape=oval]; 
+text_10 [label=text, color=gray, shape=oval]; 
+body_10 [label=body, color=gray, shape=oval]; 
+head_10 [label=head, color=gray, shape=oval]; 
+lg_11 [label=lg, color=gray, shape=oval]; 
+l_11 [label=l, color=gray, shape=oval]; 
+l_12 [label=l, color=gray, shape=oval]; 
+l_13 [label=l, color=gray, shape=oval]; 
+
+TEI_0 -> start_TEI_0 [color=red, style=dotted];
+TEI_0 -> teiHeader_0 [color=gray, style=solid];
+TEI_0 -> text_10 [color=gray, style=solid];
+TEI_0 -> end_TEI_0 [color=red, style=dotted];
+teiHeader_0 -> start_teiHeader_0 [color=gray, style=dotted];
+teiHeader_0 -> fileDesc_0 [color=gray, style=solid];
+teiHeader_0 -> end_teiHeader_0 [color=gray, style=dotted];
+fileDesc_0 -> start_fileDesc_0 [color=gray, style=dotted];
+fileDesc_0 -> titleStmt_0 [color=gray, style=solid];
+fileDesc_0 -> publicationStmt_3 [color=gray, style=solid];
+fileDesc_0 -> sourceDesc_5 [color=gray, style=solid];
+fileDesc_0 -> end_fileDesc_0 [color=gray, style=dotted];
+titleStmt_0 -> start_titleStmt_0 [color=gray, style=dotted];
+titleStmt_0 -> title_0 [color=gray, style=solid];
+titleStmt_0 -> author_1 [color=gray, style=solid];
+titleStmt_0 -> end_titleStmt_0 [color=gray, style=dotted];
+title_0 -> start_title_0 [color=gray, style=dotted];
+title_0 -> pcd5 [color=gray, style=solid];
+title_0 -> end_title_0 [color=gray, style=dotted];
+author_1 -> start_author_1 [color=gray, style=dotted];
+author_1 -> pcd7 [color=gray, style=solid];
+author_1 -> end_author_1 [color=gray, style=dotted];
+publicationStmt_3 -> start_publicationStmt_3 [color=gray, style=dotted];
+publicationStmt_3 -> p_3 [color=gray, style=solid];
+publicationStmt_3 -> end_publicationStmt_3 [color=gray, style=dotted];
+p_3 -> start_p_3 [color=gray, style=dotted];
+p_3 -> pcd11 [color=gray, style=solid];
+p_3 -> end_p_3 [color=gray, style=dotted];
+sourceDesc_5 -> start_sourceDesc_5 [color=gray, style=dotted];
+sourceDesc_5 -> bibl_5 [color=gray, style=solid];
+sourceDesc_5 -> end_sourceDesc_5 [color=gray, style=dotted];
+bibl_5 -> start_bibl_5 [color=gray, style=dotted];
+bibl_5 -> pcd15 [color=gray, style=solid];
+bibl_5 -> title_5 [color=gray, style=solid];
+bibl_5 -> pcd17 [color=gray, style=solid];
+bibl_5 -> end_bibl_5 [color=gray, style=dotted];
+title_5 -> start_title_5 [color=gray, style=dotted];
+title_5 -> pcd16 [color=gray, style=solid];
+title_5 -> end_title_5 [color=gray, style=dotted];
+text_10 -> start_text_10 [color=gray, style=dotted];
+text_10 -> body_10 [color=gray, style=solid];
+text_10 -> end_text_10 [color=gray, style=dotted];
+body_10 -> start_body_10 [color=gray, style=dotted];
+body_10 -> head_10 [color=gray, style=solid];
+body_10 -> lg_11 [color=gray, style=solid];
+body_10 -> end_body_10 [color=gray, style=dotted];
+head_10 -> start_head_10 [color=gray, style=dotted];
+head_10 -> pcd24 [color=gray, style=solid];
+head_10 -> end_head_10 [color=gray, style=dotted];
+lg_11 -> start_lg_11 [color=gray, style=dotted];
+lg_11 -> l_11 [color=gray, style=solid];
+lg_11 -> l_12 [color=gray, style=solid];
+lg_11 -> l_13 [color=gray, style=solid];
+lg_11 -> end_lg_11 [color=gray, style=dotted];
+l_11 -> start_l_11 [color=gray, style=dotted];
+l_11 -> pcd27 [color=gray, style=solid];
+l_11 -> end_l_11 [color=gray, style=dotted];
+l_12 -> start_l_12 [color=gray, style=dotted];
+l_12 -> pcd29 [color=gray, style=solid];
+l_12 -> end_l_12 [color=gray, style=dotted];
+l_13 -> start_l_13 [color=gray, style=dotted];
+l_13 -> pcd31 [color=gray, style=solid];
+l_13 -> end_l_13 [color=gray, style=dotted];
+}
