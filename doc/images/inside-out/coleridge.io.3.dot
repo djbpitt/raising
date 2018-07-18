@@ -1,0 +1,130 @@
+digraph { 
+  node [ordering=out]; 
+  subgraph { 
+    rank=same; 
+// p_0 is future at 
+start_p_0 [label="p\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_p_0 [label="p\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd1 is past at 
+// cit_0 is future at 
+start_cit_0 [label="cit\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_cit_0 [label="cit\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd2 is past at 
+// quote_0 is current at 
+start_quote_0 [label="quote\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=red, style=filled, fillcolor=pink];
+end_quote_0 [label="quote\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=red, style=filled, fillcolor=pink];
+// pcd3 is past at 
+// lg_0 is past at 
+start_lg_0 [label="lg\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_lg_0 [label="lg\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd4 is past at 
+// l_0 is past at 
+start_l_0 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_0 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd5 is past at 
+pcd5 [shape=box, label="Like\none\nwho,\non a\nlonely\nroad,", color=black];
+// pcd6 is past at 
+// l_1 is past at 
+start_l_1 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_1 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd7 is past at 
+pcd7 [shape=box, label="Doth\nwalk\nin\nfear\nand\ndread,", color=black];
+// pcd8 is past at 
+// l_2 is past at 
+start_l_2 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_2 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd9 is past at 
+pcd9 [shape=box, label="And,\nhaving\nonce\nturn’d\nround,\nwalks\non,", color=black];
+// pcd10 is past at 
+// l_3 is past at 
+start_l_3 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_3 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd11 is past at 
+pcd11 [shape=box, label="And\nturns\nno\nmore\nhis\nhead;", color=black];
+// pcd12 is past at 
+// l_4 is past at 
+start_l_4 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_4 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd13 is past at 
+pcd13 [shape=box, label="Because\nhe\nknows\na\nfrightful\nfiend", color=black];
+// pcd14 is past at 
+// l_5 is past at 
+start_l_5 [label="l\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_l_5 [label="l\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd15 is past at 
+pcd15 [shape=box, label="Doth\nclose\nbehind\nhim\ntread*.", color=black];
+// pcd16 is past at 
+// pcd17 is past at 
+// pcd18 is past at 
+// note_8 is past at 
+start_note_8 [label="note\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_note_8 [label="note\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd19 is past at 
+pcd19 [shape=box, label="*\n", color=black];
+// bibl_8 is past at 
+start_bibl_8 [label="bibl\n(", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+end_bibl_8 [label="bibl\n)", shape=ellipse, width=0.3, margin=0, fontsize=11, color=transparent, style=invis, fillcolor="#EEEEEE"];
+// pcd20 is past at 
+pcd20 [shape=box, label="Coleridge’s\n“Ancient\nMariner.”", color=black];
+// pcd21 is past at 
+// pcd22 is past at 
+// pcd23 is past at 
+  } 
+
+p_0 [label=p, color=gray, shape=oval]; 
+cit_0 [label=cit, color=gray, shape=oval]; 
+quote_0 [label=quote, color=red, shape=oval, style=filled, fillcolor=pink]; 
+lg_0 [label=lg, color=black, shape=oval]; 
+l_0 [label=l, color=black, shape=oval]; 
+l_1 [label=l, color=black, shape=oval]; 
+l_2 [label=l, color=black, shape=oval]; 
+l_3 [label=l, color=black, shape=oval]; 
+l_4 [label=l, color=black, shape=oval]; 
+l_5 [label=l, color=black, shape=oval]; 
+note_8 [label=note, color=black, shape=oval]; 
+bibl_8 [label=bibl, color=black, shape=oval]; 
+
+p_0 -> start_p_0 [color=gray, style=dotted];
+p_0 -> cit_0 [color=gray, style=solid];
+p_0 -> end_p_0 [color=gray, style=dotted];
+cit_0 -> start_cit_0 [color=gray, style=dotted];
+cit_0 -> quote_0 [color=gray, style=solid];
+cit_0 -> note_8 [color=gray, style=solid];
+cit_0 -> end_cit_0 [color=gray, style=dotted];
+quote_0 -> start_quote_0 [color=red, style=dotted];
+quote_0 -> lg_0 [color=red, style=solid];
+quote_0 -> end_quote_0 [color=red, style=dotted];
+lg_0 -> start_lg_0 [color=black, style=invis, arrowhead=none];
+lg_0 -> l_0 [color=black, style=solid];
+lg_0 -> l_1 [color=black, style=solid];
+lg_0 -> l_2 [color=black, style=solid];
+lg_0 -> l_3 [color=black, style=solid];
+lg_0 -> l_4 [color=black, style=solid];
+lg_0 -> l_5 [color=black, style=solid];
+lg_0 -> end_lg_0 [color=black, style=invis, arrowhead=none];
+l_0 -> start_l_0 [color=black, style=invis, arrowhead=none];
+l_0 -> pcd5 [color=black, style=solid];
+l_0 -> end_l_0 [color=black, style=invis, arrowhead=none];
+l_1 -> start_l_1 [color=black, style=invis, arrowhead=none];
+l_1 -> pcd7 [color=black, style=solid];
+l_1 -> end_l_1 [color=black, style=invis, arrowhead=none];
+l_2 -> start_l_2 [color=black, style=invis, arrowhead=none];
+l_2 -> pcd9 [color=black, style=solid];
+l_2 -> end_l_2 [color=black, style=invis, arrowhead=none];
+l_3 -> start_l_3 [color=black, style=invis, arrowhead=none];
+l_3 -> pcd11 [color=black, style=solid];
+l_3 -> end_l_3 [color=black, style=invis, arrowhead=none];
+l_4 -> start_l_4 [color=black, style=invis, arrowhead=none];
+l_4 -> pcd13 [color=black, style=solid];
+l_4 -> end_l_4 [color=black, style=invis, arrowhead=none];
+l_5 -> start_l_5 [color=black, style=invis, arrowhead=none];
+l_5 -> pcd15 [color=black, style=solid];
+l_5 -> end_l_5 [color=black, style=invis, arrowhead=none];
+note_8 -> start_note_8 [color=black, style=invis, arrowhead=none];
+note_8 -> pcd19 [color=black, style=solid];
+note_8 -> bibl_8 [color=black, style=solid];
+note_8 -> end_note_8 [color=black, style=invis, arrowhead=none];
+bibl_8 -> start_bibl_8 [color=black, style=invis, arrowhead=none];
+bibl_8 -> pcd20 [color=black, style=solid];
+bibl_8 -> end_bibl_8 [color=black, style=invis, arrowhead=none];
+}
