@@ -11,14 +11,16 @@
       *-->
 
   <!--* Revisions:
-      * 2018-07-10 : CMSMcQ : make file.
+      * 2018-07-20 : CMSMcQ : cosmetic changes
+      * 2018-07-16 : CMSMcQ : accept 'anaplus' as th-style value 
+      * 2018-07-10 : CMSMcQ : make file. 
       *-->
   
   <!--* What kind of Trojan-Horse elements are we merging? *-->
   <!--* Expected values are 'th' for @th:sID and @th:eID,
       * 'ana' for @ana=start|end
-      * 'xmlid' for @xml:id matching (_start|_end)$
       * 'anaplus' for @ana=start|end|*_Start|*_End
+      * 'xmlid' for @xml:id matching (_start|_end)$ 
       *-->
   <xsl:param name="th-style" select=" 'th' " static="yes"/>
     
@@ -80,6 +82,24 @@
 	select="matches($e/@ana, '^start$|^end$|_Start$|_End$') "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 	select="matches($e/@xml:id,'(_start|_end)$')"/>
+    
+  </xsl:function>
+    
+  <!--****************************************************************
+      * 4.  th:coindex() 
+      ****************************************************************-->
+  <!--* th:coindex($e as element()):  returns value used to co-index
+      * $e (if it's a marker) with its pair.
+      *-->
+  <xsl:function name="th:coindex" as="xs:string" streamability="inspection">
+    <xsl:param name="e" as="element()"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="($e/@th:sID, $e/@th:eID)[1]"/>
+    <xsl:value-of use-when="$th-style = ('ana', 'anaplus') "
+	select="$e/@loc"/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+	select="replace($e/@xml:id,'(_start|_end)$','')"/>
     
   </xsl:function>
 		
