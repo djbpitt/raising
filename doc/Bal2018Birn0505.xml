@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="balisage/balisage-1-3.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-stylesheet type="text/xsl" href="local.xsl"?>
+<!DOCTYPE article [
+<!--* zero-width space:  used in print versions of
+URIs to allow line breaks *-->
+<!ENTITY ZWSP "&#x200B;">
+]>
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Flattening and unflattening XML markup: a Zen garden of XSLT and other tools</title>
+    <title>Flattening and unflattening XML markup:
+    a Zen garden of XSLT and other tools</title>
     <info>
         <abstract>
-            <para>From time to time, it may be necessary or expedient to flatten our XML documents
-                by replacing the start- and end-tags of conventional XML content elements with empty
-                place-marker elements (variously known as <emphasis role="ital">milestone
-                    elements</emphasis> or as <emphasis>Trojan horse markup</emphasis>). When we do,
-                we will often wish, later, to restore the content elements we flattened. The purpose
-                of this late-breaking presentation is to present a survey of ways to perform the
-                task of unflattening or of raising: restoring a conventional XML element structure
-                of content elements from a flattened XML document instance (or part of one), and
-                comparing different solutions to see what we can learn from them.</para>
+            <para>From time to time, it may be necessary or expedient
+            to flatten our XML documents by replacing the start- and
+            end-tags of conventional XML content elements with empty
+            place-marker elements (variously known as <emphasis
+            role="ital">milestone elements</emphasis> or as
+            <emphasis>Trojan horse markup</emphasis>). When we do, we
+            will often wish, later, to restore the content elements we
+            flattened. The purpose of this late-breaking presentation
+            is to present a survey of ways to perform the task of
+            unflattening or of raising: restoring a conventional XML
+            element structure of content elements from a flattened XML
+            document instance (or part of one), and comparing
+            different solutions to see what we can learn from
+            them.</para>
         </abstract>
         <author>
             <personname>
@@ -22,16 +33,20 @@
                 <surname>Birnbaum</surname>
             </personname>
             <personblurb>
-                <para>David J. Birnbaum is Professor and Co-Chair of the Department of Slavic
-                    Languages and Literatures at the University of Pittsburgh. He has been involved
-                    in the study of electronic text technology since the mid-1980s, has delivered
-                    presentations at a variety of electronic text technology conferences, and has
-                    served on the board of the Association for Computers and the Humanities, the
-                    editorial board of <emphasis role="ital">Markup languages: theory and
-                        practice</emphasis>, and the Text Encoding Initiative Council. Much of his
-                    electronic text work intersects with his research in medieval Slavic manuscript
-                    studies, but he also often writes about issues in the philosophy of
-                    markup.</para>
+                <para>David J. Birnbaum is Professor and Co-Chair of
+                the Department of Slavic Languages and Literatures at
+                the University of Pittsburgh. He has been involved in
+                the study of electronic text technology since the
+                mid-1980s, has delivered presentations at a variety of
+                electronic text technology conferences, and has served
+                on the board of the Association for Computers and the
+                Humanities, the editorial board of <emphasis
+                role="ital">Markup languages: theory and
+                practice</emphasis>, and the Text Encoding Initiative
+                Council. Much of his electronic text work intersects
+                with his research in medieval Slavic manuscript
+                studies, but he also often writes about issues in the
+                philosophy of markup.</para>
             </personblurb>
             <affiliation>
                 <jobtitle>Professor of Slavic Languages and Literatures</jobtitle>
@@ -46,15 +61,20 @@
                 <surname>Beshero-Bondar</surname>
             </personname>
             <personblurb>
-                <para>Elisa Beshero-Bondar is a member of the TEI Technical Council, as well as an
-                    Associate Professor of English and Director of the Center for the Digital Text
-                    at the University of Pittsburgh at Greensburg. Her projects investigate complex
-                    texts such as epics, plays, and multi-volume voyage logs, and involve her in
-                    experimentations with the TEI, including refining methods for computer-assisted
-                    collation of editions and probing questions of interoperability to reconcile
-                    diplomatic and critical edition encodings. She is the founder and organizer of
-                    the <link xlink:href="http://digitalmitford.org">Digital Mitford project</link>
-                    and its annual coding school.</para>
+                <para>Elisa Beshero-Bondar is a member of the TEI
+                Technical Council, as well as an Associate Professor
+                of English and Director of the Center for the Digital
+                Text at the University of Pittsburgh at
+                Greensburg. Her projects investigate complex texts
+                such as epics, plays, and multi-volume voyage logs,
+                and involve her in experimentations with the TEI,
+                including refining methods for computer-assisted
+                collation of editions and probing questions of
+                interoperability to reconcile diplomatic and critical
+                edition encodings. She is the founder and organizer of
+                the <link
+                xlink:href="http://digitalmitford.org">Digital Mitford
+                project</link> and its annual coding school.</para>
             </personblurb>
             <affiliation>
                 <jobtitle>Associate Professor of English</jobtitle>
@@ -72,13 +92,17 @@
                 <surname>Sperberg-McQueen</surname>
             </personname>
             <personblurb>
-                <para>C. M. Sperberg-McQueen is the founder and principal of <link
-                        xlink:href="http://www.blackmesatech.com/">Black Mesa Technologies</link>, a
-                    consultancy specializing in helping memory institutions improve the long term
-                    preservation of and access to the information for which they are responsible. He
-                    served as editor in chief of the TEI Guidelines from 1988 to 2000, and has also
-                    served as co-editor of the World Wide Web Consortium’s XML 1.0 and XML Schema
-                    1.1 specifications.</para>
+                <para>C. M. Sperberg-McQueen is the founder and
+                principal of <link
+                xlink:href="http://www.blackmesatech.com/">Black Mesa
+                Technologies</link>, a consultancy specializing in
+                helping memory institutions improve the long term
+                preservation of and access to the information for
+                which they are responsible. He served as editor in
+                chief of the TEI Guidelines from 1988 to 2000, and has
+                also served as co-editor of the World Wide Web
+                Consortium’s XML 1.0 and XML Schema 1.1
+                specifications.</para>
             </personblurb>
             <affiliation>
                 <jobtitle>Founder and Principal</jobtitle>
@@ -87,64 +111,99 @@
             <email>cmsmcq@blackmesatech.com</email>
         </author>
     </info>
+    
     <section>
         <title>Overview</title>
-        <para>From time to time, it may be necessary or expedient to flatten our XML documents by
-            replacing the start- and end-tags of conventional XML content elements with empty
-            place-marker elements. (These place-markers are variously known as <emphasis role="ital"
-                >milestone elements</emphasis>, after the milestone technique described in the TEI
-            Guidelines for page beginnings, column beginnings, line beginnings, etc. [<xref
-                linkend="tei_p5"/>], or <emphasis>Trojan horse markup</emphasis>, after the
-            technique described by Steve DeRose [<xref linkend="derose_2004"/>]; to avoid
-            over-stressing the particular syntax used, we will generally call them
-                <emphasis>markers</emphasis>). When we do flatten our documents, we will often wish,
-            later, to restore the content elements we flattened. The three co-authors discovered
-            recently that we had each had occasion to perform this task, and that we had undertaken
-            it using different techniques.<footnote>
-                <para>Community interest in flat-to-hierarchy and hierarchy-to-flat transformations
-                    is confirmed by their inclusion in Abel Braaksma’s 2014 proposal, on the XSLT
-                    mailing list, that they be included among the top 10 most used XSLT design
-                    patterns. See
-                        <link>https://www.biglist.com/lists/lists.mulberrytech.com/xsl-list/archives/201404/msg00028.html</link>.</para>
-            </footnote></para>
-        <para>The purpose of this late-breaking presentation is to survey multiple ways to perform
-            the task of unflattening or raising, that is, restoring a conventional XML element
-            structure of content elements from a flattened XML document instance (or part of one).
-            We will compare different solutions to see what we can learn from them. Nothing here is
-            profoundly difficult or new, but each of us found it challenging and interesting enough
-            that we think it may be worth while to share what we have learned with others.</para>
-        <para>In the following sections, we describe first a concrete instance of the task, with
-            enough supporting detail to make clear that this is not an academic exercise, but one
-            that arose in a concrete project. We then present several approaches to solving the
-            problem, including some false starts, which illustrate possible wrong turnings along the
-            way. We then discuss and compare the different solutions with respect to coding
-            difficulty and costs in space and time.</para>
-        <para>In the discussions that follow, we adopt the following terminology in an attempt to
-            avoid unnecessary confusion. First, we distinguish content elements (marked by standard
-            XML start- and end-tags) from virtual elements (marked by markers). <variablelist>
-                <varlistentry>
-                    <term>content element</term>
-                    <listitem>
-                        <para>a conventional XML element marked by start- and end-tags with
-                            (possibly empty) content between them, or by a sole-tag. Cf. <emphasis
-                                role="ital">marker</emphasis>.</para>
-                    </listitem>
-                </varlistentry>
-                <varlistentry>
-                    <term>virtual element</term>
-                    <listitem>
-                        <para>a <quote>logical</quote> element marked by start- and
-                            end-markers.</para>
-                    </listitem>
-                </varlistentry>
-                <varlistentry>
-                    <term>marker</term>
-                    <listitem>
-                        <para>an empty XML element serving to mark the start or end of a virtual
-                            element.</para>
-                    </listitem>
-                </varlistentry>
-            </variablelist></para>
+	
+        <para>From time to time, it may be necessary or expedient to
+        flatten our XML documents by replacing the start- and end-tags
+        of conventional XML content elements with empty place-marker
+        elements. (These place-markers are variously known as
+        <emphasis role="ital" >milestone elements</emphasis>, after
+        the milestone technique described in the TEI Guidelines for
+        page beginnings, column beginnings, line beginnings,
+        etc. [<xref linkend="tei_p5"/>], or <emphasis>Trojan horse
+        markup</emphasis>, after the technique described by Steve
+        DeRose [<xref linkend="derose_2004"/>]; to avoid
+        over-stressing the particular syntax used, we will generally
+        call them <emphasis>markers</emphasis>). When we do flatten
+        our documents, we will often wish, later, to restore the
+        content elements we flattened. The three co-authors discovered
+        recently that we had each had occasion to perform this task,
+        and that we had undertaken it using different
+        techniques.<footnote>
+	
+            <para>Community interest in flat-to-hierarchy and
+            hierarchy-to-flat transformations is confirmed by their
+            inclusion in Abel Braaksma’s 2014 proposal, on the XSLT
+            mailing list, that they be included among the top 10 most
+            used XSLT design patterns. See
+            <link
+		xlink:href=
+		"https://www.biglist.com/lists/lists.mulberrytech.com/xsl-list/archives/201404/msg00028.html"
+		>https://www.biglist.com&ZWSP;/lists&ZWSP;/lists.mulberrytech.com&ZWSP;/xsl-list&ZWSP;/archives&ZWSP;/201404&ZWSP;/msg00028.html</link>.</para>
+	    <!--* Do we think that this is what he had in mind?
+		* I would have thought he meant eliminating divs
+		* from HTML, and introducing divs to match the
+		* heading levels.  But I'm happy to leave it, and we
+		* can ask him in August.
+		*-->
+        </footnote>
+	</para>
+	
+        <para>The purpose of this late-breaking presentation is to
+        survey multiple ways to perform the task of unflattening or
+        raising, that is, restoring a conventional XML element
+        structure of content elements from a flattened XML document
+        instance (or part of one).  We will compare different
+        solutions to see what we can learn from them. Nothing here is
+        profoundly difficult or new, but each of us found it
+        challenging and interesting enough that we think it may be
+        worth while to share what we have learned with others.</para>
+
+        <para>In the following sections, we describe first a concrete
+        instance of the task, with enough supporting detail to make
+        clear that this is not an academic exercise, but one that
+        arose in a concrete project. We then present several
+        approaches to solving the problem, including some false
+        starts, which illustrate possible wrong turnings along the
+        way. We then discuss and compare the different solutions with
+        respect to coding difficulty and costs in space and
+        time.</para>
+	
+
+        <para>In the discussions that follow, we adopt the following
+        terminology in an attempt to avoid unnecessary
+        confusion. First, we distinguish content elements (marked by
+        standard XML start- and end-tags) from virtual elements
+        (marked by markers).<variablelist>
+	
+	    <varlistentry>
+                <term>content element</term>
+                <listitem>
+                    <para>a conventional XML element marked by start- and end-tags with
+                    (possibly empty) content between them, or by a sole-tag. Cf. <emphasis
+                    role="ital">marker</emphasis>.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>virtual element</term>
+                <listitem>
+                    <para>a <quote>logical</quote> element marked by start- and
+                    end-markers.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>marker</term>
+                <listitem>
+                    <para>an empty XML element serving to mark the start or end of a virtual
+                    element.</para>
+                </listitem>
+            </varlistentry>
+	    
+        </variablelist>
+	</para>
+	
         <para>We are interested in two processes that convert between content elements and virtual
             elements marked by markers: <variablelist>
                 <varlistentry>
@@ -162,7 +221,8 @@
                             end-tags.</para>
                     </listitem>
                 </varlistentry>
-            </variablelist></para>
+        </variablelist></para>
+	
         <para>Our approaches for raising flattened XML may be categorized according to the following parameters:<itemizedlist>
                 <listitem>
                     <para>Whether they read their input as XML or as a string.</para>
@@ -174,7 +234,8 @@
                     <para>For those that read the input as XML, whether they process the flattened
                         content from left to right or from the inside outward.</para>
                 </listitem>
-            </itemizedlist></para>
+        </itemizedlist></para>
+	
         <para> The methods that work with the input and output as XML are typically recursive
             (whether the recursion is implemented through functions or templates), and the recursion
             follows one of two patterns:<itemizedlist>
@@ -202,9 +263,11 @@
                         although bottom-up is an appropriate way to refer to the construction of the
                         hierarchical output.</para>
                 </listitem>
-            </itemizedlist></para>
+        </itemizedlist></para>
+	
         <para>With respect to those parameters, the methods discussed below may be classified as
-            follows:</para>
+        follows:</para>
+	
         <table>
             <thead>
                 <tr>
@@ -303,6 +366,7 @@
                 </tr>
             </tbody>
         </table>
+	
         <itemizedlist>
             <listitem>
                 <para>We implement the first four methods in XSLT and the last two in Python. The
@@ -357,12 +421,15 @@
                     XML.</para>
             </listitem>
         </itemizedlist>
+	
     </section>
 
     <section>
         <title>The problem</title>
+	
         <section>
             <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
+	    
             <para>As a concrete example, we can consider the form taken by this task in the
                     <emphasis>Variorum Frankenstein</emphasis> [<xref linkend="frankenstein"/>]
                 project edited by the second author. In this project, we collate different encodings
@@ -377,7 +444,9 @@
                 comprised of a root element and TEI critical apparatus elements designed to mark
                 where the documents align in comparable and variant passages. When XML elements are
                 supplied in the input to the collation process, their tags are returned as text with
-                angle brackets given in escape characters, as shown in the figure below.</para>
+                angle brackets given in escape characters, as shown in
+	    the figure below.</para>
+	    
             <para>To prepare the editions for collation we began by flattening the original
                 structural markup, converting elements that wrapped volumes, chapters, paragraphs,
                 and lines (among others) into self-closed start and end markers. We flattened these
@@ -395,11 +464,13 @@
                 process by design will generate a hierarchy in conflict with the structural markup
                 of our input documents, we prepared the input source documents in advance to flatten
                 their hierarchies, because we intended to reconstruct the elements later building on
-                the collation output.</para>
+            the collation output.</para>
+	    
             <para>Here is an example from the output of CollateX representing a single divergent
                 reading in the <quote>Thomas copy</quote> of <emphasis>Frankenstein</emphasis>
                 before all witnesses align. (Line breaks have been introduced within markup here to
-                make the lines shorter.)</para>
+            make the lines shorter.)</para>
+	    
             <figure>
                 <programlisting>&lt;app&gt;
     &lt;rdg wit="#fThomas"&gt;contortions that ever and anon 
@@ -420,11 +491,13 @@
                     <para>Sample CollateX output</para>
                 </caption>
             </figure>
+	    
             <para>In the example above, there is only one <code>&lt;rdg&gt;</code> element inside
                 the first <code>&lt;app&gt;</code> because at this point the Thomas edition contains
                 an inserted passage not present in the other editions, which have no material to
                 compare with it. Following this point, the witnesses all agree, as shown in the next
-                    <code>&lt;app&gt;</code> element.</para>
+            <code>&lt;app&gt;</code> element.</para>
+	    
             <para>Following the collation process, we use the XML output as the basis for
                 reconstructing the individual edition files so that they may individually indicate
                     <quote>hotspots</quote>, or passages that vary in the other editions. We wrote
@@ -435,7 +508,9 @@
                 task, then, is to find a way to raise both the original markup we flattened from the
                 source editions with the conflicting hierarchy posed by the <code>seg</code>
                 elements derived from the collation process. Here is a sample passage from the
-                Thomas copy edition file showing the reconstructed but flattened elements:</para>
+                Thomas copy edition file showing the reconstructed but
+	    flattened elements:</para>
+	    
             <figure>
                 <programlisting>&lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions that ever and anon 
 con&lt;del loc="fThomas_C10-del_2" ana="start"/&gt;puls&lt;del
@@ -448,6 +523,7 @@ loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
                     <para>Sample reconstruction of the Thomas file, with flattened markup</para>
                 </caption>
             </figure>
+	    
             <para>In the passage above, the empty <code>&lt;seg&gt;</code> elements indicate the
                 start and end points of the variant passage in the Thomas copy. Their partially
                 shared <code>@xml:id</code> values coindex them while also pointing to the collation
@@ -457,7 +533,8 @@ loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
                     xml:id="C10_app90-fThomas_start"/&gt;</code> means that this is the start of a
                 variant from apparatus unit 90, where the Thomas copy diverges from a reading shared
                 by all of the other editions (in this case, the type of variation is that the other
-                witnesses have no corresponding reading).</para>
+            witnesses have no corresponding reading).</para>
+	    
             <para>Within the <code>&lt;seg&gt;</code> virtual element, the first two
                     <code>&lt;del&gt;</code> markers (start- and end-) frame a deleted portion of a
                 word (<quote>puls</quote>), and the third marks the end of paragraph 133 in Chapter
@@ -473,13 +550,15 @@ loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
                         another in its flattened stage. Alternatively, we could use the same
                         attributes for all flattened elements and specify which ones we wanted to
                         raise at the processing stage.</para>
-                </footnote></para>
+            </footnote></para>
+	    
             <para>The primary use case that serves as a testing ground for the comparison of raising
                 methods in this report is to raise the structural elements from the original edition
                 (such as <code>&lt;p&gt;</code> and <code>&lt;del&gt;</code>), while leaving the
                     <code>&lt;seg&gt;</code> elements flattened. The output will look something like
                 the following for the end of paragraph 133 and the start of paragraph 134 in the
-                Thomas edition:</para>
+            Thomas edition:</para>
+	    
             <figure>
                 <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt; …
 &lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions
@@ -495,10 +574,13 @@ the feelings of human nature … &lt;/p&gt;</programlisting>
                         reflowing)</para>
                 </caption>
             </figure>
+	    
             <para>A secondary use case is to raise the <code>&lt;seg/&gt;</code> elements. When,
                 later in the production process, we also raise the <code>&lt;seg&gt;</code>
                 elements, we avoid overlap, or, rather we mark a moment of intersecting hierarchy,
-                by fragmenting the one that spans a paragraph boundary into two parts:</para>
+                by fragmenting the one that spans a paragraph boundary
+	    into two parts:</para>
+	    
             <figure>
                 <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt; …
 &lt;seg xml:id="C10_app90-fThomas__Pt1"&gt;contortions 
@@ -517,9 +599,12 @@ nature … &lt;/p&gt;</programlisting>
                         the element into parts.</para>
                 </caption>
             </figure>
+	    
             <para>The split <code>&lt;seg&gt;</code> elements in the passage above now indicate
                 their association with each other with <code>__Pt1</code> and <code>__Pt2</code>
-                appended to the original value of the apparatus and reading witness location.</para>
+                appended to the original value of the apparatus and
+	    reading witness location.</para>
+	    
             <para>Our process of raising the new edition files thus entails the following steps: <orderedlist>
                     <listitem>
                         <para>Flatten all markup (prior to and following the collation
@@ -539,10 +624,12 @@ nature … &lt;/p&gt;</programlisting>
                 <!--2018-07-08 ebb:
 		Shall we revisit this in light of our discussions of
 		raising seg elements in our process?  --></para>
+		
         </section>
 
         <section xml:id="simplified" xreflabel="Simplified sample data">
             <title>Simplified sample data</title>
+	    
             <para>In addition to exploring and reporting on the application of different raising
                 methods to authentic data from <xref linkend="frankenstein"/>, described above, for
                 illustrative and development purposes when discussing program logic we use a small
@@ -551,10 +638,13 @@ nature … &lt;/p&gt;</programlisting>
                     role="ital">extended</emphasis>, and <emphasis role="ital">overlap</emphasis>.<footnote>
                     <para>All files discussed in this report, as well as the report itself, are
                         available in <link>https://github.com/djbpitt/raising</link>.</para>
-                </footnote></para>
+            </footnote></para>
+	    
             <section xml:id="simplified-original">
                 <title>Basic sample</title>
+		
                 <para>The original (basic) input is:</para>
+		
                 <figure>
                     <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root&gt;
@@ -572,9 +662,12 @@ nature … &lt;/p&gt;</programlisting>
                         <para>Original hierarchical XML</para>
                     </caption>
                 </figure>
+		
             </section>
+	    
             <section>
                 <title>Flattening</title>
+		
                 <para>To test the method on our <xref linkend="simplified"/>, we first flatten the
                     original XML with the following XSLT, which converts all tags except the root
                     (which must be preserved as a container element to ensure that the XML is well
@@ -586,7 +679,8 @@ nature … &lt;/p&gt;</programlisting>
                     original generic identifier is retained, the start-tag is replaced by an empty
                     element that adds a <code>@th:sID</code> attribute with a generated value, and
                     the end-tag is replaced by an empty element that adds a <code>th:eID</code>
-                    attribute with the same generated value:</para>
+                attribute with the same generated value:</para>
+		
                 <figure>
                     <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -616,7 +710,9 @@ nature … &lt;/p&gt;</programlisting>
                         <para>XSLT to flatten hierarchical XML to Trojan milestones</para>
                     </caption>
                 </figure>
+		
                 <para>The flattened version looks like:</para>
+		
                 <figure>
                     <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"&gt;
@@ -639,13 +735,19 @@ nature … &lt;/p&gt;</programlisting>
                         <para>Original XML after flattening with Trojan milestones</para>
                     </caption>
                 </figure>
-                <para>The output of raising must match the original XML.</para>
+		
+                <para>The output of raising must match the original
+                XML.</para>
+		
             </section>
+	    
             <section>
                 <title>Extended basic sample</title>
+		
                 <para>The basic sample contains no non-Trojan empty elements and no non-Trojan
                     attributes. We can test wheter those features are handled properly with the
-                    following slightly more complicated sample:</para>
+                following slightly more complicated sample:</para>
+		
                 <figure>
                     <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
@@ -662,6 +764,7 @@ nature … &lt;/p&gt;</programlisting>
                         <para>Extended basic sample input</para>
                     </caption>
                 </figure>
+		
                 <para> The extended basic sample adds the following features: <itemizedlist>
                         <listitem>
                             <para>There is a non-Trojan empty element, without Trojan attributes:
@@ -683,10 +786,14 @@ nature … &lt;/p&gt;</programlisting>
                     </itemizedlist>
                 </para>
             </section>
+	    
             <section>
                 <title>Overlapping markers</title>
+		
                 <para>To test the behavior of the methods with input that cannot be fully raised
-                    without creating overlap, we use the following sample:</para>
+                    without creating overlap, we use the following
+		sample:</para>
+		
                 <figure>
                     <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
@@ -703,11 +810,17 @@ nature … &lt;/p&gt;</programlisting>
                         <para>Flattened XML that cannot be raised without creating overlap</para>
                     </caption>
                 </figure>
+		
                 <para>This represents a document with two pages and two paragraphs, where the
-                    paragraph break falls in the middle of the second page.</para>
+                    paragraph break falls in the middle of the second
+		page.</para>
+		
             </section>
+	    
             <section xml:id="marker-styles">
-                <title><emphasis role="ital">Frankenstein</emphasis> markers</title>
+                <title><emphasis role="ital">Frankenstein</emphasis>
+		markers</title>
+		
                 <para>For historical reasons, the markers in the <emphasis role="ital"
                         >Frankenstein</emphasis> data differ from those of our simplified test
                     sample. Specifically, start-markers in <emphasis role="ital"
@@ -716,14 +829,21 @@ nature … &lt;/p&gt;</programlisting>
                     value <code>end</code>, and start- and end-tags are coindexed by sharing a
                     unique value of a <code>@loc</code> attribute. The output requirements include
                     removing the <code>@ana</code> attribute and refactoring the <code>@loc</code>
-                    attribute as an <code>@xml:id</code> attribute.</para>
+                    attribute as an <code>@xml:id</code>
+		attribute.</para>
+		
             </section>
-        </section>
-    </section>
+	    
+</section>
+
+</section>
+
     <section>
         <title>Solutions to the problem</title>
+	
         <section>
             <title>Right-sibling traversal</title>
+	    
             <para>One way to construct content elements from flattened XML is to use a <emphasis
                     role="ital">right-sibling traversal</emphasis> of the input tree, which proceeds
                 one element at a time processing along the following-sibling axis. Each marker
@@ -732,7 +852,9 @@ nature … &lt;/p&gt;</programlisting>
                 template rule matching a (real) container element that wraps the marker elements to
                 be reconstructed, and applies templates selectively to the first element child. We
                 construct each new content element in a template that matches the start-marker. For
-                raising elements in our simple example, this has the following structure:</para>
+                raising elements in our simple example, this has the
+	    following structure:</para>
+	    
             <figure>
                 <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="shallow-to-deep">
     <xsl:variable name="ns" select="namespace-uri()"/>
@@ -760,6 +882,7 @@ nature … &lt;/p&gt;</programlisting>
                     <para>Template for start-marker</para>
                 </caption>
             </figure>
+	    
             <para>Note that there are two calls to <code>&lt;xsl:apply-templates&gt;</code>. The
                 first call to <code>&lt;xsl:apply-templates&gt;</code> occurs within an
                     <code>&lt;xsl:copy&gt;</code> element (which constructs an element with the name
@@ -767,11 +890,14 @@ nature … &lt;/p&gt;</programlisting>
                 sibling node, which will in the normal run of things become the first child node of
                 the new content element. The second call to <code>&lt;xsl:apply-templates&gt;</code>
                 occurs after the new content element and selects not the start-marker’s immediately
-                following sibling, but the node immediately to the right of the end-marker.</para>
+                following sibling, but the node immediately to the
+	    right of the end-marker.</para>
+	    
             <para>Each child of the virtual element copies itself into the content element being
                 created. The templates for <code>text()</code> nodes, comments, processing
                 instructions, and any content elements present in the input all have essentially the
-                same structure:</para>
+            same structure:</para>
+	    
             <figure>
                 <programlisting><![CDATA[<xsl:template match="text() | comment() | processing-instruction | *[not(@th:*)]"
         mode="shallow-to-deep">
@@ -785,13 +911,17 @@ nature … &lt;/p&gt;</programlisting>
                         and content elements</para>
                 </caption>
             </figure>
+	    
             <para>If content elements can contain further markers at other levels of the tree, the
                     <code>&lt;xsl:copy-of&gt;</code> should be replaced by a shallow copy and a
                 recursive <code>&lt;xsl:apply-templates select="child::node()[1]&gt;</code>. That is
-                not the case with our test data.</para>
+            not the case with our test data.</para>
+	    
             <para>When an end-marker is encountered, the contents of the virtual element whose end
                 it marks have now all been accumulated, and the right-sibling traversal of the input
-                should stop. The template for end-markers will thus look like this:</para>
+                should stop. The template for end-markers will thus
+	    look like this:</para>
+	    
             <figure>
                 <programlisting><![CDATA[<xsl:template match="*[@th:eID]" mode="shallow-to-deep">
         
@@ -805,6 +935,7 @@ nature … &lt;/p&gt;</programlisting>
                     <para>Template for end-markers</para>
                 </caption>
             </figure>
+	    
             <para>It will be noted that the templates shown each handle a single node and then call
                     <code>&lt;xsl:apply-templates&gt;</code>, selecting the next node to be
                 processed. The template activation stack in the XSLT processor thus contains no sets
@@ -813,12 +944,16 @@ nature … &lt;/p&gt;</programlisting>
                 flattened portion of the input. An XSLT processor that does not eliminate
                 tail-recursive template calls may thus run out of stack space (at least in theory—in
                 practice, we have never seen a right-sibling recursion blow the stack on real
-                input).</para>
+            input).</para>
+	    
             <section>
-                <title>Raising <emphasis>Frankenstein</emphasis></title>
+                <title>Raising
+		<emphasis>Frankenstein</emphasis></title>
+		
                 <para>For raising <emphasis>Frankenstein</emphasis> using right-sibling traversal,
                     we adapt the code lightly to apply to its project markup in the following
-                    template rules:</para>
+                template rules:</para>
+		
                 <figure>
                     <programlisting>
      &lt;xsl:template match="div[@type='collation']"&gt;
@@ -859,18 +994,24 @@ nature … &lt;/p&gt;</programlisting>
                                 <emphasis>Frankenstein</emphasis></para>
                     </caption>
                 </figure>
+		
             </section>
+	    
             <section>
                 <title>XSLT 1.0</title>
+		
                 <para>
                     <emphasis>For purposes of performance measurement, we expect to implement this
                         algorithm in both XSLT 1.0 and XSLT 2.0 or 3.0. At the time of submission,
                         no XSLT 1.0 version is available.</emphasis>
                 </para>
+		
             </section>
+	    
         </section>
         <section xml:id="inside-out-function" xreflabel="Inside-out recursion">
             <title>Inside-out recursion</title>
+	    
             <para>Inside-out recursion works by finding all innermost pairs of start- and
                 end-markers, that is, those that mark virtual elements that do not contain any
                 markers or other virtual elements. They may contain anything else, including
@@ -880,13 +1021,16 @@ nature … &lt;/p&gt;</programlisting>
                 where the (new) innermost pairs of markers are now outside the newly created
                 container elements. The function recurs until there are no more markers. The maximum
                 possible depth of recursion is equal to the depth of the original (pre-flattening)
-                XML hierarchy.</para>
+            XML hierarchy.</para>
+	    
             <section>
                 <title>Raising</title>
+		
                 <para>The output of the preceding transformation is included in the <xref
                         linkend="simplified"/> section, above. We then reconstruct the hierarchy
                     using the inside-out recursive function <code>th:raise()</code> in the following
-                    XSLT stylesheet:</para>
+                XSLT stylesheet:</para>
+		
                 <figure>
                     <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
@@ -974,8 +1118,11 @@ nature … &lt;/p&gt;</programlisting>
                         <para>XSLT to transform Trojan milestones into container elements</para>
                     </caption>
                 </figure>
+		
                 <para>We turn off indentation (line 5) to avoid deforming the whitespace and set up
-                    a debug option (line 8), controlled by a <code>$debug</code> parameter. </para>
+                    a debug option (line 8), controlled by a
+		<code>$debug</code> parameter. </para>
+		
                 <para>The traditional identity template walks the entire tree, but because anything
                     lower than children of the root is guaranteed not to be or contain Trojan
                     markers, we set up one identity template for those lower nodes, which just
@@ -987,14 +1134,17 @@ nature … &lt;/p&gt;</programlisting>
                     declaration is informationally harmless, but also needlessly distracting, so we
                     suppress it by specifying <code>@copy-namespaces="no"</code> on
                         <code>&lt;xsl:copy&gt;</code> in the identity template that deals with
-                    Trojan markers (line 22).</para>
+                Trojan markers (line 22).</para>
+		
                 <para>Our recursive raising operation (the <code>th:raise()</code> function, lines
                     31–52) operates on document nodes, and we need to process the original document
                     node of the input file differently from the new document nodes that we create on
                     each pass through the recursive function. For that reason, we match the original
                     document node in no mode (<code>&lt;xsl:template match="/"&gt;</code>, lines
                     54–56) and pass it into the raising function (<code>&lt;xsl:sequence
-                        select="th:raise(.)"/&gt;</code>, line 55).</para>
+                        select="th:raise(.)"/&gt;</code>, line
+		55).</para>
+		
                 <para>The raising function checks for the presence of <code>@th:sID</code>
                     attributes in the input that are candidates for raising (<code>&lt;xsl:when
                         test="exists($input//*[@th:sID eq
@@ -1008,7 +1158,9 @@ nature … &lt;/p&gt;</programlisting>
                     inside the newly created document node (line 41). After the application of
                     templates is finished, we recur and pass the result into another invocation of
                         <code>th:raise()</code> (<code>&lt;xsl:sequence
-                        select="th:raise($result)"/></code>, line 44).</para>
+                        select="th:raise($result)"/></code>, line
+		44).</para>
+		
                 <para>The application of templates within the recursive function begins by applying
                     templates to the (newly created) document node in loop mode
                         (<code>&lt;xsl:apply-templates select="$input" mode="loop"/&gt;</code>, line
@@ -1019,7 +1171,9 @@ nature … &lt;/p&gt;</programlisting>
                     loop. All other processing is the same for both the original document and the
                     interim documents created inside <code>th:raise()</code>, so
                         <code>&lt;xsl:template match="/" mode="loop"&gt;</code> (lines 58–60) is the
-                    only modal template, and it applies templates to its children in no mode.</para>
+                    only modal template, and it applies templates to
+		its children in no mode.</para>
+		
                 <para>There are three templates that do the actual processing of the innermost
                     elements to be raised on each recursion: one that processes the start-marker,
                     one that processes the content of the newly raised container element, and one
@@ -1065,17 +1219,23 @@ nature … &lt;/p&gt;</programlisting>
                                 matching it, too, inside an empty <code>&lt;xsl:template&gt;</code>
                                 element (line 80).</para>
                         </listitem>
-                    </itemizedlist></para>
+                </itemizedlist></para>
+		
                 <para>When the simplified original document is flattened and then raised, as
                     described above, the output of the raising operation matches the original
-                    input.</para>
-            </section>
+                input.</para>
+		
+		</section>
+		
             <section>
-                <title>Raising <emphasis role="ital">Frankenstein</emphasis></title>
+                <title>Raising <emphasis
+		role="ital">Frankenstein</emphasis></title>
+		
                 <para>As described above, the virtual-element markup in the <emphasis role="ital"
                         >Frankenstein</emphasis> data differs from that of our simplified test
                     sample. We handle the variations in style and satisfy the additional refactoring
-                    requirements with:</para>
+                requirements with:</para>
+		
                 <figure>
                     <programlisting>&lt;xsl:element name="{name()}"&gt;
     &lt;xsl:attribute name="xml:id" select="@loc"/&gt;
@@ -1088,9 +1248,11 @@ nature … &lt;/p&gt;</programlisting>
                             <emphasis role="ital">Frankenstein</emphasis></para>
                     </caption>
                 </figure>
+		
                 <para>We match start-markers, (raised) element content, and end-markers in <emphasis
                         role="ital">Frankenstein</emphasis> with the following XPath
-                    patterns:</para>
+                patterns:</para>
+		
                 <figure>
                     <programlisting>&lt;xsl:template match="*[@ana eq 'start'][@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"&gt;</programlisting>
                     <caption>
@@ -1098,6 +1260,7 @@ nature … &lt;/p&gt;</programlisting>
                                 >Frankenstein</emphasis></para>
                     </caption>
                 </figure>
+		
                 <figure>
                     <programlisting>&lt;xsl:template match="node()[preceding-sibling::*[@ana eq 'start'][1]/@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"/&gt;</programlisting>
                     <caption>
@@ -1105,6 +1268,7 @@ nature … &lt;/p&gt;</programlisting>
                                 role="ital">Frankenstein</emphasis></para>
                     </caption>
                 </figure>
+		
                 <figure>
                     <programlisting>&lt;xsl:template match="*[@ana eq 'end'][@loc eq preceding-sibling::*[@ana eq 'start'][1]/@loc]"/&gt;</programlisting>
                     <caption>
@@ -1112,7 +1276,9 @@ nature … &lt;/p&gt;</programlisting>
                                 >Frankenstein</emphasis></para>
                     </caption>
                 </figure>
+		
             </section>
+	    
             <section>
                 <title>XSLT 1.0</title>
                 <para>
@@ -1120,13 +1286,17 @@ nature … &lt;/p&gt;</programlisting>
                         available.</emphasis>
                 </para>
             </section>
+	    
         </section>
 
         <section xml:id="accumulators" xreflabel="Accumulators">
             <title>Accumulators</title>
+	    
             <para>Another approach to the problem avoids recursion by performing a single pass over
                 the input, maintaining a stack of partly-raised elements using the
-                    <emphasis>accumulator</emphasis> construction introduced in XSLT 3.0.</para>
+                    <emphasis>accumulator</emphasis> construction
+	    introduced in XSLT 3.0.</para>
+	    
             <para>An accumulator is a sequence of values associated with the nodes of a tree; each
                 node has both a <emphasis>before</emphasis> value (calculated before descendants are
                 processed) and an <emphasis>after</emphasis> value (calculated after descendants are
@@ -1137,7 +1307,9 @@ nature … &lt;/p&gt;</programlisting>
                 pre-and-post-order traversal, calculating the before value on the first visit to a
                 node and the after value on the second. When streaming processing is requested, the
                 calculation rules are not allowed to look ahead in the document, but accumulators
-                can be used even when streaming is not requested.</para>
+                can be used even when streaming is not
+	    requested.</para>
+	    
             <para>As a simple example, we can make an accumulator to keep track of the number of
                 open virtual elements at any given point in the flattened input document: when we
                 encounter a start-marker we will add one to the accumulated value, and when we
@@ -1146,7 +1318,8 @@ nature … &lt;/p&gt;</programlisting>
                     <code>&lt;xsl:accumulator-rule&gt;</code> elements describing how the
                 accumulator’s values are calculated. Within an accumulator rule, the variable
                     <code>$value</code> gives the value of the accumulator assigned by the
-                immediately preceding node.</para>
+            immediately preceding node.</para>
+	    
             <figure>
                 <programlisting><![CDATA[<xsl:accumulator name="level" as="xs:integer"
                    initial-value="0"
@@ -1158,8 +1331,11 @@ nature … &lt;/p&gt;</programlisting>
 </xsl:accumulator>]]></programlisting>
                 <para>The declaration for a simple accumulator</para>
             </figure>
+	    
             <para>The pattern in the accumulator rules here assumes that start- and end-markers use
-                the <code>@th:sID</code> and <code>@th:eID</code> attributes described above.</para>
+                the <code>@th:sID</code> and <code>@th:eID</code>
+	    attributes described above.</para>
+	    
             <para>At any point in a tree to which this accumulator applies, we can refer to the
                 current node’s before value of the accumulator with the expression
                     <code>accumulator-before('stack')</code> and to the after value with
@@ -1169,7 +1345,9 @@ nature … &lt;/p&gt;</programlisting>
                         requires that descendants be processed.</para>
                 </footnote> Without accumulators, we could keep track of the relevant information by
                 replacing references to <code>accumlator-before('stack')</code> with references to
-                    <code>count(preceding::*[@th:sID]) - count(preceding::[@th:eID])</code>.</para>
+                    <code>count(preceding::*[@th:sID]) -
+	    count(preceding::[@th:eID])</code>.</para>
+	    
             <para>To solve the raising problem with accumulators, we declare an accumulator whose
                 value is an array (if the XPath 3.1 feature is supported) or a map, with which we
                 maintain a stack of virtual elements that have been started, but not finished. The
@@ -1177,7 +1355,8 @@ nature … &lt;/p&gt;</programlisting>
                 second member will track the contents of a second-level virtual element, and so
                 forth. Each member of the array is a sequence of nodes containing a start marker
                 (the first item in the sequence) and all the nodes seen so far that should be
-                children of the raised content element.</para>
+            children of the raised content element.</para>
+	    
             <para>The processing rules are relatively straightforward and may feel familiar to
                 anyone who has ever constructed an in-memory tree from a SAX event stream: <itemizedlist>
                     <listitem>
@@ -1215,7 +1394,8 @@ nature … &lt;/p&gt;</programlisting>
                             popped there is no top level to which to append the new element, which
                             should be written to the output tree instead.</para>
                     </listitem>
-                </itemizedlist></para>
+            </itemizedlist></para>
+	    
             <section>
                 <title>Some utility functions</title>
                 <para>In order to allow the stylesheet to be used with either the <code>th:</code>
@@ -1305,6 +1485,7 @@ nature … &lt;/p&gt;</programlisting>
                         were not presented.</emphasis>
                 </para>
             </section>
+	    
             <section>
                 <title>Declaring the accumulator and making it applicable</title>
                 <para>The overall pattern of accumulator declarations was shown above, and the
@@ -1394,7 +1575,8 @@ nature … &lt;/p&gt;</programlisting>
               forget it, no, he never listens to me on this.
               Sigh. *--></para>
                     </footnote></para>
-            </section>
+</section>
+
             <section>
                 <title>Templates</title>
                 <para>The templates in this stylesheet have very little work to do: their primary
@@ -1492,10 +1674,13 @@ nature … &lt;/p&gt;</programlisting>
 </xsl:template>]]></programlisting>
                     <para>Template for non-element nodes</para>
                 </figure>
-            </section>
-        </section>
+</section>
+
+</section>
+
         <section>
             <title>Regex</title>
+	    
             <para>It is not, in general, advisable to attempt to process arbitrary XML solely with
                 regular expressions (regex), but it is not difficult to identify and process markers
                 of the kind we are concerned with here.<footnote>
@@ -1509,14 +1694,17 @@ nature … &lt;/p&gt;</programlisting>
                         (this is a theoretical issue), as is the role of legibility in evaluating
                         the suitability of the method to the task (this is a practical
                         concern).</para>
-                </footnote></para>
+            </footnote></para>
+	    
             <para>The following regex matches start-markers:</para>
+	    
             <figure>
                 <programlisting>(&lt;[^&gt;]+?)th:sID\s*=\s*['"]\w+?['"](.*?)\/(&gt;)</programlisting>
                 <caption>
                     <para>Regex to match start-markers</para>
                 </caption>
             </figure>
+	    
             <para>The regex works as follows (in <emphasis role="ital">dot-all</emphasis> mode, that
                 is, where dot also matches <code>\n</code>):<itemizedlist>
                     <listitem>
@@ -1560,32 +1748,40 @@ nature … &lt;/p&gt;</programlisting>
                     <listitem>
                         <para>The third capture group captures the closing <code>&gt;</code>.</para>
                     </listitem>
-                </itemizedlist></para>
-            <para>We replace all matches with the following replacement pattern:</para>
+            </itemizedlist></para>
+	    
+            <para>We replace all matches with the following
+	    replacement pattern:</para>
+	    
             <figure>
                 <programlisting>\1\2\3</programlisting>
                 <caption>
                     <para>Replacement pattern for start-markers</para>
                 </caption>
             </figure>
+	    
             <para>The regex to match end-markers is similar to the one for start-markers, and
                 because real end-tags cannot contain attributes, we do not need to match or copy
                 them. We capture the opening <code>&lt;</code> separately from whatever follows it,
                 so that we can write a <code>/</code> into the replacement after it. The regex
-                is:</para>
+            is:</para>
+	    
             <figure>
                 <programlisting>(&lt;)(\S+?)\s+[^&gt;]*?th:eID=['"]\w+['"][^&gt;]*?\/(&gt;)</programlisting>
                 <caption>
                     <para>Regex to match end-markers</para>
                 </caption>
             </figure>
+	    
             <para>and the replacement pattern is:</para>
+	    
             <figure>
                 <programlisting>\1/\2\3</programlisting>
                 <caption>
                     <para>Replacement pattern for end-markers</para>
                 </caption>
             </figure>
+	    
             <para>This method will incorrectly apply the replacement to matching patterns within XML
                 comments and CDATA marked sections. With insincere apologies for disappointing Regex
                 Edge-Case Bounty Hunters, coping with matches in these contexts, which would not
@@ -1594,10 +1790,12 @@ nature … &lt;/p&gt;</programlisting>
                         and <code>th:sID</code> and <code>th:eID</code> as the attribute names for
                         our Trojan attributes. Changing these assumptions is not a problem as long
                         as the regex is changed to match.</para>
-                </footnote></para>
+            </footnote></para>
+	    
             <para>A more serious limitation of this method is that because it is not XML-aware, it
                 can be used only in situations where raising is guaranteed not to create overlap.
-                For example, given input like:</para>
+            For example, given input like:</para>
+	    
             <figure>
                 <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"&gt;
@@ -1614,7 +1812,10 @@ nature … &lt;/p&gt;</programlisting>
                     <para>XML that cannot be unflattened without creating overlap</para>
                 </caption>
             </figure>
-            <para>the result of converting all markers to real start- and end-tags would be:</para>
+	    
+            <para>the result of converting all markers to real start-
+	    and end-tags would be:</para>
+	    
             <figure>
                 <programlisting>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;root&gt;
@@ -1631,13 +1832,17 @@ nature … &lt;/p&gt;</programlisting>
                         end-tags</para>
                 </caption>
             </figure>
+	    
             <para>The resulting document is not well-formed because the pages and paragraphs
                 overlap. It is, however, possible to raise just pages but not paragraphs, or just
                 paragraphs but not pages, without creating overlap, and the result would be
-                well-formed.</para>
-        </section>
+            well-formed.</para>
+	    
+            </section>
+	    
         <section>
             <title>Pull parsing in Python</title>
+	    
             <para>The Python <code>xml.dom.pulldom</code> module can be used to stream an XML
                 document past an event handler that can be instructed to raise a flattened hierarchy.<footnote>
                     <para>The authors are grateful to Ronald Haentjens Dekker for bringing this
@@ -1664,11 +1869,14 @@ nature … &lt;/p&gt;</programlisting>
                         large documents and low memory, though, the method can easily be modified to
                         stream the output to the filesystem.</para>
                 </footnote> The maximum depth of the stack is equal to the maximum depth of nesting
-                in the hierarchical XML. </para>
+            in the hierarchical XML. </para>
+	    
             <section>
                 <title>String output</title>
+		
                 <para>The following Python 3 code replaces markers with strings equivalent to real
-                    XML start- and end-tags:</para>
+                XML start- and end-tags:</para>
+		
                 <figure>
                     <!--* Lines are long and should be broken.
                       * I can't do it because I don't remember
@@ -1710,10 +1918,12 @@ print("".join(output))</programlisting>
                         <para>Python code that constructs the XML output as a string</para>
                     </caption>
                 </figure>
+		
                 <para>We create an empty list to hold the output, read in the source, and examine
                     each event. In this simplified example, we process only
                         <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
-                        <code>CHARACTERS</code>, as follows:</para>
+                <code>CHARACTERS</code>, as follows:</para>
+		
                 <itemizedlist>
                     <listitem>
                         <para><code>START_ELEMENT.</code> Markers with <code>@th:eID</code>
@@ -1737,12 +1947,16 @@ print("".join(output))</programlisting>
                             explicitly replacing reserved characters with XML entities.</para>
                     </listitem>
                 </itemizedlist>
+		
                 <para>We are parsing the input XML in an XML-aware manner, which is reasonably
                     robust, but we are constructing the output XML as a string, which is not. See
-                    below for a discussion of the limitations.</para>
-            </section>
+                below for a discussion of the limitations.</para>
+		
+		</section>
+		
             <section>
                 <title>XML output</title>
+		
                 <para>The general approach to parsing with <code>pulldom</code> and constructing
                     output with <code>minidom</code> is similar to the <xref linkend="accumulators"
                     /> method described above. Specifically, the flattened XML is traversed in a
@@ -1753,7 +1967,8 @@ print("".join(output))</programlisting>
                     in memory as a tree, using <code>minidom</code> to create and attach nodes as
                     needed. Open elements are stored on a stack, the maximum depth of which is,
                     therefore, equal to the maximum depth of the unflattened XML. The code
-                    is:</para>
+                is:</para>
+		
                 <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
 from xml.dom.minidom import Document
 
@@ -1787,7 +2002,8 @@ with open('flattened.xml') as input:
             t = d.createTextNode(node.data)
             open_elements.peek().appendChild(t)
 
-print(open_elements.pop().toxml())</programlisting>
+		print(open_elements.pop().toxml())</programlisting>
+		
                 <para>Parsing is the same as described above, so we import the same items from
                         <code>pulldom</code>. From <code>minidom</code> we import only the
                         <code>Document</code> class, which we use to initialize our output XML
@@ -1797,12 +2013,15 @@ print(open_elements.pop().toxml())</programlisting>
                     add <code>peek()</code> to provide access to the item at the top of the stack.
                     That top item is the most recently opened element, and we peek at it in order to
                     append child elements and child <code>text()</code> nodes as we encouter them.
-                    We begin by pushing the document node onto the stack.</para>
+                    We begin by pushing the document node onto the
+		stack.</para>
+		
                 <para>We handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
                         <code>CHARACTERS</code> events in an <code>if/elif/elif</code> structure,
                     silently ignoring other events. There are three types of elements whose start
                     and end events we need to process: start-markers, end-markers, and regular
-                    elements (whether empty or not).</para>
+                elements (whether empty or not).</para>
+		
                 <itemizedlist>
                     <listitem>
                         <para>In the case of start-markers and regular elements, we append the new
@@ -1883,6 +2102,7 @@ print(open_elements.pop().toxml())</programlisting>
                             system automatically performs the entity encoding for us.</para>
                     </listitem>
                 </itemizedlist>
+		
                 <para>Conceptually, the entire start-marker functions as if it were the
                         <code>START_ELEMENT</code> event for a regular element, and the entire
                     corresponding end-marker functions as if it were the <code>END_ELEMENT</code>
@@ -1890,7 +2110,9 @@ print(open_elements.pop().toxml())</programlisting>
                     its <code>START_ELEMENT</code> event (ignoring its <code>END_ELEMENT</code>
                     event, except to remove its Trojan attribute), and pop it on the corresponding
                     end-marker’s <code>END_ELEMENT</code> event (ignoring its
-                        <code>START_ELEMENT</code> event). In tabular form:</para>
+                        <code>START_ELEMENT</code> event). In tabular
+		form:</para>
+		
                 <table>
                     <thead>
                         <tr>
@@ -1922,16 +2144,21 @@ print(open_elements.pop().toxml())</programlisting>
                     </tbody>
                 </table>
             </section>
+	    
         </section>
+	
     </section>
+    
     <section>
         <title>Some things that can go wrong</title>
+	
         <para>Each of the methods described above comes with its own complications, and it was in
             the discussion of these complications that this paper originated. Some of these are
             challenges that can be overcome, others are limitations in what the method can manage,
             and others are deal-breakers that show that the method is not ultimately suitable for
             realistic use cases. In this section we review briefly the complications for each
-            method.</para>
+        method.</para>
+	
         <section>
             <title>Right-sibling traversal</title>
             <para>Two elusive bugs in an initial implementation of the right-sibling traversal
@@ -1959,6 +2186,7 @@ print(open_elements.pop().toxml())</programlisting>
                     illuminating.]</emphasis>
             </para>
         </section>
+	
         <section xml:id="recursion_challenges" xreflabel="Inside-out recursion challenges">
             <title>Inside-out recursion</title>
             <para>The two principal pitfalls with inside-recursion are <emphasis role="ital">double
@@ -2008,6 +2236,7 @@ print(open_elements.pop().toxml())</programlisting>
                     alternative approach to raising with data of this type.</para>
             </section>
         </section>
+	
         <section>
             <title>Accumulators</title>
             <para>The primary problems we encountered in our implementation using accumulators were: <itemizedlist>
@@ -2036,6 +2265,7 @@ print(open_elements.pop().toxml())</programlisting>
                     </listitem>
                 </itemizedlist></para>
         </section>
+	
         <section>
             <title>Regex</title>
             <para>The principal challenge to writing the regex (aside from the risk of inadvertently
@@ -2058,6 +2288,7 @@ print(open_elements.pop().toxml())</programlisting>
                 contribute to the Trojan markup, <code>@ana</code> and <code>@loc</code>, may occur
                 in any order with respect to each other and other attributes. </para>
         </section>
+	
         <section>
             <title>Pull parsing in Python</title>
             <para>The Python pull parser reads the input XML as XML and responds to parse events. We
@@ -2204,9 +2435,12 @@ print(open_elements.pop().toxml())</programlisting>
                 </itemizedlist>
             </section>
         </section>
+	
     </section>
+    
     <section xml:id="comparisons">
         <title>Comparison</title>
+	
         <para>The inside-out recursive approach (both the function-based XSLT 3.0 version and
             named-template-based XSLT 1.0 one) is tail-recursive, which means that an XSLT processor
             that performs tail-call optimization will not be at risk for running out of stack space.
@@ -2215,7 +2449,9 @@ print(open_elements.pop().toxml())</programlisting>
             input (pseudo-)hierarchy. The right-sibling traversal approach (both the XSLT 3.0 and
             the XSLT 1.0 versions) is also tail-recursive, and with an XSLT parser that does not
             perform tail-call optimization, it requires stack space equal to the maximum <emphasis
-                role="ital">width</emphasis> of the widest hierarchical level.</para>
+                role="ital">width</emphasis> of the widest
+	hierarchical level.</para>
+	
         <para>Insofar as an open-source XSLT 3.0 processor that performs tail-call optimization is
             freely available in the open-source, platform-independent Saxon-HE product [<xref
                 linkend="saxon"/>], the difference in stack requirements between the two methods has
@@ -2223,16 +2459,19 @@ print(open_elements.pop().toxml())</programlisting>
             are of interest to digital humanists are typically wider than they are deep, users who
             are unable to employ an XSLT processor that performs tail-call optimization may favor
             inside-out processing over right-sibling traversal because inside-out processing is
-            likely to require less stack space.</para>
+        likely to require less stack space.</para>
+	
         <para>Developing the XSLT to reconstruct elements from the inside out may be more efficient
             than to do so from the outside in. Attempts to write code that does not control the
             order of processing must always account for the potential presence of intervening nodes
             to be reconstructed on the inside, that risk becoming duplicate (or triplicate, or
             quadruplicate, etc) nodes in the output depending on the depth of the hierarchy to be
-            reconstructed.</para>
+        reconstructed.</para>
+	
         <para>
             <emphasis role="ital">[Comparison of other methods to be added]</emphasis>
         </para>
+	
         <!--<para>TODO: Unassigned: [Measurement of time and space complexity running all solutions on
             the same data (as large as we can manage—e.g., all of <emphasis role="ital"
                 >Frankenstein</emphasis>, or an artificial document containing 10 or 100 copies of
@@ -2256,15 +2495,20 @@ print(open_elements.pop().toxml())</programlisting>
             produces well-formed output with my baby sample, recreating the original document
             (before flattening) faithfully. I look forward to the Frankentest!]</para>-->
     </section>
+    
     <section>
         <title>Conclusion</title>
+	
         <para>None of the methods described here is new, but their explicit juxtaposition,
             comparison, and evaluation in a tutorial context based on real use cases has clarified
             much about micropipelining for the author, and, it is hoped, for the reader, as
-            well.</para>
+        well.</para>
+	
     </section>
+    
     <appendix xml:id="tessellated">
         <title>Raising tessellated hierarchies</title>
+	
         <para>Raising tessellated hierarchies is a common requirement for hierarchy <emphasis
                 role="ital">inversion</emphasis>.<footnote>
                 <para><emphasis role="ital">Tessellated</emphasis> structures cover an entire domain
@@ -2282,7 +2526,8 @@ print(open_elements.pop().toxml())</programlisting>
             elements. If is later becomes necessary to operate on the pages as units, we can
                 <emphasis role="ital">invert</emphasis> the markup by transforming the
             page-beginning milestones into page container elements, while flattening the elements
-            that demarcate chapters, titles, and paragraphs.</para>
+        that demarcate chapters, titles, and paragraphs.</para>
+	
         <para>The method described in this appendix differs from those described above because it
             works only where the hierarchy being raised is tessellated. That outcome requirement
             invites the use of <code>&lt;xsl:for-each-group&gt;</code>, which partitions its entire
@@ -2290,34 +2535,46 @@ print(open_elements.pop().toxml())</programlisting>
                 <code>&lt;xsl:for-each-group&gt;</code> suitable for a situation where an entire
             text may be partitioned into tessellated paragraphs or tessellated pages makes it a poor
             choice for the contexts described in the body of this report, where new container
-            elements must be created only around small islands of content.</para>
+            elements must be created only around small islands of
+	content.</para>
+	
         <para>
             <emphasis role="ital">[To be completed, with a use case from
                     <link>http://suprasliensis.obdurodon.org</link>]</emphasis>
         </para>
+	
     </appendix>
+    
     <bibliography>
         <title>Works cited</title>
+	
         <bibliomixed xml:id="collatex" xreflabel="CollateX">
             <emphasis role="ital">CollateX: software for collating textual sources.</emphasis>
             <link>https://collatex.net/-</link>
         </bibliomixed>
+	
         <bibliomixed xml:id="derose_2004" xreflabel="DeRose 2004">DeRose, Steve. 2004. “Markup
             Overlap: a review and a horse.” Presented at Extreme Markup Languages 2004. Montréal,
             Québec, August 2-6, 2004.
-            <link>http://xml.coverpages.org/DeRoseEML2004.pdf</link></bibliomixed>
+        <link>http://xml.coverpages.org/DeRoseEML2004.pdf</link></bibliomixed>
+	
         <bibliomixed xml:id="tei_p5" xreflabel="TEI P5">P5: <emphasis role="ital">Guidelines for
                 electronic text encoding and interchange.</emphasis>
-            <link>http://www.tei-c.org/guidelines/P5/</link></bibliomixed>
+        <link>http://www.tei-c.org/guidelines/P5/</link></bibliomixed>
+	
         <bibliomixed xml:id="frankenstein" xreflabel="Variorum Frankenstein">Frankenstein <emphasis
                 role="ital">Variorum Project.</emphasis>
-            <link>https://github.com/PghFrankenstein/Pittsburgh_Frankenstein</link></bibliomixed>
+        <link>https://github.com/PghFrankenstein/Pittsburgh_Frankenstein</link></bibliomixed>
+	
         <bibliomixed xml:id="saxon" xreflabel="Saxon-HE">Saxon-HE (home edition).
-                <link>http://saxon.sourceforge.net/</link></bibliomixed>
+        <link>http://saxon.sourceforge.net/</link></bibliomixed>
+	
         <bibliomixed xml:id="xpath" xreflabel="XPath functions">
             <emphasis role="ital">XPath and XQuery functions and operators 3.1 W3C recommendation 21
                 March 2017.</emphasis>
             <link>https://www.w3.org/TR/xpath-functions-31/</link>
         </bibliomixed>
+	
     </bibliography>
+    
 </article>
