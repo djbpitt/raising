@@ -943,26 +943,35 @@ The
                     </caption>
                 </figure>
                 
-                <para>The flattened version looks like:</para>
+                <para>The flattened version looks roughly like the
+		following (line breaks have been added within tags
+		here, to shorten the lines:</para>
                 
                 <figure>
-                    <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?><p xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"> 
+                    <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?><p 
+        xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"> 
     <cit th:sID="d1e3"/> 
         <quote th:sID="d1e5"/> 
-	    <lg th:sID="d1e7"/> 
-		<l th:sID="d1e9"/> Like one who, on a lonely road, <l th:eID="d1e9"/>
-		<l th:sID="d1e12"/> Doth walk in fear and dread, <l th:eID="d1e12"/>
-		<l th:sID="d1e15"/> And, having once turn’d round, walks on, <l th:eID="d1e15"/>
-		<l th:sID="d1e18"/> And turns no more his head; <l th:eID="d1e18"/>
-		<l th:sID="d1e21"/> Because he knows a frightful fiend <l th:eID="d1e21"/>            
-		<l th:sID="d1e25"/> Doth close behind him tread*. <l th:eID="d1e25"/>
-	    <lg th:eID="d1e7"/>
-	<quote th:eID="d1e5"/>
+            <lg th:sID="d1e7"/> 
+                <l th:sID="d1e9"
+	        /> Like one who, on a lonely road, <l th:eID="d1e9"/>
+                <l th:sID="d1e12"
+		/> Doth walk in fear and dread, <l th:eID="d1e12"/>
+                <l th:sID="d1e15"
+		/> And, having once turn’d round, walks on, <l th:eID="d1e15"/>
+                <l th:sID="d1e18"
+		/> And turns no more his head; <l th:eID="d1e18"/>
+                <l th:sID="d1e21"
+		/> Because he knows a frightful fiend <l th:eID="d1e21"/>            
+                <l th:sID="d1e25"
+		/> Doth close behind him tread*. <l th:eID="d1e25"/>
+            <lg th:eID="d1e7"/>
+        <quote th:eID="d1e5"/>
         <note th:sID="d1e30"/> * 
         <bibl th:sID="d1e32"/> 
             Coleridge’s “Ancient Mariner.” 
-	<bibl th:eID="d1e32"/>
-	<note th:eID="d1e30"/>
+        <bibl th:eID="d1e32"/>
+        <note th:eID="d1e30"/>
     <cit th:eID="d1e3"/>
 </p>]]></programlisting>
                     <caption>
@@ -983,41 +992,51 @@ The
                 following slightly more complicated sample:</para>
                 
                 <figure>
-                    <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
-    <p th:sID="d1e3"/>This is a <word th:sID="d1e5"/>paragraph<word th:eID="d1e5"/> that contains
-    some <nonTrojan type="test"/> stuff.<p th:eID="d1e3"/>
-    <p th:sID="d1e11"/>This is <emphasis role="bold">another <emphasis role="ital" th:sID="d1e15"
-            />silly<emphasis th:eID="d1e15"/> paragraph</emphasis>
-    <phrase th:sID="d1e19"/><word n="1" th:sID="d1e20"/>that<word th:eID="d1e20"/>
-    <word n="2" th:sID="d1e23"/>contains<word th:eID="d1e23"/>
-    <word n="3" th:sID="d1e26"/>more<word th:eID="d1e26"/><phrase th:eID="d1e19"/> stuff.<p
-        th:eID="d1e11"/>
-</root>]]></programlisting>
+                    <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?><p
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"> 
+  <cit xml:id="fThomas_C10-cit_1" th:sID="d1e3"/> 
+  <quote xml:id="fThomas_C10-quote_1" th:sID="d1e5"/> 
+  <lg xml:id="fThomas_C10-lg_1" th:sID="d1e7"/> 
+  <l xml:id="fThomas_C10-l_1" th:sID="d1e9"
+  /> Like one who, on a lonely road, <l th:eID="d1e9"/>
+  <l xml:id="fThomas_C10-l_2" th:sID="d1e12"
+  /> Doth walk in fear and dread, <l th:eID="d1e12"/>
+  <l xml:id="fThomas_C10-l_3" th:sID="d1e15"
+  /> And, having once turn’d round, walks on, <l th:eID="d1e15"/>
+  <l xml:id="fThomas_C10-l_4" th:sID="d1e18"
+  /> And turns no more his head; <l th:eID="d1e18"/>
+  <l xml:id="fThomas_C10-l_5" th:sID="d1e21"
+  /> Because he knows a frightful fiend <l th:eID="d1e21"/>            
+  <l xml:id="fThomas_C10-l_6" th:sID="d1e25"
+  /> Doth close behind him tread*. <l th:eID="d1e25"/>
+  <lg th:eID="d1e7"/>
+  <quote th:eID="d1e5"/>
+  <note xml:id="fThomas_C10-note_1" th:sID="d1e30"/> * 
+  <bibl xml:id="fThomas_C10-bibl_1">
+    Coleridge’s “Ancient Mariner.” 
+  </bibl>
+  <note th:eID="d1e30"/>
+  <cit th:eID="d1e3"/>
+</p>
+]]></programlisting>
                     <caption>
                         <para>Extended basic sample input</para>
                     </caption>
                 </figure>
                 
                 <para> The extended basic sample adds the following features: <itemizedlist>
-                        <listitem>
-                            <para>There is a non-Trojan empty element, without Trojan attributes:
-                                    <code>&lt;nonTrojan type="test"&gt;</code>.</para>
-                        </listitem>
-                        <listitem>
-                            <para>The three <code>&lt;word&gt;</code> elements in the second
-                                paragraph have, in addition to their Trojan attributes,
-                                    <code>@n</code> attributes. The Trojan attributes must be
-                                removed during raising, but the non-Trojan attributes must be
-                                retained.</para>
-                        </listitem>
-                        <listitem>
-                            <para>The content is not completely flat; there is an <code>&lt;emphasis
-                                    role="bold"></code> container element that contains both plain
-                                text and a Trojan <code>&lt;emphasis role="ital"></code> element.
-                            </para>
-                        </listitem>
-                    </itemizedlist>
+                <listitem>
+                  <para>The <code>bibl</code> element a
+                  non-Trojan element, without Trojan
+                  attributes.</para>
+                </listitem>
+                <listitem>
+                  <para>Most elements have, in addition to their Trojan attributes,
+                  <code>@xml:id</code> attributes. The Trojan attributes must be
+                  removed during raising, but the non-Trojan attributes must be
+                  retained.</para>
+                </listitem>
+              </itemizedlist>
                 </para>
             </section>
             
@@ -1026,28 +1045,43 @@ The
                 
                 <para>To test the behavior of the methods with input that cannot be fully raised
                     without creating overlap, we use the following
-                sample:</para>
+                sample (some whitespace added for legibility):</para>
                 
                 <figure>
-                    <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<root xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
-    <page th:sID="page1"/>
-    <para th:sID="para1"/>Content on page 1 in paragraph 1
-    <page th:eID="page1"/>
-    <page th:sID="page2"/>Content on page 2 in para 1
-    <para th:eID="para1"/>
-    <para th:sID="para2"/>Content on page 2 in para 2
-    <para th:eID="para2"/>
-    <page th:eID="page2"/>
-</root>]]></programlisting>
+                    <programlisting><![CDATA[<!--* Example adapted from LMNL sawtooth syntax
+    * at http://piez.org/wendell/LMNL/lmnl-page.html
+    *-->
+<excerpt xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+    <source th:sID="source"/>The Housekeeper<source th:eID="source"/>
+    <author th:sID="author"/>Robert Frost<author th:eID="author"/>
+    <s th:sID="s1"/>
+    <l th:sID="L144" n="144"/>
+    He manages to keep the upper hand
+    <l th:eID="L144"/>
+    <l n="145" th:sID="L145"/>
+    On his own farm.
+    <s th:eID="s1"/>
+    <s th:sID="s2"/>
+    He's boss.
+    <s th:eID="s2"/>
+    <s th:sID="s3"/>
+    But as to hens:
+    <l th:eID="L145"/>
+    <l n="146" th:sID="L146"/>
+    We fence our flowers in and the hens range.
+    <l th:eID="L146"/>
+    <s th:eID="s3"/>
+</excerpt>
+]]></programlisting>
                     <caption>
                         <para>Flattened XML that cannot be raised without creating overlap</para>
                     </caption>
                 </figure>
                 
-                <para>This represents a document with two pages and two paragraphs, where the
-                    paragraph break falls in the middle of the second
-                page.</para>
+                <para>This consists of a few lines of verse, marked up
+		with both the metrical structure (verse lines) and the
+		division into sentences; both the first and third
+		sentences span verse boundaries.</para>
                 
             </section>
             
@@ -1269,7 +1303,8 @@ The
                     <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="3.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" exclude-result-prefixes="#all">
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
+    exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="no"/>
 
     <!--* Set $debug parameter to any non-null value to output messages *-->
@@ -1300,9 +1335,11 @@ The
         <xsl:param name="input" as="document-node()"/>
         <xsl:message use-when="$debug">raise() called with 
             <xsl:value-of select="count($input//*)"/>-element document 
-            (<xsl:value-of select="count($input//*[@th:sID])"/> Trojan pairs)</xsl:message>
+            (<xsl:value-of select="count($input//*[@th:sID])"
+            /> Trojan pairs)</xsl:message>
         <xsl:choose>
-            <xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
+            <xsl:when test="exists($input//*
+                           [@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
                 <!-- If we have more work to do, do it -->
                 <xsl:variable name="result" as="document-node()">
                     <xsl:document>
@@ -1486,9 +1523,18 @@ The
                 <para>We match start-markers, (raised) element content, and end-markers in <emphasis
                         role="ital">Frankenstein</emphasis> with the following XPath
                 patterns:</para>
-                
+                <!--* MSM introduces line breaks here to avoid
+		    * having to choose between widening the window
+		    * to see the end of these lines and having a 150-
+		    * or 200-character text measure, or having the
+		    * ends run off the right edge of the window.
+		    *-->
                 <figure>
-                    <programlisting>&lt;xsl:template match="*[@ana eq 'start'][@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"&gt;</programlisting>
+                  <programlisting>&lt;xsl:template match="*
+                    [@ana eq 'start']
+                    [@loc
+                    eq
+                    following-sibling::*[@ana eq 'end'][1]/@loc]"&gt;</programlisting>
                     <caption>
                         <para>XPath expression to match start-markers in <emphasis role="ital"
                                 >Frankenstein</emphasis></para>
@@ -1496,7 +1542,12 @@ The
                 </figure>
                 
                 <figure>
-                    <programlisting>&lt;xsl:template match="node()[preceding-sibling::*[@ana eq 'start'][1]/@loc eq following-sibling::*[@ana eq 'end'][1]/@loc]"/&gt;</programlisting>
+                  <programlisting>&lt;xsl:template match="node()
+                    [preceding-sibling::*
+                    [@ana eq 'start'][1]/@loc
+                    eq
+                    following-sibling::*[@ana eq 'end'][1]/@loc
+                    ]"/&gt;</programlisting>
                     <caption>
                         <para>XPath expression to match the content of raised elements in <emphasis
                                 role="ital">Frankenstein</emphasis></para>
@@ -1504,7 +1555,12 @@ The
                 </figure>
                 
                 <figure>
-                    <programlisting>&lt;xsl:template match="*[@ana eq 'end'][@loc eq preceding-sibling::*[@ana eq 'start'][1]/@loc]"/&gt;</programlisting>
+                  <programlisting>&lt;xsl:template match="*
+                    [@ana eq 'end']
+                    [@loc
+                    eq
+                    preceding-sibling::*[@ana eq 'start'][1]/@loc
+                    ]"/&gt;</programlisting>
                     <caption>
                         <para>XPath expression to match end-markers in <emphasis role="ital"
                                 >Frankenstein</emphasis></para>
