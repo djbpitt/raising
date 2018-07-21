@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><root>
+    <p>This is a <word>paragraph</word> that contains
+    some <nonTrojan type="test"/> stuff.</p>
+    <p>This is <emphasis role="bold">another <emphasis role="ital">silly</emphasis> paragraph</emphasis>
+    <phrase><word n="1">that</word>
+    <word n="2">contains</word>
+    <word n="3">more</word></phrase> stuff.</p>
+</root>
