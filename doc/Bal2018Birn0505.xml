@@ -1108,32 +1108,463 @@ The
 
     <section>
         <title>Solutions to the problem</title>
-        
+
+	<para>We describe several solutions to the problem, some
+	formulated in XSLT 3.0 and some using other tools.</para>
+	
         <section>
             <title>Right-sibling traversal</title>
             
-            <para>One way to construct content elements from flattened XML is to use a <emphasis
-                    role="ital">right-sibling traversal</emphasis> of the input tree, which proceeds
-                one element at a time processing along the following-sibling axis. Each marker
-                element calls <code>&lt;xsl:apply-templates&gt;</code> only on its first child, and
-                each template passes control to its immediate right sibling. The process requires a
-                template rule matching a (real) container element that wraps the marker elements to
-                be reconstructed, and applies templates selectively to the first element child. We
-                construct each new content element in a template that matches the start-marker. For
-                raising elements in our simple example, this has the
-            following structure:</para>
-            
-            <figure>
-                <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="shallow-to-deep">
-    <xsl:variable name="ns" select="namespace-uri()"/>
-    <xsl:variable name="ln" as="xs:string" select="local-name()"/>
-    <xsl:variable name="sID" as="xs:string" select="@th:sID"/>
+            <para>One way to construct content elements from flattened
+            XML is to do roughly what a recursive-descent parser for
+            XML does: when a recursive-descent parser sees the
+            beginning of any construct, it calls a routine to handle
+            that construct; if the construct contains other
+            constructs, other routines are called recursively. The
+            function handling a parent element starts before any
+            function handling a child, and ends only after all
+            children have been processed.  </para>
+
+	    <para>The standard idiom of including
+	    <code>xsl:apply-templates</code> similarly visits each
+	    node in the input tree left to right, in order, but
+	    provides no mechanism for passing results or state from
+	    one sibling to the next.  In order to perform the raising
+	    task, we perform instead a <emphasis
+	    role="ital">right-sibling traversal</emphasis> of the
+	    input tree, which proceeds one element at a time
+	    processing along the following-sibling axis. Each marker
+	    element calls <code>&lt;xsl:apply-templates&gt;</code>
+	    only on its first child, and each template passes control
+	    to its immediate right sibling.</para>
+
+	    <section>
+	      <title>Order of raising the elements</title>
+
+	    <para><xref
+            linkend="visit-LR-01"/> through <xref
+            linkend="visit-LR-34"/> illustrate some stages in the 
+            process of raising the virtual elements in the sample
+	    document by progressing through the flat sequence
+	    of siblings which makes up most of the input.</para>
+
+	    <!--* MSM has commented out many of the figures,
+		but the files are there and the selection can be
+		changed. *-->
+
+	    <figure xml:id="visit-LR-01">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050501.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>Illustration of left-right handling of input by
+		a recursive-descent parser or by the left-right method
+		described in the text. Initial state.</para>
+		<para>The input is shown arrayed along the bottom of
+		the diagram:  ovals filled with gray denote start- and
+		end-markers, rectangles denote text nodes.  The gray
+		ovals above denote the logical hierarchy which is to
+		be constructed (visible to human observers even if not
+		visible to the software).</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-02">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050502.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The first input node is read and recognized as
+		the start-marker for the <code>p</code> element.
+		Both the start-marker and the element node constructed
+		are shown in red, as is the arc connecting them.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-03">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050503.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The second input node is read and recognized as
+		the start-marker for the citation element  <code>cit</code>.</para>
+		<para>The start-marker for the enclosing
+		<code>p</code> element has served its purpose and is omitted
+		from the diagram.  The node for the <code>p</code>
+		element is still incomplete, as indicated by its
+		pink background.
+		</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-04">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050504.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The third input node is read and recognized as
+		the start-marker for the citation element <code>cit</code>.</para>
+	      </caption>
+	    </figure>
+
+	    <!--*
+	    
+	    <figure xml:id="visit-LR-05">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050505.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>The fourth input node is read and recognized as
+		the start-marker for the line-group element <code>lg</code>.</para>
+	    </figure>
+	    <figure xml:id="visit-LR-06">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050506.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>The fifth input node is read and recognized as
+		the start-marker for the first line of verse.</para>
+	    </figure>
+	    <figure xml:id="visit-LR-07">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050507.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>The sixth input node is the text node contained
+		in the first line of verse.</para>
+	    </figure>
+	    <figure xml:id="visit-LR-08">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050508.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>The seventh input node is read and recognized as
+		the end-marker for the first line of verse.</para>
+		</figure>
+		*-->
+
+	    
+	    <para>Between <xref linkend="visit-LR-04"/>
+	    and <xref linkend="visit-LR-09"/>, we elide several
+	    stages.  <xref linkend="visit-LR-09"/> through
+	    and <xref linkend="visit-LR-11"/> illustrate the
+	    complete recognition of the second line of verse.
+	    </para>
+	    
+	    <figure xml:id="visit-LR-09">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050509.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>The eighth input node is read and recognized as
+		the start-marker for the second line of verse.</para>
+		<para>The first line of verse is now complete and its
+		node is now shown with black oval and white background
+		instead of pink.</para>
+	    </figure>
+	    
+	    <figure xml:id="visit-LR-10">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050510.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>The ninth input node is the text
+		for the second line of verse.</para>
+	    </figure>
+	    <figure xml:id="visit-LR-11">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050511.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for second line of verse.</para>
+	      </caption>
+	    </figure>
+
+	    <!--* 
+	    <figure xml:id="visit-LR-12">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050512.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Start-marker for third line of verse.</para>
+	      </caption>
+	    </figure>	    
+	    <figure xml:id="visit-LR-13">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050513.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Text of third line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-14">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050514.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for third line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-15">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050515.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Start-marker for the fourth line of verse.</para>
+	      </caption>
+	    </figure>	    
+	    <figure xml:id="visit-LR-16">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050516.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Text of fourth line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-17">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050517.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for fourth line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-18">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050518.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Start-marker for fifth line of verse.</para>
+	      </caption>
+	    </figure>	    
+	    <figure xml:id="visit-LR-19">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050519.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Text for fifth line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-20">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050520.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>End-marker for fifth line of verse.</para>
+	    </figure>
+	    <figure xml:id="visit-LR-21">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050521.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Start-marker for sixth line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-22">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050522.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Content of sixth line of verse.</para>
+	      </caption>
+	    </figure>	    
+	    <figure xml:id="visit-LR-23">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050523.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for sixth line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-24">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050524.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for third line of verse.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-25">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050525.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for the line group.</para>
+	      </caption>
+	    </figure>	    
+	    <figure xml:id="visit-LR-26">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050526.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for the quotation.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-27">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050527.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Start-marker for the <code>note</code> element.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-28">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050528.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Text node directly contained within
+		<code>note</code> element.</para>
+	      </caption>
+	    </figure>	    
+	    <figure xml:id="visit-LR-29">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050529.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Start-marker for bibliographic information
+		element (<code>bibl</code>).</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-30">
+	      <mediaobject>		
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/left-right/Bal2018Birn050530.png"/>
+		</imageobject>
+	      </mediaobject>
+		<para>Text content of <code>bibl</code> element.</para>
+	    </figure>
+	    <figure xml:id="visit-LR-31">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050531.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for <code>bibl</code> element.</para>
+	      </caption>
+	      </figure>
+	      *-->
+
+	    <para><xref linkend="visit-LR-32"/> through
+	    and <xref linkend="visit-LR-34"/> illustrate the
+	    recognition of the last two end-markers and the final
+	    state of processing.
+	    </para>
+	    
+	    <figure xml:id="visit-LR-32">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050532.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for <code>cit</code> element.</para>
+	      </caption>
+	    </figure>	    
+	    <figure xml:id="visit-LR-33">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050533.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>End-marker for paragraph.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-LR-34">
+	      <mediaobject><imageobject>
+		<imagedata format="png" width="100%"
+			   fileref="images/left-right/Bal2018Birn050534.png"/>
+	      </imageobject></mediaobject>
+	      <caption>
+		<para>Final state:  all markers are gone, and all
+		elements have been raised.</para>
+	      </caption>
+	    </figure>
+
+	    </section>
+	    <section>
+	      <title>Outline of XSLT code</title>
+	    		
+        	
+        <para>As described above, the <emphasis
+        role="ital">right-sibling traversal</emphasis> idiom in XSLT
+        proceeds one element at a time processing along the
+        following-sibling axis. In the general case, each template for
+        a content element calls
+        <code>&lt;xsl:apply-templates&gt;</code> not on all its
+        children but only on its first child; every template (for
+        content elements, marker elements, text nodes, comments, or
+        processing instructions) concludes with a call to
+        <code>&lt;xsl:apply-templates
+        select="following-sibling::node()[1]"/></code>, thus passing
+        control to the template for its immediate right sibling.  In
+        the flattening case, the outermost element of the document may
+        be the only content element and its template the only one that
+	applies templates to its children.
+	</para>
+	<para>For our simple test cases, processing begins
+	with the template for the outermost element.<footnote>
+	<para>If the flat content is contained not in the outermost
+	element but in some other container element, all nodes outside
+	the flattened region can be copied to the output without
+	change; in this case the template for the container element
+	will be responsible for shifting from the mode for identity
+	transformation to the mode for element raising, and
+	will have a more selective <code>match</code> pattern.</para>
+      </footnote>
+	</para>
+	<figure>
+	  <programlisting><![CDATA[<xsl:template match="*[*]">
+    <xsl:copy copy-namespaces="no">
+      <xsl:copy-of select="@*"/>
+      <xsl:apply-templates mode="raising"
+                           select="child::node()[1]"/>
+    </xsl:copy>    
+  </xsl:template>]]></programlisting>
+	</figure>
+      <para>
+	The template for start-markers constructs a content element
+	for the corresponding virtual element; it has the following
+	structure:
+      </para>
+
+      <figure>
+        <programlisting><![CDATA[<xsl:template match="*[@th:sID]" mode="raising">
     
     <!--* 1: handle this element *-->
     <xsl:copy>
       <xsl:copy-of select="@* except @th:sID"/>
       <xsl:apply-templates select="following-sibling::node()[1]"
-                   mode="shallow-to-deep">
+                   mode="raising">
       </xsl:apply-templates>
     </xsl:copy>
       
@@ -1143,14 +1574,14 @@ The
                          and namespace-uri()=$ns
                          and local-name()=$ln]
                          /following-sibling::node()[1]"
-                 mode="shallow-to-deep">
-    </xsl:apply-templates>
+                 mode="raising"/>
+
 </xsl:template>]]></programlisting>
-                <caption>
-                    <para>Template for start-marker</para>
-                </caption>
-            </figure>
-            
+        <caption>
+          <para>Template for start-marker</para>
+        </caption>
+      </figure>
+      
             <para>Note that there are two calls to <code>&lt;xsl:apply-templates&gt;</code>. The
                 first call to <code>&lt;xsl:apply-templates&gt;</code> occurs within an
                     <code>&lt;xsl:copy&gt;</code> element (which constructs an element with the name
@@ -1168,11 +1599,11 @@ The
             
             <figure>
                 <programlisting><![CDATA[<xsl:template match="text() | comment() | processing-instruction | *[not(@th:*)]"
-        mode="shallow-to-deep">
+        mode="raising">
     <xsl:copy-of select="."/>
     <xsl:apply-templates 
         select="following-sibling::node()[1]"
-        mode="shallow-to-deep"/>
+        mode="raising"/>
 </xsl:template>]]></programlisting>
                 <caption>
                     <para>Template for <code>text()</code> nodes, comments, processing instructions,
@@ -1191,7 +1622,7 @@ The
             look like this:</para>
             
             <figure>
-                <programlisting><![CDATA[<xsl:template match="*[@th:eID]" mode="shallow-to-deep">
+                <programlisting><![CDATA[<xsl:template match="*[@th:eID]" mode="raising">
         
     <!--* No action necessary *-->
     <!--* We do NOT recur to our right.
@@ -1203,17 +1634,53 @@ The
                     <para>Template for end-markers</para>
                 </caption>
             </figure>
-            
-            <para>It will be noted that the templates shown each handle a single node and then call
-                    <code>&lt;xsl:apply-templates&gt;</code>, selecting the next node to be
-                processed. The template activation stack in the XSLT processor thus contains no sets
-                of nodes waiting to be processed, but the call stack may become rather deep: in our
-                sample data, the maximum depth of the template stack is the number of nodes in the
-                flattened portion of the input. An XSLT processor that does not eliminate
-                tail-recursive template calls may thus run out of stack space (at least in theory—in
-                practice, we have never seen a right-sibling recursion blow the stack on real
-            input).</para>
-            
+
+	    <para>The code shown here is simplified by assuming
+	    that the start- and end-markers in its input correspond
+	    to the start- and end-tags of a well-formed XML
+	    document.  The template for end-markers, for example,
+	    does not check to see that the end-marker found is the
+	    one that matches the element on the top of the current
+	    element stack.  When confonted with the overlapping
+	    virtual elements of some of our sample input, therefore,
+	    the code shown here will behave as if start- and
+	    end-markers were paired up by position, without regard for
+	    co-indexing or element type.  	    
+	    </para>
+	    
+	    <para>Better behavior in the presence of overlapping
+	    virtual elements or errors in the input can be achieved
+	    by passing parameters on each call to
+	    <code>apply-templates</code> in mode <code>raising</code>,
+	    which keep a stack of co-indexing IDs and element types.
+	    </para>
+	    
+	    <para>A few notes on resource consumption may be
+	    in order.</para>
+	    
+            <para>It will be noted that the templates shown each
+            handle a single node and then call
+            <code>&lt;xsl:apply-templates&gt;</code>, selecting the
+            next node to be processed. The template activation stack
+            in the XSLT processor thus contains no sets of nodes
+            waiting to be processed, but the call stack may become
+            rather deep: in our sample data, the maximum depth of the
+            template stack is the number of nodes in the flattened
+            portion of the input. An XSLT processor that does not
+            eliminate tail-recursive template calls may thus run out
+            of stack space (at least in theory—in practice, we have
+            never seen a right-sibling recursion blow the stack on
+            real input).</para>
+            <para>Because the right-sibling idiom visits each node
+	    in the flattened input just once, the cost of the process
+	    should be linear in the size of the input.  (In practice,
+	    preliminary measurements suggest that with the Saxon
+	    HE processor, the rise in cost is sub-linear to the rise
+	    in input size.)</para>
+	    <!--* Need to check with Exselt. *-->
+	    <!--* Need to check with xsltproc. *-->
+	    <!--* Need to draw plots of times. *-->
+            </section>
             <section>
                 <title>Raising
                 <emphasis>Frankenstein</emphasis></title>
@@ -1225,9 +1692,9 @@ The
                 <figure>
                     <programlisting>
      &lt;xsl:template match="div[@type='collation']"&gt;
-     &lt;xsl:apply-templates select="child::node()[1]" mode="shallow-to-deep"/&gt;
+     &lt;xsl:apply-templates select="child::node()[1]" mode="raising"/&gt;
  &lt;/xsl:template&gt;  
-    &lt;xsl:template match="*[@loc and @ana='start']" mode="shallow-to-deep"&gt;     
+    &lt;xsl:template match="*[@loc and @ana='start']" mode="raising"&gt;     
         &lt;xsl:variable name="ln" as="xs:string" select="name()"/&gt;
         &lt;xsl:variable name="sID" as="xs:string" select="@loc"/&gt;
         
@@ -1236,7 +1703,7 @@ The
            &lt;xsl:attribute name="xml:id"&gt;
                &lt;xsl:value-of select="@loc"/&gt;
            &lt;/xsl:attribute&gt;
-            &lt;xsl:apply-templates select="following-sibling::node()[1]" mode="shallow-to-deep"&gt;
+            &lt;xsl:apply-templates select="following-sibling::node()[1]" mode="raising"&gt;
             &lt;/xsl:apply-templates&gt;
         &lt;/xsl:copy&gt;
         
@@ -1245,17 +1712,17 @@ The
             [@ana='end' and @loc= $sID 
             and name()=$ln]
             /following-sibling::node()[1]"
-            mode="shallow-to-deep"&gt;
+            mode="raising"&gt;
         &lt;/xsl:apply-templates&gt;
     &lt;/xsl:template&gt;
   &lt;xsl:template match="text() | comment() | processing-instruction | *[not(@loc)]"
-        mode="shallow-to-deep"&gt;
+        mode="raising"&gt;
         &lt;xsl:copy-of select="."/&gt;
         &lt;xsl:apply-templates 
             select="following-sibling::node()[1]"
-            mode="shallow-to-deep"/&gt;
+            mode="raising"/&gt;
     &lt;/xsl:template&gt;
-    &lt;xsl:template match="*[@loc and @ana='end']" mode="shallow-to-deep"/&gt;
+    &lt;xsl:template match="*[@loc and @ana='end']" mode="raising"/&gt;
                 </programlisting>
                     <caption>
                         <para>Right sibling traversal method applied to
@@ -2466,7 +2933,7 @@ with open('flattened.xml') as input:
                 <listitem>
                     <para>Similarly, it is remarkably easy to write <code>&lt;xsl:apply-templates
                             select="..."/></code> instead of <code>&lt;xsl:apply-templates
-                            select="..." mode="shallow-to-deep"/></code>. The symptom is the reverse
+                            select="..." mode="raising"/></code>. The symptom is the reverse
                         of the preceding: some nodes in the input drop out of the output.</para>
                 </listitem>
             </itemizedlist>
