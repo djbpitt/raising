@@ -1654,33 +1654,61 @@ The
 	    <code>apply-templates</code> in mode <code>raising</code>,
 	    which keep a stack of co-indexing IDs and element types.
 	    </para>
-	    
-	    <para>A few notes on resource consumption may be
-	    in order.</para>
-	    
-            <para>It will be noted that the templates shown each
-            handle a single node and then call
-            <code>&lt;xsl:apply-templates&gt;</code>, selecting the
-            next node to be processed. The template activation stack
-            in the XSLT processor thus contains no sets of nodes
-            waiting to be processed, but the call stack may become
-            rather deep: in our sample data, the maximum depth of the
-            template stack is the number of nodes in the flattened
-            portion of the input. An XSLT processor that does not
-            eliminate tail-recursive template calls may thus run out
-            of stack space (at least in theory—in practice, we have
-            never seen a right-sibling recursion blow the stack on
-            real input).</para>
-            <para>Because the right-sibling idiom visits each node
-	    in the flattened input just once, the cost of the process
-	    should be linear in the size of the input.  (In practice,
-	    preliminary measurements suggest that with the Saxon
-	    HE processor, the rise in cost is sub-linear to the rise
-	    in input size.)</para>
-	    <!--* Need to check with Exselt. *-->
-	    <!--* Need to check with xsltproc. *-->
-	    <!--* Need to draw plots of times. *-->
+	    </section>
+	    <section>
+	      <title>Resource consumption</title>
+	      <para>A few notes on resource consumption may be
+	      in order.</para>
+	      
+              <para>It will be noted that the templates shown each
+              handle a single node and then call
+              <code>&lt;xsl:apply-templates&gt;</code>, selecting the
+              next node to be processed. The template activation stack
+              in the XSLT processor thus contains no sets of nodes
+              waiting to be processed, but the call stack may become
+              rather deep: in our sample data, the maximum depth of the
+              template stack is the number of nodes in the flattened
+              portion of the input. An XSLT processor that does not
+              eliminate tail-recursive template calls may thus run out
+              of stack space (at least in theory—in practice, we have
+              never seen a right-sibling recursion blow the stack on
+              real input).</para>
+              <para>Because the right-sibling idiom visits each node
+	      in the flattened input just once, the cost of the process
+	      should be linear in the size of the input.  (In practice,
+	      preliminary measurements suggest that with the Saxon
+	      HE processor, the rise in cost is sub-linear to the rise
+	      in input size.)</para>
+	      <!--* Need to check with Exselt. *-->
+	      <!--* Need to check with xsltproc. *-->
+	      <!--* Need to draw plots of runtimes. *-->
+
+	      <para>Despite its virtues, the right-sibling traveral
+	      idiom is needed rarely enough in XSLT programming
+	      that many XSLT authors have never used it; some find it
+	      difficult.<footnote>
+	      <para>And even those who don't admit to
+	      finding it difficult may find it easy to slip up
+	      in details when implementing a right-sibling
+	      traversal; see below (<xref
+	      linkend="errors-rst"/>).</para>
+	      </footnote>
+	      The inside-out algorithm described below
+	      (<xref linkend="inside-out-function"/>)
+	      can be regarded as an alternative which
+	      is closer to conventional XSLT usage.  The
+	      implementation using XSLT 3.0 accumulators
+	      is another approach worth learning.
+	      <!--* MSM seems to be deciding that
+		  * this is a self-help paper.  Things
+		  * you should learn, as an XSLT programmer.
+		  * If you don't like that slant, change it.
+		  *-->
+	      </para>
             </section>
+
+	  <!--* Does the adaptation to Frankenstein require
+	      discussion? *-->
             <section>
                 <title>Raising
                 <emphasis>Frankenstein</emphasis></title>
@@ -1731,7 +1759,12 @@ The
                 </figure>
                 
             </section>
-            
+
+	    <!--* MSM doesn't think the 1.0 implementation (which does
+		now exist) merits a separate subsection.  So I'm
+		commenting this out.
+		*-->
+	    <!--*
             <section>
                 <title>XSLT 1.0</title>
                 
@@ -1742,6 +1775,7 @@ The
                 </para>
                 
             </section>
+	    *-->
             
         </section>
         <section xml:id="inside-out-function" xreflabel="Inside-out recursion">
@@ -2044,8 +2078,300 @@ The
                 </para>
             </section>
             
-        </section>
+          </section>
 
+	  <section xml:id="outside-in">
+	    <title>Outside-in processing</title>
+	    <para>Once the inside-out algorithm has been defined and
+	    understood, it is natural to wonder whether a mirror-image
+	    version of the algorithm would be possible which works
+	    from the outside in.  Once the pairs of outermost start-
+	    and end-markers have been identified, the function can be
+	    called recursively not on the entire document but only on
+	    the children of the outermost elements, in an
+	    instantiation of a divide-and-conquer strategy; this
+	    should (or so it seems) result in faster processing.
+	    </para>
+	    <para>Our realization of this idea is imperfect
+	    in that we have not found a way to find and raise
+	    <emphasis role="ital">all</emphasis> outermost
+	    elements in a sequence with a single call, the way
+	    the template-matching rules of the inside-out 
+	    approach can raise multiple elements in a single
+	    call to <code>apply-templates</code>.  Instead,
+	    we find the left-most start-marker and process it,
+	    then recur to continue processing the remainder
+	    of the sequence after the matching end-marker.
+	    This results in two recursive calls for each virtual
+	    element:  one to handle the children of the newly
+	    raised element, and one for its right-siblings.</para>
+
+	    <section>
+	      <title>Code outline</title>
+	    
+	      <para>The default handling for all nodes is
+	      a shallow copy, as specified in the mode
+	      declaration for the default mode:</para>
+	      <figure>
+		<programlisting><![CDATA[<xsl:mode on-no-match="shallow-copy"/>]]></programlisting>
+	      </figure>
+	      
+	      <para>For content nodes, the function
+	      <code>th:raise-sequence()</code>
+	      is called on their children.  In the simple inputs we
+	      are dealing with, this template will match only
+	      the document's outermost element; for the
+	      Frankenstein data, it will match several others.
+	      We have not experimented to see whether it
+	      would be faster to test for start- and end-marker
+	      children here.
+	      </para>
+	      <figure>
+		<programlisting><![CDATA[<xsl:template match="*[exists(node())]">
+  <xsl:copy>
+    <xsl:sequence 
+      select="@*,
+             th:raise-sequence(child::node())"/>
+  </xsl:copy>
+</xsl:template>]]></programlisting>
+	      </figure>
+	      
+	      <para>The core of the implementation is the
+	      <code>th:raise-sequence</code> function.</para>
+	      <para>The function begins by creating lists of start-
+	      and end-markers (identified by their co-indexing IDs),
+	      so that we can find not just the leftmost start-marker
+	      but the leftmost start-marker <emphasis role="ital">with
+	      a matching end-marker in the sequence</emphasis>.
+	      If there are no matching pairs in the sequence, the
+	      sequence is returned without change.
+	      (This makes this implementation slightly more robust
+	      in the presence of overlap than the implementation
+	      shown above of the right-sibling traversal approach;
+	      we have not yet had time to rectify the inconsistency
+	      in implementation philosophy.)</para>
+	      <para>In the normal case, however, the function
+	      will select the leftmost start-marker with a
+	      matching end-marker, find the positions of the
+	      start- and end-markers in the input, and then
+	      partition the input sequence into three parts.
+	      A call to <code>apply-templates</code> processes
+	      nodes preceding the selected start-marker;
+	      a recursive call to <code>th:raise-sequence()</code>
+	      from within the raised elements processes the
+	      nodes between the selected start- and end-markers;
+	      a second recursive call processes the remainder
+	      of the original sequence.</para>
+	      
+	      <figure>
+		<programlisting><![CDATA[<xsl:function name="th:raise-sequence" as="node()*">
+    <xsl:param name="ln" as="node()*"/>
+
+    <!--* lidStarts, lidEnds:  lists of IDs
+        * for start- and end-markers *-->
+    
+    <xsl:variable name="lidStarts"
+      as="xs:string*"
+      select="for $n in $ln[th:start-marker(.)]
+        return th:id($n)"/>
+    <xsl:variable name="lidEnds"
+      as="xs:string*"
+      select="for $n in $ln[th:end-marker(.)]
+        return th:id($n)"/>
+    
+    <xsl:choose>
+      <!--* base case:  no start-marker / end-marker
+          * pairs present *-->
+      <xsl:when test="empty($lidStarts[. = $lidEnds])">
+        <!--* The sequence may contain elements 
+            * with markers inside, so we apply 
+            * templates, instead of just returning $ln *-->
+        <xsl:apply-templates select="$ln"/>
+      </xsl:when>
+
+      <!--* 'normal' case: take first start-marker 
+          * with matching end-marker *-->
+      <xsl:otherwise>
+        <!--* find ID of first start-marker
+           * with matching end-marker *-->
+         <xsl:variable name="id"
+           as="xs:string"
+           select="$lidStarts[. = $lidEnds][1]"/>
+        <!--* find position of start- and
+            * end-markers with that ID *-->
+        <xsl:variable name="posStartEnd"
+          as="xs:integer+"
+          select="for $i in 1 to count($ln) return
+                      if ($ln[$i]
+                          [(th:start-marker(.) 
+                          or th:end-marker(.)) 
+                          and th:id(.) eq $id])
+                          then $i else ()"/>
+                          
+        <xsl:variable name="posStart" 
+          as="xs:integer"
+          select="$posStartEnd[1]"/>
+        <xsl:variable name="posEnd" 
+          as="xs:integer"
+          select="$posStartEnd[2]"/>
+
+        <!--* Apply templates to all items to 
+            * left of start. These may include
+            * markers, but if so they are not 
+            * matched and not raisable. They 
+            * may also include elements which
+            * contain markers, so we need to apply
+            * templates, not just return them.
+            *-->
+            
+        <xsl:apply-templates
+          select="$ln[position() lt $posStart]"/>
+        
+        <!--* Raise the element and 
+            * call raise-sequence() on its
+            * content. *-->
+        <xsl:copy select="$ln[$posStart]">
+          <!--* copy the attributes
+              * (filtering as needed) *-->
+          <xsl:sequence 
+            select="$ln[$posStart]/(@* except @th:*)"/>
+
+          <!--* handle children *-->      
+          <xsl:sequence 
+            select="th:raise-sequence(
+                   $ln[position() gt $posStart 
+                       and position() lt $posEnd])"/>    
+        </xsl:copy>
+        
+        <!--* call raise-sequence() on all items 
+            * to right of end *-->
+        <xsl:sequence
+          select="th:raise-sequence(
+                 $ln[position() gt $posEnd]
+                 )"/>
+      </xsl:otherwise>
+    </xsl:choose>
+</xsl:function>]]></programlisting>
+	      </figure>
+	      
+	      <para>A number of ancillary functions are 
+	      defined in the stylesheet and used in the
+	      code shown above.  They are shown
+	      briefly here.  <!--* Why?  Who cares?! *-->
+	      <!--* Well, because we show this kind of
+		  thing elsewhere, and inconsistency
+		  will confuse the reader.   Yes, it's verbose
+		  and unnecessary.  But suck it up, MIchael.
+		  It's just a paper. *-->
+	      </para>
+	      <para>The <code>th:start-marker()</code>
+	      and <code>th:end-marker()</code> functions
+	      encapsulate the recognition criteria for
+	      markers.  (These forms are redundant with
+	      those given elsewhere in this paper; we have
+	      not yet eliminated the redundancy in our
+	      demonstration code.)</para>
+	      <figure>
+		<programlisting><![CDATA[  <xsl:function name="th:start-marker" as="xs:boolean">
+    <xsl:param name="e" as="node()"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="exists($e/@th:sID)"/>
+    <xsl:value-of use-when="$th-style = 'ana' "
+	select="$e/@ana='start' "/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+	select="ends-with($e/@xml:id,'_start')"/>
+    
+  </xsl:function>
+  
+  <xsl:function name="th:end-marker" as="xs:boolean">
+    <xsl:param name="e" as="node()"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="exists($e/@th:eID)"/>
+    <xsl:value-of use-when="$th-style = 'ana' "
+	select="$e/@ana='end' "/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+		  select="ends-with($e/@xml:id,'_end')"/>
+    
+  </xsl:function>
+  ]]></programlisting>
+	      </figure>
+	      
+	      <para>The <code>th:id()</code> function
+	      returns the co-indexing identifier used for
+	      any given marker.</para>
+	      <figure>
+		<programlisting><![CDATA[<xsl:function name="th:id" as="xs:string?">
+    <xsl:param name="e" as="node()"/>
+    
+    <xsl:value-of use-when="$th-style = 'th' "
+	select="($e/@th:sID, $e/@th:eID)"/>
+    <xsl:value-of use-when="$th-style = 'ana' "
+		  select="($e/@loc)"/>
+    <xsl:value-of use-when="$th-style = 'xmlid' "
+		  select="replace($e/@xml:id,'(_start|_end)$','')"/>
+    
+</xsl:function>]]></programlisting>
+	      </figure>
+	    </section>
+	    
+	    <section>
+	      <title>Resource consumption</title>
+	      <para>
+		The implementation shown calls the
+		<code>th:raise-sequence()</code> function
+		once for each virtual element.  The cost of
+		the process should thus be roughly linear
+		in the number of virtual elements in the input;
+		that seems consistent with our timings of
+		XSLT processors.<footnote>
+		<para>
+		  In an experimental implementation of
+		  inside-out and outside-in using tumbling
+		  windows in XQuery, on the other hand, the
+		  two approaches differ dramatically in run
+		  time, and the costs do not appear to be
+		  linear.  We do not currently have good
+		  data on this or any explanation.
+		</para>
+	      </footnote>
+	      </para>
+	      <para>Each node in the original flattened sequence is
+	      passed to the central as part of the argument sequence
+	      once for each level of its distance from the root of the
+	      virtual tree.  In this, the outside-in approach is
+	      indeed the mirror image of the inside-out approach.
+	      </para>
+	      <para>
+		The implementation of outside-in shown here is not,
+		however, faster than our implementation of inside-out,
+		despite the divide-and-conquer strategy.  We have
+		not been able to perform measurements to explain the
+		differences in run time, but we can offer a couple of
+		speculations.  First, on our test data the inside-out
+		approach
+		reduces the number of nodes faster than the
+		outside-in approach:  in a normal XML tree there will
+		be more leaf nodes than root nodes (and more than
+		that:  in our test data the fanout increases with
+		distance from the root).
+		Second, each call to the function traverses the input
+		sequence several times:
+		once to find all start-marker IDs, 
+		once to find all end-marker IDs, 
+		once to find the positions of the selected markers.
+		Either or both of these could explain the slower
+		run-time.
+	      </para>
+	      <!--* need plot of run times for HE, Exselt *-->
+	      <!--* need plots of run times for 1.0 version for  HE, 
+		  Exselt, xsltproc *-->
+	      <!--* need plots to compare run times for i/o and o/i
+		  for HE, Exselt, xsltproc *-->
+	    </section>
+	  </section>
+	  
         <section xml:id="accumulators" xreflabel="Accumulators">
             <title>Accumulators</title>
             
@@ -2916,7 +3242,7 @@ with open('flattened.xml') as input:
             realistic use cases. In this section we review briefly the complications for each
         method.</para>
         
-        <section>
+        <section xml:id="errors-rst">
             <title>Right-sibling traversal</title>
             <para>Two elusive bugs in an initial implementation of the right-sibling traversal
                 algorithm took the better part of a day or two to identify:</para>
