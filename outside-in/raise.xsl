@@ -53,6 +53,15 @@
       *-->
   <xsl:param name="th-style" select=" 'th' " static="yes"/>
 
+  <!--* debug:  issue debugging messages?  yes or no  *-->
+  <xsl:param name="debug" as="xs:string" select=" 'no' " static="yes"/>
+
+  <!--* instrument:  issue instrumentation messages? yes or no *-->
+  <!--* Instrumentation messages include things like monitoring
+      * size of various node sets; we turn off for timing, on for
+      * diagnostics and sometimes for debugging. *-->
+  <xsl:param name="instrument" as="xs:string" select=" 'no' " static="yes"/>
+  
   <!--* declare default mode as requiring templates *-->
   <xsl:mode on-no-match="shallow-copy"/>
   <xsl:mode name="loop" on-no-match="shallow-copy"/>
