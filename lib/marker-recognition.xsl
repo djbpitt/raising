@@ -75,7 +75,7 @@
     <xsl:param name="e" as="element()"/>
     
     <xsl:value-of use-when="$th-style = 'th' "
-	select="exists($e/@th:sID or $e/@th:eID)"/>
+	select="exists($e/@th:sID union $e/@th:eID)"/>
     <xsl:value-of use-when="$th-style = 'ana' "
 	select="$e/@ana=('start', 'end')"/>
     <xsl:value-of use-when="$th-style = 'anaplus' "
@@ -92,14 +92,16 @@
       * $e (if it's a marker) with its pair.
       *-->
   <xsl:function name="th:coindex" as="xs:string" streamability="inspection">
-    <xsl:param name="e" as="element()"/>
+    <xsl:param name="e" as="element()?"/>
     
     <xsl:value-of use-when="$th-style = 'th' "
 	select="($e/@th:sID, $e/@th:eID)[1]"/>
     <xsl:value-of use-when="$th-style = ('ana', 'anaplus') "
-	select="$e/@loc"/>
+	select="($e/@loc)"/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
-	select="replace($e/@xml:id,'(_start|_end)$','')"/>
+		  select="if (exists($e))
+			  then replace($e/@xml:id,'(_start|_end)$','')
+			  else ()"/>
     
   </xsl:function>
 		
