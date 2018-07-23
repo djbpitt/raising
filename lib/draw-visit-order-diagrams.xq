@@ -5,6 +5,7 @@
    raising problem.
    
    Revisions:
+   2018-07-18 : CMSMcQ : more clean up, ovals now work
    2018-07-17 : CMSMcQ : clean up a bit, and change the form of the tree
    2018-07-14f : CMSMcQ : made first version
 :)
@@ -26,23 +27,51 @@ declare namespace tei = "http://www.tei-c.org/ns/1.0";
    :)
    
 (: th:traversal:  What traversal order are we using?  oi, io, lr? :)
-declare variable $th:traversal as xs:string := 'lr';
-
-(: th:markershape:  How shall we draw markers?  point or oval? :)
-declare variable $th:markershape as xs:string := 'oval';
+declare variable $th:traversal as xs:string := ('io', 'oi', 'lr')[1];
 
 (: th:inputdir:  where is the input? :)
 declare variable $th:inputdir := '../input/basic/aux';
 
 (: th:inputfile:  what is the filename of the input? :)
 declare variable $th:inputfile := ('basho.xml', 
-                                   'basho2.xml'
+                                   'basho2.xml',
                                    'coleridge-quote.xml',
                                    'coleridge.xml'
-                                  )[2];
+                                  )[4];
+(: basho and coleridge-quote are 'natural' or 'real';
+   basho2 and coleridge have extra line breaks, better for 
+   oval style :)
 
 (: th:outputdir:  where does the output go? :)
-declare variable $th:outputdir := file:base-dir() || '../doc/images/left-right';
+
+declare variable $th:outputdir := file:base-dir() || '../doc/images/'
+                 || (if ($th:traversal eq 'io') then 'inside-out' 
+                     else if ($th:traversal eq 'oi') then 'outside-in'
+                     else 'left-right');
+
+(: declare variable $th:outputdir := 'cmsmcq.com/2018/08/raising/stc1'; :)
+
+(: th:markershape:  How shall we draw markers?  point or oval? :)
+declare variable $th:markershape as xs:string := 'oval';
+
+(: th:nodesep:  Minimum distance between nodes, in inches.
+   Default is 0.25, use 0.03 for Coleridge. :)
+declare variable $th:nodesep as xs:string := '0.03';
+
+(: th:textmargin:  horiz, vert margin for text boxes (in inches).
+   Default is 0.11, 0.055; try 0.03 for Coleridge. :)
+declare variable $th:textmargin as xs:string? := '"0.03, 0.11"';
+
+(: th:textwidth:  minimum width of text boxes (in inches).
+   Default is 0.75; try 0.3 for Coleridge. :)
+declare variable $th:textwidth as xs:string? := '0.3';
+
+(: th:ghost-shrinkage:  apply shrinkage to invisible markers or not?
+   Default is false; try true for Coleridge. (Amount is set in
+   the drawmarker() function.) 
+   And more generally:  shave pixels where possible?
+   :)
+declare variable $th:ghostshrinkage as xs:boolean := false();
 
 (: ****************************************************************
    * 2 Utilities (not particularly graphical)
@@ -155,9 +184,12 @@ declare function th:drawmarker(
       $kwSE || '_' || $id || ' ['
             || 'label="' || $gi || '\n' || $paren || '"'
             || ', shape=ellipse'
-            || ', width=0.3'
             || ', margin=0'
-            || ', fontsize=11'
+            ||  (if ($color eq th:markerhue('past') 
+                 and $th:ghostshrinkage) then
+                    ', width=0.03, fontsize=5'
+                else 
+                    ', width=0.3, fontsize=11')
             || ', color=' || $color
             || $style
             || $fillcolor
@@ -176,6 +208,8 @@ declare function th:drawtextnode(
                       replace($s,'\s*&#xA;\s*','\\n')
                     ) || '"'
   || ', color=' || $color
+  || (if (exists($th:textmargin)) then (', margin=' || $th:textmargin) else '')
+  || (if (exists($th:textwidth)) then (', width=' || $th:textwidth) else '')
   || '];&#xA;'
 }; 
 
@@ -563,6 +597,7 @@ declare function th:graph-inside-out(
   $cLevel as xs:integer
 ) as xs:string {
   'digraph { &#xA;'
+  || '  graph [nodesep=' || $th:nodesep || '] ;&#xA;'
   || '  node [ordering=out]; &#xA;'
   
   || '  subgraph { &#xA;'
@@ -621,6 +656,7 @@ declare function th:graph-outside-in(
   $eCur as element()
 ) as xs:string {
   'digraph { &#xA;'
+  || '  graph [nodesep=' || $th:nodesep || '] ;&#xA;'
   || '  node [ordering=out]; &#xA;'
   
   || '  subgraph { &#xA;'
@@ -691,6 +727,7 @@ declare function th:graph-left-right(
   $phase as xs:string
 ) as xs:string {
   'digraph { &#xA;'
+  || '  graph [nodesep=' || $th:nodesep || '] ;&#xA;'
   || '  node [ordering=out]; &#xA;'
   
   || '  subgraph { &#xA;'

@@ -1,6 +1,10 @@
 # run-he-all.sh
 # A quick and dirty shell script to run HE on all inputs
-# NOT YET WORKING, SET ASIDE FOR THE MOMENT
+
+# Revisions:
+# 2018-10-21 : CMSMcQ : change to accept shell script as target,
+#              not XSLT stylesheet name
+# 2018-10-20 : CMSMcQ : made file, got it working
 
 # invocation:  cd .../raising; ./testing/run-he-all.sh
 
@@ -8,7 +12,7 @@
 # Usage
 ################################################################
 function usage() {
-    echo "Usage:  run-he-all.sh STYLESHEET [options] [p1='val1' p2='val2' ...]"
+    echo "Usage:  run-he-all.sh SCRIPT [options] [p1='val1' p2='val2' ...]"
     echo "Must be run from raising directory (root of repo)."
     echo "Java options that may be helpful:"
     echo "  -Xms128m (initial Java heap size, defaults to max(128m?, 1/64 of real memory))"
@@ -83,16 +87,17 @@ fi
 # Variables
 ################################################################
 
-SSPATH="$1"
-METHOD="${SSPATH%/*}"
-SS="${SSPATH#*/}"
+SCRIPTPATH="$1"
+METHOD="${SCRIPTPATH%/*}"
+SCRIPT="${SCRIPTPATH#*/}"
 
 CURPATH=`pwd`
 CURDIR="${CURPATH##*/}"
 
 ISODATE=`date "+%Y-%m-%d"`
+HHMMSS=`date "+%H%M%S"`
 OUTDIR="testing/${ISODATE}"
-OUTFN="testdata.${METHOD}.xml"
+OUTFN="testdata.${METHOD}.${ISODATE}.${HHMMSS}.xml"
 OUTPATH="${OUTDIR}/${OUTFN}"
 
 HOSTNAME=`hostname -s`
@@ -106,15 +111,15 @@ EXTENDED="input/extended/flattened.xml \
 OVERLAP="input/overlap/page-and-para.xml\
   input/overlap/basho.xml \
   input/overlap/frost.xml \
-  input/overlap/peergynt"
-BROWN0="input/brown/r02.0052 \
-  input/brown/r02.0125 \
-  input/brown/r02.0225 \
-  input/brown/r02.0329 \
-  input/brown/r02.0368 \
-  input/brown/r02.0441 \
-  input/brown/r02.1041 \
-  input/brown/r02.1477"
+  input/overlap/peergynt.xml"
+BROWN0="input/brown/r02.0052.xml \
+  input/brown/r02.0125.xml \
+  input/brown/r02.0225.xml \
+  input/brown/r02.0329.xml \
+  input/brown/r02.0368.xml \
+  input/brown/r02.0441.xml \
+  input/brown/r02.1041.xml \
+  input/brown/r02.1477.xml"
 BROWN1="input/brown/r02_flattened.xml"
 BROWN2="input/brown/Corpus_flattened.xml"
 LOCAL1="input/local/flattened.l18.xml"
@@ -141,18 +146,19 @@ fi
 mkdir -p $OUTDIR
 
 echo "<testdata>" > $OUTPATH
-echo "<p>Automated test run, using HE, on ${SSPATH}.</p>" >> $OUTPATH
+echo "<p>Automated test run, using HE, on ${SCRIPTPATH}.</p>" >> $OUTPATH
 
 # BROWN1 and LOCAL1:  single Brown samples, v slow sometimes
 # LOCAL2:  set of 2, 4, 16 Brown samples (no longer 64)
 # LOCAL3:  64 Brown samples
 # BROWN2:  entire Brown Corpus 
-for i in $BASIC $EXTENDED $OVERLAP $BROWN0 $BROWN1 $LOCAL1 $LOCAL2
+for i in $BASIC $EXTENDED $OVERLAP $BROWN0 $BROWN1 $LOCAL1 $LOCAL2 $LOCAL3
 do
     echo -n `date` " ... " 
-    echo runonce "${SS}" "${i}" "raise_he.sh" "" 
-    runonce "${SS}" "${i}" "raise_he.sh" "" >> $OUTPATH 2>&1
+    echo runonce "${SCRIPT}" "${i}" "raise_he.sh" "" 
+    runonce "${SCRIPT}" "${i}" "${SCRIPT}" "" >> $OUTPATH 2>&1
 done
-    
+
+echo `date` " ... done"    
 echo "</testdata>" >> $OUTPATH
 

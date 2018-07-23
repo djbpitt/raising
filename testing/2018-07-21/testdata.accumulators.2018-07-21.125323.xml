@@ -1,0 +1,1155 @@
+<testdata>
+<p>Automated test run, using HE, on accumulators/raise_he.sh.</p>
+<run>
+  <date>Sat Jul 21 12:53:23 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/basic/flattened.xml</input>
+  <output>output/basic/raised_flattened_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/basic/flattened.xml -xsl:raise.xsl -o:output/basic/raised_flattened_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.25 real         1.76 user         0.11 sys
+  87904256  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24266  page reclaims
+         1  page faults
+         0  swaps
+         6  block input operations
+        11  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+        21  voluntary context switches
+      3271  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.347s
+user	0m1.771s
+sys	0m0.126s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:24 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/basic/basho.xml</input>
+  <output>output/basic/raised_basho_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/basic/basho.xml -xsl:raise.xsl -o:output/basic/raised_basho_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.01 real         1.78 user         0.11 sys
+  87670784  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24259  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         3  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      3570  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.027s
+user	0m1.787s
+sys	0m0.114s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:25 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/basic/coleridge-quote.xml</input>
+  <output>output/basic/raised_coleridge-quote_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/basic/coleridge-quote.xml -xsl:raise.xsl -o:output/basic/raised_coleridge-quote_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        0.99 real         1.78 user         0.11 sys
+  88788992  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24641  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      3538  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m0.999s
+user	0m1.789s
+sys	0m0.114s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:26 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/extended/flattened.xml</input>
+  <output>output/extended/raised_flattened_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/extended/flattened.xml -xsl:raise.xsl -o:output/extended/raised_flattened_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        6.44 real         1.74 user         0.11 sys
+  88186880  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24482  page reclaims
+         0  page faults
+         0  swaps
+         4  block input operations
+         8  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         6  voluntary context switches
+      3786  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m6.452s
+user	0m1.748s
+sys	0m0.121s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:33 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/extended/basho.xml</input>
+  <output>output/extended/raised_basho_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/extended/basho.xml -xsl:raise.xsl -o:output/extended/raised_basho_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.00 real         1.75 user         0.10 sys
+  88866816  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24371  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      3452  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.016s
+user	0m1.758s
+sys	0m0.114s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:34 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/extended/coleridge-quote.xml</input>
+  <output>output/extended/raised_coleridge-quote_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/extended/coleridge-quote.xml -xsl:raise.xsl -o:output/extended/raised_coleridge-quote_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.06 real         1.79 user         0.11 sys
+  88571904  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24771  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         6  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      3468  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.071s
+user	0m1.800s
+sys	0m0.119s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:35 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/page-and-para.xml</input>
+  <output>output/overlap/raised_page-and-para_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/page-and-para.xml -xsl:raise.xsl -o:output/overlap/raised_page-and-para_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        0.99 real         1.78 user         0.10 sys
+  88387584  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24588  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         2  block output operations
+         0  messages sent
+         0  messages received
+         3  signals received
+         2  voluntary context switches
+      3242  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.004s
+user	0m1.786s
+sys	0m0.110s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:36 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/basho.xml</input>
+  <output>output/overlap/raised_basho_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/basho.xml -xsl:raise.xsl -o:output/overlap/raised_basho_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.00 real         1.75 user         0.10 sys
+  88408064  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24388  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      3475  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.008s
+user	0m1.761s
+sys	0m0.112s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:37 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/frost.xml</input>
+  <output>output/overlap/raised_frost_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/frost.xml -xsl:raise.xsl -o:output/overlap/raised_frost_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        0.99 real         1.74 user         0.10 sys
+  87699456  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24270  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      3357  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.001s
+user	0m1.746s
+sys	0m0.112s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:38 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/peergynt.xml</input>
+  <output>output/overlap/raised_peergynt_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/peergynt.xml -xsl:raise.xsl -o:output/overlap/raised_peergynt_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.02 real         1.74 user         0.11 sys
+  88166400  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24397  page reclaims
+         0  page faults
+         0  swaps
+         1  block input operations
+         1  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      3608  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.028s
+user	0m1.750s
+sys	0m0.116s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:39 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0052.xml</input>
+  <output>output/brown/raised_r02.0052_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0052.xml -xsl:raise.xsl -o:output/brown/raised_r02.0052_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.10 real         1.91 user         0.11 sys
+  88797184  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24189  page reclaims
+         0  page faults
+         0  swaps
+         1  block input operations
+         1  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      4185  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.112s
+user	0m1.919s
+sys	0m0.117s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:40 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0125.xml</input>
+  <output>output/brown/raised_r02.0125_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0125.xml -xsl:raise.xsl -o:output/brown/raised_r02.0125_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.12 real         2.05 user         0.11 sys
+  89657344  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     24865  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      4402  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.131s
+user	0m2.057s
+sys	0m0.121s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:41 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0225.xml</input>
+  <output>output/brown/raised_r02.0225_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0225.xml -xsl:raise.xsl -o:output/brown/raised_r02.0225_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.20 real         2.31 user         0.12 sys
+  93802496  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     26027  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      4950  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.209s
+user	0m2.317s
+sys	0m0.133s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:43 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0329.xml</input>
+  <output>output/brown/raised_r02.0329_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0329.xml -xsl:raise.xsl -o:output/brown/raised_r02.0329_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.23 real         2.52 user         0.13 sys
+ 100839424  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     27271  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         3  signals received
+         2  voluntary context switches
+      5109  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.240s
+user	0m2.527s
+sys	0m0.137s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:44 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0368.xml</input>
+  <output>output/brown/raised_r02.0368_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0368.xml -xsl:raise.xsl -o:output/brown/raised_r02.0368_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.27 real         2.60 user         0.13 sys
+ 102903808  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     28374  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      5072  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.281s
+user	0m2.607s
+sys	0m0.141s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:45 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0441.xml</input>
+  <output>output/brown/raised_r02.0441_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0441.xml -xsl:raise.xsl -o:output/brown/raised_r02.0441_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.28 real         2.71 user         0.13 sys
+ 107986944  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     29195  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      5255  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.294s
+user	0m2.722s
+sys	0m0.142s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:46 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.1041.xml</input>
+  <output>output/brown/raised_r02.1041_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.1041.xml -xsl:raise.xsl -o:output/brown/raised_r02.1041_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.49 real         3.61 user         0.17 sys
+ 134942720  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     40598  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      5782  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.501s
+user	0m3.618s
+sys	0m0.184s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:48 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.1477.xml</input>
+  <output>output/brown/raised_r02.1477_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.1477.xml -xsl:raise.xsl -o:output/brown/raised_r02.1477_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.63 real         4.11 user         0.17 sys
+ 163790848  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     45262  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         2  voluntary context switches
+      5976  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.641s
+user	0m4.123s
+sys	0m0.183s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:50 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02_flattened.xml</input>
+  <output>output/brown/raised_r02_flattened_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02_flattened.xml -xsl:raise.xsl -o:output/brown/raised_r02_flattened_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.74 real         4.76 user         0.19 sys
+ 164388864  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     50633  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         1  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         3  voluntary context switches
+      6205  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.752s
+user	0m4.765s
+sys	0m0.199s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:51 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.l18.xml</input>
+  <output>output/local/raised_flattened.l18_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.l18.xml -xsl:raise.xsl -o:output/local/raised_flattened.l18_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        1.76 real         4.84 user         0.20 sys
+ 164831232  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     51918  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         1  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         3  voluntary context switches
+      5837  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m1.776s
+user	0m4.847s
+sys	0m0.213s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:53 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown02.xml</input>
+  <output>output/local/raised_flattened.brown02_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown02.xml -xsl:raise.xsl -o:output/local/raised_flattened.brown02_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        2.28 real         6.70 user         0.26 sys
+ 220344320  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+     71714  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         3  voluntary context switches
+      6501  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m2.289s
+user	0m6.706s
+sys	0m0.273s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:55 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown04.xml</input>
+  <output>output/local/raised_flattened.brown04_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown04.xml -xsl:raise.xsl -o:output/local/raised_flattened.brown04_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        3.17 real        10.85 user         0.39 sys
+ 336609280  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+    116098  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         0  block output operations
+         0  messages sent
+         0  messages received
+         2  signals received
+         3  voluntary context switches
+     14020  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m3.179s
+user	0m10.854s
+sys	0m0.402s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:53:59 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown16.xml</input>
+  <output>output/local/raised_flattened.brown16_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown16.xml -xsl:raise.xsl -o:output/local/raised_flattened.brown16_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+        5.99 real        18.51 user         0.69 sys
+ 571666432  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+    174574  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         9  block output operations
+         0  messages sent
+         0  messages received
+         4  signals received
+        10  voluntary context switches
+     23575  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m6.021s
+user	0m18.517s
+sys	0m0.704s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:05 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>accumulators</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown64.xml</input>
+  <output>output/local/raised_flattened.brown64_HE.xml</output>
+  <processor-messages>
+/usr/bin/time -l /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown64.xml -xsl:raise.xsl -o:output/local/raised_flattened.brown64_HE.xml
+Warning at xsl:accumulator on line 119 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:accumulator on line 107 column 7 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:mode on line 101 column 24 of raise.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+       19.10 real        65.51 user         1.84 sys
+1091567616  maximum resident set size
+         0  average shared memory size
+         0  average unshared data size
+         0  average unshared stack size
+    351496  page reclaims
+         0  page faults
+         0  swaps
+         0  block input operations
+         8  block output operations
+         0  messages sent
+         0  messages received
+         4  signals received
+        10  voluntary context switches
+    135489  involuntary context switches
+  </processor-messages>
+  <timing>
+
+real	0m19.135s
+user	1m5.520s
+sys	0m1.854s
+  </timing>
+</run>
+
+</testdata>

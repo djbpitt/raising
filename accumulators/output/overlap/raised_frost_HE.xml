@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><!--* Example adapted from LMNL sawtooth syntax
+    * at http://piez.org/wendell/LMNL/lmnl-page.html
+    *--><excerpt xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+ <source>The Housekeeper</source>
+ <author>Robert Frost</author>
+ <s><l n="144">He manages to keep the upper hand</l>
+ <l n="145">On his own farm.</l> <s>He's boss.</s> <s>But as to hens:</s>
+ <l n="146">We fence our flowers in and the hens range.</l></s>
+</excerpt>

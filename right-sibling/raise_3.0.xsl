@@ -10,7 +10,11 @@
       *-->
 
   <!--* Revision history:
-      * 2018-07-10 : CMSMcQ : make this file by stripping down
+      * 2018-07-20 : CMSMcQ : add instrument parameter
+      * 2018-07-16 : CMSMcQ : accept anaplus value for th-style,
+      *    recover better from duplicate IDs      
+      * 2018-07-11 : CMSMcQ : copy-namespaces=no, correct end-marker test 
+      * 2018-07-10 : CMSMcQ : make this file by stripping down 
       *     uyghur.ittc.ku.edu/lib/shallow-to-deep.xsl.
       *     Use library functions for marker recognition.
       *-->
@@ -46,8 +50,14 @@
       *-->
   <xsl:param name="th-style" select=" 'th' " static="yes"/>
 
-  <!--* debug:  yes or no *-->
+  <!--* debug:  issue debugging messages?  yes or no  *-->
   <xsl:param name="debug" as="xs:string" select=" 'no' " static="yes"/>
+
+  <!--* instrument:  issue instrumentation messages? yes or no *-->
+  <!--* Instrumentation messages include things like monitoring
+      * size of various node sets; we turn off for timing, on for
+      * diagnostics and sometimes for debugging. *-->
+  <xsl:param name="instrument" as="xs:string" select=" 'no' " static="yes"/>
 
   <xsl:output indent="no"/>
 
@@ -73,9 +83,9 @@
 			  or not($th-style='th')]"/>
      <xsl:copy-of select="@*"/>
      <!--* ah.  The standard error.
-	 <xsl:apply-templates select="node()" mode="shallow-to-deep"/>
+	 <xsl:apply-templates select="node()" mode="raising"/>
 	 *-->
-     <xsl:apply-templates select="node()[1]" mode="shallow-to-deep"/>
+     <xsl:apply-templates select="node()[1]" mode="raising"/>
      </xsl:element>
  </xsl:template>
  
@@ -95,7 +105,7 @@
     </xsl:if>    
     <xsl:copy copy-namespaces="no">
       <xsl:copy-of select="@*"/>
-      <xsl:apply-templates mode="shallow-to-deep" select="child::node()[1]"/>
+      <xsl:apply-templates mode="raising" select="child::node()[1]"/>
     </xsl:copy>    
   </xsl:template>
 
@@ -104,7 +114,7 @@
       * 3 Start-marker:  make an element and carry on
       *-->
 
-  <xsl:template match="*[th:is-start-marker(.)]" mode="shallow-to-deep">
+  <xsl:template match="*[th:is-start-marker(.)]" mode="raising">
     
     <!--* 1: handle this element *-->
     
@@ -114,14 +124,14 @@
       <xsl:attribute name="xml:id" select="@loc" use-when=" $th-style=('ana', 'anaplus') "/>
       
       <xsl:apply-templates select="following-sibling::node()[1]"
-			   mode="shallow-to-deep">
+			   mode="raising">
       </xsl:apply-templates>
     </xsl:copy>
     
     <!--* 2: continue after this element *-->
     <xsl:apply-templates select="th:matching-end-marker(.)
 				 /following-sibling::node()[1]"
-			 mode="shallow-to-deep">
+			 mode="raising">
     </xsl:apply-templates>
   </xsl:template>
 
@@ -130,7 +140,7 @@
       * 4 End-markers
       *-->
 
-  <xsl:template match="*[th:is-end-marker(.)]" mode="shallow-to-deep">
+  <xsl:template match="*[th:is-end-marker(.)]" mode="raising">
     
     <!--* no action necessary *-->
     <!--* we do NOT recur to our right.  We leave it to our parent to do 
@@ -148,31 +158,31 @@
       * Oddly this is almost identical to what deep-to-shallow does
       *-->  
   <xsl:template match="*[not(th:is-marker(.))]"
-		mode="shallow-to-deep">
+		mode="raising">
     <xsl:if test="$debug = 'yes' ">
       <xsl:message>Non-marker in shallow-to-deep: <xsl:value-of select="name()"/> </xsl:message>
     </xsl:if>
     <xsl:apply-templates select="."/>
     <!--* and recur to right sibling *-->
     <xsl:apply-templates select="following-sibling::node()[1]"
-			 mode="shallow-to-deep"/>
+			 mode="raising"/>
   </xsl:template>
   
   <!--****************************************************************
       * 6 Other node types, in shallow-to-deep mode 
       *-->
   <xsl:template match="comment() | processing-instruction()"
-		mode="shallow-to-deep">
+		mode="raising">
     <xsl:copy/>
     <xsl:apply-templates select="following-sibling::node()[1]"
-			 mode="shallow-to-deep"/>
+			 mode="raising"/>
   </xsl:template>
   
   <xsl:template match="text()"
-		mode="shallow-to-deep">
+		mode="raising">
     <xsl:copy/>
     <xsl:apply-templates select="following-sibling::node()[1]"
-			 mode="shallow-to-deep"/>
+			 mode="raising"/>
   </xsl:template>
 
   <!--****************************************************************

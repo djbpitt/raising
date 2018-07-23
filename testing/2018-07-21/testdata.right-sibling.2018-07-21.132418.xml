@@ -1,0 +1,747 @@
+<testdata>
+<p>Automated test run, using HE, on right-sibling/raise_he_3.0.sh.</p>
+<run>
+  <date>Sat Jul 21 13:24:18 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/basic/flattened.xml</input>
+  <output>output/basic/raised_flattened_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/basic/flattened.xml -xsl:raise_3.0.xsl -o:output/basic/raised_flattened_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.017s
+user	0m1.722s
+sys	0m0.110s
+  </processor-messages>
+  <timing>
+
+real	0m1.033s
+user	0m1.724s
+sys	0m0.113s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:19 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/basic/basho.xml</input>
+  <output>output/basic/raised_basho_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/basic/basho.xml -xsl:raise_3.0.xsl -o:output/basic/raised_basho_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.951s
+user	0m1.723s
+sys	0m0.109s
+  </processor-messages>
+  <timing>
+
+real	0m0.954s
+user	0m1.724s
+sys	0m0.111s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:20 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/basic/coleridge-quote.xml</input>
+  <output>output/basic/raised_coleridge-quote_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/basic/coleridge-quote.xml -xsl:raise_3.0.xsl -o:output/basic/raised_coleridge-quote_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.936s
+user	0m1.719s
+sys	0m0.109s
+  </processor-messages>
+  <timing>
+
+real	0m0.939s
+user	0m1.721s
+sys	0m0.111s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:21 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/extended/flattened.xml</input>
+  <output>output/extended/raised_flattened_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/extended/flattened.xml -xsl:raise_3.0.xsl -o:output/extended/raised_flattened_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.928s
+user	0m1.710s
+sys	0m0.102s
+  </processor-messages>
+  <timing>
+
+real	0m0.931s
+user	0m1.711s
+sys	0m0.104s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:22 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/extended/basho.xml</input>
+  <output>output/extended/raised_basho_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/extended/basho.xml -xsl:raise_3.0.xsl -o:output/extended/raised_basho_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.956s
+user	0m1.727s
+sys	0m0.108s
+  </processor-messages>
+  <timing>
+
+real	0m0.959s
+user	0m1.729s
+sys	0m0.110s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:23 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/extended/coleridge-quote.xml</input>
+  <output>output/extended/raised_coleridge-quote_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/extended/coleridge-quote.xml -xsl:raise_3.0.xsl -o:output/extended/raised_coleridge-quote_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.922s
+user	0m1.708s
+sys	0m0.104s
+  </processor-messages>
+  <timing>
+
+real	0m0.926s
+user	0m1.710s
+sys	0m0.106s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:24 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/overlap/page-and-para.xml</input>
+  <output>output/overlap/raised_page-and-para_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/page-and-para.xml -xsl:raise_3.0.xsl -o:output/overlap/raised_page-and-para_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.926s
+user	0m1.692s
+sys	0m0.106s
+  </processor-messages>
+  <timing>
+
+real	0m0.930s
+user	0m1.694s
+sys	0m0.107s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:25 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/overlap/basho.xml</input>
+  <output>output/overlap/raised_basho_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/basho.xml -xsl:raise_3.0.xsl -o:output/overlap/raised_basho_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.924s
+user	0m1.698s
+sys	0m0.103s
+  </processor-messages>
+  <timing>
+
+real	0m0.928s
+user	0m1.700s
+sys	0m0.105s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:26 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/overlap/frost.xml</input>
+  <output>output/overlap/raised_frost_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/frost.xml -xsl:raise_3.0.xsl -o:output/overlap/raised_frost_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.925s
+user	0m1.704s
+sys	0m0.104s
+  </processor-messages>
+  <timing>
+
+real	0m0.928s
+user	0m1.706s
+sys	0m0.106s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:28 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/overlap/peergynt.xml</input>
+  <output>output/overlap/raised_peergynt_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/overlap/peergynt.xml -xsl:raise_3.0.xsl -o:output/overlap/raised_peergynt_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.929s
+user	0m1.695s
+sys	0m0.108s
+  </processor-messages>
+  <timing>
+
+real	0m0.933s
+user	0m1.698s
+sys	0m0.110s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:29 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.0052.xml</input>
+  <output>output/brown/raised_r02.0052_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0052.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.0052_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m0.962s
+user	0m1.778s
+sys	0m0.106s
+  </processor-messages>
+  <timing>
+
+real	0m0.965s
+user	0m1.780s
+sys	0m0.108s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:30 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.0125.xml</input>
+  <output>output/brown/raised_r02.0125_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0125.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.0125_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.015s
+user	0m1.863s
+sys	0m0.109s
+  </processor-messages>
+  <timing>
+
+real	0m1.018s
+user	0m1.865s
+sys	0m0.111s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:31 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.0225.xml</input>
+  <output>output/brown/raised_r02.0225_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0225.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.0225_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.042s
+user	0m1.963s
+sys	0m0.117s
+  </processor-messages>
+  <timing>
+
+real	0m1.046s
+user	0m1.965s
+sys	0m0.119s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:32 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.0329.xml</input>
+  <output>output/brown/raised_r02.0329_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0329.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.0329_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.062s
+user	0m2.039s
+sys	0m0.115s
+  </processor-messages>
+  <timing>
+
+real	0m1.065s
+user	0m2.041s
+sys	0m0.117s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:33 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.0368.xml</input>
+  <output>output/brown/raised_r02.0368_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0368.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.0368_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.075s
+user	0m2.071s
+sys	0m0.117s
+  </processor-messages>
+  <timing>
+
+real	0m1.078s
+user	0m2.073s
+sys	0m0.119s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:34 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.0441.xml</input>
+  <output>output/brown/raised_r02.0441_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.0441.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.0441_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.094s
+user	0m2.157s
+sys	0m0.119s
+  </processor-messages>
+  <timing>
+
+real	0m1.098s
+user	0m2.159s
+sys	0m0.121s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:36 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.1041.xml</input>
+  <output>output/brown/raised_r02.1041_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.1041.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.1041_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.169s
+user	0m2.591s
+sys	0m0.126s
+  </processor-messages>
+  <timing>
+
+real	0m1.172s
+user	0m2.593s
+sys	0m0.128s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:37 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02.1477.xml</input>
+  <output>output/brown/raised_r02.1477_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02.1477.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02.1477_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.226s
+user	0m2.798s
+sys	0m0.141s
+  </processor-messages>
+  <timing>
+
+real	0m1.230s
+user	0m2.800s
+sys	0m0.143s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:38 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/brown/r02_flattened.xml</input>
+  <output>output/brown/raised_r02_flattened_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/brown/r02_flattened.xml -xsl:raise_3.0.xsl -o:output/brown/raised_r02_flattened_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.278s
+user	0m2.977s
+sys	0m0.153s
+  </processor-messages>
+  <timing>
+
+real	0m1.282s
+user	0m2.979s
+sys	0m0.155s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:39 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/local/flattened.l18.xml</input>
+  <output>output/local/raised_flattened.l18_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.l18.xml -xsl:raise_3.0.xsl -o:output/local/raised_flattened.l18_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.310s
+user	0m3.042s
+sys	0m0.152s
+  </processor-messages>
+  <timing>
+
+real	0m1.314s
+user	0m3.044s
+sys	0m0.154s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:41 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/local/flattened.brown02.xml</input>
+  <output>output/local/raised_flattened.brown02_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown02.xml -xsl:raise_3.0.xsl -o:output/local/raised_flattened.brown02_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.441s
+user	0m3.675s
+sys	0m0.178s
+  </processor-messages>
+  <timing>
+
+real	0m1.445s
+user	0m3.677s
+sys	0m0.180s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:42 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/local/flattened.brown04.xml</input>
+  <output>output/local/raised_flattened.brown04_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown04.xml -xsl:raise_3.0.xsl -o:output/local/raised_flattened.brown04_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m1.724s
+user	0m4.744s
+sys	0m0.210s
+  </processor-messages>
+  <timing>
+
+real	0m1.727s
+user	0m4.746s
+sys	0m0.211s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:44 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/local/flattened.brown16.xml</input>
+  <output>output/local/raised_flattened.brown16_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown16.xml -xsl:raise_3.0.xsl -o:output/local/raised_flattened.brown16_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m2.505s
+user	0m7.259s
+sys	0m0.302s
+  </processor-messages>
+  <timing>
+
+real	0m2.508s
+user	0m7.261s
+sys	0m0.304s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 13:24:46 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>right-sibling</meth>
+  <impl>raise_he_3.0.sh</impl>
+  <input>input/local/flattened.brown64.xml</input>
+  <output>output/local/raised_flattened.brown64_HE.xml</output>
+  <processor-messages>
+time /usr/bin/java -jar /opt/local/bin/saxon-he/saxon9he.jar -l -s:../input/local/flattened.brown64.xml -xsl:raise_3.0.xsl -o:output/local/raised_flattened.brown64_HE.xml
+Warning at xsl:function on line 94 column 77 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 74 column 80 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
+  SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
+
+real	0m4.204s
+user	0m10.218s
+sys	0m0.552s
+  </processor-messages>
+  <timing>
+
+real	0m4.208s
+user	0m10.221s
+sys	0m0.554s
+  </timing>
+</run>
+
+</testdata>

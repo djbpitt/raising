@@ -1,0 +1,338 @@
+<testdata>
+<p>Automated test run, using Exselt, on inside-out/raise_exselt.sh.</p>
+<run>
+  <date>Sun Jul 22 10:19:46 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/basic/flattened.xml</input>
+  <output>output/basic/raised_flattened_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.476s
+user	0m1.919s
+sys	0m0.177s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:19:48 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/basic/basho.xml</input>
+  <output>output/basic/raised_basho_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.584s
+user	0m2.201s
+sys	0m0.167s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:19:51 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/basic/coleridge-quote.xml</input>
+  <output>output/basic/raised_coleridge-quote_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.462s
+user	0m2.003s
+sys	0m0.175s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:19:53 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/extended/flattened.xml</input>
+  <output>output/extended/raised_flattened_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.476s
+user	0m1.975s
+sys	0m0.169s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:19:56 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/extended/basho.xml</input>
+  <output>output/extended/raised_basho_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.460s
+user	0m2.158s
+sys	0m0.164s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:19:58 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/extended/coleridge-quote.xml</input>
+  <output>output/extended/raised_coleridge-quote_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.466s
+user	0m1.995s
+sys	0m0.169s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:20:01 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/overlap/page-and-para.xml</input>
+  <output>output/overlap/raised_page-and-para_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.435s
+user	0m1.859s
+sys	0m0.173s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:20:03 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/overlap/basho.xml</input>
+  <output>output/overlap/raised_basho_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.460s
+user	0m1.909s
+sys	0m0.173s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:20:06 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/overlap/frost.xml</input>
+  <output>output/overlap/raised_frost_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.451s
+user	0m1.918s
+sys	0m0.173s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:20:08 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/overlap/peergynt.xml</input>
+  <output>output/overlap/raised_peergynt_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.471s
+user	0m1.949s
+sys	0m0.174s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:20:11 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.0052.xml</input>
+  <output>output/brown/raised_r02.0052_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m6.439s
+user	0m5.913s
+sys	0m0.179s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:20:17 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.0125.xml</input>
+  <output>output/brown/raised_r02.0125_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m19.532s
+user	0m19.382s
+sys	0m0.204s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:20:37 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.0225.xml</input>
+  <output>output/brown/raised_r02.0225_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m52.197s
+user	0m51.491s
+sys	0m0.295s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:21:29 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.0329.xml</input>
+  <output>output/brown/raised_r02.0329_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	1m39.218s
+user	1m38.614s
+sys	0m0.390s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:23:08 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.0368.xml</input>
+  <output>output/brown/raised_r02.0368_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	2m0.477s
+user	1m59.861s
+sys	0m0.436s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:25:09 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.0441.xml</input>
+  <output>output/brown/raised_r02.0441_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	2m53.243s
+user	2m52.599s
+sys	0m0.553s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:28:02 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.1041.xml</input>
+  <output>output/brown/raised_r02.1041_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	15m48.235s
+user	15m44.600s
+sys	0m2.525s
+  </timing>
+</run>
+
+<run>
+  <date>Sun Jul 22 10:43:51 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02.1477.xml</input>
+  <output>output/brown/raised_r02.1477_Exselt.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	33m26.483s
+user	33m19.077s
+sys	0m5.544s
+  </timing>
+</run>
+</testdata>
+<!-- abortive run on r02 *-->
+<run>
+  <date>Sun Jul 22 11:17:17 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>inside-out</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/brown/r02_flattened.xml</input>
+  <output>output/brown/raised_r02_flattened_Exselt.xml</output>
+  <processor-messages>
+*-->
+  

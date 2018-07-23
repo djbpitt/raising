@@ -1788,7 +1788,94 @@ The
                 container elements. The function recurs until there are no more markers. The maximum
                 possible depth of recursion is equal to the depth of the original (pre-flattening)
             XML hierarchy.</para>
-            
+            <para>The sequence in which virtual elements in our sample
+	    document are raised in this method is illustrated by the
+	    diagrams in <xref linkend="visit-IO-start"/> to <xref
+	    linkend="visit-IO-end"/>.</para>
+
+
+	    <figure xml:id="visit-IO-start">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/inside-out/Bal2018Birn050540.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>Illustration of inside-out handling of input.</para>
+		<para>The input is shown arrayed along the bottom of
+		the diagram:  ovals filled with gray denote start- and
+		end-markers, rectangles denote text nodes.  The gray
+		ovals above denote the logical hierarchy which is to
+		be constructed (visible to human observers even if not
+		visible to the software).</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-IO-1">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/inside-out/Bal2018Birn050541.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>On the first pass, the inside-out algorithm
+		raises all childless virtual elements.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-IO-2">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/inside-out/Bal2018Birn050542.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>On the second pass, inside-out raises elements
+		with children but no grandchildren.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-IO-3">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="90%" fileref="images/inside-out/Bal2018Birn050543.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>On the third pass, elements of the third layer
+		from the leaves are raised.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-IO-4">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="80%" fileref="images/inside-out/Bal2018Birn050544.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The fourth pass raises the children of the
+		virtual root.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-IO-5">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/inside-out/Bal2018Birn050545.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The fifth pass raises the <code>p</code> element.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-IO-end">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/inside-out/Bal2018Birn050546.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>In the final state, the inside-out algorithm has
+		raised all elements.</para>
+	      </caption>
+	    </figure>	    
+	    
             <section>
                 <title>Raising</title>
                 
@@ -2102,6 +2189,172 @@ The
 	    This results in two recursive calls for each virtual
 	    element:  one to handle the children of the newly
 	    raised element, and one for its right-siblings.</para>
+
+	    <para>The order in which elements are raised
+	    is illustrated in the diagrams of
+	    <xref linkend="visit-OI-start"/>
+	    to 
+	    <xref linkend="visit-OI-end"/>.
+	    Some steps are elided to save space.
+	    </para>
+	    
+	    <figure xml:id="visit-OI-start">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/outside-in/Bal2018Birn050560.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>Illustration of outside-in handling of input.</para>
+		<para>The input is shown arrayed along the bottom of
+		the diagram:  ovals filled with gray denote start- and
+		end-markers, rectangles denote text nodes.  The gray
+		ovals above denote the logical hierarchy which is to
+		be constructed (visible to human observers even if not
+		visible to the software).</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-1">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/outside-in/Bal2018Birn050561.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>On the first pass, the outside-in algorithm
+		raises the leftmost outer element, here the paragraph.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-2">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="100%" fileref="images/outside-in/Bal2018Birn050562.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>On the first recursive call, outside-in raises elements
+		the citation (<code>cit</code>) element.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-3">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="90%" fileref="images/outside-in/Bal2018Birn050563.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>On the third call, an ideal outside-in algorithm
+		would raise both the <code>quote</code> element
+		and the <code>note</code>, but our implementation
+		raises just the leftmost of these.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-4">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="80%" fileref="images/outside-in/Bal2018Birn050564.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The fourth call to outside-in continues the
+		depth-first traversal of the virtual tree.</para>
+	      </caption>
+	    </figure>
+	    <!--*
+	    <figure xml:id="visit-OI-5">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050565.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The fifth call raises the first verse line.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-6">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050566.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The sixth call raises the second verse line.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-7">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050567.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The seventh call raises the third verse line.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-8">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050568.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The eighth call raises the fourth verse line.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-9">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050569.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The ninth call raises the fifth verse line.</para>
+	      </caption>
+	    </figure>
+	    *-->
+	    <figure xml:id="visit-OI-10">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050570.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The tenth call to the outside-in function raises the sixth and final verse line.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-11">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050571.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>On the eleventh call, we reach the <code>note</code> element.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-12">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050572.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>The final pass raises the <code>bibl</code> element.</para>
+	      </caption>
+	    </figure>
+	    <figure xml:id="visit-OI-end">
+	      <mediaobject>
+		<imageobject>
+		  <imagedata format="png" width="70%" fileref="images/outside-in/Bal2018Birn050573.png"/>
+		</imageobject>
+	      </mediaobject>
+	      <caption>
+		<para>In the final state, the outside-in algorithm has
+		raised all elements.</para>
+	      </caption>
+	    </figure>	    
+	    
+
 
 	    <section>
 	      <title>Code outline</title>

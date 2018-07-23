@@ -1,0 +1,435 @@
+<testdata>
+<p>Automated test run, using HE, on outside-in/raise_he.sh.</p>
+<run>
+  <date>Sat Jul 21 12:54:50 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/basic/flattened.xml</input>
+  <output>output/basic/raised_flattened_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.118s
+user	0m1.711s
+sys	0m0.107s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:51 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/basic/basho.xml</input>
+  <output>output/basic/raised_basho_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.983s
+user	0m1.765s
+sys	0m0.107s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:52 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/basic/coleridge-quote.xml</input>
+  <output>output/basic/raised_coleridge-quote_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.970s
+user	0m1.728s
+sys	0m0.110s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:53 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/extended/flattened.xml</input>
+  <output>output/extended/raised_flattened_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.983s
+user	0m1.735s
+sys	0m0.110s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:54 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/extended/basho.xml</input>
+  <output>output/extended/raised_basho_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.980s
+user	0m1.760s
+sys	0m0.109s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:55 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/extended/coleridge-quote.xml</input>
+  <output>output/extended/raised_coleridge-quote_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.973s
+user	0m1.729s
+sys	0m0.107s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:56 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/page-and-para.xml</input>
+  <output>output/overlap/raised_page-and-para_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.046s
+user	0m1.694s
+sys	0m0.107s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:57 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/basho.xml</input>
+  <output>output/overlap/raised_basho_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.969s
+user	0m1.713s
+sys	0m0.105s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:58 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/frost.xml</input>
+  <output>output/overlap/raised_frost_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.966s
+user	0m1.723s
+sys	0m0.109s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:54:59 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/overlap/peergynt.xml</input>
+  <output>output/overlap/raised_peergynt_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m0.976s
+user	0m1.710s
+sys	0m0.106s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:00 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0052.xml</input>
+  <output>output/brown/raised_r02.0052_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.034s
+user	0m1.971s
+sys	0m0.119s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:01 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0125.xml</input>
+  <output>output/brown/raised_r02.0125_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.097s
+user	0m2.176s
+sys	0m0.122s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:02 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0225.xml</input>
+  <output>output/brown/raised_r02.0225_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.135s
+user	0m2.391s
+sys	0m0.129s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:03 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0329.xml</input>
+  <output>output/brown/raised_r02.0329_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.214s
+user	0m2.604s
+sys	0m0.149s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:05 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0368.xml</input>
+  <output>output/brown/raised_r02.0368_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.240s
+user	0m2.721s
+sys	0m0.146s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:06 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.0441.xml</input>
+  <output>output/brown/raised_r02.0441_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.245s
+user	0m2.778s
+sys	0m0.144s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:07 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.1041.xml</input>
+  <output>output/brown/raised_r02.1041_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.381s
+user	0m3.529s
+sys	0m0.160s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:09 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02.1477.xml</input>
+  <output>output/brown/raised_r02.1477_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.455s
+user	0m3.642s
+sys	0m0.166s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:10 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/brown/r02_flattened.xml</input>
+  <output>output/brown/raised_r02_flattened_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.604s
+user	0m3.911s
+sys	0m0.180s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:12 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.l18.xml</input>
+  <output>output/local/raised_flattened.l18_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m1.628s
+user	0m3.993s
+sys	0m0.178s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:13 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown02.xml</input>
+  <output>output/local/raised_flattened.brown02_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.094s
+user	0m5.068s
+sys	0m0.228s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:15 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown04.xml</input>
+  <output>output/local/raised_flattened.brown04_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m2.708s
+user	0m6.180s
+sys	0m0.280s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:18 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown16.xml</input>
+  <output>output/local/raised_flattened.brown16_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m5.682s
+user	0m10.466s
+sys	0m0.355s
+  </timing>
+</run>
+
+<run>
+  <date>Sat Jul 21 12:55:24 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>HE</proc>
+  <meth>outside-in</meth>
+  <impl>raise_he.sh</impl>
+  <input>input/local/flattened.brown64.xml</input>
+  <output>output/local/raised_flattened.brown64_HE.xml</output>
+  <processor-messages>
+  </processor-messages>
+  <timing>
+
+real	0m22.063s
+user	0m29.527s
+sys	0m0.782s
+  </timing>
+</run>
+
+</testdata>
