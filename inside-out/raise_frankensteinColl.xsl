@@ -15,22 +15,28 @@
 	djb's function to process an element node rather than a
 	document node in memory to perform its recursive
 	processing. -->
+    <!--2018-07-23 ebb: I've updated this stylesheet to work with the th:raise function as expressed in raise_deep.xsl. -->
+    <xsl:variable name="C10-coll"
+        as="document-node()+"
+        select="collection('../input/frankenstein/c10-coll/')"/>    
+    <!--* Experimental:  try adding a key *-->
+    <xsl:key name="start-markers" match="*[@th:sID]" use="@th:sID"/>
+    <xsl:key name="end-markers" match="*[@th:eID]" use="@th:eID"/>
     
-   <!--<xsl:mode on-no-match="shallow-copy"/>-->
-   <xsl:template match="@* | node()" mode="#all">
-       <xsl:copy copy-namespaces="no">
-           <xsl:apply-templates select="@* | node()"/>
-       </xsl:copy>
-   </xsl:template>
+    <!--* In all modes, do a shallow copy, suppress namespace nodes,
+	* and recur in default (unnamed) mode. *-->
+    <xsl:template match="@* | node()" mode="#all">
+        <xsl:copy copy-namespaces="no">
+            <xsl:apply-templates select="@* | node()"/>
+        </xsl:copy>
+    </xsl:template>
 
-   <xsl:variable name="C10-coll"
-		 as="document-node()+"
-		 select="collection('../input/frankenstein/c10-coll/')"/>  
-
+    <!--* th:raise(.):  raise all innermost elements within the container element this time passed as parameter *-->
    <xsl:function name="th:raise">
        <xsl:param name="input" as="element()"/>
+       <xsl:message>raise() called with <xsl:value-of select="count($input//*)"/>-element document (<xsl:value-of select="count($input//*[@th:sID])"/> Trojan pairs)</xsl:message>
        <xsl:choose>
-           <xsl:when test="exists($input//@ana)">
+           <xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
                <xsl:variable name="result" as="element()">
                    <div type="collation">
                        <xsl:apply-templates select="$input" mode="loop"/>                            
@@ -39,6 +45,8 @@
                <xsl:sequence select="th:raise($result)"/>
            </xsl:when>
            <xsl:otherwise>
+               <!--* We have no more work to do, return the input unchanged. *-->
+               <xsl:message>raise() returning.</xsl:message>
                <xsl:sequence select="$input"/>
            </xsl:otherwise>
        </xsl:choose>
@@ -86,41 +94,33 @@
            <xsl:text>Bridge Phase 4:</xsl:text><xsl:value-of select="tokenize(., ':')[last()]"/>
        </title>
    </xsl:template>
-   
+    <!--* On the input container element node, call th:raise() *-->
    <xsl:template match="div[@type='collation']">
        <xsl:sequence select="th:raise(.)"/>
    </xsl:template>
-   
+    <!--* Loop mode (applies to container element only). *-->
+    <!--* Loop mode for container element:  just apply templates in default unnamed mode. *-->  
    <xsl:template match="div[@type='collation']" mode="loop">
        <xsl:apply-templates/>
    </xsl:template>
    
-   <xsl:template match="*[@ana='start' and @loc eq following-sibling::*[@ana eq 'end'][1]/@loc]">
+    <xsl:template match="*[@th:sID eq
+        following-sibling::*[@th:eID][1]/@th:eID]">
        <xsl:variable name="currNode" select="current()" as="element()"/>
-       <xsl:variable name="currLoc" select="@loc" as="xs:string"/>
+       <xsl:variable name="currMarker" select="@th:sID" as="xs:string"/>
        <xsl:element name="{name()}">
+           <xsl:copy-of select="@* except @th:sID"/>
            <xsl:attribute name="xml:id">
-               <xsl:value-of select="@loc"/>
+               <xsl:value-of select="@th:sID"/>
            </xsl:attribute>
-           <xsl:copy-of select="following-sibling::node()[following-sibling::*[@loc = $currLoc]]"/>
+           <xsl:variable name="end-marker" as="element()" select="key('end-markers', @th:sID)"/>
+           <xsl:copy-of select="following-sibling::node()[. &lt;&lt; $end-marker]"/>
        </xsl:element>
    </xsl:template>
+
+   <!--suppressing nodes that are being reconstructed, including the old end marker. -->
+    <xsl:template
+        match="node()[preceding-sibling::*[@th:sID][1]/@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"/>
    
-   <!-- <xsl:template
-	match="div//*[not(@ana)]
-	[not(preceding-sibling::*[@ana eq 'start'][1]/@loc
-	eq
-	following-sibling::*[@ana eq 'end'][1]/@loc)]">
-	<xsl:copy-of copy-namespaces="no" select="."/>
-	</xsl:template>-->
-   
-   <!--suppressing nodes that are being reconstructed. -->
-   <xsl:template match="node()
-			[preceding-sibling::*[@ana eq 'start'][1]/@loc
-			eq
-			following-sibling::*
-			[@ana eq 'end'][1]/@loc]"/>
-   
-   <xsl:template match="*[@ana='end']
-			[@loc = preceding-sibling::*[@ana='start'][1]/@loc]"/>
+    <xsl:template match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"/>
         </xsl:stylesheet>
