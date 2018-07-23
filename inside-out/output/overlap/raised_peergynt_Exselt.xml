@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!--* lines 1-4 of Peer Gynt (slightly simplified)
+    * Note that the virtual elements in this input cannot all be raised.
+    * There are thus multiple possible targets:
+    * target.peergynt_sp.xml raises the dramaturgical hierarchy. 
+    * target.peergynt_vv.xml raises the verse hierarchy. 
+    * target.peergynt_io.xml raises inner virtual elements. 
+    * target.peergynt_lr.xml raises left-to-right, opportunistically. 
+    *--><sample>
+   <sp who="AASE">
+   <l xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="L01"/>
+       Peer, you're lying!
+   </sp>
+       Peer, you're lying!
+   
+       <stage>without stopping</stage>
+       No, I'm not!
+   
+   <sp who="AASE">
+   <l>
+       Well then, swear to me it's true.
+   </l>
+   </sp>
+   <sp who="PEER GYNT">
+   <l xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:sID="L03"/>
+       Swear?  why should I?
+   </sp>
+       Swear?  why should I?
+   
+       See, you dare not!
+   <l xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="L03"/>
+   <l>
+   Every word of it's a lie.
+   </l>
+   <sp xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse" th:eID="sp5"/>
+</sample>
