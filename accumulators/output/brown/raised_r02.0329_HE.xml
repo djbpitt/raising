@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt><title>Partial sample (1/6 words, 4 of 19 paragraphs) from
+      Sample R02 from  Jean Mercier, Whatever You Do, Don't Panic.
+      New York: Doubleday &amp; Company, Inc., 1961. Pp. 28-35.
+      </title></titleStmt>
+      <editionStmt><edition>A part  of the XML version of the Brown Corpus</edition></editionStmt>
+      <extent>329 words, 12 sentences, 4 paragraphs.</extent>
+      <publicationStmt>
+	<idno>R02</idno>
+	<availability><p>Used by permission of Doubleday &amp; Company, Inc. 0010-1780</p></availability>
+      </publicationStmt>
+      <sourceDesc>
+	<bibl> Jean Mercier, Whatever You Do, Don't Panic.
+	New York: Doubleday &amp; Company, Inc., 1961. Pp. 28-35.
+	</bibl>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc><p/></encodingDesc>
+    <revisionDesc>
+      <change when="2008-04-27">Header auto-generated for TEI version</change>
+    </revisionDesc>
+  </teiHeader>
+  
+<text xml:id="R02" decls="R">
+  <body>
+    <p><s n="1"><w type="PPSS">I</w> <w type="VBD">realized</w> <w type="CS">that</w> <w type="NP">Hamlet</w> <w type="BEDZ">was</w> <w type="VBN">faced</w> <w type="IN">with</w> <w type="AT">an</w> <w type="QL">entirely</w> <w type="JJ">different</w> <w type="NN">problem</w> <c type="pct">,</c> <w type="CC">but</w> <w type="PPg">his</w> <w type="NN">agony</w> <w type="MD">could</w> <w type="HV">have</w> <w type="BEN">been</w> <w type="AT">no</w> <w type="JJR">greater</w> <c type="pct">.</c> </s>
+<s n="2"><w type="AT">The</w> <w type="AP">most</w> <w type="DT">that</w> <w type="BEDZ">was</w> <w type="VBN">accomplished</w> <w type="BEDZ">was</w> <w type="VBG">adding</w> <w type="NP">Mrs.</w> <w type="NPg">Beige's</w> <w type="NN">tray</w> <w type="IN">to</w> <w type="AT">the</w> <w type="NN">dish</w> <w type="NN">pile</w> <c type="pct">,</c> <w type="CC">and</w> <w type="IN">by</w> <w type="NNS">means</w> <w type="IN">of</w> <w type="VBN">repeated</w> <w type="NNS">threats</w> <c type="pct">,</c> <w type="IN">on</w> <w type="AT">an</w> <w type="VBG">ascending</w> <w type="NN">scale</w> <c type="pct">,</c> <w type="VBG">seeing</w> <w type="CS">that</w> <w type="AT">the</w> <w type="NNS">girls</w> <w type="VBD">dressed</w> <w type="PPLS">themselves</w> <c type="pct">,</c> <w type="IN">after</w> <w type="AT">a</w> <w type="NN">fashion</w> <c type="pct">.</c> </s>
+    </p>
+    
+<p><s n="3"><w type="PPSS">I</w> <w type="BEDZ">was</w> <w type="VBN">saved</w> <w type="IN">from</w> <w type="VBG">making</w> <w type="AT">the</w> <w type="NN">decision</w> <w type="CS">as</w> <w type="AT">the</w> <w type="NN">phone</w> <w type="VBD">rang</w> <c type="pct">,</c> <w type="CC">and</w> <w type="AT">the</w> <w type="NNS">girls</w> <w type="BED">were</w> <w type="IN">upon</w> <w type="PPO">me</w> <w type="RB">instantly</w> <c type="pct">.</c> </s>
+<s n="4"><mw pos="RB BEZ">Here's </mw><w type="AT">a</w> <w type="NN">household</w> <w type="NN">hint</w> <c type="pct">:</c> <w type="CS">if</w> <w type="PPSS">you</w> <mw pos="MD *">can't </mw><w type="VB">find</w> <w type="PPg">your</w> <w type="NNS">children</w> <c type="pct">,</c> <w type="CC">and</w> <w type="VB">get</w> <w type="VBN">tired</w> <w type="IN">of</w> <w type="VBG">calling</w> <w type="PPO">them</w> <c type="pct">,</c> <w type="VB">pick</w> <w type="RP">up</w> <w type="AT">the</w> <w type="NN">phone</w> <c type="pct">.</c> </s>
+<s n="5"><w type="AT">No</w> <w type="NN">matter</w> <w type="CS">if</w> <w type="PPg">your</w> <w type="NNS">children</w> <w type="BER">are</w> <w type="IN">at</w> <w type="AT">the</w> <w type="NNS">movies</w> <c type="pct">,</c> <w type="IN">in</w> <w type="NN">school</w> <c type="pct">,</c> <w type="VBG">visiting</w> <w type="PPg">their</w> <w type="NN">grandmother</w> <c type="pct">,</c> <w type="CC">or</w> <w type="IN">on</w> <w type="AT">a</w> <w type="NN">field</w> <w type="NN">trip</w> <w type="IN">in</w> <w type="DTI">some</w> <w type="JJ">distant</w> <w type="NN">city</w> <c type="pct">,</c> <w type="PPSS">they</w> <w type="MD">will</w> <w type="BE">be</w> <w type="IN">upon</w> <w type="PPO">you</w> <w type="RB">magically</w> <w type="IN">within</w> <w type="NNS">seconds</w> <w type="CS">after</w> <w type="PPSS">you</w> <w type="VB">pick</w> <w type="RP">up</w> <w type="AT">the</w> <w type="NN">phone</w> <c type="pct">.</c> </s>
+</p>
+
+<p><s n="6"><w type="NP">Jennie</w> <w type="CC">and</w> <w type="NP">Miranda</w> <w type="VBD">twined</w> <w type="PPLS">themselves</w> <w type="IN">around</w> <w type="PPO">me</w> <c type="pct">,</c> <w type="VBG">murmuring</w> <w type="NNS">endearments</w> <c type="pct">.</c> </s>
+<s n="7"><w type="NP">Louise</w> <w type="VBD">climbed</w> <w type="IN">onto</w> <w type="AT">a</w> <w type="NN">stool</w> <w type="CC">and</w> <w type="VBD">clutched</w> <w type="AT">the</w> <w type="NN">hand</w> <w type="IN">with</w> <w type="WDT">which</w> <w type="PPSS">I</w> <w type="BEDZ">was</w> <w type="VBG">trying</w> <w type="TO">to</w> <w type="VB">hold</w> <w type="AT">the</w> <w type="NN">phone</w> <c type="pct">,</c> <w type="VBG">claiming</w> <w type="PPg">my</w> <w type="JJ">immediate</w> <w type="NN">attention</w> <w type="IN">on</w> <w type="NNS">grounds</w> <w type="IN">of</w> <w type="JJ">extreme</w> <w type="NN">emergency</w> <c type="pct">.</c> </s>
+<s n="8"><w type="RB">Somehow</w> <w type="VBG">managing</w> <w type="TO">to</w> <w type="VB">get</w> <w type="RP">out</w> <w type="AT">a</w> <w type="JJ">cool</w> <c type="pct">,</c> <w type="VBN">poised</w> <c type="pct">,</c> <c type="pct">``</c> <mw pos="MD *">Won't </mw><w type="PPSS">you</w> <w type="VB">hold</w> <w type="RP">on</w> <w type="AT">a</w> <w type="NN">second</w> <c type="pct">,</c> <w type="UH">please</w> <c type="pct">''</c> <c type="pct">,</c> <w type="PPSS">I</w> <w type="VBD">covered</w> <w type="RP">up</w> <w type="AT">the</w> <w type="NN">mouthpiece</w> <c type="pct">,</c> <w type="CC">and</w> <w type="IN">with</w> <w type="AP">more</w> <w type="NN">warmth</w> <w type="CC">and</w> <w type="AP">less</w> <w type="NN">poise</w> <c type="pct">,</c> <w type="VBD">gave</w> <w type="AT">a</w> <w type="JJ">quick</w> <w type="NN">lecture</w> <w type="IN">on</w> <w type="NN">crime</w> <w type="CC">and</w> <w type="NN">punishment</w> <c type="pct">,</c> <w type="RB">mostly</w> <w type="AT">the</w> <w type="AP">latter</w> <c type="pct">,</c> <w type="IN">including</w> <w type="NNg" subtype="TL">Devil's</w> <w type="NN" subtype="TL">Island</w> <w type="CC">and</w> <w type="AT">the</w> <w type="JJR">remoter</w> <w type="NNS">reaches</w> <w type="IN">of</w> <w type="NP">Siberia</w> <c type="pct">.</c> </s>
+<s n="9"><w type="PPSS">I</w> <w type="VBD">promised</w> <w type="TO">to</w> <w type="VB">illustrate</w> <w type="AT">the</w> <w type="NN">lecture</w> <c type="pct">,</c> <w type="CS">if</w> <w type="PPSS">they</w> <w type="QL">so</w> <w type="AP">much</w> <w type="CS">as</w> <w type="VBD">breathed</w> <w type="CS">till</w> <w type="CS">after</w> <w type="AT">the</w> <w type="NN">call</w> <w type="BEDZ">was</w> <w type="VBN">completed</w> <c type="pct">.</c> </s>
+</p>
+
+<p><s n="10"><w type="VBG">Speaking</w> <w type="IN">into</w> <w type="AT">the</w> <w type="NN">phone</w> <w type="RB">again</w> <w type="CC">and</w> <w type="VBG">recognizing</w> <w type="AT">the</w> <w type="NN">caller</w> <c type="pct">,</c> <w type="PPSS">I</w> <w type="VBD">resumed</w> <w type="PPg">my</w> <w type="JJ">everyday</w> <w type="NN">voice</w> <c type="pct">.</c> </s>
+<s n="11"><w type="RB">Soon</w> <w type="PPSS">we</w> <w type="BED">were</w> <w type="RB">deep</w> <w type="IN">in</w> <w type="AT">a</w> <w type="NN">conversation</w> <w type="WPS">that</w> <w type="BEDZ">was</w> <w type="VBN">interrupted</w> <w type="AP">many</w> <w type="NNS">times</w> <w type="IN">by</w> <w type="AP">little</w> <w type="NNS">things</w> <w type="VB">like</w> <w type="NPg">Jennie's</w> <w type="NN">holding</w> <w type="PPg">her</w> <w type="NN">breath</w> <w type="CC">and</w> <w type="VBG">pretending</w> <w type="TO">to</w> <w type="VB">black</w> <w type="RP">out</w> <c type="pct">,</c> <w type="NPg">Miranda's</w> <w type="NN">dumping</w> <w type="AT">the</w> <w type="NNS">contents</w> <w type="IN">of</w> <w type="AT">the</w> <w type="NN">sugar</w> <w type="NN">bowl</w> <w type="IN">on</w> <w type="AT">the</w> <w type="NN">table</w> <c type="pct">,</c> <w type="CC">and</w> <w type="JJ">various</w> <w type="NNS">screeches</w> <c type="pct">,</c> <w type="NNS">thuds</w> <c type="pct">,</c> <w type="CC">and</w> <w type="NNS">giggles</w> <c type="pct">.</c> </s>
+<s n="12"><w type="IN">Under</w> <w type="AT">the</w> <w type="NNS">circumstances</w> <c type="pct">,</c> <w type="PPSS">I</w> <w type="HVD">had</w> <w type="NN">difficulty</w> <w type="VBG">keeping</w> <w type="RP">up</w> <w type="IN">with</w> <w type="AT">the</w> <w type="NN">conversation</w> <w type="IN">on</w> <w type="AT">the</w> <w type="NN">phone</w> <c type="pct">,</c> <w type="CC">but</w> <w type="WRB">when</w> <w type="PPSS">I</w> <w type="VBD">hung</w> <w type="RP">up</w> <w type="PPSS">I</w> <w type="BEDZ">was</w> <w type="RB">reasonably</w> <w type="JJ">certain</w> <w type="CS">that</w> <w type="NP">Francesca</w> <w type="HVD">had</w> <w type="VBN">wanted</w> <w type="TO">to</w> <w type="VB">remind</w> <w type="PPO">me</w> <w type="IN">of</w> <w type="PPg">our</w> <w type="NN">town</w> <w type="NN">meeting</w> <w type="AT">the</w> <w type="AP">next</w> <w type="NN">evening</w> <c type="pct">,</c> <w type="CC">and</w> <w type="QL">how</w> <w type="JJ">important</w> <w type="PPS">it</w> <w type="BEDZ">was</w> <w type="CS">that</w> <w type="NP">Hank</w> <w type="CC">and</w> <w type="PPSS">I</w> <w type="BE">be</w> <w type="RB">there</w> <c type="pct">.</c> </s>
+</p>
+
+
+</body>
+</text>
+</TEI>
