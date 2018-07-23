@@ -12,7 +12,11 @@
       *-->
 
   <!--* Revisions:
-      * 2018-07-10 : CMSMcQ : declare trojan-start() and -end()
+      * 2018-07-20 : CMSMcQ : add $instrument parameter,
+      *     import marker-recognition.xsl, retire local functions
+      *     for marker-recognition
+      * 2018-07-16 : CMSMcQ : accept th-style='anaplus'
+      * 2018-07-10 : CMSMcQ : declare trojan-start() and -end() 
       *     as streamable.
       *     Rewrite accumulator rules to make copies, to make
       *     them streamable, too.
@@ -64,19 +68,30 @@
   <!--****************************************************************
       * 0.  Setup:  parameters, variables, accumulators etc. 
       ****************************************************************-->
+  <!--* marker-recognition.xsl:  encapsulates definitions of
+      * start- and end-markers ... *-->
+  <xsl:import href="../lib/marker-recognition.xsl"/>
+
   <xsl:output
       indent="no"
       />
 
   <!--* What kind of Trojan-Horse elements are we merging? *-->
   <!--* Expected values are 'th' for @th:sID and @th:eID,
-      * 'ana' for @ana=start|end
+      * 'ana' for @ana=start|end 
+      * 'anaplus' for @ana=start|end|*_Start|*_End
       * 'xmlid' for @xml:id matching (_start|_end)$
       *-->
   <xsl:param name="th-style" select=" 'th' " static="yes"/>
 
-  <!--* debug:  yes or no *-->
+  <!--* debug:  issue debugging messages?  yes or no  *-->
   <xsl:param name="debug" as="xs:string" select=" 'no' " static="yes"/>
+
+  <!--* instrument:  issue instrumentation messages? yes or no *-->
+  <!--* Instrumentation messages include things like monitoring
+      * size of various node sets; we turn off for timing, on for
+      * diagnostics and sometimes for debugging. *-->
+  <xsl:param name="instrument" as="xs:string" select=" 'no' " static="yes"/>
 
   <!--* declare default mode; we make it fail on no match
       * because it turns out we need templates for all nodes.
@@ -90,9 +105,9 @@
 		   initial-value="0"
 		   streamable="yes"
 		   >
-    <xsl:accumulator-rule match="*[th:trojan-start(.)]"
+    <xsl:accumulator-rule match="*[th:is-start-marker(.)]"
 			  select="$value + 1"/>
-    <xsl:accumulator-rule match="*[th:trojan-end(.)]"
+    <xsl:accumulator-rule match="*[th:is-end-marker(.)]"
 			  select="$value - 1"/>
   </xsl:accumulator>
 
@@ -103,7 +118,7 @@
 		   streamable="yes"
 		   >
     <!--* On Trojan start-tag, push the start-tag onto the stack *-->
-    <xsl:accumulator-rule match="*[th:trojan-start(.)]"
+    <xsl:accumulator-rule match="*[th:is-start-marker(.)]"
       phase="end">
       <xsl:variable name="this" as="element()">
         <xsl:copy>
@@ -114,14 +129,14 @@
     </xsl:accumulator-rule>
     <!--* select="array:append($value, snapshot())" *-->
     <!--* original version was not streamable (the . is problematic):
-    <xsl:accumulator-rule match="*[th:trojan-start(.)]"
+    <xsl:accumulator-rule match="*[th:is-start-marker(.)]"
       select="array:append($value, .)"/>
       *-->
     
     <!--* On Trojan end-tag, make the currently pending element,
 	pop the stack, and insert the pending element at the
 	end of the new top item. *-->
-    <xsl:accumulator-rule match="*[th:trojan-end(.)]"			  
+    <xsl:accumulator-rule match="*[th:is-end-marker(.)]"			  
 			  phase="end">
       
       <xsl:variable name="level" as="xs:integer"
@@ -149,7 +164,7 @@
     
     <!--* On any other node, append current node to the top sequence in the stack *-->
     <xsl:accumulator-rule match="node()[not(self::element())
-      or (not(th:trojan-start(.)) and not(th:trojan-end(.)))]">
+      or not(th:is-marker(.)) ]">
       <xsl:variable name="this" as="node()">
         <xsl:copy-of select="."/>
       </xsl:variable>
@@ -160,7 +175,7 @@
       else array:put($value, $level, ($value($level), $this))"/>
     </xsl:accumulator-rule>
     <!--* <xsl:accumulator-rule match="node()[not(self::element())
-				 or (not(th:trojan-start(.)) and not(th:trojan-end(.)))]"
+				 or (not(th:is-start-marker(.)) and not(th:is-end-marker(.)))]"
 			  select="for $level in array:size($value) return
 				  if ($level eq 0)
 				  then []
@@ -171,14 +186,14 @@
   <!--****************************************************************
       * 1.  Virtual start-tags 
       ****************************************************************-->
-  <xsl:template match="*[th:trojan-start(.)]" priority="10">
+  <xsl:template match="*[th:is-start-marker(.)]" priority="10">
     <!--* nothing to do, all the work is done by the accumulator *-->
   </xsl:template>
   
   <!--****************************************************************
       * 2.  Virtual end-tags 
       ****************************************************************-->  
-  <xsl:template match="*[th:trojan-end(.)]" priority="10">
+  <xsl:template match="*[th:is-end-marker(.)]" priority="10">
     <xsl:choose>
       <xsl:when test="array:size(accumulator-before('stack')) eq 1">	
 	<!--* if this end-tag ends the outermost element, emit the element *-->
@@ -199,9 +214,7 @@
   </xsl:template>
   
   <!--* 3.2 Non-trojan element nodes *-->
-  <xsl:template match="node()[self::element()
-		       and not(th:trojan-start(.))
-		       and not(th:trojan-end(.)) ]">
+  <xsl:template match="*[not(th:is-marker(.)) ]">
     <!--* If we are outside the flattened area, copy the node;
 	* otherwise, do nothing and leave everything to the
 	accumulator *-->
@@ -234,44 +247,6 @@
   <!--****************************************************************
       * 4.  Functions 
       ****************************************************************-->
-  <!--* th:trojan-start($e as element()):  true iff $e is a Trojan
-      * start-tag we want to process.
-      * (Current implementation assumes we always process
-      * anything with @th:sID.)
-      *-->
-  <xsl:function name="th:trojan-start" as="xs:boolean" streamability="inspection">
-    <xsl:param name="e" as="element()"/>
-    
-    <xsl:value-of use-when="$th-style = 'th' "
-	select="exists($e/@th:sID)"/>
-    <xsl:value-of use-when="$th-style = 'ana' "
-	select="$e/@ana='start' "/>
-    <xsl:value-of use-when="$th-style = 'anaplus' "
-	select="matches($e/@ana, '^start$|_Start$') "/>
-    <xsl:value-of use-when="$th-style = 'xmlid' "
-	select="ends-with($e/@xml:id,'_start')"/>
-    
-  </xsl:function>
-  
-  <!--* th:trojan-end($e as element()):  true iff $e is a Trojan
-      * end-tag we want to process.
-      * (Current implementation assumes we always process
-      * anything with @th:eID.)
-      *-->
-  <xsl:function name="th:trojan-end" as="xs:boolean"
-    streamability="inspection">
-    <xsl:param name="e" as="element()"/>
-    
-    <xsl:value-of use-when="$th-style = 'th' "
-	select="exists($e/@th:eID)"/>
-    <xsl:value-of use-when="$th-style = 'ana' "
-	select="$e/@ana='end' "/>
-    <xsl:value-of use-when="$th-style = 'anaplus' "
-	select="matches($e/@ana, '^end$|_End$') "/>
-    <xsl:value-of use-when="$th-style = 'xmlid' "
-		  select="ends-with($e/@xml:id,'_end')"/>
-    
-  </xsl:function>
 
   <!--* th:make-element($ln as node()+):  make an element out of
       * one stack entry *-->
