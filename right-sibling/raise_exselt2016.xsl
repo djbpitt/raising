@@ -41,14 +41,14 @@
   <!--****************************************************************
       * 0 Setup (parameters, global variables, ...)
       ****************************************************************-->
-  <xsl:import href="../lib/marker-recognition.xsl"/>
+  <xsl:import href="../lib/marker-recognition_exselt.xsl"/>
 
   <!--* What kind of Trojan-Horse elements are we merging? *-->
   <!--* Expected values are 'th' for @th:sID and @th:eID,
       * 'ana' for @ana=start|end
       * 'xmlid' for @xml:id matching (_start|_end)$
       *-->
-  <xsl:param name="th-style" select=" 'th' " static="yes"/>
+  <xsl:param name="th-style2" select=" 'th' " static="yes"/>
 
   <!--* debug:  issue debugging messages?  yes or no  *-->
   <xsl:param name="debug" as="xs:string" select=" 'no' " static="yes"/>
@@ -80,7 +80,7 @@
    <xsl:element name="{name()}" namespace="{namespace-uri()}">
      <xsl:copy-of select="namespace::*
 			  [not(. = 'http://www.blackmesatech.com/2017/nss/trojan-horse')
-			  or not($th-style='th')]"/>
+			  or not($th-style2='th')]"/>
      <xsl:copy-of select="@*"/>
      <!--* ah.  The standard error.
 	 <xsl:apply-templates select="node()" mode="raising"/>
@@ -119,9 +119,9 @@
     <!--* 1: handle this element *-->
     
     <xsl:copy copy-namespaces="no">
-      <xsl:copy-of select="@* except @th:*" use-when=" $th-style='th' "/>
-      <xsl:copy-of select="@* except (@ana, @loc)" use-when=" $th-style=('ana', 'anaplus') "/>
-      <xsl:attribute name="xml:id" select="@loc" use-when=" $th-style=('ana', 'anaplus') "/>
+      <xsl:copy-of select="@* except @th:*" use-when=" $th-style2='th' "/>
+      <xsl:copy-of select="@* except (@ana, @loc)" use-when=" $th-style2=('ana', 'anaplus') "/>
+      <xsl:attribute name="xml:id" select="@loc" use-when=" $th-style2=('ana', 'anaplus') "/>
       
       <xsl:apply-templates select="following-sibling::node()[1]"
 			   mode="raising">
@@ -192,8 +192,8 @@
     <xsl:param name="this" as="element()"/>
     <xsl:variable name="ns" select="namespace-uri($this)"/>
     <xsl:variable name="gi" select="local-name($this)"/>
-    <xsl:variable name="ID" select="$this/@th:sID" use-when="$th-style='th'"/>
-    <xsl:variable name="ID" select="$this/@loc" use-when="$th-style=('ana', 'anaplus')"/>
+    <xsl:variable name="ID" select="$this/@th:sID" use-when="$th-style2='th'"/>
+    <xsl:variable name="ID" select="$this/@loc" use-when="$th-style2=('ana', 'anaplus')"/>
 
     
     <xsl:if test="$debug = 'yes' ">
@@ -206,20 +206,20 @@
 			      and th:is-end-marker(.)
 			      and namespace-uri()=$ns
 			      and local-name()=$gi]"
-		      use-when="$th-style=('ana', 'anaplus')"/></xsl:message>
+		      use-when="$th-style2=('ana', 'anaplus')"/></xsl:message>
     </xsl:if>
     
     <xsl:sequence select="$this/following-sibling::*[
 			         @th:eID = $ID 
 				 and namespace-uri()=$ns
 				 and local-name()=$gi][1]"
-		  use-when="$th-style='th'"/>
+		  use-when="$th-style2='th'"/>
     <xsl:sequence select="$this/following-sibling::*
 			  [@loc = $ID
 			  and th:is-end-marker(.)
 			  and namespace-uri()=$ns
 			  and local-name()=$gi][1]"
-		  use-when="$th-style=('ana', 'anaplus')"/>
+		  use-when="$th-style2=('ana', 'anaplus')"/>
 
   </xsl:function>
   

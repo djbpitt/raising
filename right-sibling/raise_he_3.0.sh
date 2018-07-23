@@ -26,7 +26,8 @@ for i do
 done
     	
 
-SAX=/opt/local/bin/saxon-he/saxon9he.jar
+### SAX=/opt/local/bin/saxon-he/saxon9he.jar
+SAX="${SAXON_HOME:-/opt/local/bin/saxon-he/saxon9he.jar}"
 
 ## echo /usr/bin/time -l /usr/bin/java $JOPTS -jar $SAX -l -s:$1 -xsl:raise_3.0.xsl -o:$2 $SOPTS
 ## /usr/bin/time -l /usr/bin/java $JOPTS -jar $SAX -l -s:$1 -xsl:raise_3.0.xsl -o:$2 $SOPTS
