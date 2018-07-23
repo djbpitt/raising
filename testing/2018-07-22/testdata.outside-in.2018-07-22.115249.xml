@@ -1,0 +1,11 @@
+<testdata>
+<p>Automated test run, using Exselt, on outside-in/raise_exselt.sh.</p>
+<run>
+  <date>Sun Jul 22 11:52:49 MDT 2018</date>
+  <syst>Salerno</syst>
+  <proc>Exselt</proc>
+  <meth>outside-in</meth>
+  <impl>raise_exselt.sh</impl>
+  <input>input/basic/flattened.xml</input>
+  <output>output/basic/raised_flattened_Exselt.xml</output>
+  <processor-messages>
