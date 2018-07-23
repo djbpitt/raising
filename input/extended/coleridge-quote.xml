@@ -11,9 +11,9 @@
 	    <lg th:eID="d1e7"/>
 	<quote th:eID="d1e5"/>
         <note xml:id="fThomas_C10-note_1" th:sID="d1e30"/> * 
-        <bibl xml:id="fThomas_C10-bibl_1" th:sID="d1e32"/> 
+        <bibl xml:id="fThomas_C10-bibl_1">
             Coleridge’s “Ancient Mariner.” 
-	<bibl th:eID="d1e32"/>
+        </bibl>
 	<note th:eID="d1e30"/>
     <cit th:eID="d1e3"/>
 </p>
