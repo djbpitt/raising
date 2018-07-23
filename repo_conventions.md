@@ -73,7 +73,9 @@ Each code directory _must_ contain, as a single file (if possible) `raise` with 
 
 Code directories _must_ contain a subdirectory called `output` that contains the results of the raising operations on the input files.  The `output` directory should contain sub-subdirectories matching those of `input`.  The output for an input file whose name is of the form `flattened.` + _filename_ + `.xml` should be `raised.` + _filename_ + `xml`. For example, the result of raising `input/basic/flattened.xml` would be in `.../output/basic/raised.xml`. If an attempt at raising produces no output (e.g. because the method dies on that particular input), an empty output file may be left to signal the failure.  If possible, a file named _filename_ + `.stderr` should be provided to record the error(s) raised.
 
-When there are multiple versions of the implementation (e.g. `raise_1.0` and `raise_3.0`), and when we test with multiple processors (e.g. xsltproc, Saxon 6.5.3, Saxon 9.8 HE), the output filename should take the form `raised_` + _version_ + `_` + _processor_ + `.xml`.
+When there are multiple versions of the implementation (e.g. `raise_1.0` and `raise_3.0`), and when we test with multiple processors (e.g. xsltproc, Saxon 6.5.3, Saxon 9.8 HE), the output filename should take the form
+
+     `raised_` + _filename_ + `_` + _version_ + `_` + _processor_ + `.xml`.
 
 ### README.md and shell scripts
 
