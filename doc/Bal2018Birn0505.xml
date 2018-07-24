@@ -733,9 +733,9 @@ URIs to allow line breaks *-->
  &lt;/xsl:analyze-string&gt;
                    &lt;/xsl:template&gt;
                 </programlisting>
-                <caption><para>XSLT template to reconstruct element markers from escape-character strings</para></caption>
+                <caption><para>XSLT template to reconstruct element markers from escape-character strings <footnote><para>This particular kind of “raising” from text strings is slightly tangential to the methods we concentrate on this paper, but we include some discussion of it because it is part of the practical use-case prompting our work on this paper, and is likely to be a stage in other projects that require elements to be flattened and raised.</para></footnote></para></caption>
             </figure>
-            <para>This script applies regular expressions to isolate the strings we need to reconstruct the Trojan marker elements of the source edition that were reduced to text in the collation process. Going into the collation none of our files contain namespaces, but we apply them in the up-conversion process, so here we concatenate the <code>th:</code> namespace prefix as we reconstruct our Trojan horse attributes.</para>
+            <para>The script above applies regular expressions to isolate the strings we need to reconstruct the Trojan marker elements of the source edition that were reduced to text in the collation process. Going into the collation none of our files contain namespaces, but we apply them in the up-conversion process, so here we concatenate the <code>th:</code> namespace prefix as we reconstruct our Trojan horse attributes.</para>
                 <para>Following this element reconstruction, our next
                 task will be to find a way to raise both the original markup we flattened from the
                 source editions with the conflicting hierarchy posed by the <code>seg</code>
@@ -789,15 +789,7 @@ The
                         belonging to a particular hierarchy. </para>
                 </footnote></para>
             
-            <para>The primary use case that serves as a testing ground
-            for the comparison of raising methods in this report is to
-            raise the structural elements from the original edition
-            (such as <code>&lt;p&gt;</code> and
-            <code>&lt;del&gt;</code>), while leaving the
-            <code>&lt;seg&gt;</code> elements flattened. The output
-            will look something like <xref linkend="raised-Thomas_C10"/>
-            for the end of paragraph 133 and the start of paragraph 134 in the
-            Thomas edition:</para>
+            <para>While we wish to raise both hierarchies, the primary use case on which we concentrate in this paper is to raise the structural elements from the original edition  (such as <code>&lt;p&gt;</code> and <code>&lt;del&gt;</code>), while leaving the <code>&lt;seg&gt;</code> elements flattened. The question of how best to accomplish this brought the three co-authors together, and serves as a testing ground for the raising methods described in this paper. The output will look something like <xref linkend="raised-Thomas_C10"/> for the end of paragraph 133 and the start of paragraph 134 in the Thomas edition:</para>
             
             <figure xml:id="raised-Thomas_C10">
                 <programlisting>&lt;p xml:id="novel1_letter4_chapter4_p133"&gt;
