@@ -3972,8 +3972,8 @@ with open('flattened.xml') as input:
             <link>https://collatex.net/-</link>
         </bibliomixed>
         
-        <bibliomixed xml:id="derose_2004" xreflabel="DeRose 2004">DeRose, Steve. 2004. “Markup
-            Overlap: a review and a horse.” Presented at Extreme Markup Languages 2004. Montréal,
+        <bibliomixed xml:id="derose_2004" xreflabel="DeRose 2004">DeRose, Steve. 2004. <quote>Markup
+            Overlap: a review and a horse.</quote> Presented at Extreme Markup Languages 2004. Montréal,
             Québec, August 2-6, 2004.
         <link>http://xml.coverpages.org/DeRoseEML2004.pdf</link></bibliomixed>
 
