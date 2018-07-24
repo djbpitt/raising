@@ -1712,11 +1712,9 @@ The
 	      idiom is needed rarely enough in XSLT programming
 	      that many XSLT authors have never used it; some find it
 	      difficult.<footnote>
-	      <para>And even those who don't admit to
-	      finding it difficult may find it easy to slip up
-	      in details when implementing a right-sibling
-	      traversal; see below (<xref
-	      linkend="errors-rst"/>).</para>
+	      <para>And even those who don’t admit to finding it difficult may find it easy to slip up in
+                            the details when implementing a right-sibling traversal; see below
+                                (<xref linkend="errors-rst"/>).</para>
 	      </footnote>
 	      The inside-out algorithm described below
 	      (<xref linkend="inside-out-function"/>)
@@ -2061,7 +2059,7 @@ The
                 <para>There are three templates that do the actual processing of the innermost
                     elements to be raised on each recursion: one that processes the start-marker,
                     one that processes the content of the newly raised container element, and one
-                    that processes the corresponding end-marker. XSLT thinks that they hve the same
+                    that processes the corresponding end-marker. XSLT thinks that they have the same
                     priority as the identity templates, so we specify a higher priority explicitly
                     with <code>priority="1"</code>.<itemizedlist>
                         <listitem>
@@ -2103,7 +2101,7 @@ The
                                 matching it, too, inside an empty <code>&lt;xsl:template&gt;</code>
                                 element (line 80).</para>
                         </listitem>
-                </itemizedlist></para>
+                    </itemizedlist></para>
                 
                 <para>When the simplified original document is flattened and then raised, as
                     described above, the output of the raising operation matches the original
@@ -2119,61 +2117,127 @@ The
                 
                 <figure>
                     <programlisting>
-       &lt;xsl:template match="/"&gt;
-       &lt;xsl:for-each select="$novel-coll//TEI"&gt;
-           &lt;xsl:variable name="filename"&gt;              
-                &lt;xsl:text&gt;raised_&lt;/xsl:text&gt;
-                &lt;xsl:value-of select="tokenize(base-uri(), '/')[last()]"/&gt;
-           &lt;/xsl:variable&gt;
-           &lt;xsl:variable name="chunk"
+      <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    xmlns="http://www.tei-c.org/ns/1.0"  
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:th="http://www.blackmesatech.com/2017/nss/trojan-horse"
+    exclude-result-prefixes="#all"
+    version="3.0">
+    <xsl:output method="xml" indent="no"/>
+    <!--* This stylesheet works to raise "trojan
+	elements" from the inside out, this time over a collection
+	of Frankenstein files output from collation. It also adapts
+	djb's function to process an element node rather than a
+	document node in memory to perform its recursive
+	processing. *-->
+    <xsl:variable name="novel-coll"
+        as="document-node()+"
+        select="collection('../input/frankenstein/novel-coll/')"/>    
+     
+    <!--* In all modes, do a shallow copy, suppress namespace nodes,
+	* and recur in default (unnamed) mode. *-->
+    <xsl:template match="@* | node()" mode="#all">
+      <xsl:copy copy-namespaces="no">
+            <xsl:apply-templates select="@* | node()"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <!--* th:raise(.):  raise all innermost elements within the container element this time passed as parameter *-->
+   <xsl:function name="th:raise">
+       <xsl:param name="input" as="element()"/>
+       <xsl:choose>
+           <xsl:when test="exists($input//*[@th:sID eq following-sibling::*[@th:eID][1]/@th:eID])">
+               <xsl:variable name="result" as="element()">
+                   <div type="collation">
+                       <xsl:apply-templates select="$input" mode="loop"/>                            
+                   </div>
+               </xsl:variable>
+               <xsl:sequence select="th:raise($result)"/>
+           </xsl:when>
+           <xsl:otherwise>
+               <!--* We have no more work to do, return the input unchanged. *-->
+               <xsl:message>raise() returning.</xsl:message>
+               <xsl:sequence select="$input"/>
+           </xsl:otherwise>
+       </xsl:choose>
+   </xsl:function>
+   
+   <xsl:template match="/">
+       <xsl:for-each select="$novel-coll//TEI">
+           <xsl:variable name="filename">              
+               <xsl:text>raised_</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()]"/>
+           </xsl:variable>
+           <xsl:variable name="chunk"
 			 as="xs:string"
-			 select="substring-before(tokenize(base-uri(), '/')[last()], '.') ! substring-before(., '_')"/&gt; 
-           &lt;xsl:result-document method="xml"
+			 select="substring-before(tokenize(base-uri(), '/')[last()], '.') ! substring-before(., '_')"/> 
+           <xsl:result-document method="xml"
 				indent="yes"
-				href="output/frankenstein/novel-coll/{$filename}"&gt;
-               &lt;TEI&gt;
-		   &lt;xsl:apply-templates select="descendant::teiHeader"/&gt;
-		   &lt;text&gt;
-		       &lt;body&gt;
-			   &lt;xsl:apply-templates select="descendant::div[@type='collation']"/&gt;
-		       &lt;/body&gt;
-		   &lt;/text&gt;
-               &lt;/TEI&gt;
-           &lt;/xsl:result-document&gt;
-       &lt;/xsl:for-each&gt;
-       
-   &lt;/xsl:template&gt;
+				href="output/frankenstein/novel-coll/{$filename}">
+               <TEI>
+		   <xsl:apply-templates select="descendant::teiHeader"/>
+		   <text>
+		       <body>
+			   <xsl:apply-templates select="descendant::div[@type='collation']"/>
+		       </body>
+		   </text>
+               </TEI>
+           </xsl:result-document>
+       </xsl:for-each>  
+   </xsl:template>
+<!--* Template rules for altering the TEI header, otherwise uninvolved in the raising process: *-->   
+   <xsl:template match="teiHeader">
+       <teiHeader>
+           <fileDesc>
+               <titleStmt><xsl:apply-templates select="descendant::titleStmt/title"/></titleStmt>
+               <xsl:copy-of select="descendant::publicationStmt" copy-namespaces="no"/>
+               <xsl:copy-of select="descendant::sourceDesc" copy-namespaces="no"/>
+	   </fileDesc>
+       </teiHeader>
+   </xsl:template>  
+   <xsl:template match="titleStmt/title">
+       <title>
+           <xsl:text>Bridge Phase 4:</xsl:text><xsl:value-of select="tokenize(., ':')[last()]"/>
+       </title>
+   </xsl:template>
+    
+    <!--* On the input container element node, call th:raise() *-->
+   <xsl:template match="div[@type='collation']">
+       <xsl:sequence select="th:raise(.)"/>
+   </xsl:template>
+    <!--* Loop mode (applies to container element only). *-->
+    <!--* Loop mode for container element:  just apply templates in default unnamed mode. *-->  
+   <xsl:template match="div[@type='collation']" mode="loop">
+       <xsl:apply-templates/>
+   </xsl:template>  
+    <xsl:template match="*[@th:sID eq
+        following-sibling::*[@th:eID][1]/@th:eID]">
+       <xsl:variable name="currNode" select="current()" as="element()"/>
+       <xsl:variable name="currMarker" select="@th:sID" as="xs:string"/>
+       <xsl:element name="{name()}">
+           <xsl:copy-of select="@* except @th:sID"/>
+           <xsl:attribute name="xml:id">
+               <xsl:value-of select="@th:sID"/>
+           </xsl:attribute>
+           <xsl:variable name="end-marker" as="element()" select="following-sibling::*[@th:eID = current()/@th:sID]"/>
+           <xsl:copy-of select="following-sibling::node()[. &lt;&lt; $end-marker]"/>
+       </xsl:element>
+   </xsl:template>
+
+   <!--suppressing nodes that are being reconstructed, including the old end marker. -->
+    <xsl:template
+        match="node()[preceding-sibling::*[@th:sID][1]/@th:sID eq following-sibling::*[@th:eID][1]/@th:eID]"/>
    
-   &lt;xsl:template match="teiHeader"&gt;
-       &lt;teiHeader&gt;
-           &lt;fileDesc&gt;
-               &lt;titleStmt&gt;&lt;xsl:apply-templates select="descendant::titleStmt/title"/&gt;&lt;/titleStmt&gt;
-               &lt;xsl:copy-of select="descendant::publicationStmt" copy-namespaces="no"/&gt;
-               &lt;xsl:copy-of select="descendant::sourceDesc" copy-namespaces="no"/&gt;
-	   &lt;/fileDesc&gt;
-       &lt;/teiHeader&gt;
-   &lt;/xsl:template&gt;
-   
-   &lt;xsl:template match="titleStmt/title"&gt;
-       &lt;title&gt;
-           &lt;xsl:text&gt;Bridge Phase 4:&lt;/xsl:text&gt;&lt;xsl:value-of select="tokenize(., ':')[last()]"/&gt;
-       &lt;/title&gt;
-   &lt;/xsl:template&gt;
-    &lt;!--* On the input container element node, call th:raise() *--&gt;
-   &lt;xsl:template match="div[@type='collation']"&gt;
-       &lt;xsl:sequence select="th:raise(.)"/&gt;
-   &lt;/xsl:template&gt;
-    &lt;!--* Loop mode (applies to container element only). *--&gt;
-    &lt;!--* Loop mode for container element:  just apply templates in default unnamed mode. *--&gt;  
-   &lt;xsl:template match="div[@type='collation']" mode="loop"&gt;
-       &lt;xsl:apply-templates/&gt;
-   &lt;/xsl:template&gt;
-                        
+    <xsl:template match="*[@th:eID eq preceding-sibling::*[@th:sID][1]/@th:sID]"/>
+        </xsl:stylesheet>]]>
                     </programlisting>
+                    <caption><para>Inside-out raising of the Frankenstein Variorum collection</para></caption>
                 </figure>
                 <para>Beyond these small adaptations, there is very little different between our
                     generic inside-out raising example and the <emphasis>Frankenstein</emphasis>
-                    application. We convert the Trojan marker attributes into an xml:id with an
+                    application. One minor difference is that we use only one identity-transformation template, and have not set a priority on the template rule to process the innermost elements. We convert the Trojan marker attributes into an xml:id with an
                     element constructor:</para>
                 
                 <figure>
