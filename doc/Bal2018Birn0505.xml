@@ -3451,12 +3451,16 @@ with open('flattened.xml') as input:
                             context (whatever is at the top of the stack) adds it to the correct
                             location on the eventual output tree. Pushing it makes it the new
                             current context, so that subsequent nodes will be added to it as
-                            children to it as long as it remains the current context. Nodes are
-                            passed by reference, rather than value, so after these operations we
-                            point to the same new current node from three places: the original input
-                            document, the top of the stack, and the location in the tree we are
+                            children as long as it remains the current context. Nodes are
+                            passed by reference, rather than by value, so after these operations we
+                            point to the same new current node from three places: 
+                            <orderedlist>
+                                <listitem><para>the original input document,</para></listitem>
+                                <listitem><para>the top of the stack</para></listitem>
+                                <listitem><para>the location in the tree we are
                             assembling under the output document node, which is at the bottom of the
-                            stack.</para>
+                            stack.</para></listitem>
+                            </orderedlist></para>
                         <para>We ignore <code>START_ELEMENT</code> events for end-markers; all of
                             their processing happens on their <code>END_ELEMENT</code> event. This
                             is a somewhat arbitrary decision.</para>
@@ -3497,7 +3501,7 @@ with open('flattened.xml') as input:
                                         <code>END_ELEMENT</code> event. In this way we push the
                                     element we are currently raising onto the top of the stack at
                                     its start-marker, but we remove its Trojan attributes only when
-                                    pop it at the <code>END_ELEMENT</code> event of the
+                                    we pop it at the <code>END_ELEMENT</code> event of the
                                     end-marker.</para>
                             </listitem>
                             <listitem>
@@ -3506,7 +3510,7 @@ with open('flattened.xml') as input:
                                         <code>END_ELEMENT</code> events. In the remaining cases
                                     (end-markers and regular elements, whether empty of not), we pop
                                     the stack at the <code>END_ELEMENT</code> event, which makes its
-                                    parent in the output tree that we are constructing the current
+                                    parent in the output tree where we are constructing the current
                                     context for the next event.</para>
                             </listitem>
                         </itemizedlist>
