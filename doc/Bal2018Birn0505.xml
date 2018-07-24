@@ -694,10 +694,7 @@ URIs to allow line breaks *-->
                 <programlisting>&lt;seg xml:id="C10_app90-fThomas_start"/&gt;
 contortions that ever and anon
 con&lt;del
-    loc="fThomas_C10-del_2"
-    ana="start"/&gt;puls&lt;del
-    loc="fThomas_C10-del_2"
-    ana="end"/&gt;vulsed
+    th:sID="fThomas_C10-del_2"/&gt;puls&lt;del th:eID="fThomas_C10-del_2"/&gt;vulsed
 &amp;amp; deformed  his un-human features.
 &lt;p loc="novel1_letter4_chapter4_p133" ana="end"/&gt; 
 &lt;p loc="novel1_letter4_chapter4_p134" ana="start"/&gt;
@@ -725,21 +722,16 @@ The
                 4, followed by the beginning of paragraph 134 in the same chapter. The use of
                 attributes on <code>&lt;del></code> and <code>&lt;p></code> markers differs from
                 that with the <code>&lt;seg&gt;</code> elements; in the case of
-                    <code>&lt;del></code> and <code>&lt;p></code>, the shared <code>@loc</code>
-                attribute points to the location in the source and coindexes the start- and
-                end-markers, and the <code>@ana</code> attribute identifies the element as either a
-                start-marker or an end-marker.<footnote>
+                    <code>&lt;del></code> and <code>&lt;p></code>, the Trojan horse attributes point
+                to the location in the source and coindexes the start- and end-markers.<footnote>
                     <para>Using different formats for the markup of different flattened elements
                         makes it easy to raise one group of flattened element types while leaving
                         another in its flattened stage. Alternatively, we could use the same
-                        attributes for all flattened elements and specify which ones we wanted to                       
-                        raise at the processing stage.  <xref
-                        linkend="atmo"/> proposes a
-                        <code>th:doc</code> attribute for identifying
-                        a start- or end-marker as belonging to a
-                        particular hierarchy.
-                    </para>
-            </footnote></para>
+                        attributes for all flattened elements and specify which ones we wanted to
+                        raise at the processing stage. <xref linkend="atmo"/> proposes a
+                            <code>th:doc</code> attribute for identifying a start- or end-marker as
+                        belonging to a particular hierarchy. </para>
+                </footnote></para>
             
             <para>The primary use case that serves as a testing ground
             for the comparison of raising methods in this report is to
@@ -752,14 +744,14 @@ The
             Thomas edition:</para>
             
             <figure xml:id="raised-Thomas_C10">
-                <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt;
+                <programlisting>&lt;p xml:id="novel1_letter4_chapter4_p133"&gt;
     …
     &lt;seg xml:id="C10_app90-fThomas_start"/&gt;contortions
     that ever and anon
-    con&lt;del loc="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed
+    con&lt;del xml:id="fThomas_C10-del_2"&gt;puls&lt;/del&gt;vulsed
     &amp;amp; deformed his un-human features.
 &lt;/p&gt;
-&lt;p loc="novel1_letter4_chapter4_p134"&gt;
+&lt;p xml:id="novel1_letter4_chapter4_p134"&gt;
     The &lt;seg xml:id="C10_app90-fThomas_end"/&gt;
     different accidents of life are not so changeable as
     the feelings of human nature
@@ -788,17 +780,17 @@ The
                   But do check!
                   *-->
               
-                <programlisting>&lt;p loc="novel1_letter4_chapter4_p133"&gt;
+                <programlisting>&lt;p xml:id="novel1_letter4_chapter4_p133"&gt;
     …
     &lt;seg xml:id="C10_app90-fThomas__Pt1"&gt;contortions 
     that ever and anon
-    con&lt;del loc="fThomas_C10-del_2"
+    con&lt;del xml:id="fThomas_C10-del_2"
     &gt;puls&lt;/del&gt;vulsed
     &amp;amp; deformed his
     un-human features.
     &lt;/seg&gt;
 &lt;/p&gt;
-&lt;p loc="novel1_letter4_chapter4_p134"&gt;
+&lt;p xml:id="novel1_letter4_chapter4_p134"&gt;
     &lt;seg xml:id="C10_app90-fThomas__Pt2"&gt;
     The
     &lt;/seg&gt;
@@ -850,12 +842,13 @@ The
             <para>In addition to exploring and reporting on the application of different raising
                 methods to authentic data from <xref linkend="frankenstein"/>, described above, for
                 illustrative and development purposes when discussing program logic we use a small
-                contrived hierarchical XML sample, described here. The simplified data comes in
+                contrived hierarchical XML sample, described here and extracted from a quoted
+                passage the <emphasis>Frankenstein</emphasis> novel. The simplified data comes in
                 three forms, which we call <emphasis role="ital">basic</emphasis>, <emphasis
                     role="ital">extended</emphasis>, and <emphasis role="ital">overlap</emphasis>.<footnote>
                     <para>All files discussed in this report, as well as the report itself, are
                         available in <link>https://github.com/djbpitt/raising</link>.</para>
-            </footnote></para>
+                </footnote></para>
             
             <section xml:id="simplified-original">
                 <title>Basic sample</title>
@@ -985,8 +978,8 @@ The
                 <title>Extended basic sample</title>
                 
                 <para>The basic sample contains no non-Trojan empty elements and no non-Trojan
-                    attributes. We can test wheter those features are handled properly with the
-                following slightly more complicated sample:</para>
+                    attributes. We can test whether those features are handled properly with the
+                    following slightly more complicated sample:</para>
                 
                 <figure>
                     <programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?><p
@@ -1082,11 +1075,11 @@ The
                 
             </section>
             
-            <section xml:id="marker-styles">
+          <!--2018-07-23 ebb: The original version of this section is no longer relevant, since I've changed the Frankenstein markers to @th:sID and @th:eID. But I'll rewrite to call attention to the differently encoded <seg> elements.-->  <section xml:id="marker-styles">
                 <title><emphasis role="ital">Frankenstein</emphasis>
                 markers</title>
                 
-                <para>For historical reasons, the markers in the <emphasis role="ital"
+              <!--  <para>For historical reasons, the markers in the <emphasis role="ital"
                         >Frankenstein</emphasis> data differ from those of our simplified test
                     sample. Specifically, start-markers in <emphasis role="ital"
                         >Frankenstein</emphasis> have an <code>@ana</code> attribute with the value
@@ -1095,8 +1088,8 @@ The
                     unique value of a <code>@loc</code> attribute. The output requirements include
                     removing the <code>@ana</code> attribute and refactoring the <code>@loc</code>
                     attribute as an <code>@xml:id</code>
-                attribute.</para>
-                
+                attribute.</para>-->
+              <para>The Frankenstein Variorum encoding represents an overlapping virtual hierarchy, signalled with an alternative marker style used on the <code>&lt;seg&gt;</code> elements. Here there is an <code>@xml:id</code> bearing a flag indicating the start or end position of a variant passage. These markers cannot be raised in exactly the way they were placed, since in some cases a variant passage may start inside a paragraph or chapter, and end in the next one. In this project, the decision to raise the <code>&lt;seg&gt;</code> elements necessitates a process of splitting them into pieces within structural boundaries, so that the original virtual element becomes two elements, with part one inside one structural unit and part two inside the next. Different styles of markers here facilitates handling these elements at different moments in the raising process.</para>
             </section>
             
 </section>
