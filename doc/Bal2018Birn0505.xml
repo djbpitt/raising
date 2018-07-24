@@ -2070,12 +2070,69 @@ The
                 input.</para>
                 
                 </section>
-                
             <section>
-                <title>Raising <emphasis
-                role="ital">Frankenstein</emphasis></title>
-                <para>For the <emphasis role="ital">Frankenstein</emphasis> data, we convert the
-                    Trojan marker attributes into an xml:id with an element constructor:</para>
+                <title>Raising <emphasis>Frankenstein</emphasis></title>
+          
+                <para>To raise the <emphasis role="ital">Frankenstein</emphasis> data, our process
+                    is run recursively over a collection of 165 files in the Frankenstein Variorum.
+                    The files have a TEI header that for project maintenance purposes needs to be updated after a version change, and only a portion of the document is to be raised. Here the most significant adaptation is that we supply an element node rather than a document node as the input parameter for the th:raise function. </para>
+                
+                <figure>
+                    <programlisting>
+                        &lt;xsl:template match="/"&gt;
+       &lt;xsl:for-each select="$novel-coll//TEI"&gt;
+           &lt;xsl:variable name="filename"&gt;              
+           &lt;xsl:text&gt;raised_&lt;/xsl:text&gt;
+           &lt;xsl:value-of select="tokenize(base-uri(), '/')[last()]"/&gt;
+           &lt;/xsl:variable&gt;
+           &lt;xsl:variable name="chunk"
+			 as="xs:string"
+			 select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/&gt; 
+           &lt;xsl:result-document method="xml"
+				indent="yes"
+				href="output/frankenstein/novel-coll/{$filename}"&gt;
+               &lt;TEI&gt;
+		   &lt;xsl:apply-templates select="descendant::teiHeader"/&gt;
+		   &lt;text&gt;
+		       &lt;body&gt;
+			   &lt;xsl:apply-templates select="descendant::div[@type='collation']"/&gt;
+		       &lt;/body&gt;
+		   &lt;/text&gt;
+               &lt;/TEI&gt;
+           &lt;/xsl:result-document&gt;
+       &lt;/xsl:for-each&gt;
+       
+   &lt;/xsl:template&gt;
+   
+   &lt;xsl:template match="teiHeader"&gt;
+       &lt;teiHeader&gt;
+           &lt;fileDesc&gt;
+               &lt;titleStmt&gt;&lt;xsl:apply-templates select="descendant::titleStmt/title"/&gt;&lt;/titleStmt&gt;
+               &lt;xsl:copy-of select="descendant::publicationStmt" copy-namespaces="no"/&gt;
+               &lt;xsl:copy-of select="descendant::sourceDesc" copy-namespaces="no"/&gt;
+	   &lt;/fileDesc&gt;
+       &lt;/teiHeader&gt;
+   &lt;/xsl:template&gt;
+   
+   &lt;xsl:template match="titleStmt/title"&gt;
+       &lt;title&gt;
+           &lt;xsl:text&gt;Bridge Phase 4:&lt;/xsl:text&gt;&lt;xsl:value-of select="tokenize(., ':')[last()]"/&gt;
+       &lt;/title&gt;
+   &lt;/xsl:template&gt;
+    &lt;!--* On the input container element node, call th:raise() *--&gt;
+   &lt;xsl:template match="div[@type='collation']"&gt;
+       &lt;xsl:sequence select="th:raise(.)"/&gt;
+   &lt;/xsl:template&gt;
+    &lt;!--* Loop mode (applies to container element only). *--&gt;
+    &lt;!--* Loop mode for container element:  just apply templates in default unnamed mode. *--&gt;  
+   &lt;xsl:template match="div[@type='collation']" mode="loop"&gt;
+       &lt;xsl:apply-templates/&gt;
+   &lt;/xsl:template&gt;
+                        
+                    </programlisting>
+                </figure>
+                <para>We convert the Trojan marker attributes into an xml:id with an element
+                    constructor:</para>
                 
                 <figure>
                     <programlisting>&lt;xsl:element name="{name()}"&gt;
@@ -2085,66 +2142,21 @@ The
 &lt;/xsl:element&gt;</programlisting>
                     <caption>
                         <para>Element constructor to refactor <code>@th:sID</code> as
-                                <code>@xml:id</code> in <emphasis role="ital"
-                                >Frankenstein</emphasis></para>
-                    </caption>
-                </figure>
-                
-                <para>We match start-markers, (raised) element content, and end-markers in <emphasis
-                        role="ital">Frankenstein</emphasis> with the following XPath
-                patterns:</para>
-                <!--* MSM introduces line breaks here to avoid
-		    * having to choose between widening the window
-		    * to see the end of these lines and having a 150-
-		    * or 200-character text measure, or having the
-		    * ends run off the right edge of the window.
-		    *-->
-                <figure>
-                  <programlisting>&lt;xsl:template match="*
-                    [@th:sID
-                    eq
-                    following-sibling::*[@th:eID][1]/@th:eID]"&gt;</programlisting>
-                    <caption>
-                        <para>XPath expression to match start-markers in <emphasis role="ital"
-                                >Frankenstein</emphasis></para>
-                    </caption>
-                </figure>
-                
-                <figure>
-                  <programlisting>&lt;xsl:template match="node()
-                    [preceding-sibling::*
-                    [@ana eq 'start'][1]/@loc
-                    eq
-                    following-sibling::*[@ana eq 'end'][1]/@loc
-                    ]"/&gt;</programlisting>
-                    <caption>
-                        <para>XPath expression to match the content of raised elements in <emphasis
-                                role="ital">Frankenstein</emphasis></para>
-                    </caption>
-                </figure>
-                
-                <figure>
-                  <programlisting>&lt;xsl:template match="*
-                    [@ana eq 'end']
-                    [@loc
-                    eq
-                    preceding-sibling::*[@ana eq 'start'][1]/@loc
-                    ]"/&gt;</programlisting>
-                    <caption>
-                        <para>XPath expression to match end-markers in <emphasis role="ital"
+                                <code>@xml:sid</code> in <emphasis role="ital"
                                 >Frankenstein</emphasis></para>
                     </caption>
                 </figure>
                 
             </section>
             
-            <section>
+          <!--2018-07-23 ebb: THIS SECTION TBD:
+              <section>
                 <title>XSLT 1.0</title>
                 <para>
                     <emphasis role="ital">At the time of submission, no XSLT 1.0 version is
                         available.</emphasis>
                 </para>
-            </section>
+            </section>-->
             
           </section>
 
