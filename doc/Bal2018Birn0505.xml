@@ -3267,7 +3267,7 @@ The
                         GitHub repository is a partial model for the examples here, and we
                         appreciate his assistance in debugging the Trojan attribute pitfall
                         described below under <xref linkend="python_xml_challenges"/>.</para>
-                </footnote> The result of pull parsering can be fashioned into output in two ways,
+                </footnote> The result of pull parsing can be fashioned into output in two ways,
                 as a string or as XML. With string output, it passes all events through unchanged
                 except for markers, which it replaces with regular XML start- and end-tags. Because
                 the output construction is not XML-aware, it has the same limitations as the regex
@@ -3279,7 +3279,7 @@ The
                 each element only once. With string output, the procedure can create write output as
                 it handles each event; with XML output it is necessary to maintain the current
                 context in a stack, which is similar to the use of a stack in the <xref
-                    linkend="accumulators"/> method described.<footnote>
+                    linkend="accumulators"/> method described above.<footnote>
                     <para>We buffer output by writing it to a list, which we stringify and write all
                         at once at the end, saving the overhead of repeated write operations. With
                         large documents and low memory, though, the method can easily be modified to
@@ -3299,7 +3299,7 @@ The
                       * Python's conventions for line continuation.
                       
                       djb: "Long" is in the eye of the beholder; The longest (the first) is 79 characters,
-                      which would have been long on my first 80-character monitor, but on all but ancient hardward,
+                      which would have been long on my first 80-character monitor, but on all but ancient hardware,
                       I think these are short enough that wrapping would make them harder to read.
                       *-->
                     <programlisting>import sys
