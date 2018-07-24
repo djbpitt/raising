@@ -54,11 +54,12 @@
    
    <xsl:template match="/">
        <xsl:for-each select="$novel-coll//TEI">
-           <xsl:variable name="filename">              <xsl:text>raised_</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()]"/>
+           <xsl:variable name="filename">              
+               <xsl:text>raised_</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()]"/>
            </xsl:variable>
            <xsl:variable name="chunk"
 			 as="xs:string"
-			 select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/> 
+			 select="substring-before(tokenize(base-uri(), '/')[last()], '.') ! substring-before(., '_')"/> 
            <xsl:result-document method="xml"
 				indent="yes"
 				href="output/frankenstein/novel-coll/{$filename}">

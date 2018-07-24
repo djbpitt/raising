@@ -2079,15 +2079,15 @@ The
                 
                 <figure>
                     <programlisting>
-                        &lt;xsl:template match="/"&gt;
+       &lt;xsl:template match="/"&gt;
        &lt;xsl:for-each select="$novel-coll//TEI"&gt;
            &lt;xsl:variable name="filename"&gt;              
-           &lt;xsl:text&gt;raised_&lt;/xsl:text&gt;
-           &lt;xsl:value-of select="tokenize(base-uri(), '/')[last()]"/&gt;
+                &lt;xsl:text&gt;raised_&lt;/xsl:text&gt;
+                &lt;xsl:value-of select="tokenize(base-uri(), '/')[last()]"/&gt;
            &lt;/xsl:variable&gt;
            &lt;xsl:variable name="chunk"
 			 as="xs:string"
-			 select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/&gt; 
+			 select="substring-before(tokenize(base-uri(), '/')[last()], '.') ! substring-before(., '_')"/&gt; 
            &lt;xsl:result-document method="xml"
 				indent="yes"
 				href="output/frankenstein/novel-coll/{$filename}"&gt;
@@ -2131,8 +2131,10 @@ The
                         
                     </programlisting>
                 </figure>
-                <para>We convert the Trojan marker attributes into an xml:id with an element
-                    constructor:</para>
+                <para>Beyond these small adaptations, there is very little different between our
+                    generic inside-out raising example and the <emphasis>Frankenstein</emphasis>
+                    application. We convert the Trojan marker attributes into an xml:id with an
+                    element constructor:</para>
                 
                 <figure>
                     <programlisting>&lt;xsl:element name="{name()}"&gt;
