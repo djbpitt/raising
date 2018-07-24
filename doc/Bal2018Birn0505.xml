@@ -2754,10 +2754,10 @@ The
             attributes described above.</para>
             
             <para>At any point in a tree to which this accumulator applies, we can refer to the
-                current node’s before value of the accumulator with the expression
-                    <code>accumulator-before('stack')</code> and to the after value with
+                current node’s <emphasis>before</emphasis> value of the accumulator with the expression
+                    <code>accumulator-before('stack')</code> and to the <emphasis>after</emphasis> value with
                     <code>accumulator-after('stack')</code>.<footnote>
-                    <para>In streaming processing, references to the after value can only be located
+                    <para>In streaming processing, references to the <emphasis>after</emphasis> value can only be located
                         after any <code>&lt;xsl:apply-templates&gt;</code> or other expression that
                         requires that descendants be processed.</para>
                 </footnote> Without accumulators, we could keep track of the relevant information by
@@ -2785,7 +2785,7 @@ The
                             stack.</para>
                     </listitem>
                     <listitem>
-                        <para>Each time we see a a text node, comment, processing instruction, or
+                        <para>Each time we see a text node, comment, processing instruction, or
                             content element, we will append it to the sequence on the top of the
                             stack.</para>
                     </listitem>
@@ -2832,8 +2832,6 @@ The
     
     <xsl:value-of use-when="$th-style = 'th' "
         select="exists($e/@th:sID)"/>
-    <xsl:value-of use-when="$th-style = 'ana' "
-        select="$e/@ana='start' "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
         select="ends-with($e/@xml:id,'_start')"/>
     
@@ -2847,8 +2845,6 @@ The
     
     <xsl:value-of use-when="$th-style = 'th' "
         select="exists($e/@th:eID)"/>
-    <xsl:value-of use-when="$th-style = 'ana' "
-        select="$e/@ana='end' "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
                   select="ends-with($e/@xml:id,'_end')"/>
     
