@@ -3706,9 +3706,7 @@ with open('flattened.xml') as input:
                 one more accepting of variation, even though allowing for variation made the regex
                 harder to read and develop.</para>
             <para>The regex expressions needed to raise <emphasis role="ital"
-                    >Frankenstein</emphasis> are more complex because the two attributes that
-                contribute to the Trojan markup, <code>@ana</code> and <code>@loc</code>, may occur
-                in any order with respect to each other and other attributes. </para>
+                    >Frankenstein</emphasis> are slightly more complex because they may or may not coexist with other attributes on a given element node.</para>
         </section>
         
         <section xml:id="python-string-challenges">
