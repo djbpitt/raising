@@ -163,8 +163,8 @@ URIs to allow line breaks *-->
 
         <para>In the following sections, we describe first a concrete
         instance of the task, with enough supporting detail to make
-        clear that this is not an academic exercise, but one that
-        arose in a concrete project. We then present several
+        clear that this is not an academic exercise but one that
+        arose in a real project. We then present several
         approaches to solving the problem, including some false
         starts, which illustrate possible wrong turnings along the
         way. We then discuss and compare the different solutions with
@@ -242,18 +242,14 @@ URIs to allow line breaks *-->
                     <para>The input is handled in a single pass and
                     the virtual elements are raised <emphasis>left-to-right</emphasis> in
                     start-tag/end-tag order.</para>
-                    <para>We refer to the order as <emphasis>left-to-right</emphasis> or
-                    tag-order, rather than as depth-first, partly
-                    because in the input the markers and the
-                    content of the virtual elements they mark are all
-                    siblings.  That is, the input document is typically a shallow hierarchy and there is no difference
-                    between depth- and breadth-first traversal of the
-                    input tree.  With respect to the output tree, this
-                    pattern performs a <emphasis>depth-first pre- and post-order
-                    traversal</emphasis>:  the processing of an element starts
-                    before the processing of its children and ends
-                    afterwards.             
-                    </para>
+                    <para>We refer to the order as <emphasis>left-to-right</emphasis> or tag-order,
+                        rather than as depth-first, partly because in the input the markers and the
+                        content of the virtual elements they mark are all siblings. That is, the
+                        input document is typically a shallow hierarchy and there is no difference
+                        between depth- and breadth-first traversal of the input tree. With respect
+                        to the output tree, this pattern performs a <emphasis>depth-first pre- and
+                            post-order traversal</emphasis>: that is, the processing of an element
+                        starts before the processing of its children and ends afterwards. </para>
                     <para>We refer to the construction as <emphasis>tag-order</emphasis>
                     because the construction of the virtual elements
                     begins in the order of their start-markers and
@@ -827,7 +823,7 @@ The
                   the segment seems to include "pul/vulsed &
                   deformed his un-human features."
 
-                  But do check!
+                  But do check! EB: Yes, confirmed (even in a new output collation). Thank you!
                   *-->
               
                 <programlisting>&lt;p xml:id="novel1_letter4_chapter4_p133"&gt;
@@ -892,10 +888,11 @@ The
             <para>In addition to exploring and reporting on the application of different raising
                 methods to authentic data from <xref linkend="frankenstein"/>, described above, for
                 illustrative and development purposes when discussing program logic we use a small
-                contrived hierarchical XML sample, described here and extracted from a quoted
-                passage the <emphasis>Frankenstein</emphasis> novel. The simplified data comes in
-                three forms, which we call <emphasis role="ital">basic</emphasis>, <emphasis
-                    role="ital">extended</emphasis>, and <emphasis role="ital">overlap</emphasis>.<footnote>
+                contrived hierarchical XML sample extracted from a short passage of poetry, derived
+                from a quoted passage in the <emphasis>Frankenstein</emphasis> novel. The simplified
+                data comes in three forms, which we call <emphasis role="ital">basic</emphasis>,
+                    <emphasis role="ital">extended</emphasis>, and <emphasis role="ital"
+                    >overlap</emphasis>.<footnote>
                     <para>All files discussed in this report, as well as the report itself, are
                         available in <link>https://github.com/djbpitt/raising</link>.</para>
                 </footnote></para>
