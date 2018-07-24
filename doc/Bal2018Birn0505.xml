@@ -689,8 +689,10 @@ URIs to allow line breaks *-->
                 <programlisting>
 &lt;xsl:template match="ab/text()"  
  &lt;xsl:analyze-string select="." regex="&amp;lt;.[^/]+?[es]ID=[^/]+?/&amp;gt;"&gt;
- <!--The value of the regex attribute is the string we isolate for conversion into a new element. It begins and ends with a left and right angle bracket and contains the pattern to isolate the original non-namespaced form of our Trojan markers. -->
- &lt;!--matches strings representing flattened element tags marked with sID and eID attributes.--&gt;                         &lt;xsl:matching-substring&gt;
+ &lt;!--The value of the regex attribute is the string we isolate for conversion into a new element. 
+ It begins and ends with a left and right angle bracket and 
+ contains the pattern to isolate the original non-namespaced form of our Trojan markers. --&lt;
+                        &lt;xsl:matching-substring&gt;
    &lt;xsl:variable name="flattenedTagContents" 
             select="substring-before(., '/') ! substring-after(., '&amp;lt;')"/&gt;
    &lt;xsl:variable name="elementName" 
@@ -699,7 +701,10 @@ URIs to allow line breaks *-->
    &lt;xsl:element name="{$elementName}"&gt;
    
       &lt;xsl:for-each select="tokenize($flattenedTagContents, ' ')[position() gt 1][contains(., '=')]"&gt;
-      <!--In defining the variable below, we apply the Trojan Horse (th:) namespace prefix to the original forms of sID and eID in the input data. If the regular expression matched by [se]ID is found in the string, we concatenate the prefix with the substring before the '=' sign to form the attribute name. Otherwise, the substring before the '=' sign will be the attribute name. -->
+      &lt;!--In defining the variable below, we apply the Trojan Horse (th:) namespace prefix 
+      to the original forms of sID and eID in the input data. If the regular expression 
+      matched by [se]ID is found in the string, we concatenate the prefix with the substring before the '=' sign 
+      to form the attribute name. Otherwise, the substring before the '=' sign will be the attribute name. --&gt;
            &lt;xsl:variable name="attName" as="xs:string"&gt;
             &lt;xsl:choose&gt;
               &lt;xsl:when test="matches(current(), '[se]ID')"&gt;
@@ -717,7 +722,12 @@ URIs to allow line breaks *-->
    &lt;/xsl:element&gt;
   &lt;/xsl:matching-substring&gt;
   &lt;xsl:non-matching-substring&gt;
-    &lt;!--At this point, we run xsl:analyze-string again to isolate other kinds of strings that represent other kinds of elements need to be converted in some way. After running a series of these, we conclude with &lt;xsl:value-of select="."/&gt; to output what remains as a string.--&gt;
+    &lt;!--At this point, we run xsl:analyze-string again 
+    to isolate other kinds of strings that represent other kinds of elements. 
+    (For example, the Frankenstein project has a number of milestone-style elements 
+    that are not intended to be Trojan markers.)
+    After running a series of "string-surgeries" to make new elements with xsl:analyze-string, 
+    we conclude with &lt;xsl:value-of select="."/&gt; to output what remains as a string.--&gt;
      &lt;xsl:value-of select="."/&gt;
   &lt;/xsl:non-matching-substring&gt;
  &lt;/xsl:analyze-string&gt;
