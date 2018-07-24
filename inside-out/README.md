@@ -10,5 +10,5 @@
 
 ### Frankenmarkup
 
-* **raise-frankensteinColl.xsl** (comment needed)
-* **raise_frankenstein.xsl** (comment needed)
+* **raise-frankensteinColl.xsl** Trojan markup in collection of files, full recursion. Adapts raise_deep.xsl, so that the th:raise function runs not over a document-node() but a container element()
+* **raise_frankenstein.xsl** 
