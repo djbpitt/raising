@@ -2620,8 +2620,6 @@ The
     
     <xsl:value-of use-when="$th-style = 'th' "
 	select="exists($e/@th:sID)"/>
-    <xsl:value-of use-when="$th-style = 'ana' "
-	select="$e/@ana='start' "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 	select="ends-with($e/@xml:id,'_start')"/>
     
@@ -2632,8 +2630,6 @@ The
     
     <xsl:value-of use-when="$th-style = 'th' "
 	select="exists($e/@th:eID)"/>
-    <xsl:value-of use-when="$th-style = 'ana' "
-	select="$e/@ana='end' "/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 		  select="ends-with($e/@xml:id,'_end')"/>
     
@@ -2650,8 +2646,6 @@ The
     
     <xsl:value-of use-when="$th-style = 'th' "
 	select="($e/@th:sID, $e/@th:eID)"/>
-    <xsl:value-of use-when="$th-style = 'ana' "
-		  select="($e/@loc)"/>
     <xsl:value-of use-when="$th-style = 'xmlid' "
 		  select="replace($e/@xml:id,'(_start|_end)$','')"/>
     
