@@ -2996,6 +2996,7 @@ The
                     unnecessarily to the output tree.</para>
                 <para>The template for start-markers does nothing; all the work is handled by the
                     declaration of the accumulator.</para>
+                <!--* 2018-07-24 ebb: ??? Why have you set priority="10" on the template rules matching trojan start and end markers below?  -->
                 <figure>
                     <programlisting><![CDATA[<!--************************************************
   * 1.  Virtual start-tags 
