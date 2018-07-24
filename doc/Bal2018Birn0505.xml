@@ -1967,18 +1967,18 @@ The
                     a debug option (line 8), controlled by a
                 <code>$debug</code> parameter. </para>
                 
-                <para>The traditional identity template walks the entire tree, but because anything
-                    lower than children of the root is guaranteed not to be or contain Trojan
-                    markers, we set up one identity template for those lower nodes, which just
-                    copied them to the output (lines 16–18). The regular identity template (lines
-                    21–25) applies only to the root element and its children.
+                <para>The traditional identity template walks the entire tree, but because any
+                    descendant nodes lower than children of the root are guaranteed not to be or
+                    contain Trojan markers, we set up one identity template for those lower nodes,
+                    which just copied them to the output (lines 16–18). The regular identity
+                    template (lines 21–25) applies only to the root element and its children.
                         <code>@exclude-result-prefixes="#all"</code> is not enough to avoid writing
                     the <code>th:</code> namespace onto the root element of the output, even though
-                    the namespace in question is not used the output. An unused namespace
+                    the namespace in question is not used in the output. An unused namespace
                     declaration is informationally harmless, but also needlessly distracting, so we
                     suppress it by specifying <code>@copy-namespaces="no"</code> on
                         <code>&lt;xsl:copy&gt;</code> in the identity template that deals with
-                Trojan markers (line 22).</para>
+                    Trojan markers (line 22).</para>
                 
                 <para>Our recursive raising operation (the <code>th:raise()</code> function, lines
                     31–52) operates on document nodes, and we need to process the original document
@@ -2074,22 +2074,19 @@ The
             <section>
                 <title>Raising <emphasis
                 role="ital">Frankenstein</emphasis></title>
-                
-                <para>As described above, the virtual-element markup in the <emphasis role="ital"
-                        >Frankenstein</emphasis> data differs from that of our simplified test
-                    sample. We handle the variations in style and satisfy the additional refactoring
-                requirements with:</para>
+                <para>For the <emphasis role="ital">Frankenstein</emphasis> data, we convert the
+                    Trojan marker attributes into an xml:id with an element constructor:</para>
                 
                 <figure>
                     <programlisting>&lt;xsl:element name="{name()}"&gt;
-    &lt;xsl:attribute name="xml:id" select="@loc"/&gt;
+    &lt;xsl:attribute name="xml:id" select="@th:sID"/&gt;
     &lt;xsl:copy-of
-        select="following-sibling::node()[following-sibling::*[@loc eq current()/@loc]]"/&gt;
+        select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"/&gt;
 &lt;/xsl:element&gt;</programlisting>
                     <caption>
-                        <para>Element constructor to refactor <code>@loc</code> as
-                                <code>@xml:id</code>
-                            <emphasis role="ital">Frankenstein</emphasis></para>
+                        <para>Element constructor to refactor <code>@th:sID</code> as
+                                <code>@xml:id</code> in <emphasis role="ital"
+                                >Frankenstein</emphasis></para>
                     </caption>
                 </figure>
                 
@@ -2104,10 +2101,9 @@ The
 		    *-->
                 <figure>
                   <programlisting>&lt;xsl:template match="*
-                    [@ana eq 'start']
-                    [@loc
+                    [@th:sID
                     eq
-                    following-sibling::*[@ana eq 'end'][1]/@loc]"&gt;</programlisting>
+                    following-sibling::*[@th:eID][1]/@th:eID]"&gt;</programlisting>
                     <caption>
                         <para>XPath expression to match start-markers in <emphasis role="ital"
                                 >Frankenstein</emphasis></para>
