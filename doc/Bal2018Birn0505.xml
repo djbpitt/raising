@@ -1553,8 +1553,8 @@ The
 	    		
         	
         <para>As described above, the <emphasis role="ital">right-sibling traversal</emphasis> idiom
-                    in XSLT proceeds one element at a time processing along the following-sibling
-                    axis. In the general case, each template for a content element calls
+                    in XSLT proceeds one element at a time along the following-sibling axis. In the
+                    general case, each template for a content element calls
                         <code>&lt;xsl:apply-templates&gt;</code> not on all its children but only on
                     its first child. Every template (for content elements, marker elements, text
                     nodes, comments, or processing instructions) concludes with a call to
@@ -1565,13 +1565,12 @@ The
                     only one that applies templates to its children. </para>
 	<para>For our simple test cases, processing begins
 	with the template for the outermost element.<footnote>
-	<para>If the flat content is contained not in the outermost
-	element but in some other container element, all nodes outside
-	the flattened region can be copied to the output without
-	change; in this case the template for the container element
-	will be responsible for shifting from the mode for identity
-	transformation to the mode for element raising, and
-	will have a more selective <code>match</code> pattern.</para>
+	<para>If the flat content is contained not in the outermost element but in some other container
+                            element, all nodes outside the flattened region can be copied to the
+                            output without change. In this case the template for the container
+                            element will be responsible for shifting from the mode for identity
+                            transformation to the mode for element raising, and will have a more
+                            selective <code>match</code> pattern.</para>
       </footnote>
 	</para>
 	<figure>
@@ -1615,14 +1614,13 @@ The
       </figure>
       
             <para>Note that there are two calls to <code>&lt;xsl:apply-templates&gt;</code>. The
-                first call to <code>&lt;xsl:apply-templates&gt;</code> occurs within an
-                    <code>&lt;xsl:copy&gt;</code> element (which constructs an element with the name
-                and attributes given by the start-marker); it selects the immediately following
-                sibling node, which will in the normal run of things become the first child node of
-                the new content element. The second call to <code>&lt;xsl:apply-templates&gt;</code>
-                occurs after the new content element and selects not the start-marker’s immediately
-                following sibling, but the node immediately to the
-            right of the end-marker.</para>
+                    first call to <code>&lt;xsl:apply-templates&gt;</code> occurs within an
+                        <code>&lt;xsl:copy&gt;</code> element (which constructs an element with the
+                    name and attributes given by the start-marker); it selects the immediately
+                    following sibling node, which will in the normal run of things become the first
+                    child node of the new content element. The second call to
+                        <code>&lt;xsl:apply-templates&gt;</code> occurs after the new content
+                    element and it does <emphasis>not</emphasis> select the start-marker’s immediately following sibling, but instead selects the node <emphasis>immediately to the right of the end-marker</emphasis>.</para>
             
             <para>Each child of the virtual element copies itself into the content element being
                 created. The templates for <code>text()</code> nodes, comments, processing
