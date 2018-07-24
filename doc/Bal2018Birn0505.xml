@@ -2467,16 +2467,11 @@ The
 		<programlisting><![CDATA[<xsl:mode on-no-match="shallow-copy"/>]]></programlisting>
 	      </figure>
 	      
-	      <para>For content nodes, the function
-	      <code>th:raise-sequence()</code>
-	      is called on their children.  In the simple inputs we
-	      are dealing with, this template will match only
-	      the document's outermost element; for the
-	      Frankenstein data, it will match several others.
-	      We have not experimented to see whether it
-	      would be faster to test for start- and end-marker
-	      children here.
-	      </para>
+	      <para>For content nodes, the function <code>th:raise-sequence()</code> is called on their
+                    children. In the simple inputs we are dealing with, this template will match
+                    only the document's outermost element; for the Frankenstein data, it will match
+                    several others. At the time of this writing, we have not experimented to see
+                    whether it would be faster to test for start- and end-marker children here. </para>
 	      <figure>
 		<programlisting><![CDATA[<xsl:template match="*[exists(node())]">
   <xsl:copy>
@@ -2489,18 +2484,15 @@ The
 	      
 	      <para>The core of the implementation is the
 	      <code>th:raise-sequence</code> function.</para>
-	      <para>The function begins by creating lists of start-
-	      and end-markers (identified by their co-indexing IDs),
-	      so that we can find not just the leftmost start-marker
-	      but the leftmost start-marker <emphasis role="ital">with
-	      a matching end-marker in the sequence</emphasis>.
-	      If there are no matching pairs in the sequence, the
-	      sequence is returned without change.
-	      (This makes this implementation slightly more robust
-	      in the presence of overlap than the implementation
-	      shown above of the right-sibling traversal approach;
-	      we have not yet had time to rectify the inconsistency
-	      in implementation philosophy.)</para>
+	      <para>The function begins by creating lists of start- and end-markers (identified by their
+                    co-indexing IDs), so that we can find not just the leftmost start-marker but the
+                    leftmost start-marker <emphasis role="ital">with a matching end-marker in the
+                        sequence</emphasis>. If there are no matching pairs in the sequence, the
+                    sequence is returned without change. (This makes this implementation slightly
+                    more robust in the presence of overlap than the implementation shown above of
+                    the right-sibling traversal approach; we have not yet had time to update our
+                    method of right-sibling traversal to rectify the inconsistency in implementation
+                    philosophy.)</para>
 	      <para>In the normal case, however, the function
 	      will select the leftmost start-marker with a
 	      matching end-marker, find the positions of the
