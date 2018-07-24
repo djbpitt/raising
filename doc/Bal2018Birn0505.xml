@@ -2680,27 +2680,17 @@ The
 	      virtual tree.  In this, the outside-in approach is
 	      indeed the mirror image of the inside-out approach.
 	      </para>
-	      <para>
-		The implementation of outside-in shown here is not,
-		however, faster than our implementation of inside-out,
-		despite the divide-and-conquer strategy.  We have
-		not been able to perform measurements to explain the
-		differences in run time, but we can offer a couple of
-		speculations.  First, on our test data the inside-out
-		approach
-		reduces the number of nodes faster than the
-		outside-in approach:  in a normal XML tree there will
-		be more leaf nodes than root nodes (and more than
-		that:  in our test data the fanout increases with
-		distance from the root).
-		Second, each call to the function traverses the input
-		sequence several times:
-		once to find all start-marker IDs, 
-		once to find all end-marker IDs, 
-		once to find the positions of the selected markers.
-		Either or both of these could explain the slower
-		run-time.
-	      </para>
+	      <para>The implementation of outside-in shown here is not, however, demonstrably faster than
+                    our implementation of inside-out, despite the divide-and-conquer strategy. We
+                    have not been able to perform measurements to explain the differences in run
+                    time, but we can offer a couple of speculations. First, on our test data the
+                    inside-out approach reduces the number of nodes faster than the outside-in
+                    approach: in a typical XML tree there will be more leaf nodes than root nodes
+                    (and more than that: in our test data the fanout increases with distance from
+                    the root). Second, each call to the function traverses the input sequence
+                    several times: once to find all start-marker IDs, once to find all end-marker
+                    IDs, once to find the positions of the selected markers. Either or both of these
+                    could explain a slow run-time. </para>
 	      <!--* need plot of run times for HE, Exselt *-->
 	      <!--* need plots of run times for 1.0 version for  HE, 
 		  Exselt, xsltproc *-->
