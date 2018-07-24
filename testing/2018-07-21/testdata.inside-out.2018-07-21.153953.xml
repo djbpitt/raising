@@ -1,9 +1,9 @@
-<testdata>
+<?xml version="1.0" encoding="UTF-8"?><testdata>
 <p>Automated test run, using HE, on inside-out/raise_he.sh.</p>
 <run>
-  <date>Sat Jul 21 15:39:53 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:39:53 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/basic/flattened.xml</input>
@@ -18,7 +18,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.035" u="1.725" s="0.109" us="1.834">
 
 real	0m1.035s
 user	0m1.725s
@@ -27,9 +27,9 @@ sys	0m0.109s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:39:54 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:39:54 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/basic/basho.xml</input>
@@ -44,7 +44,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.005" u="1.802" s="0.114" us="1.9160000000000001">
 
 real	0m1.005s
 user	0m1.802s
@@ -53,9 +53,9 @@ sys	0m0.114s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:39:55 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:39:55 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/basic/coleridge-quote.xml</input>
@@ -70,7 +70,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="0.977" u="1.778" s="0.11" us="1.8880000000000001">
 
 real	0m0.977s
 user	0m1.778s
@@ -79,9 +79,9 @@ sys	0m0.110s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:39:56 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:39:56 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/extended/flattened.xml</input>
@@ -96,7 +96,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.005" u="1.733" s="0.11" us="1.8430000000000002">
 
 real	0m1.005s
 user	0m1.733s
@@ -105,9 +105,9 @@ sys	0m0.110s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:39:57 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:39:57 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/extended/basho.xml</input>
@@ -122,7 +122,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.001" u="1.761" s="0.11" us="1.871">
 
 real	0m1.001s
 user	0m1.761s
@@ -131,9 +131,9 @@ sys	0m0.110s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:39:58 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:39:58 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/extended/coleridge-quote.xml</input>
@@ -148,7 +148,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.031" u="1.777" s="0.113" us="1.89">
 
 real	0m1.031s
 user	0m1.777s
@@ -157,9 +157,9 @@ sys	0m0.113s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:39:59 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:39:59 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/page-and-para.xml</input>
@@ -174,7 +174,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.004" u="1.721" s="0.113" us="1.834">
 
 real	0m1.004s
 user	0m1.721s
@@ -183,9 +183,9 @@ sys	0m0.113s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:01 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:01 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/basho.xml</input>
@@ -200,7 +200,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="0.972" u="1.709" s="0.114" us="1.8230000000000002">
 
 real	0m0.972s
 user	0m1.709s
@@ -209,9 +209,9 @@ sys	0m0.114s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:01 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:01 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/frost.xml</input>
@@ -226,7 +226,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="0.986" u="1.722" s="0.111" us="1.833">
 
 real	0m0.986s
 user	0m1.722s
@@ -235,9 +235,9 @@ sys	0m0.111s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:02 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:02 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/peergynt.xml</input>
@@ -252,7 +252,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="0.995" u="1.741" s="0.11" us="1.8510000000000002">
 
 real	0m0.995s
 user	0m1.741s
@@ -261,9 +261,9 @@ sys	0m0.110s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:03 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:03 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0052.xml</input>
@@ -278,7 +278,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.085" u="2.102" s="0.119" us="2.221">
 
 real	0m1.085s
 user	0m2.102s
@@ -287,9 +287,9 @@ sys	0m0.119s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:05 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:05 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0125.xml</input>
@@ -304,7 +304,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.157" u="2.393" s="0.122" us="2.5149999999999997">
 
 real	0m1.157s
 user	0m2.393s
@@ -313,9 +313,9 @@ sys	0m0.122s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:06 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:06 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0225.xml</input>
@@ -330,7 +330,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.302" u="2.653" s="0.148" us="2.801">
 
 real	0m1.302s
 user	0m2.653s
@@ -339,9 +339,9 @@ sys	0m0.148s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:07 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:07 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0329.xml</input>
@@ -356,7 +356,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.265" u="2.861" s="0.148" us="3.0090000000000003">
 
 real	0m1.265s
 user	0m2.861s
@@ -365,9 +365,9 @@ sys	0m0.148s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:08 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:08 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0368.xml</input>
@@ -382,7 +382,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.3" u="2.942" s="0.149" us="3.091">
 
 real	0m1.300s
 user	0m2.942s
@@ -391,9 +391,9 @@ sys	0m0.149s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:10 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:10 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0441.xml</input>
@@ -408,7 +408,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.319" u="3.059" s="0.146" us="3.205">
 
 real	0m1.319s
 user	0m3.059s
@@ -417,9 +417,9 @@ sys	0m0.146s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:11 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:11 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.1041.xml</input>
@@ -434,7 +434,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="1.676" u="4.099" s="0.187" us="4.2860000000000005">
 
 real	0m1.676s
 user	0m4.099s
@@ -443,9 +443,9 @@ sys	0m0.187s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:13 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:13 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.1477.xml</input>
@@ -460,7 +460,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="2.05" u="4.954" s="0.223" us="5.177">
 
 real	0m2.050s
 user	0m4.954s
@@ -469,9 +469,9 @@ sys	0m0.223s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:15 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:15 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02_flattened.xml</input>
@@ -486,7 +486,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="2.527" u="5.637" s="0.243" us="5.88">
 
 real	0m2.527s
 user	0m5.637s
@@ -495,9 +495,9 @@ sys	0m0.243s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:17 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:17 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.l18.xml</input>
@@ -512,7 +512,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="2.493" u="5.787" s="0.245" us="6.032">
 
 real	0m2.493s
 user	0m5.787s
@@ -521,9 +521,9 @@ sys	0m0.245s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:20 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:20 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown02.xml</input>
@@ -538,7 +538,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="5.094" u="10.682" s="0.358" us="11.040000000000001">
 
 real	0m5.094s
 user	0m10.682s
@@ -547,9 +547,9 @@ sys	0m0.358s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:25 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:25 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown04.xml</input>
@@ -564,7 +564,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="15.168" u="21.837" s="0.386" us="22.223">
 
 real	0m15.168s
 user	0m21.837s
@@ -573,9 +573,9 @@ sys	0m0.386s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:40:40 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:40:40 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown16.xml</input>
@@ -590,7 +590,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="176.846" u="185.097" s="1.135" us="186.232">
 
 real	2m56.846s
 user	3m5.097s
@@ -599,9 +599,9 @@ sys	0m1.135s
 </run>
 
 <run>
-  <date>Sat Jul 21 15:43:37 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 15:43:37 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown64.xml</input>
@@ -616,7 +616,7 @@ Warning at xsl:function on line 54 column 32 of marker-recognition.xsl:
 Warning at xsl:function on line 33 column 86 of marker-recognition.xsl:
   SXST0068: Request for streaming ignored: this Saxon configuration does not support streaming
   </processor-messages>
-  <timing>
+  <timing r="2973.639" u="3005.537" s="13.298" us="3018.8349999999996">
 
 real	49m33.639s
 user	50m5.537s
