@@ -677,15 +677,17 @@ URIs to allow line breaks *-->
             <para>Following the collation process, we use the XML output as the basis for
                 reconstructing the individual edition files so that they may individually indicate
                     <quote>hotspots</quote>, or passages that vary in the other editions. We wrote
-                XSLT to run over the collation XML output, to produce a separate file representing each reading
-                witness. In this first stage, we leave all the original marker elements of the edition as escaped strings and we mark each witness’s hotspots with <code>&lt;seg&gt;</code> elements. 
+                XSLT to run over the collation XML output to produce a separate file representing each reading
+                witness (not shown here for space reasons). In this first stage, we leave all the original marker elements of the edition as escaped strings and we mark each witness’s hotspots with <code>&lt;seg&gt;</code> elements. 
                 Because these hotspots will sometimes overlap with structural markup from the input
                 editions, we must also insert these elements as flattened start and end markers.
             </para>
-            <para>In a next stage, we apply an XSLT script with
+            <para>In the next stage, shown in <xref
+                linkend="reconstructed-Thomas_C10"/>, we apply an XSLT script with
                     <code>&lt;xsl:analyze-string&gt;</code> to reconstruct the source edition’s
-                element markers from the strings. </para>
-            <figure>
+                element markers from the strings.<xref
+                    linkend="reconstructed-Thomas_C10"/>: </para>
+            <figure xml:id="analyze-string">
                 <programlisting>
 &lt;xsl:template match="ab/text()"  
  &lt;xsl:analyze-string select="." regex="&amp;lt;.[^/]+?[es]ID=[^/]+?/&amp;gt;"&gt;
@@ -731,7 +733,7 @@ URIs to allow line breaks *-->
      &lt;xsl:value-of select="."/&gt;
   &lt;/xsl:non-matching-substring&gt;
  &lt;/xsl:analyze-string&gt;
-                   &lt;/xsl:template&gt;
+&lt;/xsl:template&gt;
                 </programlisting>
                 <caption><para>XSLT template to reconstruct element markers from escape-character strings <footnote><para>This particular kind of “raising” from text strings is slightly tangential to the methods we concentrate on this paper, but we include some discussion of it because it is part of the practical use-case prompting our work on this paper, and is likely to be a stage in other projects that require elements to be flattened and raised. The complete XSLT stylesheet for this process is in the <link xlink:href="https://github.com/PghFrankenstein/Pittsburgh_Frankenstein">Frankenstein Variorum GitHub repository</link>, and <link xlink:href="https://github.com/PghFrankenstein/Pittsburgh_Frankenstein/blob/master/collateXPrep/P3-bridgeEditionConstructor.xsl">the stylesheet itself</link> is part three series of transformations in our raising process that may be found in the parent directory, which also holds its <link xlink:href="https://github.com/PghFrankenstein/Pittsburgh_Frankenstein/tree/master/collateXPrep/bridge-P2">input</link> and <link xlink:href="https://github.com/PghFrankenstein/Pittsburgh_Frankenstein/tree/master/collateXPrep/bridge-P3">output</link> directories.</para></footnote></para></caption>
             </figure>
