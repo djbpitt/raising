@@ -3087,6 +3087,9 @@ The
 </xsl:template>]]></programlisting>
                     <para>Template for non-element nodes</para>
                 </figure>
+                <!--* ??? ebb: This section could use a little more concluding discussion: how does the accumulator perform by comparison with the other methods we've been exploring? 
+                    Is it faster/more efficient/less error-prone?  
+                -->
 </section>
 
 </section>
