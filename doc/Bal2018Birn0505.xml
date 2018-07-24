@@ -3366,7 +3366,7 @@ print("".join(output))</programlisting>
                 
                 <para>We are parsing the input XML in an XML-aware manner, which is reasonably
                     robust, but we are constructing the output XML as a string, which is not. See
-                below for a discussion of the limitations.</para>
+                    below <xref linkend="python-string-challenges"/> for a discussion of the limitations.</para>
                 
                 </section>
                 
@@ -3567,7 +3567,7 @@ with open('flattened.xml') as input:
         
     </section>
     
-    <section>
+    <section xml:id="errors">
         <title>Some things that can go wrong</title>
         
         <para>Each of the methods described above comes with its own complications, and it was in
@@ -3655,7 +3655,7 @@ with open('flattened.xml') as input:
             </section>
         </section>
         
-        <section>
+        <section xml:id="errors-accumulators">
             <title>Accumulators</title>
             <para>The primary problems we encountered in our implementation using accumulators were: <itemizedlist>
                     <listitem>
@@ -3684,7 +3684,7 @@ with open('flattened.xml') as input:
                 </itemizedlist></para>
         </section>
         
-        <section>
+        <section xml:id="errors-regex">
             <title>Regex</title>
             <para>The principal challenge to writing the regex (aside from the risk of inadvertently
                 creating XML that is not well-formed because of overlap, which is discussed above)
@@ -3707,7 +3707,7 @@ with open('flattened.xml') as input:
                 in any order with respect to each other and other attributes. </para>
         </section>
         
-        <section>
+        <section xml:id="python-string-challenges">
             <title>Pull parsing in Python</title>
             <para>The Python pull parser reads the input XML as XML and responds to parse events. We
                 handle <code>START_ELEMENT</code>, <code>END_ELEMENT</code>, and
