@@ -2709,27 +2709,22 @@ The
 
 	    <section>
 	      <title>A bluffer's guide to accumulators</title>
-            <para>An accumulator is a sequence of values associated
-            with the nodes of a tree; each node has both a
-            <emphasis>before</emphasis> value (calculated without
-            access to the values associated with any descendants, and
-            thus calculable before descendants are visited in a
-            depth-first traversal of the tree) and an
-            <emphasis>after</emphasis> value (which may depend on the
-            values associated with descendants and thus cannot be
-            calculated until after they have been visited). The
-            declaration of an accumulator specifies how to calculate
-            the before and after values to be associated with a node,
-            given the after values associated with the previous node
-            and with the node’s last child. One simple way to
-            calculate all the values of an accumulator would be to
-            visit each node in the document in a pre-and-post-order
-            traversal, calculating the before value on the first visit
-            to a node and the after value on the second. When
-            streaming processing is requested, the calculation rules
-            are not allowed to look ahead in the document, but
-            accumulators can be used even when streaming is not
-            requested.</para>
+            <para>An accumulator is a sequence of values associated with the nodes of a tree. Each
+                    node has two values: <orderedlist>
+                        <listitem><para>a <emphasis>before</emphasis> value (calculated without
+                    access to the values associated with any descendants, and thus calculable before
+                    descendants are visited in a depth-first traversal of the tree)</para></listitem> 
+                        <listitem><para>an <emphasis>after</emphasis> value (which may depend on the values associated
+                    with descendants and thus cannot be calculated until after they have been
+                    visited).</para></listitem></orderedlist> The declaration of an accumulator specifies how to calculate the
+                    before and after values to be associated with a node, given the after values
+                    associated with the previous node and with the node’s last child. One simple way
+                    to calculate all the values of an accumulator would be to visit each node in the
+                    document in a pre-and-post-order traversal, calculating the before value on the
+                    first visit to a node and the after value on the second. When streaming
+                    processing is requested, the calculation rules are not allowed to look ahead in
+                    the document, but accumulators can be used even when streaming is not
+                    requested.</para>
             
             <para>As a simple example, we can make an accumulator to keep track of the number of
                 open virtual elements at any given point in the flattened input document: when we
