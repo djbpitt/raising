@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    xmlns:pitt="https://github.com/ebeshero/Pittsburgh_Frankenstein"
+    
     xmlns="http://www.tei-c.org/ns/1.0"  
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -20,13 +20,13 @@
         as="document-node()+"
         select="collection('../input/frankenstein/c10-coll/')"/>    
     <!--* Experimental:  try adding a key *-->
-    <xsl:key name="start-markers" match="*[@th:sID]" use="@th:sID"/>
-    <xsl:key name="end-markers" match="*[@th:eID]" use="@th:eID"/>
+  <!--2018-07-23 ebb: This isn't working, and I'm not sure why not. This stylesheet has the recursion function run over a container element, rather than an  entire document node, and I think that must be the problem. Commenting it out for now.   <xsl:key name="start-markers" match="$C10-coll//*[@th:sID]" use="@th:sID"/>
+    <xsl:key name="end-markers" match="$C10-coll//*[@th:eID]" use="@th:eID"/>-->
     
     <!--* In all modes, do a shallow copy, suppress namespace nodes,
 	* and recur in default (unnamed) mode. *-->
     <xsl:template match="@* | node()" mode="#all">
-        <xsl:copy copy-namespaces="no">
+      <xsl:copy copy-namespaces="no">
             <xsl:apply-templates select="@* | node()"/>
         </xsl:copy>
     </xsl:template>
@@ -83,8 +83,8 @@
        <teiHeader>
            <fileDesc>
                <titleStmt><xsl:apply-templates select="descendant::titleStmt/title"/></titleStmt>
-               <xsl:copy-of select="descendant::publicationStmt"/>
-               <xsl:copy-of select="descendant::sourceDesc"/>
+               <xsl:copy-of select="descendant::publicationStmt" copy-namespaces="no"/>
+               <xsl:copy-of select="descendant::sourceDesc" copy-namespaces="no"/>
 	   </fileDesc>
        </teiHeader>
    </xsl:template>
@@ -113,7 +113,7 @@
            <xsl:attribute name="xml:id">
                <xsl:value-of select="@th:sID"/>
            </xsl:attribute>
-           <xsl:variable name="end-marker" as="element()" select="key('end-markers', @th:sID)"/>
+           <xsl:variable name="end-marker" as="element()" select="following-sibling::*[@th:eID = current()/@th:sID]"/>
            <xsl:copy-of select="following-sibling::node()[. &lt;&lt; $end-marker]"/>
        </xsl:element>
    </xsl:template>
