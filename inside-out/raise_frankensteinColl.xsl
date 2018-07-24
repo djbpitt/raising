@@ -16,9 +16,9 @@
 	document node in memory to perform its recursive
 	processing. -->
     <!--2018-07-23 ebb: I've updated this stylesheet to work with the th:raise function as expressed in raise_deep.xsl. -->
-    <xsl:variable name="C10-coll"
+    <xsl:variable name="novel-coll"
         as="document-node()+"
-        select="collection('../input/frankenstein/c10-coll/')"/>    
+        select="collection('../input/frankenstein/novel-coll/')"/>    
     <!--* Experimental:  try adding a key *-->
   <!--2018-07-23 ebb: This isn't working, and I'm not sure why not. This stylesheet has the recursion function run over a container element, rather than an  entire document node, and I think that must be the problem. Commenting it out for now.   <xsl:key name="start-markers" match="$C10-coll//*[@th:sID]" use="@th:sID"/>
     <xsl:key name="end-markers" match="$C10-coll//*[@th:eID]" use="@th:eID"/>-->
@@ -53,19 +53,15 @@
    </xsl:function>
    
    <xsl:template match="/">
-       <xsl:for-each select="$C10-coll//TEI">
-           <xsl:variable name="currentP3File"
-			 as="element()"
-			 select="current()"/>
-           <xsl:variable name="filename">
-               <xsl:text>target-</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()]"/>
+       <xsl:for-each select="$novel-coll//TEI">
+           <xsl:variable name="filename">              <xsl:text>raised_</xsl:text><xsl:value-of select="tokenize(base-uri(), '/')[last()]"/>
            </xsl:variable>
            <xsl:variable name="chunk"
 			 as="xs:string"
 			 select="substring-after(substring-before(tokenize(base-uri(), '/')[last()], '.'), '_')"/> 
            <xsl:result-document method="xml"
 				indent="yes"
-				href="../input/frankenstein/target-c10-coll/{$filename}">
+				href="output/frankenstein/novel-coll/{$filename}">
                <TEI>
 		   <xsl:apply-templates select="descendant::teiHeader"/>
 		   <text>
