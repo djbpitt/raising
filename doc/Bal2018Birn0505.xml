@@ -3934,16 +3934,16 @@ with open('flattened.xml') as input:
                 <para><emphasis role="ital">Tessellated</emphasis> structures cover an entire domain
                     with the same pattern without gaps or self-overlap, much as mosaic tiles might
                     cover an entire floor.</para>
-            </footnote> Consider a simple print document that can be understood as containing a
+            </footnote> Consider a simple printed document that can be understood as containing a
             sequence of pages or a sequence of paragraphs, where each sequence fully covers the
             content without self-overlap, but where the two different element types overlap in a way
             that makes it impossible to use container elements for both. One typical XML workflow
             with such structures involves encoding one hierarchy with XML container elements and the
-            other with milestones. For example, a TEI novel transcribed from an original source
+            other with milestones. For example, a novel transcribed from an original source and encoded in TEI
             might be structured with <code>&lt;div&gt;</code> elements for chapters, which contain
                 <code>&lt;head&gt;</code> elements for chapter titles and <code>&lt;p&gt;</code>
             elements for paragraphs, with page beginnings encoded as empty <code>&lt;pb/&gt;</code>
-            elements. If is later becomes necessary to operate on the pages as units, we can
+            elements. If it later becomes necessary to operate on the pages as units, we can
                 <emphasis role="ital">invert</emphasis> the markup by transforming the
             page-beginning milestones into page container elements, while flattening the elements
         that demarcate chapters, titles, and paragraphs.</para>
@@ -3955,14 +3955,13 @@ with open('flattened.xml') as input:
                 <code>&lt;xsl:for-each-group&gt;</code> suitable for a situation where an entire
             text may be partitioned into tessellated paragraphs or tessellated pages makes it a poor
             choice for the contexts described in the body of this report, where new container
-            elements must be created only around small islands of
-        content.</para>
+            elements must be created only around small islands of content.</para>
         
-        <para>
+       <!-- <para>
             <emphasis role="ital">[To be completed, with a use case from
                     <link>http://suprasliensis.obdurodon.org</link>]</emphasis>
         </para>
-        
+        -->
     </appendix>
     
     <bibliography>
