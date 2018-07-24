@@ -2235,10 +2235,9 @@ The
                     </programlisting>
                     <caption><para>Inside-out raising of the Frankenstein Variorum collection</para></caption>
                 </figure>
-                <para>Beyond these small adaptations, there is very little different between our
+                <para>The adaptation to the raising function to process a container element node allows for us to make changes to our TEI header. Beyond this, there are few differences between our
                     generic inside-out raising example and the <emphasis>Frankenstein</emphasis>
-                    application. One minor difference is that we use only one identity-transformation template, and have not set a priority on the template rule to process the innermost elements. We convert the Trojan marker attributes into an xml:id with an
-                    element constructor:</para>
+                    stylesheet. One minor difference is that we use only one identity-transformation template, and have not set a priority on the template rule to process the innermost elements. We convert the Trojan marker attributes into an xml:id with an element constructor:</para>
                 
                 <figure>
                     <programlisting>&lt;xsl:element name="{name()}"&gt;
