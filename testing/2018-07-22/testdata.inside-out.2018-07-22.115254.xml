@@ -1,16 +1,16 @@
-<testdata>
+<?xml version="1.0" encoding="UTF-8"?><testdata>
 <p>Automated test run, using Exselt, on inside-out/raise_exselt.sh.</p>
 <run>
-  <date>Sun Jul 22 11:52:54 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:52:54 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/basic/flattened.xml</input>
   <output>output/basic/raised_flattened_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.531" u="1.918" s="0.18" us="2.098">
 
 real	0m2.531s
 user	0m1.918s
@@ -19,16 +19,16 @@ sys	0m0.180s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:52:56 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:52:56 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/basic/basho.xml</input>
   <output>output/basic/raised_basho_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.516" u="2.213" s="0.164" us="2.3770000000000002">
 
 real	0m2.516s
 user	0m2.213s
@@ -37,16 +37,16 @@ sys	0m0.164s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:52:59 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:52:59 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/basic/coleridge-quote.xml</input>
   <output>output/basic/raised_coleridge-quote_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.47" u="2.015" s="0.174" us="2.189">
 
 real	0m2.470s
 user	0m2.015s
@@ -55,16 +55,16 @@ sys	0m0.174s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:01 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:01 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/extended/flattened.xml</input>
   <output>output/extended/raised_flattened_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.561" u="2.06" s="0.184" us="2.244">
 
 real	0m2.561s
 user	0m2.060s
@@ -73,16 +73,16 @@ sys	0m0.184s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:04 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:04 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/extended/basho.xml</input>
   <output>output/extended/raised_basho_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.482" u="2.213" s="0.164" us="2.3770000000000002">
 
 real	0m2.482s
 user	0m2.213s
@@ -91,16 +91,16 @@ sys	0m0.164s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:06 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:06 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/extended/coleridge-quote.xml</input>
   <output>output/extended/raised_coleridge-quote_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.518" u="2.049" s="0.177" us="2.226">
 
 real	0m2.518s
 user	0m2.049s
@@ -109,16 +109,16 @@ sys	0m0.177s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:09 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:09 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/overlap/page-and-para.xml</input>
   <output>output/overlap/raised_page-and-para_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.568" u="2.024" s="0.225" us="2.249">
 
 real	0m2.568s
 user	0m2.024s
@@ -127,16 +127,16 @@ sys	0m0.225s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:12 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:12 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/overlap/basho.xml</input>
   <output>output/overlap/raised_basho_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.516" u="1.992" s="0.178" us="2.17">
 
 real	0m2.516s
 user	0m1.992s
@@ -145,16 +145,16 @@ sys	0m0.178s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:14 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:14 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/overlap/frost.xml</input>
   <output>output/overlap/raised_frost_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.454" u="1.912" s="0.167" us="2.0789999999999997">
 
 real	0m2.454s
 user	0m1.912s
@@ -163,16 +163,16 @@ sys	0m0.167s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:17 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:17 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/overlap/peergynt.xml</input>
   <output>output/overlap/raised_peergynt_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.56" u="2.078" s="0.176" us="2.254">
 
 real	0m2.560s
 user	0m2.078s
@@ -181,16 +181,16 @@ sys	0m0.176s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:19 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:19 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.0052.xml</input>
   <output>output/brown/raised_r02.0052_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="7.065" u="6.382" s="0.215" us="6.5969999999999995">
 
 real	0m7.065s
 user	0m6.382s
@@ -199,16 +199,16 @@ sys	0m0.215s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:26 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:26 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.0125.xml</input>
   <output>output/brown/raised_r02.0125_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="20.125" u="19.81" s="0.252" us="20.061999999999998">
 
 real	0m20.125s
 user	0m19.810s
@@ -217,16 +217,16 @@ sys	0m0.252s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:53:46 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:53:46 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.0225.xml</input>
   <output>output/brown/raised_r02.0225_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="56.972" u="55.757" s="0.46" us="56.217">
 
 real	0m56.972s
 user	0m55.757s
@@ -235,16 +235,16 @@ sys	0m0.460s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:54:44 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:54:44 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.0329.xml</input>
   <output>output/brown/raised_r02.0329_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="101.33500000000001" u="100.265" s="0.476" us="100.741">
 
 real	1m41.335s
 user	1m40.265s
@@ -253,16 +253,16 @@ sys	0m0.476s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:56:25 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:56:25 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.0368.xml</input>
   <output>output/brown/raised_r02.0368_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="125.766" u="124.906" s="0.481" us="125.387">
 
 real	2m5.766s
 user	2m4.906s
@@ -271,16 +271,16 @@ sys	0m0.481s
 </run>
 
 <run>
-  <date>Sun Jul 22 11:58:31 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 11:58:31 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.0441.xml</input>
   <output>output/brown/raised_r02.0441_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="179.338" u="178.512" s="0.724" us="179.236">
 
 real	2m59.338s
 user	2m58.512s
@@ -289,16 +289,16 @@ sys	0m0.724s
 </run>
 
 <run>
-  <date>Sun Jul 22 12:01:30 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 12:01:30 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.1041.xml</input>
   <output>output/brown/raised_r02.1041_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="978.66" u="973.923" s="3.424" us="977.347">
 
 real	16m18.660s
 user	16m13.923s
@@ -307,16 +307,16 @@ sys	0m3.424s
 </run>
 
 <run>
-  <date>Sun Jul 22 12:17:49 MDT 2018</date>
+  <date isodate="2018-07-22">Sun Jul 22 12:17:49 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>Exselt</proc>
+  <proc procid="exs">Exselt</proc>
   <meth>inside-out</meth>
   <impl>raise_exselt.sh</impl>
   <input>input/brown/r02.1477.xml</input>
   <output>output/brown/raised_r02.1477_Exselt.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2025.316" u="2017.121" s="5.977" us="2023.0980000000002">
 
 real	33m45.316s
 user	33m37.121s

@@ -34,7 +34,7 @@ cp -p $INDOC $ACC1
 # Now run until it stops moving (or you hit MAX)
 while [ $SOFAR -lt $MAX ]; do
   SOFAR=$[$SOFAR + 1]
-  xsltproc --output $ACC2 $TRANSFORM $ACC1
+  xsltproc --timing --output $ACC2 $TRANSFORM $ACC1
   diff -q $ACC1 $ACC2 > /dev/null
   if [ $? -eq 0 ]; then 
       echo "After $SOFAR runs, fixed point has been reached."

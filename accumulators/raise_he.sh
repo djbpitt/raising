@@ -28,7 +28,7 @@ done
 
 SAX="${SAXON_HOME:-/opt/local/bin/saxon-he/saxon9he.jar}"
 
-echo /usr/bin/time -l /usr/bin/java $JOPTS -jar $SAX -l -s:$1 -xsl:raise.xsl -o:$2 $SOPTS
-/usr/bin/time -l /usr/bin/java $JOPTS -jar $SAX -l -s:$1 -xsl:raise.xsl -o:$2 $SOPTS
+# echo /usr/bin/time -l /usr/bin/java $JOPTS -jar $SAX -l -s:$1 -xsl:raise.xsl -o:$2 $SOPTS
+/usr/bin/java $JOPTS -jar $SAX -t:on -s:$1 -xsl:raise.xsl -o:$2 $SOPTS
 
 ### time /usr/bin/java $JOPTS -jar $SAX -l -s:$1 -xsl:raise.xsl -o:$2 $SOPTS

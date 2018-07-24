@@ -1,16 +1,16 @@
-<testdata>
+<?xml version="1.0" encoding="UTF-8"?><testdata>
 <p>Automated test run, using HE, on inside-out/raise.xsl.</p>
 <run>
-  <date>Sat Jul 21 07:39:25 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:25 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/basic/flattened.xml</input>
   <output>output/basic/raised_flattened_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="2.875" u="1.824" s="0.172" us="1.996">
 
 real	0m2.875s
 user	0m1.824s
@@ -19,16 +19,16 @@ sys	0m0.172s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:28 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:28 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/basic/basho.xml</input>
   <output>output/basic/raised_basho_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.964" u="1.632" s="0.108" us="1.74">
 
 real	0m0.964s
 user	0m1.632s
@@ -37,16 +37,16 @@ sys	0m0.108s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:29 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:29 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/basic/coleridge-quote.xml</input>
   <output>output/basic/raised_coleridge-quote_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.944" u="1.618" s="0.106" us="1.7240000000000002">
 
 real	0m0.944s
 user	0m1.618s
@@ -55,16 +55,16 @@ sys	0m0.106s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:30 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:30 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/extended/flattened.xml</input>
   <output>output/extended/raised_flattened_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="1.001" u="1.655" s="0.108" us="1.7630000000000001">
 
 real	0m1.001s
 user	0m1.655s
@@ -73,16 +73,16 @@ sys	0m0.108s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:31 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:31 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/extended/basho.xml</input>
   <output>output/extended/raised_basho_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="1.014" u="1.638" s="0.111" us="1.7489999999999999">
 
 real	0m1.014s
 user	0m1.638s
@@ -91,16 +91,16 @@ sys	0m0.111s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:32 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:32 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/extended/coleridge-quote.xml</input>
   <output>output/extended/raised_coleridge-quote_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.989" u="1.651" s="0.108" us="1.7590000000000001">
 
 real	0m0.989s
 user	0m1.651s
@@ -109,16 +109,16 @@ sys	0m0.108s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:33 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:33 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/overlap/page-and-para.xml</input>
   <output>output/overlap/raised_page-and-para_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.977" u="1.64" s="0.108" us="1.748">
 
 real	0m0.977s
 user	0m1.640s
@@ -127,16 +127,16 @@ sys	0m0.108s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:34 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:34 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/overlap/basho.xml</input>
   <output>output/overlap/raised_basho_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.948" u="1.636" s="0.107" us="1.7429999999999999">
 
 real	0m0.948s
 user	0m1.636s
@@ -145,16 +145,16 @@ sys	0m0.107s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:35 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:35 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/overlap/frost.xml</input>
   <output>output/overlap/raised_frost_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.2" u="0.306" s="0.041" us="0.347">
 
 real	0m0.200s
 user	0m0.306s
@@ -163,9 +163,9 @@ sys	0m0.041s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:35 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:35 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/overlap/peergynt</input>
@@ -173,7 +173,7 @@ sys	0m0.041s
   <processor-messages>
 Source file ../input/overlap/peergynt does not exist
   </processor-messages>
-  <timing>
+  <timing r="0.426" u="0.868" s="0.071" us="0.939">
 
 real	0m0.426s
 user	0m0.868s
@@ -182,16 +182,16 @@ sys	0m0.071s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:36 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:36 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.0052</input>
   <output>output/brown/raised_r02.0052_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.297" u="0.612" s="0.057" us="0.669">
 
 real	0m0.297s
 user	0m0.612s
@@ -200,16 +200,16 @@ sys	0m0.057s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:36 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:36 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.0125</input>
   <output>output/brown/raised_r02.0125_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.308" u="0.628" s="0.055" us="0.683">
 
 real	0m0.308s
 user	0m0.628s
@@ -218,16 +218,16 @@ sys	0m0.055s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:36 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:36 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.0225</input>
   <output>output/brown/raised_r02.0225_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.295" u="0.612" s="0.058" us="0.67">
 
 real	0m0.295s
 user	0m0.612s
@@ -236,16 +236,16 @@ sys	0m0.058s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:37 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:37 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.0329</input>
   <output>output/brown/raised_r02.0329_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.299" u="0.623" s="0.056" us="0.679">
 
 real	0m0.299s
 user	0m0.623s
@@ -254,16 +254,16 @@ sys	0m0.056s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:37 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:37 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.0368</input>
   <output>output/brown/raised_r02.0368_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.325" u="0.653" s="0.062" us="0.7150000000000001">
 
 real	0m0.325s
 user	0m0.653s
@@ -272,16 +272,16 @@ sys	0m0.062s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:37 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:37 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.0441</input>
   <output>output/brown/raised_r02.0441_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.286" u="0.588" s="0.052" us="0.64">
 
 real	0m0.286s
 user	0m0.588s
@@ -290,16 +290,16 @@ sys	0m0.052s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:38 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:38 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.1041</input>
   <output>output/brown/raised_r02.1041_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.317" u="0.674" s="0.058" us="0.7320000000000001">
 
 real	0m0.317s
 user	0m0.674s
@@ -308,16 +308,16 @@ sys	0m0.058s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:38 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:38 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02.1477</input>
   <output>output/brown/raised_r02.1477_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.32" u="0.689" s="0.06" us="0.7489999999999999">
 
 real	0m0.320s
 user	0m0.689s
@@ -326,16 +326,16 @@ sys	0m0.060s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:38 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:38 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/brown/r02_flattened.xml</input>
   <output>output/brown/raised_r02_flattened_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.323" u="0.677" s="0.06" us="0.7370000000000001">
 
 real	0m0.323s
 user	0m0.677s
@@ -344,16 +344,16 @@ sys	0m0.060s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:39 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:39 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/local/flattened.l18.xml</input>
   <output>output/local/raised_flattened.l18_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.336" u="0.696" s="0.063" us="0.7589999999999999">
 
 real	0m0.336s
 user	0m0.696s
@@ -362,16 +362,16 @@ sys	0m0.063s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:39 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:39 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/local/flattened.brown02.xml</input>
   <output>output/local/raised_flattened.brown02_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.324" u="0.683" s="0.059" us="0.742">
 
 real	0m0.324s
 user	0m0.683s
@@ -380,16 +380,16 @@ sys	0m0.059s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:39 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:39 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/local/flattened.brown04.xml</input>
   <output>output/local/raised_flattened.brown04_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.347" u="0.729" s="0.062" us="0.7909999999999999">
 
 real	0m0.347s
 user	0m0.729s
@@ -398,16 +398,16 @@ sys	0m0.062s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:40 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:40 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/local/flattened.brown16.xml</input>
   <output>output/local/raised_flattened.brown16_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.322" u="0.707" s="0.059" us="0.766">
 
 real	0m0.322s
 user	0m0.707s
@@ -416,16 +416,16 @@ sys	0m0.059s
 </run>
 
 <run>
-  <date>Sat Jul 21 07:39:40 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 07:39:40 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>inside-out</meth>
   <impl>raise.xsl</impl>
   <input>input/local/flattened.brown64.xml</input>
   <output>output/local/raised_flattened.brown64_HE.xml</output>
   <processor-messages>
   </processor-messages>
-  <timing>
+  <timing r="0.349" u="0.737" s="0.061" us="0.798">
 
 real	0m0.349s
 user	0m0.737s

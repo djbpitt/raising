@@ -1,9 +1,9 @@
-<testdata>
+<?xml version="1.0" encoding="UTF-8"?><testdata>
 <p>Automated test run, using HE, on accumulators/raise_he.sh.</p>
 <run>
-  <date>Sat Jul 21 10:57:08 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:08 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/basic/flattened.xml</input>
@@ -40,7 +40,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
        670  voluntary context switches
       3441  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="3.021" u="1.984" s="0.184" us="2.168">
 
 real	0m3.021s
 user	0m1.984s
@@ -49,9 +49,9 @@ sys	0m0.184s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:11 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:11 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/basic/basho.xml</input>
@@ -88,7 +88,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          1  voluntary context switches
       3575  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="1.007" u="1.776" s="0.115" us="1.891">
 
 real	0m1.007s
 user	0m1.776s
@@ -97,9 +97,9 @@ sys	0m0.115s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:12 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:12 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/basic/coleridge-quote.xml</input>
@@ -136,7 +136,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          1  voluntary context switches
       3367  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.978" u="1.754" s="0.114" us="1.868">
 
 real	0m0.978s
 user	0m1.754s
@@ -145,9 +145,9 @@ sys	0m0.114s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:13 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:13 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/extended/flattened.xml</input>
@@ -184,7 +184,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          1  voluntary context switches
       3208  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.997" u="1.756" s="0.112" us="1.868">
 
 real	0m0.997s
 user	0m1.756s
@@ -193,9 +193,9 @@ sys	0m0.112s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:14 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:14 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/extended/basho.xml</input>
@@ -232,7 +232,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          1  voluntary context switches
       3417  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.987" u="1.771" s="0.112" us="1.883">
 
 real	0m0.987s
 user	0m1.771s
@@ -241,9 +241,9 @@ sys	0m0.112s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:15 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:15 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/extended/coleridge-quote.xml</input>
@@ -280,7 +280,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          1  voluntary context switches
       3468  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.992" u="1.776" s="0.115" us="1.891">
 
 real	0m0.992s
 user	0m1.776s
@@ -289,9 +289,9 @@ sys	0m0.115s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:16 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:16 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/page-and-para.xml</input>
@@ -328,7 +328,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          1  voluntary context switches
       3350  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.996" u="1.751" s="0.11" us="1.861">
 
 real	0m0.996s
 user	0m1.751s
@@ -337,9 +337,9 @@ sys	0m0.110s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:17 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:17 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/basho.xml</input>
@@ -376,7 +376,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          1  voluntary context switches
       3562  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.999" u="1.779" s="0.112" us="1.891">
 
 real	0m0.999s
 user	0m1.779s
@@ -385,9 +385,9 @@ sys	0m0.112s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:18 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:18 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/frost.xml</input>
@@ -424,7 +424,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          3  voluntary context switches
       3438  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="1.035" u="1.754" s="0.114" us="1.868">
 
 real	0m1.035s
 user	0m1.754s
@@ -433,9 +433,9 @@ sys	0m0.114s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:19 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:19 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/overlap/peergynt</input>
@@ -459,7 +459,7 @@ Source file ../input/overlap/peergynt does not exist
          0  voluntary context switches
       1628  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.423" u="0.863" s="0.069" us="0.9319999999999999">
 
 real	0m0.423s
 user	0m0.863s
@@ -468,9 +468,9 @@ sys	0m0.069s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:19 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:19 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0052</input>
@@ -494,7 +494,7 @@ Source file ../input/brown/r02.0052 does not exist
          0  voluntary context switches
       2145  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.437" u="0.864" s="0.073" us="0.9369999999999999">
 
 real	0m0.437s
 user	0m0.864s
@@ -503,9 +503,9 @@ sys	0m0.073s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:20 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:20 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0125</input>
@@ -529,7 +529,7 @@ Source file ../input/brown/r02.0125 does not exist
          0  voluntary context switches
       1786  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.42" u="0.87" s="0.071" us="0.941">
 
 real	0m0.420s
 user	0m0.870s
@@ -538,9 +538,9 @@ sys	0m0.071s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:20 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:20 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0225</input>
@@ -564,7 +564,7 @@ Source file ../input/brown/r02.0225 does not exist
          0  voluntary context switches
       1761  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.421" u="0.867" s="0.069" us="0.9359999999999999">
 
 real	0m0.421s
 user	0m0.867s
@@ -573,9 +573,9 @@ sys	0m0.069s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:21 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:21 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0329</input>
@@ -599,7 +599,7 @@ Source file ../input/brown/r02.0329 does not exist
          0  voluntary context switches
       1694  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.421" u="0.853" s="0.07" us="0.923">
 
 real	0m0.421s
 user	0m0.853s
@@ -608,9 +608,9 @@ sys	0m0.070s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:21 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:21 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0368</input>
@@ -634,7 +634,7 @@ Source file ../input/brown/r02.0368 does not exist
          0  voluntary context switches
       1870  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.424" u="0.869" s="0.071" us="0.94">
 
 real	0m0.424s
 user	0m0.869s
@@ -643,9 +643,9 @@ sys	0m0.071s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:21 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:21 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.0441</input>
@@ -669,7 +669,7 @@ Source file ../input/brown/r02.0441 does not exist
          0  voluntary context switches
       1922  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.436" u="0.888" s="0.077" us="0.965">
 
 real	0m0.436s
 user	0m0.888s
@@ -678,9 +678,9 @@ sys	0m0.077s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:22 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:22 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.1041</input>
@@ -704,7 +704,7 @@ Source file ../input/brown/r02.1041 does not exist
          0  voluntary context switches
       1719  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.422" u="0.871" s="0.068" us="0.9390000000000001">
 
 real	0m0.422s
 user	0m0.871s
@@ -713,9 +713,9 @@ sys	0m0.068s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:22 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:22 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02.1477</input>
@@ -739,7 +739,7 @@ Source file ../input/brown/r02.1477 does not exist
          0  voluntary context switches
       2033  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="0.435" u="0.919" s="0.073" us="0.992">
 
 real	0m0.435s
 user	0m0.919s
@@ -748,9 +748,9 @@ sys	0m0.073s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:23 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:23 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/brown/r02_flattened.xml</input>
@@ -787,7 +787,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          4  voluntary context switches
       6334  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="1.781" u="4.834" s="0.2" us="5.034">
 
 real	0m1.781s
 user	0m4.834s
@@ -796,9 +796,9 @@ sys	0m0.200s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:25 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:25 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.l18.xml</input>
@@ -835,7 +835,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          4  voluntary context switches
       6573  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="1.802" u="4.782" s="0.213" us="4.995">
 
 real	0m1.802s
 user	0m4.782s
@@ -844,9 +844,9 @@ sys	0m0.213s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:26 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:26 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown02.xml</input>
@@ -883,7 +883,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          3  voluntary context switches
       6720  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="2.264" u="6.596" s="0.285" us="6.881">
 
 real	0m2.264s
 user	0m6.596s
@@ -892,9 +892,9 @@ sys	0m0.285s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:29 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:29 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown04.xml</input>
@@ -931,7 +931,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          2  voluntary context switches
      14407  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="3.151" u="10.769" s="0.41" us="11.179">
 
 real	0m3.151s
 user	0m10.769s
@@ -940,9 +940,9 @@ sys	0m0.410s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:32 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:32 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown16.xml</input>
@@ -979,7 +979,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          2  voluntary context switches
      32647  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="6.196" u="22.604" s="0.665" us="23.269">
 
 real	0m6.196s
 user	0m22.604s
@@ -988,9 +988,9 @@ sys	0m0.665s
 </run>
 
 <run>
-  <date>Sat Jul 21 10:57:38 MDT 2018</date>
+  <date isodate="2018-07-21">Sat Jul 21 10:57:38 MDT 2018</date>
   <syst>Salerno</syst>
-  <proc>HE</proc>
+  <proc procid="she">HE</proc>
   <meth>accumulators</meth>
   <impl>raise_he.sh</impl>
   <input>input/local/flattened.brown64.xml</input>
@@ -1027,7 +1027,7 @@ Warning at xsl:mode on line 101 column 24 of raise.xsl:
          7  voluntary context switches
     172120  involuntary context switches
   </processor-messages>
-  <timing>
+  <timing r="18.896" u="63.104" s="2.203" us="65.307">
 
 real	0m18.896s
 user	1m3.104s
