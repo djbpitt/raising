@@ -663,7 +663,7 @@ URIs to allow line breaks *-->
                 an inserted passage not present in the other editions, which have no material to
                 compare with it. Following this point, the witnesses all agree, as shown in the next
                     <code>&lt;app&gt;</code> element. The output actually does not contain 
-                tags for the virtual <code>&lt;del&gt;</code> and <code>&lt;p&gt;</code> elements but rather they have been reduced to escape characters: <code>&amp;lt;del&amp;gt;</code> and <code>&amp;lt;p&amp;gt;</code>.</para>
+                markers for the virtual <code>&lt;del&gt;</code> and <code>&lt;p&gt;</code> elements but rather these have been converted to a string carrying escape characters as a trace of their prior existence as elements: <code>&amp;lt;del&amp;gt;</code> and <code>&amp;lt;p&amp;gt;</code>.</para>
             <!--* Then why on earth doesn't CollateX emit an empty
                 reading to signal explicitly that the other witnesses
                 have nothing here?  Even printed apparatus
@@ -674,12 +674,12 @@ URIs to allow line breaks *-->
             <para>Following the collation process, we use the XML output as the basis for
                 reconstructing the individual edition files so that they may individually indicate
                     <quote>hotspots</quote>, or passages that vary in the other editions. We wrote
-                XSLT to run over the collation XML output, to produce a separate file for each reading
-                witness. In this first stage, we leave all the original marker elements of the edition as escaped strings and we mark each witness’s hotspots with <code>&lt;seg></code>. 
+                XSLT to run over the collation XML output, to produce a separate file representing each reading
+                witness. In this first stage, we leave all the original marker elements of the edition as escaped strings and we mark each witness’s hotspots with <code>&lt;seg&gt;</code> elements. 
                 Because these hotspots will sometimes overlap with structural markup from the input
                 editions, we must also insert these elements as flattened start and end markers.
             </para>
-<para></para>
+            <para>In a next stage, we apply an XSLT script with <code>&lt;xsl:analyze-string&gt;</code> to reconstruct the source edition’s element markers from the strings.</para>
                 <para>Our
                 task, then, is to find a way to raise both the original markup we flattened from the
                 source editions with the conflicting hierarchy posed by the <code>seg</code>
@@ -3315,7 +3315,7 @@ print("".join(output))</programlisting>
                     therefore, equal to the maximum depth of the unflattened XML. The code
                 is:</para>
                 
-                <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
+               <figure> <programlisting>from xml.dom.pulldom import CHARACTERS, START_ELEMENT, parseString, END_ELEMENT
 from xml.dom.minidom import Document
 
 
@@ -3349,6 +3349,8 @@ with open('flattened.xml') as input:
             open_elements.peek().appendChild(t)
 
                 print(open_elements.pop().toxml())</programlisting>
+               <caption><para>Raising with python using pulldom</para></caption>
+               </figure>
                 
                 <para>Parsing is the same as described above, so we import the same items from
                         <code>pulldom</code>. From <code>minidom</code> we import only the
