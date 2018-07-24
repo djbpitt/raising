@@ -2873,12 +2873,7 @@ The
     <xsl:copy select="$ln[1]">
       <!--* first copy (and filter) attributes *-->
       <xsl:sequence select="$ln[1]/(@* except @th:*)"
-                    use-when="$th-style = 'th' "/>
-      <xsl:sequence use-when="$th-style = 'ana' ">
-        <xsl:sequence select="$ln[1]/(@* except (@ana, @loc))"/>
-        <xsl:attribute name="xml:id" select="$ln[1]/@loc"/>
-      </xsl:sequence>
-                    
+                    use-when="$th-style = 'th' "/>  
       <xsl:sequence use-when="$th-style='xmlid'">
         <xsl:sequence select="$ln[1]/@*"/>
         <xsl:attribute name="xml:id" 
