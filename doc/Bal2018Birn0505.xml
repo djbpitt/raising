@@ -1505,22 +1505,17 @@ The
 	      <title>Outline of XSLT code</title>
 	    		
         	
-        <para>As described above, the <emphasis
-        role="ital">right-sibling traversal</emphasis> idiom in XSLT
-        proceeds one element at a time processing along the
-        following-sibling axis. In the general case, each template for
-        a content element calls
-        <code>&lt;xsl:apply-templates&gt;</code> not on all its
-        children but only on its first child; every template (for
-        content elements, marker elements, text nodes, comments, or
-        processing instructions) concludes with a call to
-        <code>&lt;xsl:apply-templates
-        select="following-sibling::node()[1]"/></code>, thus passing
-        control to the template for its immediate right sibling.  In
-        the flattening case, the outermost element of the document may
-        be the only content element and its template the only one that
-	applies templates to its children.
-	</para>
+        <para>As described above, the <emphasis role="ital">right-sibling traversal</emphasis> idiom
+                    in XSLT proceeds one element at a time processing along the following-sibling
+                    axis. In the general case, each template for a content element calls
+                        <code>&lt;xsl:apply-templates&gt;</code> not on all its children but only on
+                    its first child. Every template (for content elements, marker elements, text
+                    nodes, comments, or processing instructions) concludes with a call to
+                        <code>&lt;xsl:apply-templates
+                    select="following-sibling::node()[1]"/></code>, thus passing control to the
+                    template for its immediate right sibling. In the flattening case, the outermost
+                    element of the document may be the only content element and its template the
+                    only one that applies templates to its children. </para>
 	<para>For our simple test cases, processing begins
 	with the template for the outermost element.<footnote>
 	<para>If the flat content is contained not in the outermost
@@ -1712,14 +1707,14 @@ The
      &lt;xsl:template match="div[@type='collation']"&gt;
      &lt;xsl:apply-templates select="child::node()[1]" mode="raising"/&gt;
  &lt;/xsl:template&gt;  
-    &lt;xsl:template match="*[@loc and @ana='start']" mode="raising"&gt;     
+    &lt;xsl:template match="*[@th:sID]" mode="raising"&gt;     
         &lt;xsl:variable name="ln" as="xs:string" select="name()"/&gt;
-        &lt;xsl:variable name="sID" as="xs:string" select="@loc"/&gt;
+        &lt;xsl:variable name="sID" as="xs:string" select="@th:sID"/&gt;
         
         &lt;!--* 1: handle this element *--&gt;
         &lt;xsl:copy&gt;
            &lt;xsl:attribute name="xml:id"&gt;
-               &lt;xsl:value-of select="@loc"/&gt;
+               &lt;xsl:value-of select="$sID"/&gt;
            &lt;/xsl:attribute&gt;
             &lt;xsl:apply-templates select="following-sibling::node()[1]" mode="raising"&gt;
             &lt;/xsl:apply-templates&gt;
@@ -1727,7 +1722,7 @@ The
         
         &lt;!--* 2: continue after this element *--&gt;
       &lt;xsl:apply-templates select="following-sibling::*
-            [@ana='end' and @loc= $sID 
+            [@th:eID= $sID 
             and name()=$ln]
             /following-sibling::node()[1]"
             mode="raising"&gt;
@@ -1740,7 +1735,7 @@ The
             select="following-sibling::node()[1]"
             mode="raising"/&gt;
     &lt;/xsl:template&gt;
-    &lt;xsl:template match="*[@loc and @ana='end']" mode="raising"/&gt;
+    &lt;xsl:template match="*[@th:eID]" mode="raising"/&gt;
                 </programlisting>
                     <caption>
                         <para>Right sibling traversal method applied to
