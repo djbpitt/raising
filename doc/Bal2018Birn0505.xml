@@ -3781,8 +3781,8 @@ with open('flattened.xml') as input:
                     <listitem>
                         <para>The relationships among namespaces, namespace prefixes, and namespace
                             declarations in <code>minidom</code> are alien to the XML view of
-                            namespaces. <code>minidom</code> is namespace-aware at the level of the
-                            model, but that awareness is not integrated with the serialization
+                            namespaces. While <code>minidom</code> is namespace-aware at the level of the
+                            model, that awareness is not integrated with the serialization
                             supported by the <code>toxml()</code> method (and some others). Here is
                             a partial summary of the details:</para>
                         <itemizedlist>
@@ -3841,7 +3841,7 @@ with open('flattened.xml') as input:
                             (e.g., by binding a different prefix to the namespace URI, or by using
                             namespace declarations on individual elements, instead of a prefix) will
                             not be processed correctly.</para>
-                        <para>These <code>pulldom</code> and <code>minidom</code> behaviors are very
+                        <para>These <code>pulldom</code> and <code>minidom</code> behaviors are
                             far from XML-idiomatic, but except for the syntactic dependencies they
                             impose (where namespaces are declared, how the declarations are spelled,
                             how they are bound to prefixes), they prove not to be much of a
