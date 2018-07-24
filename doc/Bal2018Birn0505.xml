@@ -662,8 +662,11 @@ URIs to allow line breaks *-->
                 the first <code>&lt;app&gt;</code> because at this point the Thomas edition contains
                 an inserted passage not present in the other editions, which have no material to
                 compare with it. Following this point, the witnesses all agree, as shown in the next
-                    <code>&lt;app&gt;</code> element. The output actually does not contain 
-                markers for the virtual <code>&lt;del&gt;</code> and <code>&lt;p&gt;</code> elements but rather these have been converted to a string carrying escape characters as a trace of their prior existence as elements: <code>&amp;lt;del&amp;gt;</code> and <code>&amp;lt;p&amp;gt;</code>.</para>
+                    <code>&lt;app&gt;</code> element. The output actually does not contain markers
+                for the virtual <code>&lt;del&gt;</code> and <code>&lt;p&gt;</code> elements but
+                rather these have been converted to a string carrying escape characters as a trace
+                of their prior existence as elements: <code>&amp;lt;del/&amp;gt;</code> and
+                    <code>&amp;lt;p/&amp;gt;</code>.</para>
             <!--* Then why on earth doesn't CollateX emit an empty
                 reading to signal explicitly that the other witnesses
                 have nothing here?  Even printed apparatus
@@ -679,9 +682,52 @@ URIs to allow line breaks *-->
                 Because these hotspots will sometimes overlap with structural markup from the input
                 editions, we must also insert these elements as flattened start and end markers.
             </para>
-            <para>In a next stage, we apply an XSLT script with <code>&lt;xsl:analyze-string&gt;</code> to reconstruct the source edition’s element markers from the strings.</para>
-                <para>Our
-                task, then, is to find a way to raise both the original markup we flattened from the
+            <para>In a next stage, we apply an XSLT script with
+                    <code>&lt;xsl:analyze-string&gt;</code> to reconstruct the source edition’s
+                element markers from the strings. </para>
+            <figure>
+                <programlisting>
+&lt;xsl:template match="ab/text()"  
+ &lt;xsl:analyze-string select="." regex="&amp;lt;.[^/]+?[es]ID=[^/]+?/&amp;gt;"&gt;
+ <!--The value of the regex attribute is the string we isolate for conversion into a new element. It begins and ends with a left and right angle bracket and contains the pattern to isolate the original non-namespaced form of our Trojan markers. -->
+ &lt;!--matches strings representing flattened element tags marked with sID and eID attributes.--&gt;                         &lt;xsl:matching-substring&gt;
+   &lt;xsl:variable name="flattenedTagContents" 
+            select="substring-before(., '/') ! substring-after(., '&amp;lt;')"/&gt;
+   &lt;xsl:variable name="elementName" 
+            select="tokenize($flattenedTagContents, ' ')[1]"/&gt;
+                                
+   &lt;xsl:element name="{$elementName}"&gt;
+   
+      &lt;xsl:for-each select="tokenize($flattenedTagContents, ' ')[position() gt 1][contains(., '=')]"&gt;
+      <!--In defining the variable below, we apply the Trojan Horse (th:) namespace prefix to the original forms of sID and eID in the input data. If the regular expression matched by [se]ID is found in the string, we concatenate the prefix with the substring before the '=' sign to form the attribute name. Otherwise, the substring before the '=' sign will be the attribute name. -->
+           &lt;xsl:variable name="attName" as="xs:string"&gt;
+            &lt;xsl:choose&gt;
+              &lt;xsl:when test="matches(current(), '[se]ID')"&gt;
+                &lt;xsl:value-of select="concat('th:', substring-before(current(), '='))"/&gt;
+              &lt;/xsl:when&gt;
+              &lt;xsl:otherwise&gt;
+                &lt;xsl:value-of select="substring-before(current(), '=')"/&gt;   
+              &lt;/xsl:otherwise&gt;
+           &lt;/xsl:choose&gt;                                   
+          &lt;/xsl:variable&gt;
+          &lt;xsl:attribute name="{$attName}"&gt;
+              &lt;xsl:value-of select="substring-after(current(), '=&amp;#34;') ! substring-before(., '&amp;#34;')"/&gt;    
+          &lt;/xsl:attribute&gt;
+    &lt;/xsl:for-each&gt; 
+   &lt;/xsl:element&gt;
+  &lt;/xsl:matching-substring&gt;
+  &lt;xsl:non-matching-substring&gt;
+    &lt;!--At this point, we run xsl:analyze-string again to isolate other kinds of strings that represent other kinds of elements need to be converted in some way. After running a series of these, we conclude with &lt;xsl:value-of select="."/&gt; to output what remains as a string.--&gt;
+     &lt;xsl:value-of select="."/&gt;
+  &lt;/xsl:non-matching-substring&gt;
+ &lt;/xsl:analyze-string&gt;
+                   &lt;/xsl:template&gt;
+                </programlisting>
+                <caption><para>XSLT template to reconstruct element markers from escape-character strings</para></caption>
+            </figure>
+            <para>This script applies regular expressions to isolate the strings we need to reconstruct the Trojan marker elements of the source edition that were reduced to text in the collation process. Going into the collation none of our files contain namespaces, but we apply them in the up-conversion process, so here we concatenate the <code>th:</code> namespace prefix as we reconstruct our Trojan horse attributes.</para>
+                <para>Following this element reconstruction, our next
+                task will be to find a way to raise both the original markup we flattened from the
                 source editions with the conflicting hierarchy posed by the <code>seg</code>
                 elements derived from the collation process. <xref
                 linkend="reconstructed-Thomas_C10"/>
