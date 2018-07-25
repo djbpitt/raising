@@ -1701,7 +1701,7 @@ The
                     of nodes in the flattened portion of the input. An XSLT processor that does not
                     eliminate tail-recursive template calls may thus run out of stack space (at
                     least in theory—in practice, we have never seen a right-sibling recursion blow
-                    the stack on real, well-formed input).</para>
+                    the stack on real input).</para>
               <para>Because the right-sibling idiom visits each node
 	      in the flattened input just once, the cost of the process
 	      should be linear in the size of the input.  (In practice,
