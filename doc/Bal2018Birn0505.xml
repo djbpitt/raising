@@ -858,7 +858,11 @@ The
             <!--* MSM wonders: if you want to make that kind of
                 association explicit, wouldn't @part or @next
                 and @prev do that in a more standard way?
-                Just asking. *-->
+                Just asking. 
+                
+                EB: Of course it would be the standard TEI way to use @part, or @next, or @prev, and I suppose it's a bad habit of mine to put a lot of information into an xml:id and parse it with string functions. Should we comment on the nonstandard nature of my xml:id in the paper? Alternatively, I suppose I should change this markup in the project. Still, perhaps there's no need to add more attributes, if I already do convey what information I need to parse these segs and raise them as a virtual hierarchy with their xml:ids. 
+                
+                *-->
             
             <para>Our process of raising the new edition files thus entails the following steps: <orderedlist>
                     <listitem>
@@ -1697,7 +1701,7 @@ The
                     of nodes in the flattened portion of the input. An XSLT processor that does not
                     eliminate tail-recursive template calls may thus run out of stack space (at
                     least in theory—in practice, we have never seen a right-sibling recursion blow
-                    the stack on real, well-formed input).</para>
+                    the stack on real input).</para>
               <para>Because the right-sibling idiom visits each node
 	      in the flattened input just once, the cost of the process
 	      should be linear in the size of the input.  (In practice,
