@@ -85,31 +85,6 @@ URIs to allow line breaks *-->
             </affiliation>
             <email>ebb8@pitt.edu</email>
         </author>
-        <author>
-            <personname>
-                <firstname>C.</firstname>
-                <othername>M.</othername>
-                <surname>Sperberg-McQueen</surname>
-            </personname>
-            <personblurb>
-                <para>C. M. Sperberg-McQueen is the founder and
-                principal of <link
-                xlink:href="http://www.blackmesatech.com/">Black Mesa
-                Technologies</link>, a consultancy specializing in
-                helping memory institutions improve the long term
-                preservation of and access to the information for
-                which they are responsible. He served as editor in
-                chief of the TEI Guidelines from 1988 to 2000, and has
-                also served as co-editor of the World Wide Web
-                Consortium’s XML 1.0 and XML Schema 1.1
-                specifications.</para>
-            </personblurb>
-            <affiliation>
-                <jobtitle>Founder and Principal</jobtitle>
-                <orgname>Black Mesa Technologies</orgname>
-            </affiliation>
-            <email>cmsmcq@blackmesatech.com</email>
-        </author>
     </info>
     
     <section>
@@ -302,24 +277,6 @@ URIs to allow line breaks *-->
         <para>With respect to those parameters, the methods discussed
         below may be classified as follows:</para>
 
-        <!--* 20 July.  MSM decides 'input traversal' is not a useful
-            concept here and comments that column out, despite
-            consciousness that DJB was trying to distinguish
-            systematically between 'input traversal' and 'output
-            construction'.
-            
-            Input traversal makes sense as a concept for programs
-            that move around a tree; the sense in which the use
-            of apply-templates in XSLT moves around the tree is
-            at best a loose one: processors can reorder the templates
-            in time however they like.
-            
-            MSM adds 'Passes', discovers we already have it; moves it.
-            
-            Suppresses 'recursion' and 'stack' as not intrinsic to
-              the method but accidents of implementation            
-            Renames 'output construction' and 'well-formed'.        
-            *-->
         <table>
           <col width="2"/><!--* method *-->
           <col width="1"/><!--* input *-->
@@ -340,9 +297,6 @@ URIs to allow line breaks *-->
                     *-->
                     <th>Passes / Calls</th>
                     <th>Overlap handling</th>
-                    <!--* MSM finds "well-formed" an unhappy
-                        name for this column, but has not found
-                        a better one. *-->
                 </tr>
             </thead>
             <tbody>
@@ -817,14 +771,6 @@ The
 
             
             <figure>
-              <!--* MSM moved seg end-tag from before del (immediately
-                  after 'con') to end of first paragraph, after
-                  consulting input/Frankenstein/novel-coll, where
-                  the segment seems to include "pul/vulsed &
-                  deformed his un-human features."
-
-                  But do check! EB: Yes, confirmed (even in a new output collation). Thank you!
-                  *-->
               
                 <programlisting>&lt;p xml:id="novel1_letter4_chapter4_p133"&gt;
     …
@@ -855,14 +801,6 @@ The
                 their association with each other with <code>__Pt1</code> and <code>__Pt2</code>
                 appended to the original value of the apparatus and
             reading witness location.</para>
-            <!--* MSM wonders: if you want to make that kind of
-                association explicit, wouldn't @part or @next
-                and @prev do that in a more standard way?
-                Just asking. 
-                
-                EB: Of course it would be the standard TEI way to use @part, or @next, or @prev, and I suppose it's a bad habit of mine to put a lot of information into an xml:id and parse it with string functions. Should we comment on the nonstandard nature of my xml:id in the paper? Alternatively, I suppose I should change this markup in the project. Still, perhaps there's no need to add more attributes, if I already do convey what information I need to parse these segs and raise them as a virtual hierarchy with their xml:ids. 
-                
-                *-->
             
             <para>Our process of raising the new edition files thus entails the following steps: <orderedlist>
                     <listitem>
@@ -1189,9 +1127,6 @@ The
 	    document by progressing through the flat sequence
 	    of siblings which makes up most of the input.</para>
 
-	    <!--* MSM has commented out many of the figures,
-		but the files are there and the selection can be
-		changed. *-->
 
 	    <figure xml:id="visit-LR-01">
 	      <mediaobject>
@@ -1726,11 +1661,6 @@ The
 	      is closer to conventional XSLT usage.  The
 	      implementation using XSLT 3.0 accumulators
 	      is another approach worth learning.
-	      <!--* MSM seems to be deciding that
-		  * this is a self-help paper.  Things
-		  * you should learn, as an XSLT programmer.
-		  * If you don't like that slant, change it.
-		  *-->
 	      </para>
             </section>
 
@@ -1787,10 +1717,6 @@ The
                 
             </section>
 
-	    <!--* MSM doesn't think the 1.0 implementation (which does
-		now exist) merits a separate subsection.  So I'm
-		commenting this out.
-		*-->
 	    <!--*
             <section>
                 <title>XSLT 1.0</title>
