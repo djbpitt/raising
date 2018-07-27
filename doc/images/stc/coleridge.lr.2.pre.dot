@@ -1,0 +1,116 @@
+digraph { 
+  graph [nodesep=0.03] ;
+  node [ordering=out]; 
+  subgraph { 
+    rank=same; 
+// p_0 is current at pre
+start_p_0 [label="p\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=red, style=filled, fillcolor=pink];
+end_p_0 [label="p\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// cit_0 is future at pre
+start_cit_0 [label="cit\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_cit_0 [label="cit\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// quote_0 is future at pre
+start_quote_0 [label="quote\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_quote_0 [label="quote\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// lg_0 is future at pre
+start_lg_0 [label="lg\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_lg_0 [label="lg\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// l_0 is future at pre
+start_l_0 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_0 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd1 is future at pre
+pcd1 [shape=box, label="Like\none\nwho,\non a\nlonely\nroad,", color=black, margin="0.03, 0.11", width=0.3];
+// l_1 is future at pre
+start_l_1 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_1 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd2 is future at pre
+pcd2 [shape=box, label="Doth\nwalk\nin\nfear\nand\ndread,", color=black, margin="0.03, 0.11", width=0.3];
+// l_2 is future at pre
+start_l_2 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_2 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd3 is future at pre
+pcd3 [shape=box, label="And,\nhaving\nonce\nturn’d\nround,\nwalks\non,", color=black, margin="0.03, 0.11", width=0.3];
+// l_3 is future at pre
+start_l_3 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_3 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd4 is future at pre
+pcd4 [shape=box, label="And\nturns\nno\nmore\nhis\nhead;", color=black, margin="0.03, 0.11", width=0.3];
+// l_4 is future at pre
+start_l_4 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_4 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd5 is future at pre
+pcd5 [shape=box, label="Because\nhe\nknows\na\nfrightful\nfiend", color=black, margin="0.03, 0.11", width=0.3];
+// l_5 is future at pre
+start_l_5 [label="l\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_l_5 [label="l\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd6 is future at pre
+pcd6 [shape=box, label="Doth\nclose\nbehind\nhim\ntread*.", color=black, margin="0.03, 0.11", width=0.3];
+// note_8 is future at pre
+start_note_8 [label="note\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_note_8 [label="note\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd7 is future at pre
+pcd7 [shape=box, label="*", color=black, margin="0.03, 0.11", width=0.3];
+// bibl_8 is future at pre
+start_bibl_8 [label="bibl\n(", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+end_bibl_8 [label="bibl\n)", shape=ellipse, margin=0, width=0.3, fontsize=11, color=black, style=filled, fillcolor="#EEEEEE"];
+// pcd8 is future at pre
+pcd8 [shape=box, label="Coleridge’s\n“Ancient\nMariner.”", color=black, margin="0.03, 0.11", width=0.3];
+  } 
+
+p_0 [label=p, color=red, shape=oval, style=filled, fillcolor=pink]; 
+cit_0 [label=cit, color=gray, shape=oval]; 
+quote_0 [label=quote, color=gray, shape=oval]; 
+lg_0 [label=lg, color=gray, shape=oval]; 
+l_0 [label=l, color=gray, shape=oval]; 
+l_1 [label=l, color=gray, shape=oval]; 
+l_2 [label=l, color=gray, shape=oval]; 
+l_3 [label=l, color=gray, shape=oval]; 
+l_4 [label=l, color=gray, shape=oval]; 
+l_5 [label=l, color=gray, shape=oval]; 
+note_8 [label=note, color=gray, shape=oval]; 
+bibl_8 [label=bibl, color=gray, shape=oval]; 
+
+p_0 -> start_p_0 [color=red, style=dotted];
+p_0 -> cit_0 [color=gray, style=solid];
+p_0 -> end_p_0 [color=gray, style=dotted];
+cit_0 -> start_cit_0 [color=gray, style=dotted];
+cit_0 -> quote_0 [color=gray, style=solid];
+cit_0 -> note_8 [color=gray, style=solid];
+cit_0 -> end_cit_0 [color=gray, style=dotted];
+quote_0 -> start_quote_0 [color=gray, style=dotted];
+quote_0 -> lg_0 [color=gray, style=solid];
+quote_0 -> end_quote_0 [color=gray, style=dotted];
+lg_0 -> start_lg_0 [color=gray, style=dotted];
+lg_0 -> l_0 [color=gray, style=solid];
+lg_0 -> l_1 [color=gray, style=solid];
+lg_0 -> l_2 [color=gray, style=solid];
+lg_0 -> l_3 [color=gray, style=solid];
+lg_0 -> l_4 [color=gray, style=solid];
+lg_0 -> l_5 [color=gray, style=solid];
+lg_0 -> end_lg_0 [color=gray, style=dotted];
+l_0 -> start_l_0 [color=gray, style=dotted];
+l_0 -> pcd1 [color=gray, style=solid];
+l_0 -> end_l_0 [color=gray, style=dotted];
+l_1 -> start_l_1 [color=gray, style=dotted];
+l_1 -> pcd2 [color=gray, style=solid];
+l_1 -> end_l_1 [color=gray, style=dotted];
+l_2 -> start_l_2 [color=gray, style=dotted];
+l_2 -> pcd3 [color=gray, style=solid];
+l_2 -> end_l_2 [color=gray, style=dotted];
+l_3 -> start_l_3 [color=gray, style=dotted];
+l_3 -> pcd4 [color=gray, style=solid];
+l_3 -> end_l_3 [color=gray, style=dotted];
+l_4 -> start_l_4 [color=gray, style=dotted];
+l_4 -> pcd5 [color=gray, style=solid];
+l_4 -> end_l_4 [color=gray, style=dotted];
+l_5 -> start_l_5 [color=gray, style=dotted];
+l_5 -> pcd6 [color=gray, style=solid];
+l_5 -> end_l_5 [color=gray, style=dotted];
+note_8 -> start_note_8 [color=gray, style=dotted];
+note_8 -> pcd7 [color=gray, style=solid];
+note_8 -> bibl_8 [color=gray, style=solid];
+note_8 -> end_note_8 [color=gray, style=dotted];
+bibl_8 -> start_bibl_8 [color=gray, style=dotted];
+bibl_8 -> pcd8 [color=gray, style=solid];
+bibl_8 -> end_bibl_8 [color=gray, style=dotted];
+}
