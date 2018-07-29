@@ -2,9 +2,12 @@
 
 This solution uses a right-sibling traversal of the input to perform the task. 
 
-There are two versions:  `raise_1.0.xsl` and `raise_3.0.xsl`, for
+Two versions:  `raise_1.0.xsl` and `raise_3.0.xsl`, provide general solutions for
 XSLT 1.0 and 3.0, respectively.  Both use `apply-templates` for the
 traversal.
+
+`raise-frankenstein.xsl` is adapted to raise the Frankenstein novel collection, and processes a teiHeader separately from a portion of the document which contains markup to be raised. This solution is adapted for XSLT 3.0 and trojan-style markers.
+
 
 ## Shell scripts ##
 
