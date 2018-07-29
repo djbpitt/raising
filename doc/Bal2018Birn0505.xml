@@ -85,6 +85,32 @@ URIs to allow line breaks *-->
             </affiliation>
             <email>ebb8@pitt.edu</email>
         </author>
+	<author>
+            <personname>
+                <firstname>C.</firstname>
+                <othername>M.</othername>
+                <surname>Sperberg-McQueen</surname>
+            </personname>
+            <personblurb>
+                <para>C. M. Sperberg-McQueen is the founder and
+                principal of <link
+                xlink:href="http://www.blackmesatech.com/">Black Mesa
+                Technologies</link>, a consultancy specializing in
+                helping memory institutions improve the long term
+                preservation of and access to the information for
+                which they are responsible. He served as editor in
+                chief of the TEI Guidelines from 1988 to 2000, and has
+                also served as co-editor of the World Wide Web
+                Consortium’s XML 1.0 and XML Schema 1.1
+                specifications.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Founder and Principal</jobtitle>
+                <orgname>Black Mesa Technologies</orgname>
+            </affiliation>
+            <email>cmsmcq@blackmesatech.com</email>
+        </author>
+
     </info>
     
     <section>
