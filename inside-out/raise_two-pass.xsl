@@ -10,14 +10,6 @@
     <xsl:key name="start-markers" match="*[@th:sID]" use="@th:sID"/>
     <xsl:key name="end-markers" match="*[@th:eID]" use="@th:eID"/>
 
-    <!--* In all modes, do a shallow copy, suppress namespace nodes,
-	* and recur in default (unnamed) mode. *-->
-    <xsl:template match="@* | node()" mode="#all">
-        <xsl:copy copy-namespaces="no">
-            <xsl:apply-templates select="@* | node()"/>
-        </xsl:copy>
-    </xsl:template>
-
     <!--* th:raise(.):  raise all innermost elements within the document
 	passed as parameter *-->
     <xsl:function name="th:raise">
@@ -50,36 +42,44 @@
     <!--* Loop mode for document node:  just apply templates in
 	default unnamed mode. *-->
     <xsl:template match="/" mode="loop">
-        <xsl:apply-templates/>
+        <xsl:variable name="raise-starts" as="element()+"
+            select="
+                *[@th:sID eq
+                following-sibling::*[@th:eID][1]/@th:eID]"/>
+        <xsl:variable name="raise-ends" as="element()+" select="key('end-markers', $raise-starts)"/>
+        <xsl:variable name="raise-contents" as="node()*"
+            select="
+                for $raise-start in $raise-starts
+                return
+                    $raise-start/following-sibling::node()[. &lt;&lt; key('end-markers', $raise-start/@th:sID)]"/>
+        <xsl:apply-templates>
+            <xsl:with-param name="raise-starts" as="element()+" select="$raise-starts" tunnel="yes"/>
+            <xsl:with-param name="raise-contents" as="node()*" select="$raise-contents" tunnel="yes"/>
+            <xsl:with-param name="raise-ends" as="element()+" select="$raise-ends" tunnel="yes"/>
+        </xsl:apply-templates>
     </xsl:template>
 
-    <!--* Innermost start-marker *-->
-    <xsl:template
-        match="
-            *[@th:sID eq
-            following-sibling::*[@th:eID][1]/@th:eID]">
-        <xsl:copy copy-namespaces="no">
-            <xsl:copy-of select="@* except @th:sID"/>
-            <!-- content of raised element; no foreign end-markers
-		 here (but possibly start-markers); just copy the
-		 nodes -->
-
-            <!--* v.Prev had:
-            <xsl:copy-of
-                select="following-sibling::node()[following-sibling::*[@th:eID eq current()/@th:sID]]"
-		/>
-		but this requires the processor to scan all following
-		siblings, not just those up to the end-marker, because
-		the processor cannot know that the th:eID value won't
-		repeat.
-		
-		It might do better with
-		select="following-sibling::node()[not(preceding-sibling::*[@th:eID eq current()/@th:sID])]"
-		but it's simpler to be more obvious:
-		*-->
-            <xsl:variable name="end-marker" as="element()" select="key('end-markers', @th:sID)"/>
-            <xsl:copy-of select="following-sibling::node()[. &lt;&lt; $end-marker]"/>
-        </xsl:copy>
+    <xsl:template match="*">
+        <xsl:param name="raise-starts"/>
+        <xsl:param name="raise-contents"/>
+        <xsl:param name="raise-ends"/>
+        <xsl:choose>
+            <xsl:when test="current() intersect $raise-starts">
+                <xsl:variable name="end-marker" as="element()" select="key('end-markers', @th:sID)"/>
+                <xsl:copy copy-namespaces="no">
+                    <xsl:copy-of select="@* except @th:*"/>
+                    <xsl:copy-of
+                        select="current()/following-sibling::node()[. &lt;&lt; $end-marker]"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:when test="current() intersect $raise-contents or current() intersect $raise-ends"/>
+            <xsl:otherwise>
+                <xsl:copy copy-namespaces="no">
+                    <xsl:copy-of select="@*"/>
+                    <xsl:apply-templates select="node()"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- nodes inside new wrapper:  do nothing -->
