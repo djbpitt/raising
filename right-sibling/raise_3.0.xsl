@@ -120,6 +120,7 @@
     
     <xsl:copy copy-namespaces="no">
       <xsl:copy-of select="@* except @th:*" use-when=" $th-style='th' "/>
+      <xsl:attribute name="xml:id" select="@th:sID" use-when=" $th-style=('th') "/>
       <xsl:copy-of select="@* except (@ana, @loc)" use-when=" $th-style=('ana', 'anaplus') "/>
       <xsl:attribute name="xml:id" select="@loc" use-when=" $th-style=('ana', 'anaplus') "/>
       
