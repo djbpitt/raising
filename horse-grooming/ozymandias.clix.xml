@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lmnl-document xmlns:x="http://lmnl-markup.org/ns/xLMNL">
+    <sonneteer id="ozymandias">
+        <x:empty name="meta" rID="R.d71e6">
+            <x:annotation ID="N.d71e7" sl="1" so="37" el="1" eo="72" name="author">
+                <x:content>
+                    <x:span ranges="">Percy Bysshe Shelley</x:span>
+                </x:content>
+            </x:annotation>
+            <x:annotation ID="N.d71e10" sl="1" so="74" el="1" eo="97" name="title">
+                <x:content>
+                    <x:span ranges="">Ozymandias</x:span>
+                </x:content>
+            </x:annotation>
+        </x:empty>
+        <x:span ranges="R.d71e2"> </x:span>
+        <sonnet>
+            <octave>
+                <quatrain>
+                    <line>
+                        <x:start name="s" rID="R.d71e16"/>
+                        <x:start name="phr" rID="R.d71e20"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e19 R.d71e20">I met a traveller from an antique land,</x:span>
+                        <x:end name="phr" rID="R.d71e20"/>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18"> </x:span>
+                    <line>
+                        <x:start name="phr" rID="R.d71e29"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e28 R.d71e29"
+                            >Who said —</x:span>
+                        <x:end name="phr" rID="R.d71e29"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e28"> </x:span>
+                        <x:start name="phr" rID="R.d71e35"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e28 R.d71e35"
+                            >“Two vast and trunkless legs of stone</x:span>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e35"> </x:span>
+                    <line>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e35 R.d71e42"
+                            >Stand in the desart....</x:span>
+                        <x:end name="phr" rID="R.d71e35"/>
+                        <x:start name="phr" rID="R.d71e46"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e42 R.d71e46"
+                            >Near them,</x:span>
+                        <x:end name="phr" rID="R.d71e46"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e42"> </x:span>
+                        <x:start name="phr" rID="R.d71e52"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e42 R.d71e52"
+                            >on the sand,</x:span>
+                        <x:end name="phr" rID="R.d71e52"/>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18"> </x:span>
+                    <line>
+                        <x:start name="phr" rID="R.d71e61"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e60 R.d71e61"
+                            >Half sunk a shattered visage lies,</x:span>
+                        <x:end name="phr" rID="R.d71e61"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e60"> </x:span>
+                        <x:start name="phr" rID="R.d71e67"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e18 R.d71e60 R.d71e67"
+                            >whose frown,</x:span>
+                        <x:end name="phr" rID="R.d71e67"/>
+                    </line>
+                </quatrain>
+                <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17"> </x:span>
+                <quatrain>
+                    <line>
+                        <x:start name="phr" rID="R.d71e78"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e77 R.d71e78"
+                            >And wrinkled lip,</x:span>
+                        <x:end name="phr" rID="R.d71e78"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e77"> </x:span>
+                        <x:start name="phr" rID="R.d71e84"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e77 R.d71e84"
+                            >and sneer of cold command,</x:span>
+                        <x:end name="phr" rID="R.d71e84"/>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76"> </x:span>
+                    <line>
+                        <x:start name="phr" rID="R.d71e92"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e92 R.d71e93"
+                            >Tell that its sculptor well those passions read</x:span>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e92"> </x:span>
+                    <line>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e92 R.d71e99"
+                            >Which yet survive,</x:span>
+                        <x:end name="phr" rID="R.d71e92"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e99"> </x:span>
+                        <x:start name="phr" rID="R.d71e105"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e99 R.d71e105"
+                            >stamped on these lifeless things,</x:span>
+                        <x:end name="phr" rID="R.d71e105"/>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76"> </x:span>
+                    <line>
+                        <x:start name="phr" rID="R.d71e114"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e113 R.d71e114"
+                            >The hand that mocked them,</x:span>
+                        <x:end name="phr" rID="R.d71e114"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e113"> </x:span>
+                        <x:start name="phr" rID="R.d71e120"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e17 R.d71e76 R.d71e113 R.d71e120"
+                            >and the heart that fed;</x:span>
+                        <x:end name="phr" rID="R.d71e120"/>
+                    </line>
+                </quatrain>
+            </octave>
+            <x:span ranges="R.d71e2 R.d71e15 R.d71e16"> </x:span>
+            <sestet>
+                <tercet>
+                    <line>
+                        <x:start name="phr" rID="R.d71e133"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e132 R.d71e133"
+                            >And on the pedestal,</x:span>
+                        <x:end name="phr" rID="R.d71e133"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e132"> </x:span>
+                        <x:start name="phr" rID="R.d71e140"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e132 R.d71e140"
+                            >these words appear:</x:span>
+                        <x:end name="phr" rID="R.d71e140"/>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131"> </x:span>
+                    <line>
+                        <x:start name="phr" rID="R.d71e148"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e147 R.d71e148"
+                            >My name is Ozymandias,</x:span>
+                        <x:end name="phr" rID="R.d71e148"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e147"> </x:span>
+                        <x:start name="phr" rID="R.d71e155"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e147 R.d71e155"
+                            >King of Kings,</x:span>
+                        <x:end name="phr" rID="R.d71e155"/>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131"> </x:span>
+                    <line>
+                        <x:start name="phr" rID="R.d71e163"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e162 R.d71e163"
+                            >Look on my Works,</x:span>
+                        <x:end name="phr" rID="R.d71e163"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e162"> </x:span>
+                        <x:start name="phr" rID="R.d71e169"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e162 R.d71e169"
+                            >ye Mighty,</x:span>
+                        <x:end name="phr" rID="R.d71e169"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e162"> </x:span>
+                        <x:start name="phr" rID="R.d71e176"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e16 R.d71e130 R.d71e131 R.d71e162 R.d71e176"
+                            >and despair!</x:span>
+                        <x:end name="s" rID="R.d71e16"/>
+                        <x:end name="phr" rID="R.d71e176"/>
+                    </line>
+                </tercet>
+                <x:span ranges="R.d71e2 R.d71e15 R.d71e130"> </x:span>
+                <tercet>
+                    <line>
+                        <x:start name="s" rID="R.d71e188"/>
+                        <x:start name="phr" rID="R.d71e189"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e187 R.d71e188 R.d71e189"
+                            >Nothing beside remains.</x:span>
+                        <x:end name="s" rID="R.d71e188"/>
+                        <x:end name="phr" rID="R.d71e189"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e187"> </x:span>
+                        <x:start name="s" rID="R.d71e196"/>
+                        <x:start name="phr" rID="R.d71e197"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e187 R.d71e196 R.d71e197"
+                            >Round the decay</x:span>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e196 R.d71e197"> </x:span>
+                    <line>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e196 R.d71e197 R.d71e204"
+                            >Of that colossal Wreck,</x:span>
+                        <x:end name="phr" rID="R.d71e197"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e196 R.d71e204"> </x:span>
+                        <x:start name="phr" rID="R.d71e210"/>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e196 R.d71e204 R.d71e210"
+                            >boundless and bare</x:span>
+                    </line>
+                    <x:span ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e196 R.d71e210"> </x:span>
+                    <line>
+                        <x:span
+                            ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e196 R.d71e210 R.d71e216"
+                            >The lone and level sands stretch far away.</x:span>
+                        <x:end name="phr" rID="R.d71e210"/>
+                        <x:span ranges="R.d71e2 R.d71e15 R.d71e130 R.d71e185 R.d71e196 R.d71e216"
+                            >”</x:span>
+                        <x:end name="s" rID="R.d71e196"/>
+                    </line>
+                </tercet>
+            </sestet>
+        </sonnet>
+    </sonneteer>
+</lmnl-document>

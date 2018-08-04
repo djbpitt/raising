@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="trojans-testing.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<sonnet xmlns:th="urn:trojan-horses">
+   <octave>
+      <quatrain>
+         <line>
+            <s name="s" th:sID="s1"/>
+            <phr name="phr" th:sID="phr1"/>I met a traveller from an antique land,<phr name="phr" th:eID="phr1"/>
+         </line> 
+         <line>
+            <phr name="phr" th:sID="phr2"/>Who said —<phr name="phr" th:eID="phr2"/> 
+            <phr name="phr" th:sID="phr3"/>“Two vast and trunkless legs of stone</line> 
+         <line>Stand in the desart....<phr name="phr" th:eID="phr3"/>
+            <phr name="phr" th:sID="phr4"/>Near them,<phr name="phr" th:eID="phr4"/> 
+            <phr name="phr" th:sID="phr5"/>on the sand,<phr name="phr" th:eID="phr5"/>
+         </line> 
+         <line>
+            <phr name="phr" th:sID="phr6"/>Half sunk a shattered visage lies,<phr name="phr" th:eID="phr6"/> 
+            <phr name="phr" th:sID="phr7"/>whose frown,<phr name="phr" th:eID="phr7"/>
+         </line>
+      </quatrain> 
+      <quatrain>
+         <line>
+            <phr name="phr" th:sID="phr8"/>And wrinkled lip,<phr name="phr" th:eID="phr8"/> 
+            <phr name="phr" th:sID="phr9"/>and sneer of cold command,<phr name="phr" th:eID="phr9"/>
+         </line> 
+         <line>
+            <phr name="phr" th:sID="phr10"/>Tell that its sculptor well those passions read</line> 
+         <line>Which yet survive,<phr name="phr" th:eID="phr10"/> 
+            <phr name="phr" th:sID="phr11"/>stamped on these lifeless things,<phr name="phr" th:eID="phr11"/>
+         </line> 
+         <line>
+            <phr name="phr" th:sID="phr12"/>The hand that mocked them,<phr name="phr" th:eID="phr12"/> 
+            <phr name="phr" th:sID="phr13"/>and the heart that fed;<phr name="phr" th:eID="phr13"/>
+         </line>
+      </quatrain>
+   </octave> 
+   <sestet>
+      <tercet>
+         <line>
+            <phr name="phr" th:sID="phr14"/>And on the pedestal,<phr name="phr" th:eID="phr14"/> 
+            <phr name="phr" th:sID="phr15"/>these words appear:<phr name="phr" th:eID="phr15"/>
+         </line> 
+         <line>
+            <phr name="phr" th:sID="phr16"/>My name is Ozymandias,<phr name="phr" th:eID="phr16"/> 
+            <phr name="phr" th:sID="phr17"/>King of Kings,<phr name="phr" th:eID="phr17"/>
+         </line> 
+         <line>
+            <phr name="phr" th:sID="phr18"/>Look on my Works,<phr name="phr" th:eID="phr18"/> 
+            <phr name="phr" th:sID="phr19"/>ye Mighty,<phr name="phr" th:eID="phr19"/> 
+            <phr name="phr" th:sID="phr20"/>and despair!
+            <phr name="phr" th:eID="phr20"/><s name="s" th:eID="s1"/>
+         </line>
+      </tercet> 
+      <tercet>
+         <line>
+            <s name="s" th:sID="s2"/>
+            <phr name="phr" th:sID="phr21"/>Nothing beside remains.<phr name="phr" th:eID="phr21"/>
+            <s name="s" th:eID="s2"/> 
+            <s name="s" th:sID="s3"/>
+            <phr name="phr" th:sID="phr22"/>Round the decay</line> 
+         <line>Of that colossal Wreck,<phr name="phr" th:eID="phr22"/> 
+            <phr name="phr" th:sID="phr23"/>boundless and bare</line> 
+         <line>The lone and level sands stretch far away.<phr name="phr" th:eID="phr23"/>”<s name="s" th:eID="s3"/>
+         </line>
+      </tercet>
+   </sestet>
+</sonnet>
